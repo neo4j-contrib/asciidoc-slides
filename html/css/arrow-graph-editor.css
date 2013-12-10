@@ -1,0 +1,69 @@
+svg.graphdiagram {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%
+}
+
+.tools {
+    z-index: 100;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    padding: 10px;
+    background-color: #f7f7f7;
+}
+
+.modal.pop-up-editor.node {
+    position: absolute;
+}
+
+.modal.export-markup {
+    position: absolute;
+    width: 800px;
+    margin-left: -400px;
+}
+
+.modal.export-markup .modal-body {
+    overflow: hidden;
+    max-height: 70%;
+}
+
+p.button-row {
+    text-align: right;
+}
+
+textarea.code {
+    padding: 0;
+    resize: none;
+    width: 760px;
+    border: none;
+    box-shadow: none;
+    font-family: Menlo, monospace;
+    font-size: 10pt;
+}
+
+.top-right-btn-bar {
+    padding: 14px 15px 15px;
+    margin-bottom: 0;
+    text-align: right;
+}
+
+.top-right-btn-bar .btn + .btn {
+    margin-bottom: 0;
+    margin-left: 5px;
+}
+
+circle.node.overlay:hover {
+    fill: rgba(150, 150, 255, 0.5);
+}
+
+circle.node.ring:hover {
+    stroke: rgba(150, 150, 255, 0.5);
+}
+
+path.relationship.overlay:hover {
+    fill: rgba(150, 150, 255, 0.5);
+    stroke: rgba(150, 150, 255, 0.5);
+}
