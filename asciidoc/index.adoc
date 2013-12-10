@@ -1,7 +1,7 @@
 = Short tests with asciidoc
 Presenter Peter
 :backend: deckjs
-:stylesheet: css/neotech.css
+//:stylesheet: css/neotech.css
 :deckjs_theme: neotech
 :deckjs_transition: horizontal-slide
 :source-highlighter: codemirror
