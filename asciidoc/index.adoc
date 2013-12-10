@@ -1,25 +1,13 @@
-= Title
+= Short tests with asciidoc
 Presenter Peter
 :backend: deckjs
 :stylesheet: css/neotech.css
 :deckjs_theme: neotech
 :deckjs_transition: horizontal-slide
-:codemirror:
-:cypher:
+:source-highlighter: codemirror
 :navigation:
-
-== Title of Slide One 
-
-[options="step"]
-This paragraph is displayed first.
-
-[options="step"]
-This paragraph is displayed second.
-
-== Title of Slide Two 
-
-This is the first slide after the title slide.
-
-:leveloffset: 1
+:arrows:
 
 include::sections/intro/1.adoc[]
+
+include::sections/intro/2.adoc[]

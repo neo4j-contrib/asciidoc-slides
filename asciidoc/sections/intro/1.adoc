@@ -1,6 +1,17 @@
-== Cypher intro 
+== Code
 
-[source,cypher]
+=== Literal
+
+++++
+<textarea id="code" name="code" class="code" mode="cypher" style="display: none;" runnable="false">
+//cypher syntax
+MATCH (a)-->(b)</textarea>
+++++
+
+=== code block
+
+[source,cypher code]
 ----
-MATCH (n) RETURN n
+//cypher syntax
+MATCH (a)-->(b)
 ----
