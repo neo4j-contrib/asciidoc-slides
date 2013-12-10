@@ -1,4 +1,4 @@
-= Slide 1
+== Cypher intro 
 
 [source,cypher]
 ----
