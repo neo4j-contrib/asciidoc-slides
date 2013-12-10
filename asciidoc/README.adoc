@@ -6,6 +6,5 @@ see http://asciidoctor.org/docs/install-and-use-deckjs-backend/[deck.js instruct
 ----
 gem install asciidoctor tilt haml redcarpet
 asciidoctor -T ./asciidoctor-backends/haml/deckjs  index.adoc
-python -m SimpleHTTPServer
-open http://localhost:8000
+open index.html
 ----
