@@ -1,6 +1,6 @@
 == Producing html
 
-see http://asciidoctor.org/docs/install-and-use-deckjs-backend/[deck.js instructions], backend is already added locally here.
+See http://asciidoctor.org/docs/install-and-use-deckjs-backend/[deck.js instructions], backend is already added locally here.
 
 [source,bash]
 ----

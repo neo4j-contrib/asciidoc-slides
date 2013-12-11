@@ -1,5 +1,20 @@
 == Code
 
+=== Custom color code
+
+++[highlight]#MATCH (n)#->() RETURN n++ should be highlighted <1> and monospace icon:heart[size=2x]
+
+
+
+=== code block
+
+[source,cypher code]
+[subs=""]
+----
+//cypher syntax
+MATCH (a)-->(b)
+----
+
 === Literal
 
 ++++
@@ -7,11 +22,3 @@
 //cypher syntax
 MATCH (a)-->(b)</textarea>
 ++++
-
-=== code block
-
-[source,cypher code]
-----
-//cypher syntax
-MATCH (a)-->(b)
-----

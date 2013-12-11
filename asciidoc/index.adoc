@@ -1,13 +1,17 @@
 = Short tests with asciidoc
 Presenter Peter
 :backend: deckjs
-//:stylesheet: css/neotech.css
 :deckjs_theme: neotech
 :deckjs_transition: horizontal-slide
+:icons: font
 :source-highlighter: codemirror
 :navigation:
 :arrows:
+:gist-source: https://raw.github.com/neo4j-contrib/gists/master/
+
 
 include::sections/intro/1.adoc[]
 
 include::sections/intro/2.adoc[]
+
+include::sections/intro/3.adoc[]
