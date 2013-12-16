@@ -9,7 +9,6 @@
 === code block
 
 [source,cypher code]
-[subs=""]
 ----
 //cypher syntax
 MATCH (a)-->(b)

@@ -128,6 +128,10 @@
       %script(src='deck.js/extensions/arrows/home.js')
       %script(src='deck.js/extensions/arrows/d3.v3.js')
       %script(src='deck.js/extensions/arrows/arrows-graph-diagram.js')
+    - if attr? :footer
+      %footer=attr :footer
+    - if attr? :logo
+      %img#logo(src='#{attr :logo}')
     :javascript
       d3.selectAll("figure.graph-diagram")
                             .call(gd.figure().scaling(gd.scaling.centerOrScaleDiagramToFitWindow));

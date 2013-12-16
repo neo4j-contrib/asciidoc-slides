@@ -1,0 +1,3 @@
+== Leonhard Euler 1707-1783
+
+image::img/euler.png[]
