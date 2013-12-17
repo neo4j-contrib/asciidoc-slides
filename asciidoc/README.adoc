@@ -5,18 +5,18 @@ This is what you install:
 - Install the needed Ruby gems for asciidoctor to work
 [source,bash]
 ----
-$ gem install asciidoctor tilt haml redcarpet
+gem install asciidoctor tilt haml redcarpet
 ----
 
 
 - execute asciidoctor to produce Deck.js HTML5 output from the asciidoc source files
 [source,bash]
 ----
-$ asciidoctor -T ./asciidoctor-backends/haml/deckjs  index.adoc
+asciidoctor -T ./asciidoctor-backends/haml/deckjs  index.adoc
 ----
 
 - open the resulting HTML file
 [source,bash]
 ----
-$ open index.html
+open index.html
 ----
