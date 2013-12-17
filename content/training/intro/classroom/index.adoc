@@ -1,0 +1,25 @@
+= Neo4j Intro Training
+:presenter: Neo Technology
+:twitter: neo4j
+:email: info@neotechnology.com
+:backend: deckjs
+:deckjs_theme: neotech
+:deckjs_transition: horizontal-slide
+:icons: font
+:source-highlighter: codemirror
+:navigation:
+:status:
+:arrows:
+:gist-source: https://raw.github.com/neo4j-contrib/gists/master/
+:footer: © All Rights Reserved 2013 | Neo Technology, Inc.
+:logo: ../../img/Neo_Technology.jpg
+
+
+
+include::01_welcome.adoc[]
+
+include::02_title.adoc[]
+
+include::01_why/0101_index.adoc[]
+
+include::03_schedule.adoc[]

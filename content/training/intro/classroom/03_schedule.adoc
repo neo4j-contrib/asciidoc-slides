@@ -1,0 +1,11 @@
+== Schedule
+
+  8.30am  -  Registration, installation and breakfast
+  9.00am  -  Session 1: Graphs and Modeling
+10.30am  -  Morning coffee break
+10.45am  -  Session 2: Neo4j and Cypher
+12.00pm  -  Lunch
+  1.00pm  -  Session 3: Advanced queries using Cypher
+  2.30pm  -  Afternoon coffee break
+  2.45pm  -  Session 4: Next steps and Q&A
+  4.00pm  -  End of training
