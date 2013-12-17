@@ -12,7 +12,7 @@ sudo bundle install
 - execute asciidoctor to produce Deck.js HTML5 output from the asciidoc source files
 [source,bash]
 ----
-asciidoctor -T ./asciidoctor-backends/haml/deckjs  index.adoc
+asciidoctor -T ./asciidoctor-backends/haml/deckjs -a allow-uri-read -a presenter="Your Name"  index.adoc
 ----
 
 - open the resulting HTML file

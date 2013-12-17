@@ -5,9 +5,6 @@
 
 === Query
 
-//hide
-include::http:////movies.adoc
-
 [source,cypher]
 ----
 //a comment

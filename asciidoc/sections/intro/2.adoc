@@ -1,4 +1,14 @@
-== Arrows
+== Includes
+
+=== External Graphgist
+
+:leveloffset: 1
+
+include::https://raw.github.com/neo4j-contrib/gists/master/meta/Simple.adoc[]
+
+:leveloffset: 0
+
+=== Arrows
 
 ++++
 <figure class="graph-diagram">
