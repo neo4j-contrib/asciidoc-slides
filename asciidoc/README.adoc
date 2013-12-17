@@ -5,14 +5,7 @@ This is what you install (in your terminal):
 - Install asciidoctor
 [source,bash]
 ----
-sudo gem install asciidoctor
-----
-
-
-- Install the needed Ruby gems for asciidoctor to work
-[source,bash]
-----
-sudo gem install tilt haml redcarpet
+bundle install
 ----
 
 
