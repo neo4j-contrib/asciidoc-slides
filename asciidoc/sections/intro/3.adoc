@@ -3,7 +3,10 @@
 
 === Which directors also acted in their movie?
 
-=== Result
+=== Query
+
+//hide
+include::http:////movies.adoc
 
 [source,cypher]
 ----
@@ -11,3 +14,7 @@
 MATCH (d)-[:DIRECTED]->(m)<-[:ACTED_IN]-(d)
 RETURN d.name, m.title;
 ----
+
+=== Result
+
+//table
