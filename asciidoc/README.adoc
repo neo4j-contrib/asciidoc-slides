@@ -1,10 +1,10 @@
 == Producing html
 
-See http://asciidoctor.org/docs/install-and-use-deckjs-backend/[deck.js instructions], backend is already added locally here.
+This is what you install:
 
 [source,bash]
 ----
-gem install asciidoctor tilt haml redcarpet
-asciidoctor -T ./asciidoctor-backends/haml/deckjs  index.adoc
-open index.html
+$ gem install asciidoctor tilt haml redcarpet
+$ asciidoctor -T ./asciidoctor-backends/haml/deckjs  index.adoc
+$ open index.html
 ----
