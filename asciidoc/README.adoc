@@ -5,7 +5,7 @@ This is what you install (in your terminal):
 - Install asciidoctor
 [source,bash]
 ----
-bundle install
+sudo bundle install
 ----
 
 
