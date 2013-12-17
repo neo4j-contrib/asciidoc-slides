@@ -5,8 +5,9 @@
 
 === Result
 
-[source,cypher code]
+[source,cypher]
 ----
+//a comment
 MATCH (d)-[:DIRECTED]->(m)<-[:ACTED_IN]-(d)
 RETURN d.name, m.title;
 ----

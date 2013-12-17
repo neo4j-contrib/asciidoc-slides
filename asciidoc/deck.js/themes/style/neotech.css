@@ -544,7 +544,7 @@ pre.highlight {
 }
 
 footer {
-    position: absolute;
+    position: fixed;
     bottom: 10px;
     left: 30px;
     font-size: 0.5em;

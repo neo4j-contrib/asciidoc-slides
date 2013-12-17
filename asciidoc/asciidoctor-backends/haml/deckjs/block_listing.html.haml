@@ -11,6 +11,10 @@
       - case attr 'source-highlighter'
       - when 'coderay'
         - pre_class = ['CodeRay']
+      - when 'codemirror'
+        - pre_class = nil
+        - code_class = ['code']
+        - code_mode = language
       - when 'pygments'
         - pre_class = ['pygments','highlight']
       - when 'prettify'
@@ -25,9 +29,12 @@
         - nowrap = false
       -#- when 'highlightjs', 'highlight.js'
       - pre_class << 'nowrap' if nowrap
-      %pre{:class=>pre_class, :lang=>pre_lang}
-        -# Haml automatically preserves whitespace in <pre> tags by replacing newlines with &#x000A;, but I'm not sure about the <code> tag
-        %code{:class=>code_class}~content
+      - if (attr 'source-highlighter') == 'codemirror'
+        %textarea{:class=>code_class, :mode=>(code_mode ? code_mode : nil)}~content
+      - else
+        %pre{:class=>pre_class, :lang=>pre_lang}
+          -# Haml automatically preserves whitespace in <pre> tags by replacing newlines with &#x000A;, but I'm not sure about the <code> tag
+          %code{:class=>code_class, :mode=>(code_mode ? code_mode : nil)}~content
     - else
       %pre{:class=>(nowrap ? 'nowrap' : nil)}
         -# Haml automatically preserves whitespace in <pre> tags by replacing newlines with &#x000A;, but I'm not sure about the <code> tag
