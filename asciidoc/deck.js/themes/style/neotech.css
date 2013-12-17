@@ -479,7 +479,7 @@ a:hover, a:focus {
 }
 
 .slide .deck-before, .slide .deck-previous {
-    opacity: 0.4;
+    /*opacity: 0.4;*/
 }
 
 .slide .deck-before:not(.deck-child-current) .deck-before, .slide .deck-before:not(.deck-child-current) .deck-previous, .slide .deck-previous:not(.deck-child-current) .deck-before, .slide .deck-previous:not(.deck-child-current) .deck-previous {
