@@ -548,6 +548,7 @@ footer {
     bottom: 10px;
     left: 30px;
     font-size: 0.5em;
+    z-index: 100;
 }
 
 .deck-prev-link:hover, .deck-prev-link:focus, .deck-prev-link:active, .deck-prev-link:visited, .deck-next-link:hover, .deck-next-link:focus, .deck-next-link:active, .deck-next-link:visited {
