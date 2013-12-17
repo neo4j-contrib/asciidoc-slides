@@ -7,3 +7,7 @@
 * How do I query data?
 
 and...
+
+=== provide confidence start building 
+
+=== a graph enabled application

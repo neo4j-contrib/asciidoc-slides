@@ -20,6 +20,8 @@ include::01_welcome.adoc[]
 
 include::02_title.adoc[]
 
-include::01_why/0101_index.adoc[]
+include::01_Why/0101_index.adoc[]
 
 include::03_schedule.adoc[]
+
+include::02_Intro_to_Graphs/0201_index.adoc[]
