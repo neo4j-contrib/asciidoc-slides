@@ -1,6 +1,6 @@
 == Producing html
 
-This is what you install:
+This is what you install (in your terminal):
 
 - Install the needed Ruby gems for asciidoctor to work
 [source,bash]
