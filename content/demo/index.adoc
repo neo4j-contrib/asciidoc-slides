@@ -22,13 +22,12 @@
 :download-link: https://github.com/neo4j-contrib/asciidoc-slides/archive/master.zip[download]
 :sectids!:
 
-////
-Presenter: {presenter}
 
-Twitter:   http://twitter.com/{twitter}[@{twitter}]
+== Who is training you?
 
-Email:     {email}
-////
+=== Presenter: {presenter}
+=== Twitter:   http://twitter.com/{twitter}[@{twitter}]
+=== Email:     {email}
 
 include::sections/intro/1_cypher.adoc[]
 
