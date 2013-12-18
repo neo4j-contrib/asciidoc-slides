@@ -1,6 +1,7 @@
 [canvas-image="{img}/euler.png"]
 == Leonhard Euler
 
+[role="canvas-caption", position="right"] 
 image::{img}/euler.png[]
 
 [role="canvas-caption", position="center-up"] 

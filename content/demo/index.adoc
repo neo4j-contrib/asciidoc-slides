@@ -3,6 +3,7 @@
 :twitter: neo4j
 :email: info@neotechnology.com
 :backend: deckjs
+:deckjsdir: ../../asciidoc/deck.js
 :deckjs_theme: neotech
 :deckjs_transition: horizontal-slide
 :icons: font
