@@ -1,3 +1,3 @@
 == A training video
 
-video::https://vimeo.com/81146271[vimeo,400,225]
+video::81146271[vimeo,800,550]
