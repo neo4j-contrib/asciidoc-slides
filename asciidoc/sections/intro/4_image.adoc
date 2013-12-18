@@ -1,0 +1,7 @@
+[canvas-image="{img}/euler.png"]
+== Leonhard Euler
+
+image::{img}/euler.png[]
+
+[role="canvas-caption", position="center-up"] 
+Leonhard Euler, Swiss Mathematician, 1707-1783
