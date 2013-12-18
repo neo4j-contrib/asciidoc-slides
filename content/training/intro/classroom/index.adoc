@@ -5,6 +5,7 @@
 :backend: deckjs
 :deckjs_theme: neotech
 :deckjs_transition: none
+:deckjsdir: ../../../../asciidoc/deck.js
 // horizontal-slide
 :icons: font
 :source-highlighter: codemirror
