@@ -1,10 +1,15 @@
 == Neo4j Tutorial
 
+[align="center"]
 ----
 (you)-[:KNOW]->(Neo4j)
 ----
 
-
+[position="center-down"]
 with {presenter}
 
 {email} | @{twitter}
+
+////
+Introduce yourself, and give some background.
+////

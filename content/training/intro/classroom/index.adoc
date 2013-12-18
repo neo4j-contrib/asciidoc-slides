@@ -4,7 +4,8 @@
 :email: info@neotechnology.com
 :backend: deckjs
 :deckjs_theme: neotech
-:deckjs_transition: horizontal-slide
+:deckjs_transition: none
+// horizontal-slide
 :icons: font
 :source-highlighter: codemirror
 :navigation:
@@ -12,8 +13,12 @@
 :arrows:
 :gist-source: https://raw.github.com/neo4j-contrib/gists/master/
 :footer: © All Rights Reserved 2013 | Neo Technology, Inc.
-:logo: ../../img/Neo_Technology.jpg
-
+:img: ../../img
+:logo: {img}/Neo_Technology.jpg
+:blank:
+:goto:
+:toc:
+:split:
 
 
 include::01_welcome.adoc[]

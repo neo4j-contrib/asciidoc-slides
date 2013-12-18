@@ -1,7 +1,8 @@
 == Include graphgist
 
-:leveloffset: 1
+// :leveloffset: 1
 
-include::https://raw.github.com/neo4j-contrib/gists/master/meta/Simple.adoc[]
+// exclude the header, otherwise use leveloffset
+include::https://raw.github.com/neo4j-contrib/gists/master/meta/Simple.adoc[lines=2..-1]
 
-:leveloffset: 0
+// :leveloffset: 0

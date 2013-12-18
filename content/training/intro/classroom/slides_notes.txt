@@ -1,0 +1,1475 @@
+1 Find a seat. Say hi!
+Welcome!
+Grab a USB key, and plug it in.
+Windows
+Run the 32/64 .exe.!
+Run the 
+Install Neo4j
+ application!
+When you see the command prompt,
+When you see Neo4j desktop 
+type 
+./bin/neo4j start
+click the start button
+Grab a coffee and get ready to begin!
+Make sure to check everyone has Neo4j installed by 9am if possible. Tell them they don
+t need to go further than getting it installed. If anyone comes in late, help them over morning coffee break.
+Neo4j Tutorial (you)-[:know]->(Neo4j)
+with
+YOUR
+NAME
+ All Rights Reserved 2013 | Neo Technology, Inc.
+Introduce yourself, and give some background.
+come?
+Get the class to introduce themselves, and learn what they want.
+Also set expectations about what is in and out of scope?
+This is an introduction to neo4j, we
+re not covering more advanced topics.
+Answer
+five
+questions
+ What
+Neo4j?
+ Why
+would
+ How
+model
+data?
+ How
+enter
+data?
+ How
+query
+data?
+and...
+The goal of this tutorial is to help you to answer five questions...
+provide
+confidence
+start
+building
+ graph
+enabled
+application
+This is the one take away goal for the tutorial.
+Schedule
+8.30am
+Registration,
+installation
+breakfast
+9.00am
+Session
+Graphs
+Modeling
+ 10.30am
+Morning
+coffee
+break
+ 10.45am
+Session
+Neo4j
+Cypher
+ 12.00pm
+Lunch
+1.00pm
+Session
+Advanced
+queries
+using
+Cypher
+2.30pm
+Afternoon
+coffee
+break
+2.45pm
+Session
+Next
+steps
+4.00pm
+training
+Note that the times are approximate.
+We want this class to be a conversation, not a lecture. So we might go longer in some parts, and spend less time on others, or just skip ahead entirely
+. In reality, we
+ll mostly try to stick to the flow of this deck.
+(Introduction
+Graphs)
+first...
+important
+message...
+Zombie Pastimes
+% of People Who Hate Michael Jackson by Date
+Dancing With
+ Michael Jackson
+Eating Brains
+June 25, 2009
+June 26,2009
+These are lovely, pretty diagrams. And we wont be talking about these today, because...
+Zombie Pastimes
+% of People Who Hate Michael Jackson by Date
+Dancing With Michael Jackson
+Eating Brains
+June 25, 2009
+June 26,2009
+Make the point that this is an important distinction, and it
+s good to start using the right terminology.
+These
+Charts!
+Graphs!
+Leonhard Euler 1707-1783
+When we
+re talking about Graphs, we
+re talking about a representation of information, rooted in mathematical theory.
+So... to talk about Graphs, it
+s helpful to understand history.
+Introduce Leonhard Euler, Swiss Mathematician, who invented most of modern mathematical terminology and notation (like the notion of functions), and pioneered graph theory.
+Quiz: 
+Who knows the current name of Ko
+nigsberg?
+ - Answer: Kaliningrad.
+nigsberg (Prussia) - 1736
+Euler lived in Ko
+nigsberg for a while, and in 1736 he created and solved the problem known as the 
+7 Bridges of Ko
+nigsberg
+. The problem is to decide whether it is possible to follow a path that crosses each bridge exactly once and return to the starting point. This problem was the first study of graph theory.
+nigsberg was divided into multiple areas by the Pregel river, and the 7 bridges (animation forward) joined the different city areas together. Euler first identified these 4 land masses (animation forward) and pointed out that the choice of route inside each of the 4 city areas was irrelevant to the problem.
+This seems obvious now, but it was a major insight at the time and allowed Euler to reformulate the problem in abstract terms.
+Euler then went further, and realised that position, size or any other feature of the bridge didn
+t matter - except for which two land masses it connected.
+2 B3
+With these two understandings, Euler eliminated all features all features except the list of land masses and the bridges connecting them. In modern terms, one replaces each land mass with an abstract "vertex", and
+each bridge with an abstract connection, an "edge".
+For normal humans (not mathematicians) we find it easier to use the terms 
+Node
+ and 
+Relationship
+ This resulting structure is called a graph.
+what
+about
+data?
+Alice
+Graph Databases Book
+When we think about data, one of the most important aspects is how things are connected. This is a natural part of how we talk about things, and also of the graph model. 
+This is a also a graph, but with some data attached. Here: we
+ve attached names to the nodes and described the type of the relationships.
+Friend Of
+Friend Of
+Has Read
+Has Read
+Person
+name: Alice
+ age: 38
+HAS_READ on: 10/03/2013 rating: 5
+FRIEND_OF since: 07/09/2011
+FRIEND_OF since: 07/09/2011
+  name: Bob
+   age: 34
+HAS_READ on: 03/02/2013 rating: 4
+Person
+Book
+ title: Graph Databases
+authors: Ian Robinson,
+Jim Webber
+We can take this further, and attach arbitrary key/value pairs
+This is the Property Graph Model, which has the following characteristics:
+ It contains Nodes and Relationships, both of which can contain properties (key-value pairs).
+ Relationships are always between exactly 2 nodes. They have a type, and they are directed.
+There are other graph models, however everyone in the industry has converged on the idea that this model is the most obvious and the most useful for real humans and the application we
+re building
+Segue:
+Graphs
+Relational
+World
+This section can be skipped, if the class isn
+t interested in, or asking about, relational databases
+Customers Customer_Accounts Accounts
+Start with Customers and Accounts
+We have a customer, Alice.
+s got 3 accounts
+To keep track of which accounts Alice owns, we need a 3rd table, to store the mapping. Typically called a join table.
+Note that the joins are usually done by a synthetic ID. If anyone suggests the join table is not needed, because this is a one-to-many, suggest that there could be multiple owners of the accounts (like couples) - making it many-to-many.
+Alice
+$212
+$632
+$100
+143 143
+Alice
+$212
+$632
+$100
+143 143
+Person
+Labels
+Nodes
+Text
+Relationships
+Account
+Account Account
+bal: $100
+owns
+owns
+bal: $632
+name: Alice
+owns
+bal: $212
+(Modeling
+with
+Graphs)
+The absolute number one piece of advice for any graph modeling activity is to...
+Start
+with
+whiteboard
+Discuss how this example was drawn in about 2 minutes while thinking about sharing, liking and commenting on Facebook. All we do is draw instinctually. 
+ve all drawn diagrams like this dozens of times. It
+s natural. It
+s what we do when there
+s a whiteboard handy and we
+re trying to solve real problems.
+Make a point that whiteboard modeling is best done with actual instances (
+Adam
+Sarah
+LOLCAL
+) and not types (
+Person
+Picture
+And once we
+ve done our mental mind dump, what we
+ve drawn is already a valid graph
+Adam SHARED
+LOL Cat
+FUNNY
+FRIEND_OF
+LIKES
+Sarah
+COMMENTED
+This can be stored in a graph database without any change. No mapping to tables, no primary/foreign keys. It
+s a graph, and we store a graph.
+Adam SHARED
+LOL Cat
+FUNNY
+FRIEND_OF
+LIKES
+Sarah
+COMMENTED
+Discuss problems that could exist in this model, based on actual use-cases. Ie. Facebook users comment on the sharing of something, not on the thing (picture) itself. !Discuss how wall posts could be chained (using a linked list).
+Here
+s another doodle, this time Actors, Directors and Movies
+Tom Hanks
+Hugo Weaving ACTED_IN
+ACTED_IN
+Cloud Atlas
+ACTED_IN
+The Matrix DIRECTED
+DIRECTED Lana Wachowski
+Again: Already a graph!
+Model
+Incrementally
+Tom Hanks
+Hugo Weaving ACTED_IN
+ACTED_IN
+Cloud Atlas
+ACTED_IN
+The Matrix DIRECTED
+DIRECTED Lana Wachowski
+s look at the movie model in more detail
+Person
+Person
+name: Tom Hanks
+nationality: USA
+won: Oscar, Emmy
+    name: Hugo Weaving
+    nationality: Australia
+    won: MTV Movie Award
+ACTED_IN roles: Agent Smith
+      title: The Matrix
+      genre: sci-fi
+DIRECTED
+name: Lana Wachowski
+  nationality: USA
+  won: Razzie, Hugo
+ACTED_IN roles: Zachry
+ACTED_IN roles: Bill Smoke
+Movie
+Movie
+title: Cloud Atlas
+genre: drama, sci-fi
+Person
+DIRECTED
+Here
+s additional data layered in.
+Discuss what could be done if an actor has multiple roles in a movie? For example: they could be stored as either an array of roles, or separate ACTED_IN relationships. Note that the sample data uses the array method, which might not be the best, but is useful for today
+s training.
+Coffee?
+(Brief
+tour
+Neo4j)
+Neo4j
+Browser
+finding
+help
+http://localhost:7474/
+ Dashboard, for monitoring of key stats
+ Node, Relationship and Property 
+counts
+ are just estimates (actually represent the allocated ID space for each graph entity)
+Neo4j
+Browser
+execute
+Cypher,
+visualize
+The Console is where you can run graph queries, written in Cypher.
+ll be using this starting... now.
+Neo4j
+Browser
+importing
+sample
+data
+The Console is where you can run graph queries, written in Cypher.
+ll be using this starting... now.
+Neo4j
+Data
+browser
+display
+more
+data
+The Data browser is useful for easy introspection, exploration, or debugging.
+Get them to enter 1, and then switch to the visualizer. Walk through changing the style to show the {title} property, and use a circle, for nodes that have that prop.
+(Introduction
+Cypher)
+Cypher
+Neo4j's
+graph
+query
+language
+Declarative
+Pattern-Matching
+language
+SQL-like
+syntax
+Designed
+graphs
+Declarative - meaning you tell it what you want, not how to get it. This is the same as SQL.
+about
+Patterns
+This is a basic pattern
+Discuss how that pattern can be found in a bigger graph.
+That pattern appears in multiple places (and a lot more besides these).
+How?
+ do we describe & find patterns?
+nodes,
+relationship
+(a) --> (b)
+One of the most simple patterns.
+We can start by describing this pattern in text. How is that helpful?
+nodes,
+relationship
+   MATCH (a)--(b)
+   RETURN a, b;
+you don
+t need directions.
+nodes,
+relationship
+   MATCH (a)-->(b)
+   RETURN a, b;
+Your first cypher query!
+Have them type in, and then run this query.
+MATCH (a)-->(b)
+RETURN a, b;
+This is what Cypher will find (and a whole lot more)
+nodes,
+relationship
+(a) --> ()
+We don
+t have to give a name to everything
+nodes,
+relationship
+   MATCH (a)-->()
+   RETURN a;
+We only need the names for things we plan to use in the rest of the query
+ This will just return details about the (a) node.
+Have them try this.
+nodes,
+relationship
+   MATCH (a)-->()
+   RETURN a.name;
+Rather than returning the cryptic node details, we can return individual properties of that node.
+ Have them try this.
+nodes,
+relationship
+(a) -[r]-> ()
+What about the relationship?
+ We can give that a name also, using the square brackets in the middle of the arrow.
+nodes,
+relationship
+ MATCH (a)-[r]->()
+ RETURN a.name, type(r);
+Have them try this. Point out the use of 
+type()
+ to get the type of the relationship.
+nodes,
+optional
+relationship
+MATCH (a)
+OPTIONAL MATCH (a)-[r]->()
+ RETURN a.name, type(r);
+Optional relationship
+nodes,
+relationship
+a ACTED IN m
+(a) -[:ACTED_IN]-> (m)
+What if we only want relationships of a specific type?
+Note that I changed the name to 
+. Explain that this is a identifier, and the name is arbitrary.
+nodes,
+relationship
+MATCH (a)-[:ACTED_IN]->(m)
+RETURN a.name, m.title;
+a ACTED IN m
+Have them try this. This is actors and the movies they were in.
+nodes,
+relationship
+MATCH (a)-[r:ACTED_IN]->(m)
+RETURN a.name, r.roles, m.title;
+a ACTED IN m
+Putting relationship name and type together. Actors, Roles and their Movies.
+Paths
+(a)-->(b)-->(c)
+Path
+ is series of connected nodes and relationships that are matched by a pattern
+(a)-->(b)-->(c)
+These are the Paths that Cypher will find (and a whole lot more)
+Paths
+(a)-->(b)-->(c)
+This path is all in one direction, implied by the two arrows.
+Paths
+(a)-->(b)<--(c)
+But the direction is flexible.
+(a)-->(b)<--(c)
+These are the Paths that Cypher will find (and a whole lot more). Discuss how directionality could also be left out entirely.
+Paths
+MATCH (a)-[:ACTED_IN]->(m)<-[:DIRECTED]-(d)
+RETURN a.name, m.title, d.name;
+m ad
+Ask: 
+What will this give us?
+ Get them to try it.
+ACTED IN
+DIRECTED
+MATCH (a)-[:ACTED_IN]->(m)<-[:DIRECTED]-(d)
+RETURN a.name, m.title, d.name;
+These are the Paths that Cypher will find (and a whole lot more)
+Paths
+MATCH (a)-[:ACTED_IN]->(m)<-[:DIRECTED]-(d)
+RETURN a.name, m.title, d.name;
+a.name
+m.title
+d.name
+Keanu Reeves
+The Matrix
+Andy Wachowski
+Keanu Reeves
+The Matrix Reloaded
+Andy Wachowski
+Noah Wyle
+A Few Good Men
+Rob Reiner
+Tom Hanks
+Cloud Atlas
+Andy Wachowski
+Paths
+MATCH (a)-[:ACTED_IN]->(m)<-[:DIRECTED]-(d)
+RETURN a.name AS actor, m.title AS movie,
+       d.name AS director;
+actor
+movie
+director
+Keanu Reeves
+The Matrix
+Andy Wachowski
+Keanu Reeves
+The Matrix Reloaded
+Andy Wachowski
+Noah Wyle
+A Few Good Men
+Rob Reiner
+Tom Hanks
+Cloud Atlas
+Andy Wachowski
+Show how we can name the output columns
+Paths
+MATCH (a)-[:ACTED_IN]->(m), (m)<-[:DIRECTED]-(d)
+RETURN a.name, m.title, d.name;
+a ACTED IN m m DIRECTED d
+Note that the pattern can be split into separate path patterns. This is the same as the previous pattern.
+Paths
+MATCH (a)-[:ACTED_IN]->(m), (d)-[:DIRECTED]->(m)
+RETURN a.name, m.title, d.name;
+a ACTED IN m d DIRECTED
+These patterns are all the same.
+Paths
+MATCH p=(a)-[:ACTED_IN]->(m)<-[:DIRECTED]-(d)
+RETURN p;
+m ad
+We can name paths, and return those paths. Paths contain collections of nodes and relationships forming the path.
+ACTED IN
+DIRECTED
+Paths
+MATCH p=(a)-[:ACTED_IN]->(m)<-[:DIRECTED]-(d)
+RETURN nodes(p);
+m ad
+We can use the nodes() function to just access the nodes in the path. Also 
+rels()
+ for relationships.
+ACTED IN
+DIRECTED
+Paths
+MATCH p1=(a)-[:ACTED_IN]->(m), p2=(d)-[:DIRECTED]->(m)
+RETURN p1, p2;
+a ACTED IN m d DIRECTED
+Only connected patterns can be used to create named paths
+Aggregation
+MATCH (a)-[:ACTED_IN]->(m)<-[:DIRECTED]-(d)
+RETURN a.name, m.title, d.name;
+a.name
+m.title
+d.name
+Keanu Reeves
+The Matrix
+Andy Wachowski
+Keanu Reeves
+The Matrix Reloaded
+Andy Wachowski
+Noah Wyle
+A Few Good Men
+Rob Reiner
+Tom Hanks
+Cloud Atlas
+Andy Wachowski
+What if we want to group together Keanu and Andy? Like 
+GROUP BY
+ in SQL.
+Aggregation
+MATCH (a)-[:ACTED_IN]->(m)<-[:DIRECTED]-(d)
+RETURN a.name, d.name, count(*);
+a.name
+d.name
+count(*)
+Aaron Sorkin"
+Rob Reiner
+Keanu Reeves
+Andy Wachowski
+Hugo Weaving
+Tom Tykwer
+Groups by the other items specified in return clause
+Aggregation
+MATCH (a)-[:ACTED_IN]->(m)<-[:DIRECTED]-(d)
+RETURN a.name, d.name, count(m);
+a.name
+d.name
+count(m)
+Aaron Sorkin"
+Rob Reiner
+Keanu Reeves
+Andy Wachowski
+Hugo Weaving
+Tom Tykwer
+Identical to previous.
+MATCH (a)-[:ACTED_IN]->(m)<-[:DIRECTED]-(d)
+RETURN a.name AS actor,
+d.name AS director, count(m) AS count;
+actor
+director
+count
+Aaron Sorkin"
+Rob Reiner
+Keanu Reeves
+Andy Wachowski
+Hugo Weaving
+Tom Tykwer
+alias for variables, more convenient, use downstream in ORDER BY etc
+Aggregation
+MATCH (a)-[:ACTED_IN]->(m)<-[:DIRECTED]-(d)
+RETURN a.name, d.name, collect(m.title);
+m ad
+Quiz: try this and see what it returns!
+ACTED IN
+ACTED IN
+Aggregation
+- add up the number of occurrences min(x) - get the lowest value
+max(x) - get the highest value
+avg(x) - get the average of a numeric value sum(x) - add up all values
+count(x)
+collect(x)
+- collected all the occurrences into an array
+Sort
+Limit
+MATCH (a)-[:ACTED_IN]->(m)<-[:DIRECTED]-(d)
+RETURN a.name, d.name, count(*) AS count
+ORDER BY count DESC
+LIMIT 5;
+Ask: 
+Which actor and director worked together the most?
+Which directors also acted in their movie?
+MATCH (d)-[:DIRECTED]->(m)<-[:ACTED_IN]-(d)
+RETURN d.name, m.title;
+Unique
+relationships
+paths
+MATCH (a)-[:ACTED_IN]->(m)<-[:ACTED_IN]-(a)
+RETURN a.name, m.title;
+Get them to try this. It will return no results. !Explain why.
+Starting
+somewhere
+All-nodes
+Query
+MATCH (n)
+RETURN n;
+Matches every node in the graph
+This returns every node! Explain why.
+Find
+specific
+node
+(within
+all-nodes)
+MATCH (n)
+WHERE n.name = "Tom Hanks"
+RETURN n;
+WHERE - filter the results
+n.name = "Tom Hanks" - by the name property value
+This finds Tom Hanks, but looks through all nodes to do so. Use the next slide to explain why.
+Find
+specific
+node
+(concise
+syntax)
+MATCH (n {name:"Tom Hanks"})
+RETURN n;
+MATCH (n) - find patterns in graph
+{name:"Tom Hanks"} - with the specified properties
+This finds Tom Hanks, but looks through all nodes to do so. Use the next slide to explain why.
+MATCH (n {n.name:"Tom Hanks"})
+RETURN n;
+Explain how Cypher will search through every node to find one with a name property, with the value 
+Tom Hanks
+Find
+specific
+node
+(with
+label)
+MATCH (tom:Person)
+WHERE tom.name="Tom Hanks"
+RETURN tom;
+   :Person - Matches only nodes labeled as Person
+ MATCH (tom:Person {name:"Tom Hanks"})
+ RETURN tom;
+Talk about how Cypher now only has to look through a subset of all nodes.
+MATCH (tom:Person {name:"Tom Hanks"})
+RETURN tom;
+Explain how Cypher will use the index to 
+immediately
+ find the node with name=
+Tom Hanks
+Start
+with
+specific
+(labeled)
+node
+MATCH (tom:Person)-[:ACTED_IN]->(movie:Movie)
+WHERE tom.name="Tom Hanks"
+RETURN movie.title;
+MATCH (tom:Person {name:"Tom Hanks"})-[:ACTED_IN]->(movie:Movie)
+RETURN movie.title;
+(Movies featuring Tom Hanks)
+Ask: 
+What movies was Tom Hanks in?
+Explain how Cypher will start the search from Tom, and find matching paths from there.
+MATCH (tom:Person {name:"Tom Hanks"})-[:ACTED_IN]->(movie:Movie)
+RETURN movie.title;
+Start
+with
+specific
+labeled
+node
+MATCH (tom:Person {name:"Tom Hanks"})-[:ACTED_IN]->(movie),
+      (director)-[:DIRECTED]->(movie)
+RETURN director.name;
+(Directors who worked with Tom Hanks)
+A more complicated example (bigger pattern, longer paths).
+MATCH (tom:Person {name:"Tom Hanks"})-[:ACTED_IN]->(movie:Movie)
+  (director:Person)-[:DIRECTED]->(movie)
+RETURN director.name;
+Ask: 
+Who are the directors that Tom Hanks worked with?
+ Note that some directors are found twice.
+Start
+with
+specific
+labeled
+node
+MATCH (tom:Person)-[:ACTED_IN]->()<-[:DIRECTED]-(director)
+WHERE tom.name="Tom Hanks"
+RETURN DISTINCT director.name;
+(Directors who worked with Tom Hanks)
+Use distinct to remove duplicates.
+Note that this is the same as using an aggregate function, but doesn
+t add an extra column to the result.
+Create
+label-specific
+index
+CREATE INDEX ON :Person(name)
+CREATE INDEX ON :Movie(title)
+Create two indexes.
+- nodes labeled as Person, indexed by name property
+- nodes labeled as Movie, indexed by title property
+Labels
+pattern
+"anchors"
+MATCH (tom:Person {name:"Tom Hanks"})-[:ACTED_IN]->(movie),
+  (kevin:Person {name:"Kevin Bacon"})-[:ACTED_IN]->(movie)
+RETURN DISTINCT movie.title;
+(Movies featuring both Tom Hanks and Kevin Bacon)
+Mention that Cypher can directly lookup Tom and Kevin from the name index on Person. This "anchors" the pattern to these bound nodes.
+!Observe:Nolabelon"movie."Why?Moviesarealready chosenbyACTED_INrelationship,andaren'tusedinwhereclause.Thisgivesflexibilitywhenwelateraddtvshows,commercials,orlivetheater.Laterwe may want to use Movie to exclude those other relationships. And, there is a performance benefit.
+MATCH (tom:Person {name:"Tom Hanks"})-[:ACTED_IN]->(movie),
+   (kevin:Person {name:"Kevin Bacon"})-[:ACTED_IN]->(movie)
+RETURN DISTINCT movie.title;
+Explain how cypher will use both known (
+bound
+) nodes to find paths that match the pattern. Ask: 
+What is the movie?
+ (Apollo 13)
+Rule of thumb: only label nodes which appear in WHERE clause.
+Conditions
+Conditions
+properties
+MATCH (tom:Person {name:"Tom Hanks"})-[:ACTED_IN]->(movie:Movie)
+WHERE movie.released < 1992
+RETURN DISTINCT movie.title;
+(Movies in which Tom Hanks acted, that were released before 1992)
+Conditions are used to constrain the paths that cypher will match the pattern to. Get them to try this, before moving showing the next slide.
+Explain how Cypher will start the search from Keanu, and find matching paths from there.
+MATCH (tom:Person {name:"Tom Hanks"})-[:ACTED_IN]->(movie:Movie)
+WHERE movie.released < 1992
+RETURN DISTINCT movie.title;
+2012
+1990
+2000
+1992
+Conditions
+properties
+MATCH (actor:Person {name:"Keanu Reeves"})-[r:ACTED_IN]->(movie)
+WHERE "Neo" IN (r.roles)
+RETURN DISTINCT movie.title;
+(Movies in which Keanu Reeves played Neo)
+Relationship properties can also be used in constraints.
+Note that, in this model, the 
+roles
+ property is an array of names - so we use the IN operator !
+Conditions
+properties
+MATCH (actor:Person {name:"Keanu Reeves"})-[r:ACTED_IN]->(movie)
+WHERE ANY( x IN r.roles WHERE x = "Neo")
+RETURN DISTINCT movie.title;
+(Movies in which Keanu Reeves played Neo)
+Relationship properties can also be used in constraints.
+Note that, in this model, the 
+roles
+ property is an array of names - so we use the IN operator !
+Conditions
+based
+comparisons
+MATCH (tom:Person {name:"Tom Hanks"})-[:ACTED_IN]->
+      (movie)<-[:ACTED_IN]-(a:Person)
+WHERE a.born < tom.born
+RETURN DISTINCT a.name;
+(Actors who worked with Tom and are older than he was)
+These might be actors he learnt from. Ask: 
+Who are they?
+Conditions
+based
+comparisons
+MATCH (tom:Person {name:"Tom Hanks"})-[:ACTED_IN]->
+      (movie)<-[:ACTED_IN]-(a:Person)
+WHERE a.born < tom.born
+RETURN DISTINCT a.name, (tom.born - a.born) AS diff;
+(Actors who worked with Tom and are older than he was)
+Show that calculations can also be done in the output - as well as renaming the column. Ask: 
+Who was the oldest?
+Conditions
+based
+patterns
+MATCH (gene:Person {name:"Gene Hackman"})-[:ACTED_IN]->
+      (movie)<-[:ACTED_IN]-(actor)
+RETURN DISTINCT actor.name;
+(Actors who worked with Gene Hackman)
+Ask: 
+But want if we only want actors he worked with, who are also directors of their own films?
+Conditions
+based
+patterns
+MATCH (gene:Person {name:"Gene Hackman"})-[:ACTED_IN]->
+      (movie)<-[:ACTED_IN]->(director)
+WHERE (director)-[:DIRECTED]->()
+RETURN DISTINCT director.name;
+(Actors who worked with Gene and were directors of their own films)
+Ask: 
+Who is it?
+ -- Clint Eastwood
+- match expanded die subgraphs, where filters them down and in this case it is rather a limit - performance wise it is sometimes better like this, sometimes in match (measure)
+Conditions
+based
+patterns
+MATCH (keanu:Person {name:"Keanu Reeves"})
+       -[:ACTED_IN]->(movie)<-[:ACTED_IN]-(actor),
+      (hugo:Person {name:"Hugo Weaving"})
+WHERE NOT (hugo)-[:ACTED_IN]->(movie)
+RETURN DISTINCT actor.name;
+(Actors who worked with Keanu, but not when he was also working with Hugo)
+Who are the five busiest actors?
+ MATCH (a:Person)-[:ACTED_IN]->()
+ RETURN a.name, count(*) AS count
+ ORDER BY count DESC
+ LIMIT 5;
+- business - most films
+- bonus - who are the actors busiest in the last 10 years?
+ADVANCED
+Recommend 3 actors that Keanu Reeves should work with (but hasn
+MATCH (keanu:Person)-[:ACTED_IN]->()<-[:ACTED_IN]-(c),
+      (c)-[:ACTED_IN]->()<-[:ACTED_IN]-(coc)
+WHERE keanu.name="Keanu Reeves"
+  AND NOT((keanu)-[:ACTED_IN]->()<-[:ACTED_IN]-(coc))
+  AND coc <> keanu
+RETURN coc.name, count(coc)
+ORDER BY count(coc) DESC
+LIMIT 3;
+Coffee?
+Lunch?
+MATCH (kevin:Person {name:"Kevin Bacon"})-[:ACTED_IN]->(movie)
+RETURN DISTINCT movie.title;
+(Movies featuring Kevin Bacon)
+Point out that this is missing the most famous - 
+Mystic River
+(Updating
+Graphs
+with
+Cypher)
+Creating
+nodes
+CREATE (m:Movie {title:"Mystic River", released:1993});
+   MATCH (m:Movie {title:"Mystic River"})
+   RETURN m;
+The second query is to check that it was properly created. Get them to run it, and look at the result. !Point out that we forgot the tagline - 
+s add it
+Adding
+properties
+MATCH (movie:Movie {title:"Mystic River"})
+SET movie.tagline = "We bury our sins here, Dave. We wash them clean."
+RETURN movie;
+Look at the result, which has the new tagline.
+Point out that 
+Ooops.... the released date is wrong!
+Changing
+properties
+MATCH (movie:Movie {title:"Mystic River"})
+SET movie.released = 2003
+RETURN movie;
+Creating
+Relationships
+MATCH (movie:Movie {title:"Mystic River"}),
+      (kevin:Person {name:"Kevin Bacon"})
+MERGE (kevin)-[r:ACTED_IN]->(movie)
+ON CREATE SET r.roles=["Sean"]
+ MATCH (kevin:Person {name:"Kevin Bacon"})-[:ACTED_IN]->(movie)
+ RETURN movie.title;
+match the two end-nodes first,
+then use MERGE to create the ACTED_IN relationship if it was not already there if it was created also set the roles property
+Change Kevin Bacon
+s role in Mystic River
+ from 
+Sean
+ to 
+Sean Devine
+MATCH (kevin:Person {name:"Kevin Bacon"})-[r:ACTED_IN]->
+      (movie:Movie {title:"Mystic River"})
+SET r.roles = ["Sean Devine"]
+RETURN r.roles;
+Ask: 
+What if there was other roles in the array we didn
+t want to overwrite?
+Change Kevin Bacon
+s role in Mystic River
+ from 
+Sean
+ to 
+Sean Devine
+MATCH (kevin:Person {name:"Kevin Bacon"})-[r:ACTED_IN]->
+      (movie:Movie {title:"Mystic River"})
+SET r.roles = [n in r.roles WHERE n <> "Sean"] + "Sean Devine"
+RETURN r.roles;
+Add Clint Eastwood as the director of Mystic River
+MATCH (movie:Movie {title:"Mystic River"}),
+      (clint:Person {name:"Clint Eastwood"})
+MERGE (clint)-[:DIRECTED]->(movie);
+List all the character roles in the movie 
+The Matrix
+MATCH (matrix:Movie {title:"The Matrix"})<-[r:ACTED_IN]-()
+RETURN r.roles;
+Get them to note that there is a strange character, called 
+Emil
+. Suggest that 
+Next - let
+s see who this 
+Emil
+ character is!
+this
+"Emil"
+character?
+MATCH (matrix:Movie {title:"The Matrix"})<-[r:ACTED_IN]-(a)
+WHERE a.name =~ ".*Emil.*"
+RETURN a;
+Ask: 
+Who is this 
+Emil
+ character?
+Deleting
+nodes
+MATCH (emil:Person {name:"Emil Eifrem"})
+DELETE emil;
+Remove Emil Eifrem, because he shouldn
+t be in the data set. Ooops! That fails, because there are still relationships in place.
+Deleting
+relationships
+MATCH (emil:Person {name:"Emil Eifrem"})-[r]-()
+DELETE r;
+Remove this Emil character, first the relationships.
+Deleting
+nodes
+relationships
+How we can delete the relationship and nodes in one statement.
+!Point out that this probably didn
+t work - if they removed the relationships already, then the MATCH wouldn
+t find anything!
+Deleting
+nodes
+relationships
+MATCH (emil:Person {name: "Emil Eifrem"})
+OPTIONAL MATCH (emil)-[r]-()
+DELETE r, emil;
+How we can delete the relationship and nodes in one statement, even if there are no relationships? OPTIONAL MATCH will return a single row with null values for unmatched/unbound elements
+Add KNOWS relationships between all actors who were in the same movie
+MATCH (a:Person)-[:ACTED_IN]->()<-[:ACTED_IN]-(b:Person)
+CREATE UNIQUE (a)-[:KNOWS]-(b);
+Note that this will create a KNOWS relationship only once, you don't want to have two directional relationships in this case. !Discuss this vs having two directed relationships.
+Match
+Create
+MERGE
+MERGE (p:Person {name:"Clint Eastwood"})
+RETURN p
+    Uses indexes, constraints and locks to guarantee
+    unique lookup and creation
+matches all given properties
+only pass unique / business keys to match / create uniquely how do I set other properties on create? -> next slide
+Match
+Create
+MERGE
+MERGE (p:Person {name:"Clint Eastwood"})
+ON CREATE SET p.created = timestamp()
+ON MATCH SET p.accessed = coalesce(p.accessed,0)+1
+RETURN p
+    ON CREATE SET - executed on create
+    ON MATCH SET  - executed on match
+also for property updates on create or on match
+Coffee?
+(More
+Cypher)
+Matching
+multiple
+relationships
+MATCH (a)-[:ACTED_IN|:DIRECTED]->()<-[:ACTED_IN|:DIRECTED]-(b)
+CREATE UNIQUE (a)-[:KNOWS]-(b);
+(Create KNOWS relationships between anyone, Actors or Directors, who worked together)
+The KNOWS relationship will be our shortcut or in-graph-index for collegues who worked together.
+Variable
+length
+paths
+ab ab
+ (a)-[*1..3]->(b)
+Friends-of-Friends
+MATCH (keanu:Person {name:"Keanu Reeves"})-[:KNOWS*2]-(fof) RETURN DISTINCT fof.name;
+- or -
+MATCH (keanu:Person)-[:KNOWS*2]-(fof)
+WHERE keanu.name = "Keanu Reeves"
+RETURN DISTINCT fof.name;
+Note that friends of friends includes Keanu himself!
+Return Friends-of-Friends of Keanu Reeves who are not immediate friends
+MATCH (keanu:Person {name:"Keanu Reeves"})-[:KNOWS*2]-(fof)
+WHERE keanu <> fof AND NOT (keanu)-[:KNOWS]-(fof)
+RETURN DISTINCT fof.name;
+Bacon
+Number!
+MATCH p=shortestPath(
+   (charlize:Person)-[:KNOWS*]-(bacon:Person)
+WHERE charlize.name="Charlize Theron" AND
+      bacon.name="Kevin Bacon"
+RETURN length(p);
+Bacon
+Number!
+MATCH (bacon:Person {name:"Kevin Bacon"}),
+      (charlize:Person {name:"Charlize Theron"}),
+      p=shortestPath((charlize)-[:KNOWS*]-(bacon))
+RETURN length(p);
+Alternative query:
+Return the names of the people joining Charlize to Kevin.
+MATCH p=shortestPath((charlize:Person)-[:KNOWS*]-(bacon:Person))
+WHERE charlize.name="Charlize Theron" AND
+      bacon.name="Kevin Bacon"
+RETURN [n in nodes(p) | n.name] AS names;
+(Use the Cypher reference card on collection functions)
+Note that most people will just 
+RETURN n
+. To get just the full solution (just names), they will need to use the cheat-sheet and understand extract. You should walk them through this.
+(Graphs
+Everywhere)
+Neo4j Case Studies
+Industry: Communications Use case: Recommendations San Jose, CA
+Cisco.com
+Background
+ Cisco.com serves customer and business customers with Support Services
+ Needed real-time recommendations, to encourage use of online knowledge
+base
+ Cisco had been successfully using Neo4j for its internal master data
+management solution.
+ Identified a strong fit for online recommendations
+Business problem
+ Call center volumes needed to be lowered by improving the efficacy of online self service
+ Leverage large amounts of knowledge stored in service cases, solutions, articles, forums, etc.
+ Problem resolution times, as well as support costs, needed to be lowered
+Knowledge Base Article
+Knowledge Base Article
+Support Case
+Support Case
+Solution
+Knowledge Base Article
+Message
+Neo Technology Confidential
+Solution & Benefits
+ Cases, solutions, articles, etc. continuously scraped for cross-reference links, and represented in Neo4j
+ Real-time reading recommendations via Neo4j
+ Neo4j Enterprise with HA cluster
+ The result: customers obtain help faster, with decreased reliance on customer support
+Industry: Communications
+Use case: Master Data Management San Jose, CA
+Cisco HMP
+Background
+ One of the world
+s largest communications equipment manufacturers
+ #91 Global 2000. $44B in annual sales.
+ Needed a system that could accommodate its master data hierarchies in a
+performant way
+ HMP is a Master Data Management system at whose heart is Neo4j. Data
+access services available 24x7 to applications companywide
+Business problem
+ Sales compensation system had become unable to meet Cisco
+s needs
+ Existing Oracle RAC system had reached its limits:
+ Insufficient flexibility for handling complex organizational hierarchies and mappings
+Real-time
+ queries were taking > 1 minute!
+ Business-critical 
+ system needs to be continually available, with zero
+downtime
+Solution & Benefits
+ Cisco created a new system: the Hierarchy Management Platform (HMP)
+ Allows Cisco to manage master data centrally, and centralize data access and business
+rules
+ Neo4j provided 
+Minutes to Milliseconds
+ performance over Oracle RAC, serving
+master data in real time
+ The graph database model provided exactly the flexibility needed to support Cisco
+business rules
+ HMP so successful that it has expanded to
+include product hierarchy
+Neo Technology Confidential
+Industry: Logistics
+Use case: Parcel Routing
+Background
+ One of the world
+s largest logistics carriers 
+ Projected to outgrow capacity of old system 
+ New parcel routing system
+ Single source of truth for entire network
+ B2C & B2B parcel tracking
+ Real-time routing: up to 5M parcels per day
+Business problem
+ 24x7 availability, year round
+ Peak loads of 2500+ parcels per second
+ Complex and diverse software stack
+ Need predictable performance & linear scalability
+ Daily changes to logistics network: route from any point, to any point
+Solution & Benefits
+ Neo4j provides the ideal domain fit: 
+ a logistics network is a graph
+ Extreme availability & performance with Neo4j clustering
+ Hugely simplified queries, vs. relational for complex routing
+ Flexible data model can reflect real-world data variance much better than relational 
+Whiteboard friendly
+ model easy to understand
+Neo Technology Confidential
+Industry: Online Job Search
+Use case: Social / Recommendations Sausalito, CA
+GlassDoor
+Background
+ Online jobs and career community, providing anonymized inside information to job seekers
+Business problem
+ Wanted to leverage known fact that most jobs are found through personal & professional connections
+ Needed to rely on an existing source of social network data. Facebook was the ideal choice.
+ End users needed to get instant gratification
+ Aiming to have the best job search service, in a very competitive market
+Person
+Company
+WORKS_AT
+Person Company
+Person
+Neo Technology Confidential
+Solution & Benefits
+ First-to-market with a product that let users find jobs through their network of Facebook friends
+ Job recommendations served real-time from Neo4j
+ Individual Facebook graphs imported real-time into Neo4j
+ Glassdoor now stores > 50% of the entire Facebook social graph
+ Neo4j cluster has grown seamlessly, with new instances being brought online as graph
+size and load have increased
+WORKS_AT
+KNOWS
+KNOWS
+KNOWS
+Industry: Web/ISV
+Use case: Content Management, Social, Access Control San Jose, CA
+Adobe
+Background
+ One of the ten largest software companies globally
+ $4B+ in revenue. Over 11,000 employees.
+ Launched Creative Cloud in 2012, allowing its Creative Suite users to
+collaborate via the Cloud
+Business problem
+ Adobe needed a highly robust and available, 24x7 distributed global system, supporting collaboration for users of its highest revenue product line
+ Storing creative artifacts in the cloud meant managing access rights for (eventually) millions of users, groups, collections, and pieces of content
+ Complex access control rules controlling who was connected to whom, and who could see or edit what, proved a significant technical challenge
+User-Content-Access Graph
+Solution & Benefits
+ Selected Neo4j to meet very aggressive project deadlines.The flexibility of the graph model, and performance, were the two major selection factors.
+ Easily evolve the system to meet tomorrow
+s needs
+ Extremely high availability and transactional performance requirements. 24x7 with no
+downtime.
+ Neo4j allows consistently fast response times with complex queries, even as the
+system grows
+ First (and possibly still only) database cluster to run across three Amazon EC2
+regions: U.S., Europe,Asia
+Neo Technology Confidential
+Industry: Communications
+Use case: Network Management Paris, France
+Background
+ Second largest communications company in France 
+ Part of Vivendi Group, partnering with Vodafone
+Business problem
+ Infrastructure maintenance took one full week to plan, because of the need to model network impacts
+ Needed rapid, automated 
+what if 
+ analysis to ensure resilience during unplanned network outages
+ Identify weaknesses in the network to uncover the need for additional redundancy
+ Network information spread across > 30 systems, with daily changes to network infrastructure
+ Business needs sometimes changed very rapidly
+Service
+Router
+Fiber Link
+Switch DEPENDS_ON
+LINKED
+DEPENDS_ON
+Fiber Link
+Switch DEPENDS_ON
+Router
+Fiber Link
+DEPENDS_ON
+Oceanfloor Cable
+Solution & Benefits
+ Flexible network inventory management system, to support modeling, aggregation & troubleshooting
+ Single source of truth (Neo4j) representing the entire network
+ Dynamic system loads data from 30+ systems, and allows new applications to access
+network data
+ Modeling efforts greatly reduced because of the near 1:1 mapping between the real
+world and the graph
+ Flexible schema highly adaptable to changing business requirements
+Neo Technology Confidential
+DEPENDS_ON
+DEPENDS_ON
+DEPENDS_ON
+DEPENDS_ON
+LINKED
+DEPENDS_ON
+LINKED
+DEPENDS_ON
+DEPENDS_ON
+Industry: Communications Use case: Social gaming Frankfurt, Germany
+Deutsche Telecom
+Background
+ Europe
+s largest communications company
+ Provider of mobile & land telephone lines to consumers and businesses, as well
+as internet services, television, and other services
+Business problem
+ The Fanorakel application allows fans to have an interactive experience while watchingsports
+ Fans can vote for referee decisions and interact with other fans watching the game
+ Highly connected dataset with real-time updates
+ Queries need to be served real-time on rapidly changing data
+ One technical challenge is to handle the very high spikes of activity during
+popular games
+Interactive Television Programming
+Solution & Benefits
+ Interactive, social offering gives fans a way to experience the game more closely
+ IncreasedcustomerstickinessforDeutscheTelekom
+ A completely new channel for reaching customers with information, promotions, and
+ Clear competitive advantage
+Neo Technology Confidential
+Industry: Web/ISV,Communications Use case: Network Management Global (U.S., France)
+Hewlett Packard
+Background
+ World
+s largest provider of IT infrastructure, software & services
+s Unified Correlation Analyzer (UCA) application is a key application inside
+s OSS Assurance portfolio
+ Carrier-class resource & service management, problem determination, root
+cause & service impact analysis
+ Helps communications operators manage large, complex and fast changing
+networks
+Business problem
+ Use network topology information to identify root problems causes on the network
+ Simplify alarm handling by human operators
+ Automate handling of certain types of alarms Help operators respond rapidly
+to network issues
+ Filter/group/eliminate redundant Network Management System alarms by
+event correlation
+Solution & Benefits
+ Accelerated product development time
+ Extremely fast querying of network topology
+ Graph representation a perfect domain fit
+ 24x7 carrier-grade reliability with Neo4j HA clustering 
+ Met objective in under 6 months
+Neo Technology Confidential
+OSS = Operations Support Systems. Systems used by telecommunications service providers to administer and maintain network systems.
+Industry: Communications
+Use case: Resource Authorization & Access Control Oslo, Norway
+Telenor
+Background
+ 10th largest Telco provider in the world, leading in the Nordics
+ Online self-serve system where large business admins manage employee
+subscriptions and plans
+ Mission-critical system whose availability and responsiveness is critical to
+customer satisfaction
+Business problem
+ Degrading relational performance. User login taking minutes while system retrieved access rights
+ Millions of plans, customers, admins, groups. 
+ Highly interconnected data set w/massive joins
+ Nightly batch workaround solved the performance problem, but meant data was no longer current
+ Primary system was Sybase. Batch pre-compute workaround projected to reach 9 hours by 2014: longer than the nightly batch window
+User
+USER_ACCESS
+Customer
+PART_OF Customer
+CONTROLLED_BY
+Account
+SUBSCRIBED_BY
+Subscriptio
+Neo Technology Confidential
+Solution & Benefits
+ Moved authorization functionality from Sybase to Neo4j
+ Modeling the resource graph in Neo4j was straightforward, as the domain is
+inherently a graph
+ Able to retire the batch process, and move to real-time responses: measured in
+milliseconds
+ Users able to see fresh data, not yesterday
+s snapshot 
+ Customer retention risks fully mitigated
+Industry: Professional Social Network Use case: Social, Recommendations Silicon Valley & France
+Viadeo
+Background
+ World
+s second-largest professional network
+ (after LinkedIn)
+ 50M members. 30K+ new members daily.
+ Over 400 staff with offices in 12 countries
+Business problem
+ Business imperative for real-time recommendations: to attract new users and retain existing ones
+ Key differentiator: show members how they are connected to any other member
+ Real-time traversals of social graph not feasible with MySQL cluster. Batch precompute meant stale data.
+ Process taking longer & longer: > 1 week!
+Solution & Benefits
+ Neo4j solution implemented in 8 weeks with 3 part-time programmers
+ Able to move from batch to real-time: improved responsiveness with up-to-date data. 
+ Viadeo (at the time) had 8M members and 35M relationships.
+ Neo4j cluster now sits at the heart of Viadeo
+s professional network, connecting 50M
++ professionals
+Neo Technology Confidential
+Industry: Communications Use case: Social, Mobile Hong Kong
+Maaii
+Background
+ Hong Kong based telephony infrastructure provider
+ (aka M800 aka Pop Media)
+ Exclusive China Mobile partner for international toll-free services. SMS Hub & other offerings
+ 2012 Red Herring Top 100 Global Winner
+Business problem
+ Launched a new mobile communication app 
+Maaii
+ allowing consumers to communicate by voice & text
+(Similar to Line,Viber, Rebtel,VoxOx...)
+ Needed to store & relate devices, users, and contacts
+ Import phone numbers from users
+ address books. Rapidly serve up contacts
+from central database 
+to the mobile app
+ Currently around 3M users w/200M nodes in the graph
+Solution & Benefits
+ Quick transactional performance for key operations: 
+ friend suggestions (
+friend of friend
+ updating contacts, blocking calls, etc.
+ etc.
+ High availability telephony app uses Neo4j clustering 
+ Strong architecture fit: Scala w/Neo4j embedded
+Neo Technology Confidential
+Industry: Web/ISV,Communications Use case: Data Center Management Zu
+rich, Switzerland
+Junisphere
+Background
+ Junisphere AG is a Zurich-based IT solutions provider
+ Founded in 2001. Profitable. Self funded.
+ Software & services.
+ Novel approach to infrastructure monitoring: 
+Starts with the end user, mapped to business processes and services, and dependent infrastructure
+Business problem
+Business Service Management
+ requires mapping of complex graph, covering: business processes--> business services--> IT infrastructure
+ Embed capability of storing and retrieving this information into OEM application
+ Re-architecting outdated C++ application based on relational database, with Java
+Solution & Benefits
+ Actively sought out a Java-based solution that could store data as a graph 
+ Domain model is reflected directly in the database:
+No time lost in translation
+Our business and enterprise consultants now speak the same language, and can
+model the domain with the database on a 1:1 ratio.
+ Spring Data Neo4j strong fit for Java architecture
+Neo Technology Confidential
+Industry: Education
+Use case: Resource Authorization & Access Control San Francisco, CA
+Teachscape
+Background
+ Teachscape, Inc. develops online learning tools for K-12 teachers, school principals, and other instructional leaders.
+ Teachscape evaluated relational as an option, considering MySQL and Oracle.
+ Neo4j was selected because the graph data model provides a more natural fit
+for managing organizational hierarchy and access to assets.
+Business problem
+ Neo4j was selected to be at the heart of a new architecture.
+ The user management system, centered around Neo4j, will be used to support single sign-on, user management, contract management, and end-user access to
+their subscription entitlements.
+Solution & Benefits
+ Domain and technology fit
+ simple domain model where the relationships are relatively complex. Secondary factors included support for transactions, strong Java support, and well-implemented Lucene indexing integration
+ Speed and Flexibility
+ The business depends on being able to do complex walks quickly and efficiently. This was a major factor in the decision to use Neo4j.
+ Ease of Use
+ accommodate efficient access for home-grown and commercial off-the-shelf applications, as well as ad-hoc use.
+ Extreme availability & performance with Neo4j clustering
+ Hugely simplified queries, vs. relational for complex routing
+ Flexible data model can reflect real-world data variance much better than relational
+Whiteboard friendly
+ model easy to understand
+Neo Technology Confidential
+Industry: Life Sciences
+Use case: Content Management Cambridge, Massachusetts
+SevenBridges Genomics
+Background
+ Bioinformatics company offering gene sequencing 
+ "as a service" (over the web)
+ Provider of genomic information services
+ Needed a new platform to support storage & retrieval of sequenced genomes
+in the cloud
+Business problem
+ Neo4j is used to store metadata about each sequenced genome (including a pointer to the sequenced genome itself, which is a binary file stored on Amazon S3), and to support search and other forms of information processing against the genomic data.
+ graph database was chosen because 
+Our specific domain maps naturally onto graph paradigm
+Solution & Benefits
+ Domain fit
+ Domain naturally lends itself to a graph representation.
+ Graph model determined to be a perfect fit.
+ Agility & Performance
+ Saved time with Neo4j as compared to the alternatives.
+ Queries 
+practically write themselves.
+ Solution Completeness
+Neo4j is incomparably better than other graph databases.
+Neo Technology Confidential
+(More
+about
+Neo4j)
+More
+about
+Neo4j Neo4j
+APIs
+Neo4j
+offers
+three
+APIs:
+ 1.Cypher
+most
+work
+ 2.REST
+management
+ 3.Plugin
+special
+cases
+Talk a bit about cypher
+http://www.neo4j.org/develop/drivers
+Java, ruby, php, python, node, .net. Groovy, Scala, perl, go...
+Even haskell :)
+Over 20 drivers - check them out
+Traverses
+4,000,000+
+relationships
+second
+commodity
+hardware
+Licensing
+options
+Community is great, advanced adds monitoring. Enterprise is HA, 24x7 support and professional training workshop Ask sales engineer if more questions . . .
+Community is great, advanced adds monitoring. Enterprise is HA, 24x7 support and professional training workshop Ask sales engineer if more questions . . .
+(Next
+steps)
+rise
+graph
+Big trend recap
+It's
+just
+social
+Show breadth of opportunities for modeling
+Find
+graphs
+your
+domain,
+ and
+model
+them
+t just write logs to the graph 
+ extract meaningful data first
+involved
+community
+Meetups and mailing list
+http://stackoverflow.com/questions/tagged/neo4j
+http://groups.google.com/group/neo4j
+https://github.com/neo4j/neo4j/issues
+http://neo4j.meetup.com/
+http://www.neo4j.org/participate/contributors#map
+(Thank
+You)
+http://www.neo4j.org
+ http://groups.google.com/group/neo4j
+ http://www.neo4j.org/develop

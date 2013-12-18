@@ -20,10 +20,12 @@
 <link href="deck.js/core/deck.core.css" rel="stylesheet">
 <link href="deck.js/extensions/hash/deck.hash.css" media="screen" rel="stylesheet">
 <link href="deck.js/extensions/scale/deck.scale.css" media="screen" rel="stylesheet">
+<link href="deck.js/extensions/goto/deck.goto.css" media="screen" rel="stylesheet">
 <link href="deck.js/extensions/navigation/deck.navigation.css" media="screen" rel="stylesheet">
 <link href="deck.js/extensions/status/deck.status.css" media="screen" rel="stylesheet">
+<link href="deck.js/extensions/toc/deck.toc.css" media="screen" rel="stylesheet">
 <link href="deck.js/themes/style/neotech.css" media="screen" rel="stylesheet">
-<link href="deck.js/themes/transition/horizontal-slide.css" media="screen" rel="stylesheet">
+<link href="deck.js/themes/transition/none.css" media="screen" rel="stylesheet">
 <link href="deck.js/core/print.css" media="print" rel="stylesheet">
 <script src="deck.js/modernizr.custom.js"></script>
 </head>
@@ -88,7 +90,7 @@ Grab a coffee and get ready to begin!
 </div>
 </div>
 
-<div class="paragraph"><p>with Michael Hunger</p></div>
+<div class="paragraph"><p class="center-down">with Michael Hunger</p></div>
 
 <div class="paragraph"><p><a href="mailto:info@neotechnology.com">info@neotechnology.com</a> | @neo4j</p></div>
 </section>
@@ -102,25 +104,16 @@ Grab a coffee and get ready to begin!
 <h2>Answer five Questions</h2>
 <div class="ulist">
 <ul>
-<li>What is Neo4j?</li>
-<li>Why would I use it?</li>
-<li>How do I model data?</li>
-<li>How do I enter data?</li>
-<li>How do I query data?</li>
+<li class="slide">What is Neo4j?</li>
+<li class="slide">Why would I use it?</li>
+<li class="slide">How do I model data?</li>
+<li class="slide">How do I enter data?</li>
+<li class="slide">How do I query data?</li>
+<li class="slide">and&#8230;</li>
+<li class="slide">provide confidence start building</li>
+<li class="slide">a graph enabled application</li>
 </ul>
 </div>
-
-<div class="paragraph"><p>and&#8230;</p></div>
-
-<section class="slide" id="_provide_confidence_start_building">
-<h2>provide confidence start building</h2>
-
-</section>
-
-<section class="slide" id="_a_graph_enabled_application">
-<h2>a graph enabled application</h2>
-
-</section>
 </section>
 
 <section class="slide" id="_schedule">
@@ -145,6 +138,137 @@ Grab a coffee and get ready to begin!
 
 </section>
 
+<section class="slide" id="_but_first_an_important_message">
+<h2>But first an important message &#8230;</h2>
+
+</section>
+
+<section class="slide" id="_these_are_charts">
+<h2>These are Charts &#8230;</h2>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">image</dt>
+<dd>
+<p>== Not Graphs</p>
+</dd>
+</dl>
+</div>
+</section>
+
+<section class="slide" id="_leonhard_euler_1707_1783">
+<h2>Leonhard Euler 1707-1783</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="euler" src="../../img/euler.png">
+</div>
+</div>
+
+<div class="paragraph"><p>Swiss Mathematician</p></div>
+</section>
+
+<section class="slide" id="_7_bridges_of_k_nigsberg">
+<h2>7 Bridges of Königsberg</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="konigsberg" src="../../img/konigsberg.png">
+</div>
+</div>
+
+<div class="paragraph"><p>Königsberg (Prussia) - 1736</p></div>
+
+<div class="paragraph"><p>7 Bridges, one route?</p></div>
+</section>
+
+<section class="slide" id="_7_bridges_of_k_nigsberg_approach">
+<h2>7 Bridges of Königsberg - Approach</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="konigsberg1" src="../../img/konigsberg1.png">
+</div>
+</div>
+
+<div class="paragraph"><p>Identify parts &#8594; Landmasses &amp; Bridges</p></div>
+</section>
+
+<section class="slide" id="_7_bridges_of_k_nigsberg_model">
+<h2>7 Bridges of Königsberg - Model</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="konigsberg3" src="../../img/konigsberg3.png">
+</div>
+</div>
+
+<div class="paragraph"><p>It&#8217;s a graph &#8594; Nodes &amp; Relationships</p></div>
+</section>
+
+<section class="slide" id="_7_bridges_of_k_nigsberg_solution">
+<h2>7 Bridges of Königsberg - Solution</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="konigsberg4" src="../../img/konigsberg4.png">
+</div>
+</div>
+
+<div class="paragraph"><p>Path finding &#8594; There was no route</p></div>
+</section>
+
+<section class="slide" id="_what_about_data">
+<h2>What about data?</h2>
+
+</section>
+
+<section class="slide" id="_alice_bob">
+<h2>Alice &amp; Bob</h2>
+<figure class="graph-diagram">
+<ul class="graph-diagram-markup" data-internal-scale="1.58" data-external-scale="1">
+  <li class="node" data-node-id="0" data-x="-115.53164556962025" data-y="-540.7594936708862">
+    <span class="caption">Bob</span>
+  </li>
+  <li class="node" data-node-id="1" data-x="-358.9403254972869" data-y="-330.334538878843">
+    <span class="caption">Book</span><dl class="properties"><dt>title</dt><dd>"Graph Databases"</dd></dl></li>
+  <li class="node" data-node-id="2" data-x="-565.6753022399126" data-y="-595.5646381619613">
+    <span class="caption">Alice</span>
+  </li>
+  <li class="relationship" data-from="0" data-to="1">
+    <span class="type">Has Read</span>
+  </li>
+  <li class="relationship" data-from="0" data-to="2">
+    <span class="type">Friend Of</span>
+  </li>
+  <li class="relationship" data-from="2" data-to="1">
+    <span class="type">Has Read</span>
+  </li>
+  <li class="relationship" data-from="2" data-to="0">
+    <span class="type">Friend Of</span>
+  </li>
+</ul>
+</figure>
+</section>
+
+<section class="slide" id="_add_detail">
+<h2>Add Detail</h2>
+<figure class="graph-diagram">
+<ul class="graph-diagram-markup" data-internal-scale="1.58" data-external-scale="1">
+  <li class="node" data-node-id="0" data-x="-115.53164556962025" data-y="-540.7594936708862">
+    <span class="caption">Person</span><dl class="properties"><dt>name</dt><dd>Bob</dd><dt>age</dt><dd>38</dd></dl></li>
+  <li class="node" data-node-id="1" data-x="-358.9403254972869" data-y="-330.334538878843">
+    <span class="caption">Book</span><dl class="properties"><dt>title</dt><dd>"Graph Databases"</dd><dt>authors</dt><dd>"Ian Robinson, ..."</dd></dl></li>
+  <li class="node" data-node-id="2" data-x="-565.6753022399126" data-y="-595.5646381619613">
+    <span class="caption">Person</span><dl class="properties"><dt>name</dt><dd>Alice</dd><dt>age</dt><dd>34</dd></dl></li>
+  <li class="relationship" data-from="0" data-to="1">
+    <span class="type">Has Read</span><dl class="properties"><dt>date</dt><dd>Jun-03</dd><dt>rating</dt><dd>4</dd></dl></li>
+  <li class="relationship" data-from="0" data-to="2">
+    <span class="type">Friend Of</span>
+  </li>
+  <li class="relationship" data-from="2" data-to="1">
+    <span class="type">Has Read</span><dl class="properties"><dt>date</dt><dd>Dec-05</dd><dt>rating</dt><dd>5</dd></dl></li>
+  <li class="relationship" data-from="2" data-to="0">
+    <span class="type">Friend Of</span>
+  </li>
+</ul>
+</figure>
+</section>
+
 <a class="deck-prev-link" href="#" title="Previous">&#8592;</a>
 <a class="deck-next-link" href="#" title="Next">&#8594;</a>
 <p class="deck-status">
@@ -152,11 +276,22 @@ Grab a coffee and get ready to begin!
 /
 <span class="deck-status-total"></span>
 </p>
+<form action="." class="goto-form" method="get">
+<label for="goto-slide">Go to Slide:</label>
+<input id="goto-slide" list="goto-datalist" name="slidenum" type="text">
+<datalist id="goto-data-list"></datalist>
+<input type="submit" value="Go">
+</form>
 <a class="deck-permalink" href="." title="Permalink to this slide">#</a>
 <script src="deck.js/extensions/hash/deck.hash.js"></script>
 <script src="deck.js/extensions/scale/deck.scale.js"></script>
+<script src="deck.js/extensions/blank/deck.blank.js"></script>
+<script src="deck.js/extensions/goto/deck.goto.js"></script>
 <script src="deck.js/extensions/navigation/deck.navigation.js"></script>
+<script src="deck.js/extensions/split/deck.split.js"></script>
 <script src="deck.js/extensions/status/deck.status.js"></script>
+<script src="deck.js/extensions/toc/deck.toc.js"></script>
+<div class="deck-toc"></div>
 <script src="deck.js/extensions/arrows/home.js"></script>
 <script src="deck.js/extensions/arrows/d3.v3.js"></script>
 <script src="deck.js/extensions/arrows/arrows-graph-diagram.js"></script>

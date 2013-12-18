@@ -1,0 +1,68 @@
+== What about data?
+
+== Alice & Bob
+
+////
+When we think about data, one of the most important aspects is how things are connected. This is a natural part of how we talk about things, and also of the graph model.
+“This is a also a graph, but with some data attached. Here: we’ve attached names to the nodes and described the type of the relationships.”
+////
+
+++++
+<figure class="graph-diagram">
+<ul class="graph-diagram-markup" data-internal-scale="1.58" data-external-scale="1">
+  <li class="node" data-node-id="0" data-x="-115.53164556962025" data-y="-540.7594936708862">
+    <span class="caption">Bob</span>
+  </li>
+  <li class="node" data-node-id="1" data-x="-358.9403254972869" data-y="-330.334538878843">
+    <span class="caption">Book</span><dl class="properties"><dt>title</dt><dd>"Graph Databases"</dd></dl></li>
+  <li class="node" data-node-id="2" data-x="-565.6753022399126" data-y="-595.5646381619613">
+    <span class="caption">Alice</span>
+  </li>
+  <li class="relationship" data-from="0" data-to="1">
+    <span class="type">Has Read</span>
+  </li>
+  <li class="relationship" data-from="0" data-to="2">
+    <span class="type">Friend Of</span>
+  </li>
+  <li class="relationship" data-from="2" data-to="1">
+    <span class="type">Has Read</span>
+  </li>
+  <li class="relationship" data-from="2" data-to="0">
+    <span class="type">Friend Of</span>
+  </li>
+</ul>
+</figure>
+++++
+
+== Add Detail
+
+////
+“We can take this further, and attach arbitrary key/value pairs”
+* This is the Property Graph Model, which has the following characteristics:
+* It contains Nodes and Relationships, both of which can contain properties (key-value pairs).
+Relationships are always between exactly 2 nodes. They have a type, and they are directed.
+“There are other graph models, however everyone in the industry has converged on the idea that this model is the most obvious and the most useful for real humans and the application we’re building”
+////
+
+++++
+<figure class="graph-diagram">
+<ul class="graph-diagram-markup" data-internal-scale="1.58" data-external-scale="1">
+  <li class="node" data-node-id="0" data-x="-115.53164556962025" data-y="-540.7594936708862">
+    <span class="caption">Person</span><dl class="properties"><dt>name</dt><dd>Bob</dd><dt>age</dt><dd>38</dd></dl></li>
+  <li class="node" data-node-id="1" data-x="-358.9403254972869" data-y="-330.334538878843">
+    <span class="caption">Book</span><dl class="properties"><dt>title</dt><dd>"Graph Databases"</dd><dt>authors</dt><dd>"Ian Robinson, ..."</dd></dl></li>
+  <li class="node" data-node-id="2" data-x="-565.6753022399126" data-y="-595.5646381619613">
+    <span class="caption">Person</span><dl class="properties"><dt>name</dt><dd>Alice</dd><dt>age</dt><dd>34</dd></dl></li>
+  <li class="relationship" data-from="0" data-to="1">
+    <span class="type">Has Read</span><dl class="properties"><dt>date</dt><dd>Jun-03</dd><dt>rating</dt><dd>4</dd></dl></li>
+  <li class="relationship" data-from="0" data-to="2">
+    <span class="type">Friend Of</span>
+  </li>
+  <li class="relationship" data-from="2" data-to="1">
+    <span class="type">Has Read</span><dl class="properties"><dt>date</dt><dd>Dec-05</dd><dt>rating</dt><dd>5</dd></dl></li>
+  <li class="relationship" data-from="2" data-to="0">
+    <span class="type">Friend Of</span>
+  </li>
+</ul>
+</figure>
+++++

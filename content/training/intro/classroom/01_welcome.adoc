@@ -13,3 +13,7 @@
 . Grab a coffee and get ready to begin!
 
 
+////
+Make sure to check everyone has Neo4j installed by 9am if possible. 
+Tell them they dont need to go further than getting it installed. If anyone comes in late, help them over morning coffee break.
+////

@@ -15,8 +15,27 @@ sudo bundle install
 asciidoctor -T ./asciidoctor-backends/haml/deckjs -a allow-uri-read -a presenter="Your Name"  index.adoc
 ----
 
+or
+
+----
+./run.sh asciidoc/index.adoc
+----
+
 - open the resulting HTML file
 [source,bash]
 ----
-open index.html
+open asciidoc/index.html
+----
+
+=== Neo4j Trainings
+
+to be found under
+
+`content/training/[intro,cypher,production,modeling,import]/[classroom,online]/index.adoc`
+
+build intro training with
+
+----
+./training.sh
+open content/training/intro/classroom/index.html
 ----

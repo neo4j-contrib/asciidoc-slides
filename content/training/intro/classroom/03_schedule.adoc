@@ -9,3 +9,9 @@
   2.30pm  -  Afternoon coffee break
   2.45pm  -  Session 4: Next steps and Q&A
   4.00pm  -  End of training
+
+////
+Note that the times are approximate.
+We want this class to be a conversation, not a lecture. So we might go longer in some parts, and spend less time on others, or just skip ahead entirely. 
+In reality, we'll mostly try to stick to the flow of this deck.
+////

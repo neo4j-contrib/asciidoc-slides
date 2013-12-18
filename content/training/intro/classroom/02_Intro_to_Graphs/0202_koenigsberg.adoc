@@ -1,0 +1,35 @@
+//[canvas-image="{img}/euler.png"]
+== Leonhard Euler 1707-1783
+
+image::{img}/euler.png[]
+
+Swiss Mathematician
+
+== 7 Bridges of Königsberg
+
+image::{img}/konigsberg.png[]
+
+Königsberg (Prussia) - 1736
+
+7 Bridges, one route?
+
+== 7 Bridges of Königsberg - Approach
+
+image::{img}/konigsberg1.png[]
+
+
+Identify parts -> Landmasses & Bridges
+
+== 7 Bridges of Königsberg - Model
+
+image::{img}/konigsberg3.png[]
+
+It's a graph -> Nodes & Relationships
+
+== 7 Bridges of Königsberg - Solution
+
+image::{img}/konigsberg4.png[]
+
+Path finding -> There was no route
+
+

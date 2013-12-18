@@ -1,13 +1,15 @@
 == Answer five Questions
 
+[options="step"]
 * What is Neo4j?
 * Why would I use it?
 * How do I model data?
 * How do I enter data?
 * How do I query data?
+* and...
+* provide confidence start building 
+* a graph enabled application
 
-and...
-
-=== provide confidence start building 
-
-=== a graph enabled application
+////
+This is the one take away goal for the tutorial.
+////
