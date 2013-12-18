@@ -18,14 +18,16 @@ asciidoctor -T ./asciidoctor-backends/haml/deckjs -a allow-uri-read -a presenter
 or
 
 ----
-./run.sh asciidoc/index.adoc
+./run.sh content/demo/index.adoc
 ----
 
 - open the resulting HTML file
 [source,bash]
 ----
-open asciidoc/index.html
+open content/demo/index.html
 ----
+
+see: http://neo4j-contrib.github.io/asciidoc-slides/content/demo/index.html[Slide Demo]
 
 === Neo4j Trainings
 
@@ -39,3 +41,5 @@ build intro training with
 ./training.sh
 open content/training/intro/classroom/index.html
 ----
+
+see: http://neo4j-contrib.github.io/asciidoc-slides/content/training/intro/classroom/index.html[Training Demo]
