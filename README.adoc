@@ -8,6 +8,12 @@ This is what you install (in your terminal):
 sudo bundle install
 ----
 
+on Linux
+[source,bash]
+----
+sudo gem install asciidoctor
+----
+Make sure you're using at least asciidoctor 0.1.4.
 
 - execute asciidoctor to produce Deck.js HTML5 output from the asciidoc source files
 [source,bash]
