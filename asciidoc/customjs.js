@@ -22,15 +22,11 @@ var myPrettyCode = function (url) {
 
 loadScript("js/base64.js", myPrettyCode);
 loadScript("js/console.js", myPrettyCode);
-loadScript("js/cypher.datatable.js", myPrettyCode);
-loadScript("js/dot.js", myPrettyCode);
-loadScript("js/jquery.dataTables.min.js", myPrettyCode);
 loadScript("js/jquery-ui-1.10.3.custom.min.js", myPrettyCode);
 loadScript("js/versal_color_manager.js", myPrettyCode);
 loadScript("js/versal_visualization.js", myPrettyCode);
 loadScript("js/visualization.js", myPrettyCode);
-loadScript("js/viz.js", myPrettyCode);
-$.getScript("js/opal.js", function () {
+$.getScript("js/viz.js", function () {
 
     loadScript("js/gist.js", myPrettyCode);
     loadScript("js/graphgist.js", myPrettyCode);

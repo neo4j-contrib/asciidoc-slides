@@ -34,7 +34,7 @@
 <section class="slide">
 <h2>Who is training you?</h2>
 <section class="slide">
-<h2>Presenter: Peter Neubauer</h2>
+<h2>Presenter: Neo Technology</h2>
 
 </section>
 
@@ -191,6 +191,15 @@ The console is set up after the executions, with an empty database, for the read
 </div>
 </section>
 
+<section class="slide">
+<h2>Run a query with a setup</h2>
+<div class="listingblock">
+<div class="content">
+<textarea class="code" mode="cypher" setup="https://gist.github.com/peterneubauer/8299763/raw/9df26cbea841f6b1b4bcc35ac0cdd372b5e40e56/simplest_cypher.cql">MATCH (n) RETURN n</textarea>
+</div>
+</div>
+</section>
+
 <a class="deck-prev-link" href="#" title="Previous">&#8592;</a>
 <a class="deck-next-link" href="#" title="Next">&#8594;</a>
 <p class="deck-status">
@@ -208,6 +217,7 @@ The console is set up after the executions, with an empty database, for the read
 <script src="../../asciidoc/deck.js/extensions/arrows/arrows-graph-diagram.js"></script>
 <footer>© All Rights Reserved 2013 | Neo Technology, Inc.</footer>
 <img id="logo" src="img/Neo_Technology.jpg">
+<div id="console-wrapper"></div>
 <script>
   d3.selectAll("figure.graph-diagram")
                         .call(gd.figure().scaling(gd.scaling.centerOrScaleDiagramToFitWindow));

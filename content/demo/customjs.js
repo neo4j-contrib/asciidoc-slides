@@ -21,16 +21,12 @@ var myPrettyCode = function (url) {
 };
 
 loadScript("/asciidoc/js/base64.js", myPrettyCode);
-loadScript("/asciidoc/js/console.js", myPrettyCode);
-loadScript("/asciidoc/js/cypher.datatable.js", myPrettyCode);
-loadScript("/asciidoc/js/dot.js", myPrettyCode);
-loadScript("/asciidoc/js/jquery.dataTables.min.js", myPrettyCode);
 loadScript("/asciidoc/js/jquery-ui-1.10.3.custom.min.js", myPrettyCode);
 loadScript("/asciidoc/js/versal_color_manager.js", myPrettyCode);
 loadScript("/asciidoc/js/versal_visualization.js", myPrettyCode);
 loadScript("/asciidoc/js/visualization.js", myPrettyCode);
-loadScript("/asciidoc/js/viz.js", myPrettyCode);
-$.getScript("/asciidoc/js/opal.js", function () {
+loadScript("/asciidoc/js/console.js", myPrettyCode);
+$.getScript("/asciidoc/js/viz.js", function () {
 
     loadScript("/asciidoc/js/gist.js", myPrettyCode);
     loadScript("/asciidoc/js/graphgist.js", myPrettyCode);
