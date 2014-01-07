@@ -8,6 +8,7 @@
       - code_class = language ? [language, "language-#{language}"] : nil
       - pre_class = ['highlight']
       - pre_lang = nil
+      - setup = attr :setup
       - case attr 'source-highlighter'
       - when 'coderay'
         - pre_class = ['CodeRay']
@@ -30,7 +31,7 @@
       -#- when 'highlightjs', 'highlight.js'
       - pre_class << 'nowrap' if nowrap
       - if (attr 'source-highlighter') == 'codemirror'
-        %textarea{:class=>code_class, :mode=>(code_mode ? code_mode : nil)}~content
+        %textarea{:class=>code_class, :mode=>(code_mode ? code_mode : nil), :setup=>(setup ? setup : nil)}~content
       - else
         %pre{:class=>pre_class, :lang=>pre_lang}
           -# Haml automatically preserves whitespace in <pre> tags by replacing newlines with &#x000A;, but I'm not sure about the <code> tag

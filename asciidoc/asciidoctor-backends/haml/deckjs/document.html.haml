@@ -134,7 +134,9 @@
     - if attr? :footer
       %footer=attr :footer
     - if attr? :logo
-      %img#logo(src='#{attr :logo}')
+      %img#logo(src='#{attr :logo}') 
+      
+      %div#console-wrapper
     :javascript
       d3.selectAll("figure.graph-diagram")
                             .call(gd.figure().scaling(gd.scaling.centerOrScaleDiagramToFitWindow));
