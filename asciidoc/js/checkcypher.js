@@ -52,9 +52,9 @@ function init() {
             executeStatements(statements, function () {
                 console.log("done.", errors);
                 if(errors.length > 0) {
-                   $status.text("Done with errors.");
-                   for(i = 0;i<errors.length;i++) {
-                       $("#errors").append("statement: <br>"+ errors[i].statement+" <br/>Message: <br/>" +errors[i].message+"<br/>"); 
+                    $status.text("Done with errors.");
+                    for(i = 0;i<errors.length;i++) {
+                        $("#errors").append("statement: <br>"+ errors[i].statement+" <br/>Message: <br/>" +errors[i].message+"<br/>");
                     }
                 }
             });

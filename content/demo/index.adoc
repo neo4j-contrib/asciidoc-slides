@@ -11,7 +11,7 @@
 :navigation:
 :status:
 :arrows:
-:customjs:
+:customjs: ../../asciidoc/js/checkcypher.js
 :gist-source: https://raw.github.com/neo4j-contrib/gists/master/
 :footer: © All Rights Reserved 2013 | Neo Technology, Inc.
 :logo: img/Neo_Technology.jpg

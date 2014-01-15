@@ -136,12 +136,17 @@
     - if attr? :logo
       %img#logo(src='#{attr :logo}') 
       
-      %div#console-wrapper
+      %div.slide
+        %h2 Status of the presenation
+        %h3 Cypher queries execution
+        %div
+          %div#status
+          %pre#errors
     :javascript
       d3.selectAll("figure.graph-diagram")
                             .call(gd.figure().scaling(gd.scaling.centerOrScaleDiagramToFitWindow));
-    - if attr? :customjs
-      %script(src="#{:customjs}.js")
+    - if attr? :customjs   
+      %script(src="#{attr :customjs}")
     :javascript
       (function($, deck, undefined) {
         $.deck.defaults.keys['previous'] = [8, 33, 37, 39];

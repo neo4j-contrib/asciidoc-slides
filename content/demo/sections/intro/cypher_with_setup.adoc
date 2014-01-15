@@ -1,7 +1,8 @@
 == Run a query with a setup
 
-[source,cypher,setup="https://gist.github.com/peterneubauer/8299763/raw/9df26cbea841f6b1b4bcc35ac0cdd372b5e40e56/simplest_cypher.cql"]
+[source,cypher,setup="/content/demo/sections/intro/movies.cql"]
 ----
 MATCH (n) RETURN n
 ----
+
 
