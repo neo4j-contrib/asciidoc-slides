@@ -4,12 +4,17 @@
 
 == These are Charts ...
 
-image::
+image::{img}/charts.png[]
 
 == Not Graphs
+
+image::{img}/charts_not_graphs.png[]
 
 include::0202_koenigsberg.adoc[]
 
 include::0203_what_about_data.adoc[]
 
 include::0204_relational.adoc[]
+
+include::0205_modeling_with_graphs.adoc[]
+

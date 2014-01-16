@@ -145,13 +145,19 @@ Grab a coffee and get ready to begin!
 
 <section class="slide" id="_these_are_charts">
 <h2>These are Charts &#8230;</h2>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">image</dt>
-<dd>
-<p>== Not Graphs</p>
-</dd>
-</dl>
+<div class="imageblock">
+<div class="content">
+<img alt="charts" src="../../img/charts.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_not_graphs">
+<h2>Not Graphs</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="charts not graphs" src="../../img/charts_not_graphs.png">
+</div>
 </div>
 </section>
 
@@ -212,8 +218,8 @@ Grab a coffee and get ready to begin!
 <div class="paragraph"><p>Path finding &#8594; There was no route</p></div>
 </section>
 
-<section class="slide" id="_what_about_data">
-<h2>What about data?</h2>
+<section class="slide" id="_so_what_about_data">
+<h2>So what about data?</h2>
 
 </section>
 
@@ -274,6 +280,156 @@ Grab a coffee and get ready to begin!
 
 </section>
 
+<section class="slide" id="_one_table">
+<h2>One table</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="rel graph1" src="../../img/rel_graph1.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_another_one">
+<h2>Another one</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="rel graph2" src="../../img/rel_graph2.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_a_link_table">
+<h2>A link table</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="rel graph3" src="../../img/rel_graph3.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_joining_them">
+<h2>JOINing them</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="rel graph4" src="../../img/rel_graph4.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_this_is_the_data">
+<h2>This is the data</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="rel graph5" src="../../img/rel_graph5.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_explicit_as_a_graph">
+<h2>Explicit as a graph</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="rel graph6" src="../../img/rel_graph6.jpg">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_nodes_relationsihips_and">
+<h2>Nodes, Relationsihips and &#8230;</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="rel graph7" src="../../img/rel_graph7.jpg">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_nodes_relationships_and_labels">
+<h2>Nodes, Relationships and Labels.</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="rel graph8" src="../../img/rel_graph8.jpg">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_modeling_with_graphs">
+<h2>Modeling with graphs</h2>
+
+</section>
+
+<section class="slide" id="_start_with_a_whiteboard">
+<h2>Start with a whiteboard</h2>
+
+</section>
+
+<section class="slide" id="_1">
+<h2>1</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="model1" src="../../img/model1.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_2">
+<h2>2</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="model2" src="../../img/model2.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_3">
+<h2>3</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="model3" src="../../img/model3.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_4">
+<h2>4</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="model4" src="../../img/model4.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_5">
+<h2>5</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="model5" src="../../img/model5.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_model_incrementally">
+<h2>Model incrementally</h2>
+
+</section>
+
+<section class="slide" id="_6">
+<h2>6</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="model6" src="../../img/model6.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_7">
+<h2>7</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="model7" src="../../img/model7.png">
+</div>
+</div>
+</section>
+
 <a class="deck-prev-link" href="#" title="Previous">&#8592;</a>
 <a class="deck-next-link" href="#" title="Next">&#8594;</a>
 <p class="deck-status">
@@ -302,7 +458,14 @@ Grab a coffee and get ready to begin!
 <script src="../../../../asciidoc/deck.js/extensions/arrows/arrows-graph-diagram.js"></script>
 <footer>© All Rights Reserved 2013 | Neo Technology, Inc.</footer>
 <img id="logo" src="../../img/Neo_Technology.jpg">
+<div class="slide">
+<h2>Status of the presenation</h2>
+<h3>Cypher queries execution</h3>
+<div>
 <div id="status"></div>
+<pre id="errors"></pre>
+</div>
+</div>
 <script>
   d3.selectAll("figure.graph-diagram")
                         .call(gd.figure().scaling(gd.scaling.centerOrScaleDiagramToFitWindow));

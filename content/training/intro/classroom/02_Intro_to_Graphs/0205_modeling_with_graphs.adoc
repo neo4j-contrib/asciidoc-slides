@@ -1,0 +1,33 @@
+== Modeling with graphs
+
+== Start with a whiteboard
+
+== 1 
+
+image::{img}/model1.png[]
+
+== 2
+
+image::{img}/model2.png[]
+
+== 3
+
+image::{img}/model3.png[]
+
+== 4
+
+image::{img}/model4.png[]
+
+== 5
+
+image::{img}/model5.png[]
+
+== Model incrementally
+
+== 6
+
+image::{img}/model6.png[]
+
+== 7
+
+image::{img}/model7.png[]
