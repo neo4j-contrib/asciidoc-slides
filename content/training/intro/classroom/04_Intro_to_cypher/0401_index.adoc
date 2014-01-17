@@ -1,0 +1,15 @@
+== Intro to Cypher
+
+== Cypher is Neo4j's graph query language
+
+[options="step"]
+- Declarative Pattern-Matching language
+- SQL-like syntax
+- Designed for graphs
+
+include::0402_its_all_about_patterns.adoc[]
+
+include::0403_graph1.adoc[]
+
+== Coffee?
+

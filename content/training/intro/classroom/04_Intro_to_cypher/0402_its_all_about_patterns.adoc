@@ -1,0 +1,20 @@
+== It's all about patterns
+
+++++
+<figure class="graph-diagram">
+ <ul class="graph-diagram-markup" data-internal-scale="0.1" data-external-scale="1">
+   <li class="node" data-node-id="0" data-x="-3721.668487548828" data-y="110.88548278808594">
+     <span class="caption">b</span>
+   </li>
+   <li class="node" data-node-id="1" data-x="-580" data-y="110.88548278808594">
+     <span class="caption">c</span>
+   </li>
+   <li class="node" data-node-id="4" data-x="-2265.906596183777" data-y="-2229.114517211914">
+     <span class="caption">a</span>
+   </li>
+   <li class="relationship" data-from="4" data-to="0"></li>
+   <li class="relationship" data-from="0" data-to="1"></li>
+   <li class="relationship" data-from="4" data-to="1"></li>
+ </ul>
+</figure>
+++++
