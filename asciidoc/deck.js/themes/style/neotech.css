@@ -23,6 +23,7 @@ time, mark, audio, video {
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
     display: block;
+    display: block;
 }
 
 blockquote, q {
@@ -371,7 +372,9 @@ pre {
 }*/
 
 code {
-    color: #789;
+    color: #000000;
+    font-size: 200%;
+    font:bold;
 }
 
 blockquote {
