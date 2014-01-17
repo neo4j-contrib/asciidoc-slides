@@ -1,0 +1,26 @@
+== Two nodes, one relationship
+
+//TODO make sure of the layout
+
+===  The graph
+
+include::arrows_two_nodes_one_rel_2.adoc[]
+
+=== The code
+
+[source]
+----
+(a)-->()
+----
+
+== Two nodes, one relationship
+
+
+[source,cypher]
+----
+MATCH (a)-->()
+RETURN a.name
+----
+
+
+include::arrows_two_nodes_one_rel_2.adoc[]

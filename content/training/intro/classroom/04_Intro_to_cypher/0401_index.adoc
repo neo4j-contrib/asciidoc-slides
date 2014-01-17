@@ -11,5 +11,21 @@ include::0402_its_all_about_patterns.adoc[]
 
 include::0403_graph1.adoc[]
 
+include::0404_graph2.adoc[]
+
+== How?
+
+include::0405_two_nodes_one_rel.adoc[]
+
+include::0406_two_nodes_one_rel.adoc[]
+
+include::0407_two_nodes_one_rel.adoc[]
+
+include::0408_two_nodes_one_rel.adoc[]
+
+include::0409_two_nodes_one_rel.adoc[]
+
+
+
 == Coffee?
 

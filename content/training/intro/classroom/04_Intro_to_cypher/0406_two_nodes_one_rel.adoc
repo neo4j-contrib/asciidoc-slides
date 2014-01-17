@@ -1,0 +1,17 @@
+== Two nodes, one relationship
+
+=== The code
+
+[source, cypher]
+----
+MATCH (a)--(b)
+RETURN a, b
+----
+
+===  The pattern
+
+include::arrows_two_nodes_one_rel_2.adoc[]
+
+== The Graph
+
+image::{img}/graph3.png[]

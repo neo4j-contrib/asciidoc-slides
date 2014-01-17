@@ -1,0 +1,14 @@
+== Two nodes, one relationship
+
+//TODO make sure of the layout
+
+===  The graph
+
+include::arrows_two_nodes_one_rel_1.adoc[]
+
+=== The code
+
+[source]
+----
+(a)-->(b)
+----

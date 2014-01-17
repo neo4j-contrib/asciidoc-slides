@@ -1,0 +1,5 @@
+== It's all about patterns
+
+//TODO: do in Arrows
+
+image::{img}/graph2.png[]
