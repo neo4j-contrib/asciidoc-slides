@@ -601,8 +601,8 @@ gd = {};
         };
 
         scaling.sizeSvgToFitDiagram = function(layoutModel, view) {
+            console.log("sizing");
             var box = smallestContainingBox( layoutModel );
-
             view
                 .attr("viewBox", [box.x, box.y, box.width, box.height].join( " " ))
                 .attr("width", box.width * layoutModel.graphModel.externalScale())
@@ -1709,3 +1709,129 @@ gd = {};
         return figure;
     };
 })();
+
+function bind(graph, view, nodeBehaviour, relationshipBehaviour) {
+    nodeBehaviour = nodeBehaviour || function() {};
+    relationshipBehaviour = relationshipBehaviour || function() {};
+
+    function cx(d) {
+        return d.ex();
+    }
+    function cy(d) {
+        return d.ey();
+    }
+
+    function label(d) {
+        return d.label();
+    }
+
+    function nodeClasses(d) {
+        return d.class().join(" ") + " " + "graph-diagram-node-id-" + d.id;
+    }
+
+    var nodes = view.selectAll("circle.graph-diagram-node")
+        .data(d3.values(graph.nodeList()));
+
+    nodes.exit().remove();
+
+    nodes.enter().append("svg:circle")
+        .attr("class", nodeClasses)
+        .attr("r", gd.parameters.radius)
+        .call(nodeBehaviour);
+
+    nodes
+        .attr("cx", cx)
+        .attr("cy", cy);
+
+    function horizontalArrow(d) {
+        var length = d.start.distanceTo(d.end);
+        var side = d.end.isLeftOf(d.start) ? -1 : 1;
+        return gd.horizontalArrowOutline(
+            side * (gd.parameters.radius + gd.parameters.nodeStartMargin),
+            side * (length - (gd.parameters.radius + gd.parameters.nodeEndMargin)));
+    }
+
+    function midwayBetweenStartAndEnd(d) {
+        var length = d.start.distanceTo(d.end);
+        var side = d.end.isLeftOf(d.start) ? -1 : 1;
+        return side * length / 2;
+    }
+
+    function translateToStartNodeCenterAndRotateToRelationshipAngle(d) {
+        var angle = d.start.angleTo(d.end);
+        if (d.end.isLeftOf(d.start)) {
+            angle += 180;
+        }
+        return "translate(" + d.start.ex() + "," + d.start.ey() + ") rotate(" + angle + ")";
+    }
+
+    function relationshipClasses(d) {
+        return d.class().join(" ");
+    }
+
+    var relationshipGroup = view.selectAll("g.graph-diagram-relationship")
+        .data(graph.relationshipList());
+
+    relationshipGroup.exit().remove();
+
+    relationshipGroup.enter().append("svg:g")
+        .attr("class", relationshipClasses);
+
+    relationshipGroup
+        .attr("transform", translateToStartNodeCenterAndRotateToRelationshipAngle);
+
+    function singleton(d) {
+        return [d];
+    }
+
+    var relationshipPath = relationshipGroup.selectAll("path.graph-diagram-relationship")
+        .data(singleton);
+
+    relationshipPath.enter().append("svg:path")
+        .attr("class", relationshipClasses)
+        .call(relationshipBehaviour);
+
+    relationshipPath
+        .attr("d", horizontalArrow);
+
+    function relationshipWithLabel(d) {
+        return [d].filter(label);
+    }
+
+    var relationshipLabel = relationshipGroup.selectAll("text.graph-diagram-relationship-label")
+        .data(relationshipWithLabel);
+
+    relationshipLabel.exit().remove();
+
+    relationshipLabel.enter().append("svg:text")
+        .attr("class", "graph-diagram-relationship-label")
+        .call(relationshipBehaviour);
+
+    relationshipLabel
+        .attr("x", midwayBetweenStartAndEnd)
+        .attr("y", 0 )
+        .text(label);
+
+    function renderBoundVariables(className) {
+        function boundVariableClasses(d) {
+            return className + " " + d.class;
+        }
+
+        var boundVariables = view.selectAll("text." + className)
+            .data(d3.values(graph.nodeList()).filter(label));
+
+        boundVariables.exit().remove();
+
+        boundVariables.enter().append("svg:text")
+            .attr("class", boundVariableClasses)
+            .call(nodeBehaviour);
+
+        boundVariables
+            .attr("x", cx)
+            .attr("y", cy)
+            .text(label);
+    }
+
+    renderBoundVariables("graph-diagram-bound-variable-shadow");
+    renderBoundVariables("graph-diagram-bound-variable");
+}

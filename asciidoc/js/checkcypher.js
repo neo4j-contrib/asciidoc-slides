@@ -17,7 +17,7 @@ function loadScript(url, callback) {
 var status = "Executing queries"
 
 var errors =[];
-
+$.getScript("/asciidoc/js/presentation.js");
 $.getScript("/asciidoc/js/jquery-ui-1.10.3.custom.min.js", function () {
     init();
 });
@@ -83,7 +83,7 @@ function initConsole(done) {
 function setSessionHeader(request) {
     request.setRequestHeader("X-Session", session_id);
     request.withCredentials = true;
-    console.log("session", session_id, request);
+//    console.log("session", session_id, request);
 }
 
 function handleBlock(cypherblocks, statements, done) {
@@ -94,7 +94,7 @@ function handleBlock(cypherblocks, statements, done) {
         var element = cypherblocks.shift();
         var setup = element.attr("setup");
         if (setup) {
-            console.log("pulling in", setup);
+//            console.log("pulling in", setup);
             var CLEAN = "OPTIONAL MATCH (n)-[r]->() DELETE n, r";
             statements.push(CLEAN);
             $.get(setup, function (content) {
@@ -116,7 +116,7 @@ function executeStatements(statements, done) {
         done();
     } else {
         var statement = statements.shift();
-        console.log("executing now", statement);
+//        console.log("executing now", statement);
         $.ajax(CONSOLE_URL + "/cypher", {
             data: statement,
             type: "POST",
@@ -124,7 +124,7 @@ function executeStatements(statements, done) {
             contentType: "application/json",
             beforeSend: setSessionHeader,
             success: function (result) {
-                console.log("done executing", statement, arguments);
+//                console.log("done executing", statement, arguments);
                 var res = JSON.parse(result);
                 if(res.error) {
                     errors.push({statement:statement,message:res.error});
@@ -132,7 +132,7 @@ function executeStatements(statements, done) {
                 executeStatements(statements, done);
             },
             error: function (result) {
-                console.log("error executing", statement, arguments);
+//                console.log("error executing", statement, arguments);
                 executeStatements(statements, done);
                 errors.push(result);
             }});
