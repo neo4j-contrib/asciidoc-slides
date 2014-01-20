@@ -69,6 +69,8 @@ function init() {
                     for (i = 0; i < errors.length; i++) {
                         $("#errors").append("statement: <br>" + errors[i].statement + " <br/>Message: <br/>" + errors[i].message + "<br/>");
                     }
+                } else {
+                    $status.text("No cypher errors, tested against " + CONSOLE_URL); 
                 }
             });
         });
