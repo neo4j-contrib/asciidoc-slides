@@ -1,0 +1,56 @@
+== Paths
+
+[role="notitle"]
+[[graph_optional_match]]
+===  The graph
+
+include::arrows_three_nodes_path1.adoc[]
+
+
+[role="notitle"]
+=== The code
+
+++(a) - - >(b) - - >(c)++
+
+
+== Paths
+
+[role="notitle"]
+[[graph_optional_match]]
+===  The graph
+
+include::arrows_three_nodes_path2.adoc[]
+
+
+[role="notitle"]
+=== The code
+
+++(a) - - >(b)< - - (c)++
+
+
+== Paths
+
+[role="notitle"]
+[[graph_optional_match]]
+===  The graph
+
+include::arrows_three_nodes_path3.adoc[]
+
+
+[role="notitle"]
+=== The code
+
+++MATCH [highlight]#(a)-[:ACTED_IN]->(m)<-[:DIRECTED]-(d)#++
+
+++RETURN a.name, m.title, d.name++
+
+
+== A Movies Query
+
+[role="notitle"]
+=== The code
+[source,cypher,setup="../../data/movies.cql"]
+----
+MATCH (a)-[:ACTED_IN]->(m)<-[:DIRECTED]-(d)
+RETURN a.name, m.title, d.name;
+----

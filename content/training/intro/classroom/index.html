@@ -816,6 +816,159 @@ RETURN a.name, type(r)</textarea>
 </section>
 </section>
 
+<section class="slide" id="_two_nodes_one_relationship_9">
+<h2>Two nodes, one relationship</h2>
+<section class="notitle slide" id="graph_optional_match">
+<h2>The graph</h2>
+<figure class="graph-diagram">
+<ul class="graph-diagram-markup" data-internal-scale="10" data-external-scale="1">
+  <li class="node" data-node-id="0" data-x="-80" data-y="-40">
+    <span class="caption">m</span>
+  </li>
+  <li class="node" data-node-id="1" data-x="-20" data-y="-40">
+    <span class="caption">a</span>
+  </li>
+  <li class="relationship" data-from="0" data-to="1">
+    <span class="type">ACTED_IN</span>
+  </li>
+</ul>
+</figure>
+</section>
+
+<section class="notitle slide" id="_the_code_6">
+<h2>The code</h2>
+<div class="paragraph"><p><code>(a)-[:ACTED_IN]&#8594;(m)</code></p></div>
+</section>
+
+<section class="notitle slide" id="_the_code_7">
+<h2>The code</h2>
+<div class="listingblock">
+<div class="content">
+<textarea class="code" mode="cypher">MATCH (a)-[:ACTED_IN]-&gt;(m)
+RETURN a.name, m.title</textarea>
+</div>
+</div>
+</section>
+
+<section class="slide" id="_returning_role_properties">
+<h2>Returning role properties</h2>
+<div class="listingblock">
+<div class="content">
+<textarea class="code" mode="cypher">MATCH (a)-[r:ACTED_IN]-&gt;(m)
+RETURN a.name, r.roles, m.title</textarea>
+</div>
+</div>
+</section>
+</section>
+
+<section class="slide" id="_paths">
+<h2>Paths</h2>
+<section class="notitle slide" id="graph_optional_match">
+<h2>The graph</h2>
+<figure class="graph-diagram">
+<ul class="graph-diagram-markup" data-internal-scale="10" data-external-scale="1">
+  <li class="node" data-node-id="0" data-x="-50" data-y="-40">
+    <span class="caption">a</span>
+  </li>
+  <li class="node" data-node-id="1" data-x="-20" data-y="-40">
+    <span class="caption">b</span>
+  </li>
+  <li class="node" data-node-id="2" data-x="10" data-y="-40">
+      <span class="caption">c</span>
+  </li>
+  <li class="relationship" data-from="0" data-to="1">
+    <span class="type"></span>
+  </li>
+  <li class="relationship" data-from="1" data-to="2">
+      <span class="type"></span>
+    </li>
+</ul>
+</figure>
+</section>
+
+<section class="notitle slide" id="_the_code_8">
+<h2>The code</h2>
+<div class="paragraph"><p><code>(a) - - &gt;(b) - - &gt;(c)</code></p></div>
+</section>
+</section>
+
+<section class="slide" id="_paths_2">
+<h2>Paths</h2>
+<section class="notitle slide" id="graph_optional_match">
+<h2>The graph</h2>
+<figure class="graph-diagram">
+<ul class="graph-diagram-markup" data-internal-scale="10" data-external-scale="1">
+  <li class="node" data-node-id="0" data-x="-50" data-y="-40">
+    <span class="caption">a</span>
+  </li>
+  <li class="node" data-node-id="1" data-x="-20" data-y="-40">
+    <span class="caption">b</span>
+  </li>
+  <li class="node" data-node-id="2" data-x="10" data-y="-40">
+      <span class="caption">c</span>
+  </li>
+  <li class="relationship" data-from="0" data-to="1">
+    <span class="type"></span>
+  </li>
+  <li class="relationship" data-from="2" data-to="1">
+      <span class="type"></span>
+    </li>
+</ul>
+</figure>
+</section>
+
+<section class="notitle slide" id="_the_code_9">
+<h2>The code</h2>
+<div class="paragraph"><p><code>(a) - - &gt;(b)&lt; - - (c)</code></p></div>
+</section>
+</section>
+
+<section class="slide" id="_paths_3">
+<h2>Paths</h2>
+<section class="notitle slide" id="graph_optional_match">
+<h2>The graph</h2>
+<figure class="graph-diagram">
+<ul class="graph-diagram-markup" data-internal-scale="10" data-external-scale="1">
+  <li class="node" data-node-id="0" data-x="-50" data-y="-40">
+    <span class="caption">a</span>
+  </li>
+  <li class="node" data-node-id="1" data-x="-10" data-y="-20">
+    <span class="caption">m</span>
+  </li>
+  <li class="node" data-node-id="2" data-x="30" data-y="-40">
+      <span class="caption">d</span>
+  </li>
+  <li class="relationship" data-from="0" data-to="1">
+    <span class="type">ACTED_IN</span>
+  </li>
+  <li class="relationship" data-from="2" data-to="1">
+      <span class="type">DIRECTED</span>
+    </li>
+</ul>
+</figure>
+</section>
+
+<section class="notitle slide" id="_the_code_10">
+<h2>The code</h2>
+<div class="paragraph"><p><code>MATCH <span class="highlight">(a)-[:ACTED_IN]&#8594;(m)&#8592;[:DIRECTED]-(d)</span></code></p></div>
+
+<div class="paragraph"><p><code>RETURN a.name, m.title, d.name</code></p></div>
+</section>
+</section>
+
+<section class="slide" id="_a_movies_query">
+<h2>A Movies Query</h2>
+<section class="notitle slide" id="_the_code_11">
+<h2>The code</h2>
+<div class="listingblock">
+<div class="content">
+<textarea class="code" mode="cypher" setup="../../data/movies.cql">MATCH (a)-[:ACTED_IN]-&gt;(m)&lt;-[:DIRECTED]-(d)
+RETURN a.name, m.title, d.name;</textarea>
+</div>
+</div>
+</section>
+</section>
+
 <section class="slide" id="_coffee_2">
 <h2>Coffee?</h2>
 

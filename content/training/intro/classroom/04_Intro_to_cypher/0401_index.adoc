@@ -25,6 +25,10 @@ include::0409_two_nodes_one_rel.adoc[]
 
 include::0410_optional_match.adoc[]
 
+include::0411_relationship_type.adoc[]
+
+include::0412_paths.adoc[]
+
 
 
 == Coffee?
