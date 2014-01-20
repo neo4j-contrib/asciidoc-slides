@@ -1,0 +1,80 @@
+== Aggregation
+
+[source,cypher,options="step"]
+----
+MATCH (a)-[:ACTED_IN]->(m)<-[:DIRECTED]-(d)
+RETURN a.name, m.title, d.name;
+----
+
+[options="step"]
+[frame="topbot",options="header"]
+|===
+|a.name|m.title	|d.name
+|[highlight]#“Keanu Reeves”#|	“The Matrix”|[highlight]#“Andy Wachowski”#
+|[highlight]#“Keanu Reeves”#|	“The Matrix Reloaded”|[highlight]#“Andy Wachowski”#
+|“Noah Wyle”,	“A Few Good Men”|	“Rob Reiner”
+|“Tom Hanks”,	“Cloud Atlas"|	“Andy Wachowski”
+|===
+
+
+== Aggregation functions
+
+[options="step"]
+* ++count(x)++	- add up the number of occurrences
+* ++min(x)++	- get the lowest value
+* ++max(x)++	- get the highest value
+* ++avg(x)++	- get the average of a numeric value
+* ++sum(x)++	- add up all values
+* ++collect(x)++	- collected all the occurrences into an array
+
+== Aggregation
+
+[source,cypher,options="step"]
+----
+MATCH (a)-[:ACTED_IN]->(m)<-[:DIRECTED]-(d)
+RETURN a.name, d.name, count(*);
+----
+
+[frame="topbot",options="header,step"]
+|===
+|a.name|	d.name|[highlight]#count(*)#
+|“Aaron Sorkin"|“Rob Reiner”|	[highlight]#2#
+|“Keanu Reeves”|"Andy Wachowski”|	[highlight]#3#
+|“Hugo Weaving”|“Tom Tykwer”|	[highlight]#1#
+|===
+
+== Aggregation
+
+[source,cypher,options="step"]
+----
+MATCH (a)-[:ACTED_IN]->(m)<-[:DIRECTED]-(d)
+RETURN a.name, d.name, count(m);
+----
+
+[frame="topbot",options="header,step"]
+|===
+|a.name|	d.name|[highlight]#count(m)#
+|“Aaron Sorkin"|“Rob Reiner”|	2
+|“Keanu Reeves”|"Andy Wachowski”|	3
+|“Hugo Weaving”|“Tom Tykwer”|	1
+|===
+
+
+== As
+
+[source,cypher,options="step"]
+----
+MATCH (a)-[:ACTED_IN]->(m)<-[:DIRECTED]-(d)
+RETURN 
+ a.name AS actor,
+ d.name AS director, 
+ count(m) AS count;
+----
+
+[frame="topbot",options="header,step"]
+|===
+|[highlight]#actor#|[highlight]#director#|[highlight]#count#
+|“Aaron Sorkin"|“Rob Reiner”|	2
+|“Keanu Reeves”|"Andy Wachowski”|	3
+|“Hugo Weaving”|“Tom Tykwer”|	1
+|===

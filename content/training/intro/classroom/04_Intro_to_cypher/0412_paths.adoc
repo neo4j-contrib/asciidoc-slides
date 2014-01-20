@@ -54,3 +54,40 @@ include::arrows_three_nodes_path3.adoc[]
 MATCH (a)-[:ACTED_IN]->(m)<-[:DIRECTED]-(d)
 RETURN a.name, m.title, d.name;
 ----
+
+[role="notitle"]
+=== The result
+
+[frame="topbot",options="header"]
+|===
+|a.name|m.title	|d.name
+|“Keanu Reeves”|	“The Matrix”|	“Andy Wachowski”
+|“Keanu Reeves”|	“The Matrix Reloaded”|	“Andy Wachowski”
+|“Noah Wyle”|	“A Few Good Men”|	“Rob Reiner”
+|“Tom Hanks”|	“Cloud Atlas”|	“Andy Wachowski”
+|===
+
+
+
+== A Movies Query with alias
+
+[role="notitle"]
+=== The code
+[source,cypher]
+----
+MATCH (a)-[:ACTED_IN]->(m)<-[:DIRECTED]-(d)
+RETURN a.name AS actor, m.title AS movie,
+       d.name AS director;
+----
+
+[role="notitle"]
+=== The result
+
+[frame="topbot",options="header"]
+|===
+|actor|movie	|director
+|“Keanu Reeves”|	“The Matrix”|	“Andy Wachowski”
+|“Keanu Reeves”|	“The Matrix Reloaded”|	“Andy Wachowski”
+|“Noah Wyle”|	“A Few Good Men”|	“Rob Reiner”
+|“Tom Hanks”|	“Cloud Atlas”|	“Andy Wachowski”
+|===
