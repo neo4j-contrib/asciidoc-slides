@@ -571,5 +571,9 @@ footer {
     background-color: rgb(221, 252, 154);
 }
 
+section.notitle h2 {
+    display: none;
+}
+
 
 

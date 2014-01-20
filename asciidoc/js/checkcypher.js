@@ -16,7 +16,7 @@ function loadScript(url, callback) {
 
 var status = "Executing queries"
 
-var errors =[];
+var errors = [];
 $.getScript("/asciidoc/js/presentation.js");
 $.getScript("/asciidoc/js/jquery-ui-1.10.3.custom.min.js", function () {
     init();
@@ -39,7 +39,20 @@ String.prototype.endsWith = function (suffix) {
 
 var session_id = guid();
 
+
+function setupDiagrams() {
+    $.deck('.slide');
+
+    var figure = gd.figure();
+    figure.scaling(gd.scaling.sizeSvgToFitDiagram);
+    d3.selectAll("figure.graph-diagram")
+        .call(function (selection) {
+            figure(selection);
+        });
+}
 function init() {
+
+    setupDiagrams();
     var $status = $("#status");
     $status.text(status);
     var cypherblocks = [];
@@ -51,10 +64,10 @@ function init() {
             console.log("Statements to execute:", statements);
             executeStatements(statements, function () {
                 console.log("done.", errors);
-                if(errors.length > 0) {
+                if (errors.length > 0) {
                     $status.text("Done with errors.");
-                    for(i = 0;i<errors.length;i++) {
-                        $("#errors").append("statement: <br>"+ errors[i].statement+" <br/>Message: <br/>" +errors[i].message+"<br/>");
+                    for (i = 0; i < errors.length; i++) {
+                        $("#errors").append("statement: <br>" + errors[i].statement + " <br/>Message: <br/>" + errors[i].message + "<br/>");
                     }
                 }
             });
@@ -126,8 +139,8 @@ function executeStatements(statements, done) {
             success: function (result) {
 //                console.log("done executing", statement, arguments);
                 var res = JSON.parse(result);
-                if(res.error) {
-                    errors.push({statement:statement,message:res.error});
+                if (res.error) {
+                    errors.push({statement: statement, message: res.error});
                 }
                 executeStatements(statements, done);
             },

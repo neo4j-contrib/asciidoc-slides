@@ -1,5 +1,6 @@
 == Two nodes, one relationship
 
+[role="notitle"]
 === The code
 
 [source, cypher]
@@ -12,6 +13,24 @@ RETURN a, b
 
 include::arrows_two_nodes_one_rel_2.adoc[]
 
+[role="notitle"]
 == The Graph
 
-image::{img}/graph3.png[]
+
+[[big_graph2]]
+[role="notitle"]
+=== ab1
+
+include::big_graph.adoc[]
+
+[[graph_pattern_ab1]] 
+[role="notitle"]
+=== ab1
+
+[[graph_pattern_ab2]] 
+[role="notitle"]
+=== ab2
+
+[[graph_pattern_ab3]] 
+[role="notitle"]
+=== ab3

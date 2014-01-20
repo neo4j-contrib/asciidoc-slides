@@ -1,6 +1,6 @@
 ++++
 <figure class="graph-diagram two-nodes-one-rel1">
-<ul class="graph-diagram-markup" data-internal-scale="10" data-external-scale="10">
+<ul class="graph-diagram-markup" data-internal-scale="10" data-external-scale="1">
   <li class="node" data-node-id="0" data-x="-50" data-y="-40">
     <span class="caption">a</span>
   </li>

@@ -515,26 +515,26 @@ Grab a coffee and get ready to begin!
 <section class="slide" id="_it_s_all_about_patterns_2">
 <h2>It&#8217;s all about patterns</h2>
 <figure class="graph-diagram big-graph">
-<ul class="graph-diagram-markup" data-internal-scale="0.1" data-external-scale="1">
+<ul class="graph-diagram-markup" data-internal-scale="0.1" data-external-scale="0.5">
   <li class="node triangle1" data-node-id="0" data-x="-5921.668487548828" data-y="130.88548278808594"></li>
-  <li class="node triangle1 triangle2" data-node-id="1" data-x="-3190" data-y="-530"></li>
-  <li class="node" data-node-id="3" data-x="880" data-y="2180"></li>
+  <li class="node triangle1 triangle2 graph_pattern_ab2" data-node-id="1" data-x="-3190" data-y="-530"></li>
+  <li class="node graph_pattern_ab1" data-node-id="3" data-x="880" data-y="2180"></li>
   <li class="node triangle1" data-node-id="4" data-x="-5505.906596183777" data-y="-2989.114517211914"></li>
-  <li class="node triangle2" data-node-id="5" data-x="450" data-y="-380"></li>
+  <li class="node triangle2 graph_pattern_ab3" data-node-id="5" data-x="450" data-y="-380"></li>
   <li class="node" data-node-id="6" data-x="2180" data-y="-2790"></li>
-  <li class="node triangle2" data-node-id="7" data-x="-2080" data-y="-3230"></li>
-  <li class="node" data-node-id="8" data-x="-3600" data-y="2360"></li>
+  <li class="node triangle2 graph_pattern_ab2" data-node-id="7" data-x="-2080" data-y="-3230"></li>
+  <li class="node graph_pattern_ab1 graph_pattern_ab3" data-node-id="8" data-x="-3600" data-y="2360"></li>
   <li class="node" data-node-id="9" data-x="2750" data-y="340"></li>
-  <li class="relationship triangle1" data-from="4" data-to="0"></li>
-  <li class="relationship triangle1" data-from="0" data-to="1"></li>
-  <li class="relationship triangle1" data-from="4" data-to="1"></li>
+  <li class="relationship triangle1 " data-from="4" data-to="0"></li>
+  <li class="relationship triangle1 " data-from="0" data-to="1"></li>
+  <li class="relationship triangle1 " data-from="4" data-to="1"></li>
+  <li class="relationship triangle2 graph_pattern_ab2" data-from="7" data-to="1"></li>
   <li class="relationship " data-from="5" data-to="7"></li>
-  <li class="relationship triangle2" data-from="7" data-to="1"></li>
   <li class="relationship triangle2" data-from="1" data-to="5"></li>
   <li class="relationship triangle2" data-from="7" data-to="5"></li>
-  <li class="relationship" data-from="8" data-to="3"></li>
+  <li class="relationship graph_pattern_ab1" data-from="8" data-to="3"></li>
   <li class="relationship" data-from="5" data-to="3"></li>
-  <li class="relationship" data-from="5" data-to="8"></li>
+  <li class="relationship graph_pattern_ab3" data-from="5" data-to="8"></li>
   <li class="relationship" data-from="4" data-to="7"></li>
   <li class="relationship" data-from="7" data-to="6"></li>
   <li class="relationship" data-from="5" data-to="6"></li>
@@ -544,24 +544,15 @@ Grab a coffee and get ready to begin!
 </ul>
 </figure>
 
-<section class="slide" id="triangle1">
+<section class="notitle slide" id="triangle1">
 <h2>Triangle1</h2>
 
 </section>
 
-<section class="slide" id="triangle2">
+<section class="notitle slide" id="triangle2">
 <h2>Triangle2</h2>
 
 </section>
-</section>
-
-<section class="slide" id="_it_s_all_about_patterns_3">
-<h2>It&#8217;s all about patterns</h2>
-<div class="imageblock">
-<div class="content">
-<img alt="graph2" src="../../img/graph2.png">
-</div>
-</div>
 </section>
 
 <section class="slide" id="_how">
@@ -574,7 +565,7 @@ Grab a coffee and get ready to begin!
 <section class="slide" id="_the_graph">
 <h2>The graph</h2>
 <figure class="graph-diagram two-nodes-one-rel1">
-<ul class="graph-diagram-markup" data-internal-scale="10" data-external-scale="10">
+<ul class="graph-diagram-markup" data-internal-scale="10" data-external-scale="1">
   <li class="node" data-node-id="0" data-x="-50" data-y="-40">
     <span class="caption">a</span>
   </li>
@@ -598,7 +589,7 @@ Grab a coffee and get ready to begin!
 
 <section class="slide" id="_two_nodes_one_relationship_2">
 <h2>Two nodes, one relationship</h2>
-<section class="slide" id="_the_code_2">
+<section class="notitle slide" id="_the_code_2">
 <h2>The code</h2>
 <div class="listingblock">
 <div class="content">
@@ -611,46 +602,88 @@ RETURN a, b</textarea>
 <section class="slide" id="_the_pattern">
 <h2>The pattern</h2>
 <figure class="graph-diagram">
-<ul class="graph-diagram-markup" data-internal-scale="10" data-external-scale="10">
+<ul class="graph-diagram-markup" data-internal-scale="10" data-external-scale="1">
   <li class="node" data-node-id="0" data-x="-50" data-y="-40">
     <span class="caption">a</span>
   </li>
   <li class="node" data-node-id="1" data-x="-20" data-y="-40">
     <span class="caption"></span>
   </li>
-  <li class="relationship" data-from="0" data-to="1"></li>
+  <li class="relationship graph_pattern_optional_rel" data-from="0" data-to="1"></li>
 </ul>
 </figure>
 </section>
 </section>
 
-<section class="slide" id="_the_graph_2">
+<section class="notitle slide" id="_the_graph_2">
 <h2>The Graph</h2>
-<div class="imageblock">
-<div class="content">
-<img alt="graph3" src="../../img/graph3.png">
-</div>
-</div>
+<section class="notitle slide" id="big_graph2">
+<h2>ab1</h2>
+<figure class="graph-diagram big-graph">
+<ul class="graph-diagram-markup" data-internal-scale="0.1" data-external-scale="0.5">
+  <li class="node triangle1" data-node-id="0" data-x="-5921.668487548828" data-y="130.88548278808594"></li>
+  <li class="node triangle1 triangle2 graph_pattern_ab2" data-node-id="1" data-x="-3190" data-y="-530"></li>
+  <li class="node graph_pattern_ab1" data-node-id="3" data-x="880" data-y="2180"></li>
+  <li class="node triangle1" data-node-id="4" data-x="-5505.906596183777" data-y="-2989.114517211914"></li>
+  <li class="node triangle2 graph_pattern_ab3" data-node-id="5" data-x="450" data-y="-380"></li>
+  <li class="node" data-node-id="6" data-x="2180" data-y="-2790"></li>
+  <li class="node triangle2 graph_pattern_ab2" data-node-id="7" data-x="-2080" data-y="-3230"></li>
+  <li class="node graph_pattern_ab1 graph_pattern_ab3" data-node-id="8" data-x="-3600" data-y="2360"></li>
+  <li class="node" data-node-id="9" data-x="2750" data-y="340"></li>
+  <li class="relationship triangle1 " data-from="4" data-to="0"></li>
+  <li class="relationship triangle1 " data-from="0" data-to="1"></li>
+  <li class="relationship triangle1 " data-from="4" data-to="1"></li>
+  <li class="relationship triangle2 graph_pattern_ab2" data-from="7" data-to="1"></li>
+  <li class="relationship " data-from="5" data-to="7"></li>
+  <li class="relationship triangle2" data-from="1" data-to="5"></li>
+  <li class="relationship triangle2" data-from="7" data-to="5"></li>
+  <li class="relationship graph_pattern_ab1" data-from="8" data-to="3"></li>
+  <li class="relationship" data-from="5" data-to="3"></li>
+  <li class="relationship graph_pattern_ab3" data-from="5" data-to="8"></li>
+  <li class="relationship" data-from="4" data-to="7"></li>
+  <li class="relationship" data-from="7" data-to="6"></li>
+  <li class="relationship" data-from="5" data-to="6"></li>
+  <li class="relationship" data-from="0" data-to="8"></li>
+  <li class="relationship" data-from="9" data-to="6"></li>
+  <li class="relationship" data-from="9" data-to="3"></li>
+</ul>
+</figure>
+</section>
+
+<section class="notitle slide" id="graph_pattern_ab1">
+<h2>ab1</h2>
+
+</section>
+
+<section class="notitle slide" id="graph_pattern_ab2">
+<h2>ab2</h2>
+
+</section>
+
+<section class="notitle slide" id="graph_pattern_ab3">
+<h2>ab3</h2>
+
+</section>
 </section>
 
 <section class="slide" id="_two_nodes_one_relationship_3">
 <h2>Two nodes, one relationship</h2>
-<section class="slide" id="_the_graph_3">
+<section class="notitle slide" id="_the_graph_3">
 <h2>The graph</h2>
 <figure class="graph-diagram">
-<ul class="graph-diagram-markup" data-internal-scale="10" data-external-scale="10">
+<ul class="graph-diagram-markup" data-internal-scale="10" data-external-scale="1">
   <li class="node" data-node-id="0" data-x="-50" data-y="-40">
     <span class="caption">a</span>
   </li>
   <li class="node" data-node-id="1" data-x="-20" data-y="-40">
     <span class="caption"></span>
   </li>
-  <li class="relationship" data-from="0" data-to="1"></li>
+  <li class="relationship graph_pattern_optional_rel" data-from="0" data-to="1"></li>
 </ul>
 </figure>
 </section>
 
-<section class="slide" id="_the_code_3">
+<section class="notitle slide" id="_the_code_3">
 <h2>The code</h2>
 <div class="listingblock">
 <div class="content">
@@ -670,14 +703,14 @@ RETURN a.name</textarea>
 </div>
 
 <figure class="graph-diagram">
-<ul class="graph-diagram-markup" data-internal-scale="10" data-external-scale="10">
+<ul class="graph-diagram-markup" data-internal-scale="10" data-external-scale="1">
   <li class="node" data-node-id="0" data-x="-50" data-y="-40">
     <span class="caption">a</span>
   </li>
   <li class="node" data-node-id="1" data-x="-20" data-y="-40">
     <span class="caption"></span>
   </li>
-  <li class="relationship" data-from="0" data-to="1"></li>
+  <li class="relationship graph_pattern_optional_rel" data-from="0" data-to="1"></li>
 </ul>
 </figure>
 </section>
@@ -692,24 +725,24 @@ RETURN a.name</textarea>
 </div>
 
 <figure class="graph-diagram">
-<ul class="graph-diagram-markup" data-internal-scale="10" data-external-scale="10">
+<ul class="graph-diagram-markup" data-internal-scale="10" data-external-scale="1">
   <li class="node" data-node-id="0" data-x="-50" data-y="-40">
     <span class="caption">a</span>
   </li>
   <li class="node" data-node-id="1" data-x="-20" data-y="-40">
     <span class="caption"></span>
   </li>
-  <li class="relationship" data-from="0" data-to="1"></li>
+  <li class="relationship graph_pattern_optional_rel" data-from="0" data-to="1"></li>
 </ul>
 </figure>
 </section>
 
 <section class="slide" id="_two_nodes_one_relationship_6">
 <h2>Two nodes, one relationship</h2>
-<section class="slide" id="_the_graph_4">
+<section class="notitle slide" id="_the_graph_4">
 <h2>The graph</h2>
 <figure class="graph-diagram">
-<ul class="graph-diagram-markup" data-internal-scale="10" data-external-scale="10">
+<ul class="graph-diagram-markup" data-internal-scale="10" data-external-scale="1">
   <li class="node" data-node-id="0" data-x="-50" data-y="-40">
     <span class="caption">a</span>
   </li>
@@ -723,7 +756,7 @@ RETURN a.name</textarea>
 </figure>
 </section>
 
-<section class="slide" id="_the_code_4">
+<section class="notitle slide" id="_the_code_4">
 <h2>The code</h2>
 <div class="paragraph"><p><code>(a)-<span class="highlight">[r]</span> - &gt;()</code></p></div>
 </section>
@@ -739,7 +772,7 @@ RETURN a.name, type(r)</textarea>
 </div>
 
 <figure class="graph-diagram">
-<ul class="graph-diagram-markup" data-internal-scale="10" data-external-scale="10">
+<ul class="graph-diagram-markup" data-internal-scale="10" data-external-scale="1">
   <li class="node" data-node-id="0" data-x="-50" data-y="-40">
     <span class="caption">a</span>
   </li>
@@ -751,6 +784,36 @@ RETURN a.name, type(r)</textarea>
   </li>
 </ul>
 </figure>
+</section>
+
+<section class="slide" id="_two_nodes_one_relationship_8">
+<h2>Two nodes, one relationship</h2>
+<section class="notitle slide" id="graph_optional_match">
+<h2>The graph</h2>
+<figure class="graph-diagram">
+<ul class="graph-diagram-markup" data-internal-scale="10" data-external-scale="1">
+  <li class="node" data-node-id="0" data-x="-50" data-y="-40">
+    <span class="caption">a</span>
+  </li>
+  <li class="node" data-node-id="1" data-x="-20" data-y="-40">
+    <span class="caption"></span>
+  </li>
+  <li class="relationship graph_pattern_optional_rel" data-from="0" data-to="1"></li>
+</ul>
+</figure>
+</section>
+
+<section class="notitle slide" id="graph_pattern_optional_rel">
+<h2>Optional stroke</h2>
+
+</section>
+
+<section class="notitle slide" id="_the_code_5">
+<h2>The code</h2>
+<div class="paragraph"><p><code><span class="highlight">OPTIONAL</span> MATCH <span class="highlight">(a)-[r]&#8594;()</span></code></p></div>
+
+<div class="paragraph"><p><code>RETURN a.name, type(r)</code></p></div>
+</section>
 </section>
 
 <section class="slide" id="_coffee_2">
@@ -794,10 +857,6 @@ RETURN a.name, type(r)</textarea>
 <pre id="errors"></pre>
 </div>
 </div>
-<script>
-  d3.selectAll("figure.graph-diagram")
-                        .call(gd.figure().scaling(gd.scaling.centerOrScaleDiagramToFitWindow));
-</script>
 <script src="../../../../asciidoc/js/checkcypher.js"></script>
 <script>
   (function($, deck, undefined) {

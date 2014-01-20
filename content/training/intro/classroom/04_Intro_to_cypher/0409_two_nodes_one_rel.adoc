@@ -1,17 +1,16 @@
 == Two nodes, one relationship
 
-//TODO make sure of the layout
-
+[role="notitle"]
 ===  The graph
 
 include::arrows_two_nodes_one_rel_3.adoc[]
 
+[role="notitle"]
 === The code
 
 ++(a)-[highlight]#[r]# - >()++
 
 == Two nodes, one relationship
-
 
 [source,cypher]
 ----

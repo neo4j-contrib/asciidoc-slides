@@ -6,4 +6,5 @@ MATCH (a)-->()
 RETURN a.name
 ----
 
+
 include::arrows_two_nodes_one_rel_2.adoc[]

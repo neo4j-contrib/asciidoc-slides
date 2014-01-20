@@ -142,9 +142,6 @@
         %div
           %div#status
           %pre#errors
-    :javascript
-      d3.selectAll("figure.graph-diagram")
-                            .call(gd.figure().scaling(gd.scaling.centerOrScaleDiagramToFitWindow));
     - if attr? :customjs   
       %script(src="#{attr :customjs}")
     :javascript
