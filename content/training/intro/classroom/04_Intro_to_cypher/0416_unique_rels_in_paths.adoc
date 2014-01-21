@@ -1,0 +1,7 @@
+== Unique relationships in paths
+
+[source,cypher,options="step"]
+----
+MATCH (a)-[:ACTED_IN]->(m)<-[:ACTED_IN]-(a)
+RETURN a.name, m.title
+----

@@ -33,7 +33,20 @@ include::0413_paths.adoc[]
 
 include::0414_aggregation.adoc[]
 
+include::0415_lab.adoc[]
 
+include::0416_unique_rels_in_paths.adoc[]
 
-== Coffee?
+include::0417_sort_and_limit.adoc[]
+
+include::0418_aggregation.adoc[]
+
+include::0419_start.adoc[]
+
+include::0420_index.adoc[]
+
+include::0421_labels_on_patterns.adoc[]
+
+include::0422_conditions.adoc[]
+
 

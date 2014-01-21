@@ -1,0 +1,46 @@
+== Deleting nodes
+
+[source,cypher,options="step"]
+----
+MATCH (emil:Person)
+WHERE emil.name="Emil Eifrem"
+DELETE emil
+----
+
+[options="step"]
+(Wrong Error Message)
+
+
+== Deleting relationships
+
+[source,cypher,options="step"]
+----
+MATCH (emil:Person)-[r]-()
+WHERE emil.name="Emil Eifrem"
+DELETE r
+----
+
+== Deleting nodes and relationships
+
+[source,cypher,options="step"]
+----
+MATCH (n)
+OPTIONAL MATCH (n)-[r]->()
+DELETE n, r
+----
+
+[options="step"]
+(delete all content in the database)
+
+
+[.labslide]
+== Lab
+
+=== Add KNOWS relationships between all actors who were in the same movie
+
+[source,cypher,options="step"]
+----
+MATCH (a:Person)-[:ACTED_IN]->()<-[:ACTED_IN]-(b:Person)
+//ATT!
+CREATE UNIQUE (a)-[:KNOWS]->(b);
+----

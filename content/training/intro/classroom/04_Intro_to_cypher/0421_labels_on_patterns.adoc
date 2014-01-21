@@ -1,0 +1,13 @@
+== Labels on pattern "anchors"
+
+[source,cypher,options="step"]
+----
+MATCH (tom:Person)-[:ACTED_IN]->(movie),
+(kevin:Person)-[:ACTED_IN]->(movie)
+WHERE tom.name="Tom Hanks" AND
+      kevin.name="Kevin Bacon"
+RETURN DISTINCT movie.title
+----
+
+[options="step"]
+(Movies featuring both Tom Hanks and Kevin Bacon)

@@ -36,3 +36,10 @@ include::02_Intro_to_Graphs/0201_index.adoc[]
 include::03_Tour_of_neo4j/0301_index.adoc[]
 
 include::04_Intro_to_cypher/0401_index.adoc[]
+
+== Coffee? Lunch?
+
+include::05_Updating_with_cypher/0501_index.adoc[]
+
+== (Graphs are everywhere)
+

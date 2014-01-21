@@ -1,0 +1,33 @@
+++++
+<figure class="graph-diagram">
+<ul class="graph-diagram-markup" data-internal-scale="0.1" data-external-scale="1">
+  <li class="node" data-node-id="0" data-x="-5931.668487548828" data-y="60.88548278808594">
+    <span class="caption">a</span>
+  </li>
+  <li class="node" data-node-id="1" data-x="-2120" data-y="40">
+    <span class="caption">b</span>
+  </li>
+  <li class="node" data-node-id="2" data-x="-6750" data-y="1330">
+    <span class="caption">a</span>
+  </li>
+  <li class="node" data-node-id="3" data-x="-4120" data-y="1330"></li>
+  <li class="node" data-node-id="4" data-x="-1290" data-y="1250">
+    <span class="caption">b</span>
+  </li>
+  <li class="node" data-node-id="5" data-x="-7960" data-y="2730">
+    <span class="caption">a</span>
+  </li>
+  <li class="node" data-node-id="6" data-x="-5330" data-y="2710"></li>
+  <li class="node" data-node-id="7" data-x="-2900" data-y="2690"></li>
+  <li class="node" data-node-id="8" data-x="-490" data-y="2600">
+    <span class="caption">b</span>
+  </li>
+  <li class="relationship" data-from="0" data-to="1"></li>
+  <li class="relationship" data-from="2" data-to="3"></li>
+  <li class="relationship" data-from="3" data-to="4"></li>
+  <li class="relationship" data-from="5" data-to="6"></li>
+  <li class="relationship" data-from="6" data-to="7"></li>
+  <li class="relationship" data-from="7" data-to="8"></li>
+</ul>
+</figure>
+++++

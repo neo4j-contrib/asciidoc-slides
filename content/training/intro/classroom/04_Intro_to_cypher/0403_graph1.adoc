@@ -4,10 +4,10 @@
 [[big_graph1]]
 include::big_graph.adoc[]
 
-[[triangle1]]
+[[bg1_triangle1]]
 [role="notitle"]
 === Triangle1
 
-[[triangle2]] 
+[[bg1_triangle2]] 
 [role="notitle"]
 === Triangle2

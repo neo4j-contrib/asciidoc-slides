@@ -1,0 +1,166 @@
+== Conditions
+
+[source,cypher,options="step"]
+----
+MATCH (tom:Person)-[:ACTED_IN]->(movie:Movie)
+WHERE tom.name="Tom Hanks"
+AND movie.released < 1992
+RETURN DISTINCT movie.title
+----
+
+[options="step"]
+(Movies in which Tom Hanks acted, that were released before 1992)
+
+
+[[big_graph7]]
+== The Graph
+
+include::big_graph.adoc[]
+
+[[bg7_one_node]]
+[options="step"]
+[red]#Tom Hanks#
+
+[[bg7_one_node_outgoing]]
+[options="step"]
+[orange]#Movies#
+
+
+== Conditions on properties
+
+[source,cypher,options="step"]
+----
+MATCH (actor:Person)-[r:ACTED_IN]->(movie)
+WHERE actor.name="Keanu Reeves"
+AND "Neo" IN (r.roles)
+RETURN DISTINCT movie.title
+----
+
+[options="step"]
+(Movies in which Keanu Reeves played Neo)
+
+== Conditions on properties
+
+[source,cypher,options="step"]
+----
+MATCH (actor:Person)-[r:ACTED_IN]->(movie)
+WHERE actor.name="Keanu Reeves"
+AND ANY( x IN r.roles WHERE x = "Neo")
+RETURN DISTINCT movie.title
+----
+
+[options="step"]
+(Movies in which Keanu Reeves played Neo)
+
+== Conditions based on comparisons
+
+[source,cypher,options="step"]
+----
+MATCH (tom:Person)-[:ACTED_IN]->(movie),
+(a:Person)-[:ACTED_IN]->(movie)
+WHERE tom.name="Tom Hanks"
+AND a.born < tom.born
+RETURN DISTINCT a.name
+----
+
+[options="step"]
+(Actors who worked with Tom and are older than he was)
+
+== Conditions based on comparisons
+
+[source,cypher,options="step"]
+----
+MATCH (tom:Person)-[:ACTED_IN]->(movie),
+(a:Person)-[:ACTED_IN]->(movie)
+WHERE tom.name="Tom Hanks"
+AND a.born < tom.born
+RETURN DISTINCT a.name, (tom.born - a.born) AS diff
+----
+
+[options="step"]
+(Actors who worked with Tom and are older than he was)
+
+== Conditions based on patterns
+
+[source,cypher,options="step"]
+----
+MATCH (gene:Person)-[:ACTED_IN]->(movie),
+(n)-[:ACTED_IN]->(movie)
+WHERE gene.name="Gene Hackman"
+RETURN DISTINCT n.name
+----
+
+[options="step"]
+(Actors who worked with Gene Hackman)
+
+== Conditions based on patterns
+
+[source,cypher,options="step"]
+----
+MATCH (gene:Person)-[:ACTED_IN]->(movie),
+(n)-[:ACTED_IN]->(movie)
+WHERE gene.name="Gene Hackman"
+AND (n)-[:DIRECTED]->()
+RETURN DISTINCT n.name
+----
+
+[options="step"]
+(Actors who worked with Gene and were directors of their own films)
+
+== Conditions based on patterns
+
+[source,cypher,options="step"]
+----
+MATCH (keanu:Person)-[:ACTED_IN]->(movie),
+(n)-[:ACTED_IN]->(movie),
+ (hugo:Person)
+WHERE keanu.name="Keanu Reeves" AND
+      hugo.name="Hugo Weaving"
+AND NOT (hugo)-[:ACTED_IN]->(movie)
+RETURN DISTINCT n.name
+----
+
+
+== Wildcard matching on properties
+
+[source,cypher,options="step"]
+----
+MATCH (matrix:Movie)<-[r:ACTED_IN]-(a)
+WHERE matrix.title="The Matrix"
+AND a.name =~ ".*Emil.*"
+RETURN a
+----
+
+[options="step"]
+(Actors who worked with Keanu, but not when he was also working with Hugo)
+
+[.labslide]
+== Lab
+
+=== Who are the five busiest actors?
+
+[source,cypher,options="step"]
+----
+MATCH (a:Person)-[:ACTED_IN]->()
+RETURN a.name, count(*) AS count
+ORDER BY count DESC
+LIMIT 5
+----
+
+[.labslide]
+== Advanced lab
+
+=== Recommend 3 actors that Keanu Reeves should work with (but hasn’t).
+
+[source,cypher,options="step"]
+----
+MATCH (keanu:Person)-[:ACTED_IN]->()<-[:ACTED_IN]-(c),
+      (c)-[:ACTED_IN]->()<-[:ACTED_IN]-(coc)
+WHERE keanu.name="Keanu Reeves"
+AND NOT((keanu)-[:ACTED_IN]->()<-[:ACTED_IN]-(coc))
+AND coc <> keanu
+RETURN coc.name, count(coc)
+ORDER BY count(coc) DESC
+LIMIT 3
+----
+

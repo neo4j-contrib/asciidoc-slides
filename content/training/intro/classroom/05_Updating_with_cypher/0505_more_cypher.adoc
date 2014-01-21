@@ -1,0 +1,73 @@
+== More Cypher!
+
+== Matching multiple relationships
+
+[source,cypher,options="step"]
+----
+MATCH (a)-[:ACTED_IN|:DIRECTED]->()<-[:ACTED_IN|:DIRECTED]-(b)
+CREATE UNIQUE (a)-[:KNOWS]->(b)
+----
+
+[options="step"]
+(Create KNOWS relationships between anyone, Actors or Directors, who worked together)
+
+
+== Variable length paths
+
+[options="step"]
+=== The pattern
+include::arrows_variable_length.adoc[]
+
+[options="step"]
+++(a)-[*1..3]->(b)++
+
+
+== Friends-of-Friends
+
+[source,cypher,options="step"]
+----
+MATCH (keanu:Person)-[:KNOWS*2]->(fof)
+WHERE keanu.name="Keanu Reeves"
+RETURN DISTINCT fof.name
+----
+
+
+
+
+[.labslide]
+== Lab
+
+=== Return Friends-of-Friends of Keanu Reeves who are not immediate friends
+
+[source,cypher,options="step"]
+----
+MATCH (keanu:Person)-[:KNOWS*2]-(fof)
+WHERE keanu.name="Keanu Reeves"
+AND NOT (keanu)-[:KNOWS]-(fof) AND NOT(keanu=fof)
+RETURN DISTINCT fof.name
+----
+
+== Bacon Number!
+
+[source,cypher,options="step"]
+----
+MATCH p=shortestPath(
+  (charlize:Person)-[:KNOWS*]->(bacon:Person)
+)
+WHERE charlize.name="Charlize Theron" AND
+      bacon.name="Kevin Bacon"
+RETURN length(rels(p))
+----
+
+[.labslide]
+== Lab
+
+=== Return the names of the people joining Charlize to Kevin.
+
+[source,cypher,options="step"]
+----
+MATCH p=shortestPath((charlize:Person)-[:KNOWS*]->(bacon:Person))
+WHERE charlize.name="Charlize Theron" AND
+      bacon.name="Kevin Bacon"
+RETURN [n in nodes(p) | n.name] AS names;
+----

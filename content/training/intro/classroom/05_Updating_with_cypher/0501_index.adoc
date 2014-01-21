@@ -1,0 +1,10 @@
+== Updating graphs with Cypher
+
+include::0502_create.adoc[]
+include::0503_delete.adoc[]
+include::0504_merge.adoc[]
+
+== Coffee?
+
+include::0505_more_cypher.adoc[]
+

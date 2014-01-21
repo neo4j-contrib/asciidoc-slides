@@ -575,5 +575,28 @@ section.notitle h2 {
     display: none;
 }
 
+table,td {
+    border: solid thin;
+}
+
+th {
+    border: solid thick;
+}
+
+figure,table {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.red {
+    color: red;
+}
+.orange {
+    color: orange;
+}
+.blue {
+    color: #0000ff;
+}
+
 
 

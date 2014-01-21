@@ -23,14 +23,14 @@ include::arrows_two_nodes_one_rel_2.adoc[]
 
 include::big_graph.adoc[]
 
-[[graph_pattern_ab1]] 
+[[bg2_graph_pattern_ab1]] 
 [role="notitle"]
 === ab1
 
-[[graph_pattern_ab2]] 
+[[bg2_graph_pattern_ab2]] 
 [role="notitle"]
 === ab2
 
-[[graph_pattern_ab3]] 
+[[bg2_graph_pattern_ab3]] 
 [role="notitle"]
 === ab3

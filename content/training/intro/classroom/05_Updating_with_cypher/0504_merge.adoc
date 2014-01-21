@@ -1,0 +1,26 @@
+== Match or Create is MERGE
+
+[source,cypher,options="step"]
+----
+MERGE (p:Person {name:"Clint Eastwood"})
+RETURN p
+----
+
+[options="step"]
+Uses indexes, constraints and locks to guarantee unique lookup and creation
+
+
+
+== Match or Create is MERGE
+
+[source,cypher,options="step"]
+----
+MERGE (p:Person {name:"Clint Eastwood"})
+ON CREATE p SET p.created = timestamp()
+ON MATCH p SET p.accessed = coalesce(p.accessed,0)+1
+RETURN p
+----
+
+[options="step"]
+* [highlight]#ON CREATE x SET# - executed on create
+* [highlight]#ON MATCH x SET#  - executed on match

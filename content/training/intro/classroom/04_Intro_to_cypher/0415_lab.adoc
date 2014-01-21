@@ -1,0 +1,10 @@
+[.labslide]
+== Lab
+
+=== Which directors acted also in their movie?
+
+[source,cypher,options="step"]
+----
+MATCH (a)-[:ACTED_IN]->(m)<-[:DIRECTED]-(d)
+RETURN a.name, m.title, d.name;
+----

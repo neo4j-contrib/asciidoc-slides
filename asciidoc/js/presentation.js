@@ -19,32 +19,31 @@ function step(id) {
     return stepBuilder;
 }
 
-function highlight(stepAndClassId, highlight_color, graphParent) {
-    var graph = graphParent.select("figure.graph-diagram")
-    step(stepAndClassId).onEnter(function () {
-        console.log("onEnter", stepAndClassId, graph);
-        graph.selectAll(".node." + stepAndClassId)
+function highlight( graphParentId,stepId, classId,highlight_color) {
+    var graph = d3.select("#"+graphParentId).select("figure.graph-diagram");
+    step(stepId).onEnter(function () {
+        console.log("onEnter", classId, graph);
+        graph.selectAll(".node." + classId)
             .style("stroke", highlight_color);
-        graph.selectAll(".relationship." + stepAndClassId)
+        graph.selectAll(".relationship." + classId)
             .style("fill", highlight_color);
     }).onReverse(function () {
-            graph.selectAll(".node." + stepAndClassId)
+            graph.selectAll(".node." + classId)
                 .style("stroke", null);
-            graph.selectAll(".relationship." + stepAndClassId)
+            graph.selectAll(".relationship." + classId)
                 .style("fill", null);
         });
 }
 
-function stroke(stepAndClassId, highlight_color, strokeStyle, graphParent) {
-    var graph = graphParent.select("figure.graph-diagram");
+function dash(graphParentId, stepAndClassId) {
+    var graph = d3.select("#"+graphParentId).select("figure.graph-diagram");
     step(stepAndClassId).onEnter(function () {
-        console.log("onEnter stroke", stepAndClassId, graphParent);
+        console.log("onEnter stroke", stepAndClassId, graphParentId);
         graph.selectAll(".node." + stepAndClassId)
-            .style("stroke", highlight_color);
+            .style("stroke", "red");
         graph.selectAll(".relationship." + stepAndClassId)
             .style("stroke-width", "10")
             .attr("fill", "none")
-//            .attr("stroke", highlight_color)
             .attr("stroke-dasharray", "10,10");
     }).onReverse(function () {
             graph.selectAll(".node." + stepAndClassId)
@@ -57,17 +56,29 @@ function stroke(stepAndClassId, highlight_color, strokeStyle, graphParent) {
 
 
 (function () {
-    var graph1 = d3.select("#big_graph1");
-    highlight("triangle1", "red", graph1);
-    highlight("triangle2", "red", graph1);
+    highlight("big_graph1","bg1_triangle1", "triangle1", "red");
+    highlight("big_graph1","bg1_triangle2", "triangle2", "red");
 
-    var graph2 = d3.select("#big_graph2");
-    highlight("graph_pattern_ab1", "red", graph2);
-    highlight("graph_pattern_ab2", "red", graph2);
-    highlight("graph_pattern_ab3", "red", graph2);
+    highlight("big_graph2","bg2_graph_pattern_ab1","graph_pattern_ab1", "red");
+    highlight("big_graph2","bg2_graph_pattern_ab2","graph_pattern_ab2", "red");
+    highlight("big_graph2","bg2_graph_pattern_ab3","graph_pattern_ab3", "red");
+    
+    highlight("big_graph3", "bg3_one_node", "one_node", "red");
+    highlight("big_graph4", "bg4_one_node", "one_node", "red");
+    
+    
+    highlight("big_graph5", "bg5_one_node", "one_node", "red");
+    highlight("big_graph5", "bg5_one_node_outgoing","one_node_outgoing", "red");
+
+    highlight("big_graph6", "bg6_one_node", "bg5_one_node", "red");
+    highlight("big_graph6","bg6_one_node_outgoing", "one_node_outgoing", "orange");
+    highlight("big_graph6","bg6_one_node_outgoing_incoming","one_node_outgoing_incoming", "blue");
+
+    highlight("big_graph7","bg7_one_node", "one_node", "red");
+    highlight("big_graph7","bg7_one_node_outgoing", "one_node_outgoing", "orange");
 
 
-    stroke("graph_pattern_optional_rel", "red", null, d3.select("#graph_optional_match"));
+    dash("graph_optional_match", "graph_pattern_optional_rel" );
 })();
 
 
