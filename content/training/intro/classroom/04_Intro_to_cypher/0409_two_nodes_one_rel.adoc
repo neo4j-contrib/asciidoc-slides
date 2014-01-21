@@ -12,7 +12,7 @@ include::arrows_two_nodes_one_rel_3.adoc[]
 
 == Two nodes, one relationship
 
-[source,cypher]
+[source,cypher,options="step"]
 ----
 MATCH (a)-[r]->()
 RETURN a.name, type(r)

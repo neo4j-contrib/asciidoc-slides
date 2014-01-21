@@ -575,11 +575,8 @@ Grab a coffee and get ready to begin!
   <li class="relationship" data-from="0" data-to="1"></li>
 </ul>
 </figure>
-</section>
 
-<section class="slide" id="_the_code">
-<h2>The code</h2>
-<div class="listingblock">
+<div class="listingblock slide">
 <div class="content">
 <textarea class="code">(a)--&gt;(b)</textarea>
 </div>
@@ -589,15 +586,12 @@ Grab a coffee and get ready to begin!
 
 <section class="slide" id="_two_nodes_one_relationship_2">
 <h2>Two nodes, one relationship</h2>
-<section class="notitle slide" id="_the_code_2">
-<h2>The code</h2>
-<div class="listingblock">
+<div class="listingblock slide">
 <div class="content">
 <textarea class="code" mode="cypher">MATCH (a)--(b)
 RETURN a, b</textarea>
 </div>
 </div>
-</section>
 
 <section class="slide" id="_the_pattern">
 <h2>The pattern</h2>
@@ -683,7 +677,7 @@ RETURN a, b</textarea>
 </figure>
 </section>
 
-<section class="notitle slide" id="_the_code_3">
+<section class="notitle slide" id="_the_code">
 <h2>The code</h2>
 <div class="listingblock">
 <div class="content">
@@ -695,7 +689,7 @@ RETURN a, b</textarea>
 
 <section class="slide" id="_two_nodes_one_relationship_4">
 <h2>Two nodes, one relationship</h2>
-<div class="listingblock">
+<div class="listingblock slide">
 <div class="content">
 <textarea class="code" mode="cypher">MATCH (a)--&gt;()
 RETURN a.name</textarea>
@@ -717,7 +711,7 @@ RETURN a.name</textarea>
 
 <section class="slide" id="_two_nodes_one_relationship_5">
 <h2>Two nodes, one relationship</h2>
-<div class="listingblock">
+<div class="listingblock slide">
 <div class="content">
 <textarea class="code" mode="cypher">MATCH (a)--&gt;()
 RETURN a.name</textarea>
@@ -756,7 +750,7 @@ RETURN a.name</textarea>
 </figure>
 </section>
 
-<section class="notitle slide" id="_the_code_4">
+<section class="notitle slide" id="_the_code_2">
 <h2>The code</h2>
 <div class="paragraph"><p><code>(a)-<span class="highlight">[r]</span> - &gt;()</code></p></div>
 </section>
@@ -764,7 +758,7 @@ RETURN a.name</textarea>
 
 <section class="slide" id="_two_nodes_one_relationship_7">
 <h2>Two nodes, one relationship</h2>
-<div class="listingblock">
+<div class="listingblock slide">
 <div class="content">
 <textarea class="code" mode="cypher">MATCH (a)-[r]-&gt;()
 RETURN a.name, type(r)</textarea>
@@ -786,8 +780,8 @@ RETURN a.name, type(r)</textarea>
 </figure>
 </section>
 
-<section class="slide" id="_two_nodes_one_relationship_8">
-<h2>Two nodes, one relationship</h2>
+<section class="slide" id="_two_nodes_one_optional_relationship">
+<h2>Two nodes, one optional relationship</h2>
 <section class="notitle slide" id="graph_optional_match">
 <h2>The graph</h2>
 <figure class="graph-diagram">
@@ -805,18 +799,16 @@ RETURN a.name, type(r)</textarea>
 
 <section class="notitle slide" id="graph_pattern_optional_rel">
 <h2>Optional stroke</h2>
-
-</section>
-
-<section class="notitle slide" id="_the_code_5">
-<h2>The code</h2>
-<div class="paragraph"><p><code><span class="highlight">OPTIONAL</span> MATCH <span class="highlight">(a)-[r]&#8594;()</span></code></p></div>
-
-<div class="paragraph"><p><code>RETURN a.name, type(r)</code></p></div>
+<div class="listingblock slide">
+<div class="content">
+<textarea class="code" mode="cypher">OPTIONAL MATCH (a)-[r]-&gt;()
+RETURN a.name, type(r)</textarea>
+</div>
+</div>
 </section>
 </section>
 
-<section class="slide" id="_two_nodes_one_relationship_9">
+<section class="slide" id="_two_nodes_one_relationship_8">
 <h2>Two nodes, one relationship</h2>
 <section class="notitle slide" id="graph_optional_match">
 <h2>The graph</h2>
@@ -835,14 +827,11 @@ RETURN a.name, type(r)</textarea>
 </figure>
 </section>
 
-<section class="notitle slide" id="_the_code_6">
+<section class="notitle slide" id="_the_code_3">
 <h2>The code</h2>
 <div class="paragraph"><p><code>(a)-[:ACTED_IN]&#8594;(m)</code></p></div>
-</section>
 
-<section class="notitle slide" id="_the_code_7">
-<h2>The code</h2>
-<div class="listingblock">
+<div class="listingblock slide">
 <div class="content">
 <textarea class="code" mode="cypher">MATCH (a)-[:ACTED_IN]-&gt;(m)
 RETURN a.name, m.title</textarea>
@@ -852,7 +841,7 @@ RETURN a.name, m.title</textarea>
 
 <section class="slide" id="_returning_role_properties">
 <h2>Returning role properties</h2>
-<div class="listingblock">
+<div class="listingblock slide">
 <div class="content">
 <textarea class="code" mode="cypher">MATCH (a)-[r:ACTED_IN]-&gt;(m)
 RETURN a.name, r.roles, m.title</textarea>
@@ -886,7 +875,7 @@ RETURN a.name, r.roles, m.title</textarea>
 </figure>
 </section>
 
-<section class="notitle slide" id="_the_code_8">
+<section class="notitle slide" id="_the_code_4">
 <h2>The code</h2>
 <div class="paragraph"><p><code>(a) - - &gt;(b) - - &gt;(c)</code></p></div>
 </section>
@@ -917,7 +906,7 @@ RETURN a.name, r.roles, m.title</textarea>
 </figure>
 </section>
 
-<section class="notitle slide" id="_the_code_9">
+<section class="notitle slide" id="_the_code_5">
 <h2>The code</h2>
 <div class="paragraph"><p><code>(a) - - &gt;(b)&lt; - - (c)</code></p></div>
 </section>
@@ -948,7 +937,7 @@ RETURN a.name, r.roles, m.title</textarea>
 </figure>
 </section>
 
-<section class="notitle slide" id="_the_code_10">
+<section class="notitle slide" id="_the_code_6">
 <h2>The code</h2>
 <div class="paragraph"><p><code>MATCH <span class="highlight">(a)-[:ACTED_IN]&#8594;(m)&#8592;[:DIRECTED]-(d)</span></code></p></div>
 
@@ -958,7 +947,7 @@ RETURN a.name, r.roles, m.title</textarea>
 
 <section class="slide" id="_a_movies_query">
 <h2>A Movies Query</h2>
-<section class="notitle slide" id="_the_code_11">
+<section class="notitle slide" id="_the_code_7">
 <h2>The code</h2>
 <div class="listingblock">
 <div class="content">
@@ -1011,7 +1000,7 @@ RETURN a.name, m.title, d.name;</textarea>
 
 <section class="slide" id="_a_movies_query_with_alias">
 <h2>A Movies Query with alias</h2>
-<section class="notitle slide" id="_the_code_12">
+<section class="notitle slide" id="_the_code_8">
 <h2>The code</h2>
 <div class="listingblock">
 <div class="content">
@@ -1091,7 +1080,7 @@ RETURN a.name AS actor, m.title AS movie,
 </figure>
 </section>
 
-<section class="notitle slide" id="_the_code_13">
+<section class="notitle slide" id="_the_code_9">
 <h2>The code</h2>
 <div class="listingblock">
 <div class="content">
@@ -1162,7 +1151,7 @@ RETURN a.name, m.title, d.name</textarea>
 </figure>
 </section>
 
-<section class="notitle slide" id="_the_code_14">
+<section class="notitle slide" id="_the_code_10">
 <h2>The code</h2>
 <div class="listingblock">
 <div class="content">

@@ -1,9 +1,6 @@
 == Two nodes, one relationship
 
-[role="notitle"]
-=== The code
-
-[source, cypher]
+[source,cypher,options="step"]
 ----
 MATCH (a)--(b)
 RETURN a, b

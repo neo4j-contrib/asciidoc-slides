@@ -1,6 +1,6 @@
 == Two nodes, one relationship
 
-[source,cypher]
+[source,cypher,options="step"]
 ----
 MATCH (a)-->()
 RETURN a.name

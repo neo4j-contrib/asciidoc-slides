@@ -1,4 +1,4 @@
-== Two nodes, one relationship
+== Two nodes, one optional relationship
 
 [role="notitle"]
 [[graph_optional_match]]
@@ -11,9 +11,8 @@ include::arrows_two_nodes_one_rel_2.adoc[]
 === Optional stroke
 
 
-[role="notitle"]
-=== The code
-
-++[highlight]#OPTIONAL# MATCH [highlight]#(a)-[r]->()#++
-
-++RETURN a.name, type(r)++
+[source,cypher,options="step"]
+----
+OPTIONAL MATCH (a)-[r]->()
+RETURN a.name, type(r)
+----

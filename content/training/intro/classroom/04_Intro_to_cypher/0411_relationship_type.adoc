@@ -12,9 +12,8 @@ include::arrows_a_acted_in_m.adoc[]
 
 ++(a)-[:ACTED_IN]->(m)++
 
-[role="notitle"]
-=== The code
-[source,cypher]
+
+[source,cypher,options="step"]
 ----
 MATCH (a)-[:ACTED_IN]->(m)
 RETURN a.name, m.title
@@ -22,7 +21,7 @@ RETURN a.name, m.title
 
 === Returning role properties
 
-[source,cypher]
+[source,cypher,options="step"]
 ----
 MATCH (a)-[r:ACTED_IN]->(m)
 RETURN a.name, r.roles, m.title
