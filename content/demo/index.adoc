@@ -4,8 +4,9 @@
 :email: info@neotechnology.com
 :backend: deckjs
 :deckjsdir: ../../asciidoc/deck.js
-:deckjs_theme: neotech
 :deckjs_transition: horizontal-slide
+:deckjs_theme: neotech
+:goto:
 :icons: font
 :source-highlighter: codemirror
 :navigation:

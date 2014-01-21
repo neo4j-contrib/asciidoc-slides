@@ -64,8 +64,10 @@
       %link(rel='stylesheet' media='screen' href='#{deckjs_dir}/extensions/toc/deck.toc.css')
     - unless attr :deckjs_theme == 'none'
       %link(rel='stylesheet' media='screen' href="#{deckjs_dir}/themes/style/#{attr :deckjs_theme, 'web-2.0'}.css")
-    - unless attr :deckjs_transition == 'none'
+    - if attr? :deckjs_transition != 'none'
       %link(rel='stylesheet' media='screen' href="#{deckjs_dir}/themes/transition/#{attr :deckjs_transition, 'fade'}.css")
+    - else
+      %link(rel='stylesheet' media='screen' href="#{deckjs_dir}/themes/transition/fade.css")
     - if attr? :customcss
       %link(rel='stylesheet' href="#{:customcss}.css")
     %link(rel='stylesheet' media='print' href='#{deckjs_dir}/core/print.css')

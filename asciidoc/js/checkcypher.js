@@ -53,6 +53,7 @@ function setupDiagrams() {
 function init() {
 
     setupDiagrams();
+    $.deck('showGoTo')
     var $status = $("#status");
     $status.text(status);
     var cypherblocks = [];
