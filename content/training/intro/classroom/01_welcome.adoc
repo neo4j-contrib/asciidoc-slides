@@ -1,15 +1,17 @@
 == Welcome 
 
+
 . Find a seat. Say hi!
 . Grab a USB key, and plug it in.
-. Windows
-.. Run the `Install-Neo4j.exe`
-.. When you see Neo4j desktop
-.. click the start button
-.  Mac
-.. Run the `Install Neo4j` application!
-.. When you see the command prompt,
-.. type `./bin/neo4j start`
+
+[options="header"]
+|===
+|Windows                        |Mac/Linux
+|Run the "Install-Neo4j.exe"    |Start a terminal
+|When you see Neo4j desktop    |When you see the command prompt,
+|Click the start button        |Type "./bin/neo4j start"
+|===
+
 . Grab a coffee and get ready to begin!
 
 
