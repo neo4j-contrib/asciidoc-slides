@@ -2,6 +2,8 @@
 == It's all about patterns
 
 [[big_graph1]]
+[role="notitle"]
+=== bg1
 include::big_graph.adoc[]
 
 [[bg1_triangle1]]

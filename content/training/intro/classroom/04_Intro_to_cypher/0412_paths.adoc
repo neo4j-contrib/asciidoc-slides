@@ -1,7 +1,6 @@
 == Paths
 
 [role="notitle"]
-[[graph_optional_match]]
 ===  The graph
 
 include::arrows_three_nodes_path1.adoc[]
@@ -16,7 +15,6 @@ include::arrows_three_nodes_path1.adoc[]
 == Paths
 
 [role="notitle"]
-[[graph_optional_match]]
 ===  The graph
 
 include::arrows_three_nodes_path2.adoc[]
@@ -31,18 +29,16 @@ include::arrows_three_nodes_path2.adoc[]
 == Paths
 
 [role="notitle"]
-[[graph_optional_match]]
 ===  The graph
 
 include::arrows_three_nodes_path3.adoc[]
 
 
-[role="notitle"]
-=== The code
-
-++MATCH [highlight]#(a)-[:ACTED_IN]->(m)<-[:DIRECTED]-(d)#++
-
-++RETURN a.name, m.title, d.name++
+[source,cypher,options="step"]
+----
+MATCH (a)-[:ACTED_IN]->(m)<-[:DIRECTED]-(d)
+RETURN a.name, m.title, d.name
+----
 
 
 == A Movies Query
@@ -85,7 +81,7 @@ RETURN a.name AS actor, m.title AS movie,
 
 [frame="topbot",options="header"]
 |===
-|actor|movie	|director
+|[highlight]#actor#|[highlight]#movie#	|[highlight]#director#
 |“Keanu Reeves”|	“The Matrix”|	“Andy Wachowski”
 |“Keanu Reeves”|	“The Matrix Reloaded”|	“Andy Wachowski”
 |“Noah Wyle”|	“A Few Good Men”|	“Rob Reiner”

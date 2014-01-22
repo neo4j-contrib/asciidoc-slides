@@ -10,13 +10,8 @@ RETURN a, b
 
 include::arrows_two_nodes_one_rel_2.adoc[]
 
-[role="notitle"]
-== The Graph
-
-
 [[big_graph2]]
-[role="notitle"]
-=== ab1
+== The graph
 
 include::big_graph.adoc[]
 
