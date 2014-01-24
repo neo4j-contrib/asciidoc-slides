@@ -43,5 +43,7 @@ include::05_Updating_with_cypher/0501_index.adoc[]
 
 include::06_case_studies/0601_index.adoc[]
 
+include::07_next_steps.adoc[]
+
 == (Graphs are everywhere)
 

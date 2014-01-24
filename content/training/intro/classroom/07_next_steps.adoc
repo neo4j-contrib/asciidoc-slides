@@ -1,0 +1,52 @@
+== Next steps
+
+=== The rise of the graph
+
+=== It's not just social
+
+=== Find the graphs in your domain, and model them
+
+
+== Get involved in the community
+
+== Graphgists
+
+http://gist.neo4j.org[]
+
+== StackOverflow
+
+image::{img}/so.png[]
+
+http://stackoverflow.com/questions/tagged/neo4j
+
+
+== Neo4j Google Group
+
+image::{img}/google_group.png[]
+
+http://groups.google.com/group/neo4j[]
+
+== Github Issues and code
+
+image::{img}/github.png[]
+
+https://github.com/neo4j/neo4j/issues[]
+
+== Meetups/User groups
+
+image::{img}/meetups.png[]
+
+http://neo4j.meetup.com/[]
+
+== The Graphistas map
+
+image::{img}/graphistas_map.png[]
+
+http://www.neo4j.org/participate/contributors#map[]
+
+
+== (Thank You)
+
+* http://www.neo4j.org
+* http://groups.google.com/group/neo4j
+* http://www.neo4j.org/develop
