@@ -1,0 +1,63 @@
+[[case_studies]]
+== Case Studies
+
+== Customers
+
+image::{img}/customers.png[]
+
+== Cisco
+
+image::{img}/cs_cisco.png[]
+
+== Cisco
+
+image::{img}/cs_cisco_hmp.png[]
+
+== Accenture
+
+image::{img}/cs_accenture.png[]
+
+== Adobe
+
+image::{img}/cs_adobe.png[]
+
+== GLassdor
+
+image::{img}/cs_glassdoor.png[]
+
+== HP
+
+image::{img}/cs_hp.png[]
+
+== Junisphere
+
+image::{img}/cs_junisphere.png[]
+
+== Maaii
+
+image::{img}/cs_maaii.png[]
+
+== Seven Bridges Genomics
+
+image::{img}/cs_seven_bridges.png[]
+
+== SFR
+
+image::{img}/cs_sfr.png[]
+
+== Teachscape
+
+image::{img}/cs_teachscape.png[]
+
+== Deutsche Telekom
+
+image::{img}/cs_telekom.png[]
+
+== Telenor
+
+image::{img}/cs_telenor.png[]
+
+== Viadeo
+
+image::{img}/cs_viadeo.png[]
+

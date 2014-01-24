@@ -1505,8 +1505,8 @@ RETURN n</textarea>
 <div class="listingblock slide">
 <div class="content">
 <textarea class="code" mode="cypher">MATCH (n)
-WHERE has(n.name) AND n.name = "Tom Hanks"
-RETURN n</textarea>
+WHERE has(n.name) AND n.name="Tom Hanks"
+RETURN n</textarea>
 </div>
 </div>
 
@@ -2190,8 +2190,8 @@ RETURN p</textarea>
 <div class="listingblock slide">
 <div class="content">
 <textarea class="code" mode="cypher">MERGE (p:Person {name:"Clint Eastwood"})
-ON CREATE p SET p.created = timestamp()
-ON MATCH p SET p.accessed = coalesce(p.accessed,0)+1
+ON CREATE SET p.created = timestamp()
+ON MATCH SET p.accessed = coalesce(p.accessed,0)+1
 RETURN p</textarea>
 </div>
 </div>
@@ -2319,6 +2319,146 @@ RETURN [n in nodes(p) | n.name] AS names;</textarea>
 </div>
 </div>
 </section>
+</section>
+
+<section class="slide" id="case_studies">
+<h2>Case Studies</h2>
+
+</section>
+
+<section class="slide" id="_customers">
+<h2>Customers</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="customers" src="../../img/customers.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_cisco">
+<h2>Cisco</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="cs cisco" src="../../img/cs_cisco.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_cisco_2">
+<h2>Cisco</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="cs cisco hmp" src="../../img/cs_cisco_hmp.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_accenture">
+<h2>Accenture</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="cs accenture" src="../../img/cs_accenture.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_adobe">
+<h2>Adobe</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="cs adobe" src="../../img/cs_adobe.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_glassdor">
+<h2>GLassdor</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="cs glassdoor" src="../../img/cs_glassdoor.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_hp">
+<h2>HP</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="cs hp" src="../../img/cs_hp.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_junisphere">
+<h2>Junisphere</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="cs junisphere" src="../../img/cs_junisphere.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_maaii">
+<h2>Maaii</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="cs maaii" src="../../img/cs_maaii.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_seven_bridges_genomics">
+<h2>Seven Bridges Genomics</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="cs seven bridges" src="../../img/cs_seven_bridges.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_sfr">
+<h2>SFR</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="cs sfr" src="../../img/cs_sfr.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_teachscape">
+<h2>Teachscape</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="cs teachscape" src="../../img/cs_teachscape.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_deutsche_telekom">
+<h2>Deutsche Telekom</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="cs telekom" src="../../img/cs_telekom.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_telenor">
+<h2>Telenor</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="cs telenor" src="../../img/cs_telenor.png">
+</div>
+</div>
+</section>
+
+<section class="slide" id="_viadeo">
+<h2>Viadeo</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="cs viadeo" src="../../img/cs_viadeo.png">
+</div>
+</div>
 </section>
 
 <section class="slide" id="__graphs_are_everywhere">

@@ -16,8 +16,8 @@ Uses indexes, constraints and locks to guarantee unique lookup and creation
 [source,cypher,options="step"]
 ----
 MERGE (p:Person {name:"Clint Eastwood"})
-ON CREATE p SET p.created = timestamp()
-ON MATCH p SET p.accessed = coalesce(p.accessed,0)+1
+ON CREATE SET p.created = timestamp()
+ON MATCH SET p.accessed = coalesce(p.accessed,0)+1
 RETURN p
 ----
 

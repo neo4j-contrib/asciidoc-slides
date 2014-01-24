@@ -13,8 +13,8 @@ RETURN n
 [source,cypher,options="step"]
 ----
 MATCH (n)
-WHERE has(n.name) AND n.name = "Tom Hanks"
-RETURN n
+WHERE has(n.name) AND n.name="Tom Hanks"
+RETURN n
 ----
 
 [options="step"]
