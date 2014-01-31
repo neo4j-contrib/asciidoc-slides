@@ -39,7 +39,7 @@ Both *Nodes* and *Relationships* can have **Properties**. Properties are key:val
 
 **Nodes with Properties**
 `(m {title:"The Matrix"})`                 Movie with a title property
-`(a {name:"Keanu Reeves",born:1964}`       Actor with name and born property
+`(a {name:"Keanu Reeves",born:1964})`       Actor with name and born property
 
 **Relationship with Properties**
 `(a)-[:ACTED_IN {roles:["Neo"]}]->(m)` Relationship *ACTED_IN* with *roles* property (an array of character names)
@@ -49,4 +49,5 @@ To allow us to distinguish between different types of nodes, we us **Labels**. A
 
 **Labels**
 `(a:Person)`                                       a Person
+`(a:Person  {name:"Keanu Reeves"})`                                       a Person with properties
 `(a:Person)-[:ACTED_IN]->(m:Movie)`   a Person that ACTED_IN some movie
