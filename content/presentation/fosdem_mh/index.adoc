@@ -1,0 +1,497 @@
+= Live Graph Model Documentation with Graph Gists
+:presenter: Neo Technology
+:twitter: neo4j
+:email: info@neotechnology.com
+:backend: deckjs
+:deckjsdir: ../../../asciidoc/deck.js
+:deckjs_theme: neotech
+:icons: font
+:source-highlighter: codemirror
+:navigation:
+:goto:
+:status:
+:arrows:
+:customjs: ../../../asciidoc/js/checkcypher.js
+:gist-source: https://raw.github.com/neo4j-contrib/gists/master/
+:footer: © All Rights Reserved 2013 | Neo Technology, Inc.
+:img: img
+:logo: {img}/Neo_Technology.jpg
+:allow-uri-read:
+:video:
+:docs-link: https://github.com/neo4j-contrib/asciidoc-slides[documentation]
+:download-link: https://github.com/neo4j-contrib/asciidoc-slides/archive/master.zip[download]
+:sectids!:
+:deckjs_transition: none
+
+++++
+<style type="text/css">
+.small {
+   font-size:0.6em;
+}
+</style>
+++++
+
+
+
+
+// = Live Graph Model Documentation with Graph Gists
+
+
+
+
+== Who the hell is this guy?
+
+* Michael Hunger
+* Developer Advocate Neo Technology
+* Love People and Graphs
+* @mesirii | michael@neotechnology.com
+
+
+
+
+
+
+
+
+
+== What will he talk about?
+
+[options="step"]
+* (Graphs)-[:LOVE]->(Whiteboards)
+* (Graphs)-[:HATE]->(Text-Files)
+* Ascii-Art Rocks
+* Really? The GraphGist idea
+* Power Combination of Cool Tools
+* How does it work?
+* Our Community Rocks - The GraphGist Challenge
+
+== Question for you!
+
+=== How to discuss/communicate your awesome graph domain model?
+
+=== What is an easy way to present it in a modern, interactive format?
+
+=== Draw it by hand?
+
+=== Need a running database?
+
+=== Or just a browser?
+
+== (Graphs)-[:LOVE]->(Whiteboards)
+
+[options="step"]
+* The picture vs. 1000 words
+* creative thinking doodles
+* modeling is incremental
+* ongoing discussion, refinement
+* whiteboard, -walls, -tables
+
+[canvas-image="{img}/model4.png"]
+== Drawing
+
+[canvas-image="{img}/model5.png"]
+== Drawing Overlay
+
+[canvas-image="{img}/model6.png"]
+== Graph
+
+[canvas-image="{img}/model7.png"]
+== Graph Enriched
+
+
+== Graph Model
+
+++++
+<figure class="graph-diagram">
+<ul class="graph-diagram-markup" data-internal-scale="1.58" data-external-scale="1">
+  <li class="node" data-node-id="0" data-x="-115.53164556962025" data-y="-540.7594936708862">
+    <span class="caption">Person</span><dl class="properties"><dt>name</dt><dd>Bob</dd><dt>age</dt><dd>38</dd></dl></li>
+  <li class="node" data-node-id="1" data-x="-358.9403254972869" data-y="-330.334538878843">
+    <span class="caption">Book</span><dl class="properties"><dt>title</dt><dd>"Graph Databases"</dd><dt>authors</dt><dd>"Ian Robinson, ..."</dd></dl></li>
+  <li class="node" data-node-id="2" data-x="-565.6753022399126" data-y="-595.5646381619613">
+    <span class="caption">Person</span><dl class="properties"><dt>name</dt><dd>Alice</dd><dt>age</dt><dd>34</dd></dl></li>
+  <li class="relationship" data-from="0" data-to="1">
+    <span class="type">Has Read</span><dl class="properties"><dt>date</dt><dd>Jun-03</dd><dt>rating</dt><dd>4</dd></dl></li>
+  <li class="relationship" data-from="0" data-to="2">
+    <span class="type">Friend Of</span>
+  </li>
+  <li class="relationship" data-from="2" data-to="1">
+    <span class="type">Has Read</span><dl class="properties"><dt>date</dt><dd>Dec-05</dd><dt>rating</dt><dd>5</dd></dl></li>
+  <li class="relationship" data-from="2" data-to="0">
+    <span class="type">Friend Of</span>
+  </li>
+</ul></figure>
+++++
+
+== (Graphs)-[:HATE]->(Text-Files)
+
+[options="step"]
+* It's the 1000 words
+* Single dimensional
+* No graphics
+* Verbose
+
+== But Ascii-Art Rocks
+
+[options="step"]
+* Turn text into pictures
+* The Power of Symbols
+* Graph Patterns Made easy
+* Hacker Friendly
+* Diffs, VCS
+
+[canvas-image="{img}/blank.png"]
+== Cypher
+
+++++
+<h1>Cypher</h1>
+++++
+
+== (Cypher)-[:USES]->(Ascii-Art)
+
+[options="step"]
+* Declarative Graph Query Language
+* Graph Pattern Matching
+* Humane, Readable
+* Expressive
+* Read and Write Graphs
+* Tabular Results
+
+[canvas-image="{img}/pattern2.gif"]
+== Cypher Query
+
+[canvas-image="{img}/pattern1.gif"]
+== Cypher Pattern
+
+== Cypher Query
+
+=== Setup
+
+[source,cypher]
+----
+CREATE (neo:Company {name:"Neo"})-[:IN]->(:Country {tld:"SE"})
+CREATE (:Person {name:"Peter",age:40})-[:WORKS_AT]->(neo)
+CREATE (:Person {name:"Kenny",age:23})-[:WORKS_AT]->(neo)
+CREATE (:Person {name:"Kenny",age:23})-[:WORKS_AT]->(neo)
+CREATE (structr:Company {name:"Structr"})-[:IN]->(:Country {tld:"DE"})
+CREATE (:Person {name:"Axel",age:39})-[:WORKS_AT]->(structr)
+CREATE (:Person {name:"Christian",age:25})-[:WORKS_AT]->(structr)
+----
+
+=== Query
+
+[source,cypher]
+----
+// Count Hipsters by Country
+MATCH (p:Person)-[:WORKS_AT]->(:Company)-[:IN]->(c:Country)
+WHERE p.age < 28
+RETURN c.tld, count(p) as hipsters
+----
+
+== How do you demo it?
+
+* We built our own sandbox
+
+=== The Neo4j Console
+++++
+<iframe src="http://console.neo4j.org/r/cctayc" width="800" height="400"></iframe>
+++++
+
+== Console - Sandbox, a useful Tool
+
+=== How does it work?
+
+[options="step"]
+* In-Memory throwaway Neo4j instances
+* Simple Console UI with Graph Viz and Table Results
+* One Click sharing
+* Repl, SandBox, Bug-Reporter, Modeling Questions
+* Tiny Webapp on Heroku
+
+=== People love it
+
+[canvas-image="{img}/Neo4jConsole.jpg"]
+== Neo4j Console Sample
+
+[canvas-image="{img}/blank.png"]
+== AsciiDoc
+
+++++
+<h1>AsciiDoc</h1>
+++++
+
+== AsciiDoc - the better Markup Language
+
+[options="step"]
+* Full Toolchain for book generation
+* lots of options
+* still easy to read text files
+* generates html, pdf, text
+* The Neo4j Manual is pure AsciiDoc goodness
+* Has live queries with embedded Console 
+
+== AsciiDoc Example (source)
+
+[source,asciidoc]
+----
+== Basic AsciiDoc formatting
+
+[width="50%",cols="1m,1a"]
+|===
+| \_Italic_ | _Italic_
+| \*Bold* | *Bold*
+| \`Monospace` | `Monospace`
+| `http://www.neo4j.org/` | http://www.neo4j.org/
+| `http://www.neo4j.org/[neo4j.org]` | http://www.neo4j.org/[neo4j.org]
+| `link:./?5956246[Link to a GraphGist]` | link:./?5956246[Link to a GraphGist]
+|===
+
+Headings:
+
+ = Heading 1
+ == Heading 2
+ === Heading 3
+
+Images:
+
+ image::http://assets.neo4j.org/img/still/cineasts.gif[]
+----
+
+[canvas-image="{img}/asciidoc_github.jpg"]
+== AsciiDoc Example (rendered source)
+
+[role="canvas-caption", position="bottom-right"] 
+AsciiDoc Example (rendered source)
+
+[canvas-image="{img}/asciidoc_gist.jpg"]
+== AsciiDoc Example (rendered)
+
+[role="canvas-caption", position="bottom-right"] 
+AsciiDoc Example (rendered)
+
+== AsciiDoctor - the better AsciiDoc
+
+[options="step"]
+* Reimplementation in Ruby (also jRuby)
+* **Much** faster
+* lots of extensions
+* support for deck.js (you see it)
+* Cross-Compiled to Javascript (Opal.js)
+
+== Focus, Michael
+
+=== What was the question again?
+
+=== How to present a live, graph model?
+
+== What is a gist?
+
+* A useful snippet of information
+* Easy to share, fork and change
+* Nicely rendered and presented
+
+== What is a GraphGist?
+
+=== an AsciiDoc file with:
+
+[options="step"]
+* a graph domain model (cypher)
+* describing text and pictures
+* some example queries checked against the model
+* interactively executable (Cypher)
+* a Neo4j Console for further exploration
+
+
+[canvas-image="{img}/got_gist.jpg"]
+== Really? The GraphGist idea
+[role="canvas-caption", position="bottom-right"] 
+http://gist.neo4j.org/?6029850[]
+
+== What does it look like?
+
+[source,role=small]
+----
+ = The Game of Thrones in Neo4j
+ 
+ image::http://maxdemarzidotcom.files.wordpress.com/2013/06/neoiscoming.jpg?w=580[]
+ 
+ == The setup
+ 
+ //hide
+ [source,cypher]
+ ----
+ CREATE 
+ (_0 { name:"Westeros" }),
+ (_1 { house:"Tully" }),
+ ...
+ (_13 { name:"Danaerys" }),
+ ...
+ (_28 { name:"Tyrion" }), 
+ _1-[:HOUSE]->_0, 
+ _13-[:MARRIED_TO]->_12, 
+ _14-[:CHILD_OF]->_8, 
+ ...
+ _27-[:CHILD_OF]->_19, _28-[:CHILD_OF]->_10
+ ----
+ 
+ //graph
+
+ == Find all children of all houses
+
+ [source, cypher]
+ ----
+ MATCH (westeros)<-[:HOUSE]-(house)<-[:OF_HOUSE]-(ancestor), family=(ancestor)<-[:CHILD_OF*0..]-(last)
+ WHERE westeros.name='Westeros'
+ RETURN house.house, collect(DISTINCT last.name)
+ ----
+
+ //table
+
+ == Find all the children of parents that are siblings 
+
+ [source,cypher]
+ ----
+ MATCH (kid)-[:CHILD_OF]->(parent1)-[:CHILD_OF]->(ancestor)<-[:CHILD_OF]-(parent2)<-[:CHILD_OF]-(kid) 
+ RETURN DISTINCT kid.name as name
+ ----
+ 
+ //table
+ 
+ Easy.
+----
+
+
+== What does it look like? (setup)
+
+[source]
+----
+ = The Game of Thrones in Neo4j
+ 
+ image::http://maxdemarzidotcom.files.wordpress.com/2013/06/neoiscoming.jpg?w=580[]
+ 
+ == The setup
+ 
+ //hide
+ [source,cypher]
+ ----
+ CREATE 
+ (_0 { name:"Westeros" }),
+ (_1 { house:"Tully" }),
+ ...
+ (_13 { name:"Danaerys" }),
+ ...
+ (_28 { name:"Tyrion" }), 
+ _1-[:HOUSE]->_0, 
+ _13-[:MARRIED_TO]->_12, 
+ _14-[:CHILD_OF]->_8, 
+ ...
+ _27-[:CHILD_OF]->_19, _28-[:CHILD_OF]->_10
+ ----
+ 
+ //graph
+
+----
+
+== What does it look like? (use-case)
+
+[source]
+----
+  == Find all children of all houses
+  
+  [source, cypher]
+  ----
+  MATCH (westeros)<-[:HOUSE]-(house)<-[:OF_HOUSE]-(ancestor), family=(ancestor)<-[:CHILD_OF*0..]-(last)
+  WHERE westeros.name='Westeros'
+  RETURN house.house, collect(DISTINCT last.name)
+  ----
+  
+  //table
+  
+  //graph
+  
+  Easy.
+
+----
+
+[canvas-image="{img}/graphgist.jpg"]
+== Graph Gist Graph
+
+[canvas-image="{img}/blank.png"]
+== Power Tool Combo
+
+++++
+<h1>Power Tool Combo</h1>
+++++
+
+== Power Combination of Cool Tools
+
+[options="step"]
+* AsciiDoc(tor) running in Browser with Opal.js
+* Cypher
+* Neo4j Console
+* JavaScript (D3.js, jQuery)
+* HTML5 (postMessage)
+* GitHub Gists
+
+=== The Glue? Javascript
+
+[canvas-image="{img}/swiss-army-knife.jpg"]
+== Swiss Army Knife
+
+== How does it work?
+
+[options="step"]
+. Load Gist file from GitHub Gist / Url
+. Render AsciiDoc to HTML5 on the fly
+. Write to page / CSS
+. Placeholder replacement
+. Instantiate Console IFrame
+. Find all setup- and use-case queries
+. Send to Console, Check Results
+. Render Results as Table or Graph
+. Reset and Show Console
+
+
+== Next Step ?
+
+=== We have a great tool for model documentation
+
+=== Now we need some models, aka content
+
+=== Don't make something up!
+
+=== Ask your users, your Community
+
+== Create a Challenge (or two)
+
+=== First Challenge (September)
+
+* Give me anything
+* Nice Prizes (Money, Books, T-Shirts, Tickets)
+* Impressive http://blog.neo4j.org/2013/10/the-first-graphgist-challenge-completed.html[17 submissions in 4 weeks]
+
+=== Winners
+
+. http://gist.neo4j.org/?6619085[US Flights & Airports] by Nicole White
+. http://gist.neo4j.org/?github-jotomo%2Fneo4j-gist-challenge%2F%2Flearning-graph%2Flearning-graph.adoc[Learning Graph] by Johannes Mockenhaupt
+. http://gist.neo4j.org/?6506717[Chess Games] and Positions by Wes Freeman
+
+== Create a Challenge (or two)
+
+=== Second Challenge (Winter Dec+Jan)
+
+* 10 Categories from Education, Tranport up to "Show Off"
+* Unbelievable https://github.com/neo4j-contrib/graphgist/wiki[65 submissions in 8 weeks w/ holidays]
+
+=== Winners
+
+* We don't know yet
+* Looking forward to review
+* Check them out
+* Feel free to chime in
+
+== That's it
+
+=== Questions ?
+
+=== Thank You!

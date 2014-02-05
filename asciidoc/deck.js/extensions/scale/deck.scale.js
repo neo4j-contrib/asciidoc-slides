@@ -32,12 +32,19 @@ works fine.
       baseHeight = $container.height();
     }
 
+    var baseWidth = options.baseWidth;
+
+    if (!baseHeight) {
+      baseWidth = $container.width();
+    }
+
     // Scale each slide down if necessary (but don't scale up)
     $.each(rootSlides, function(i, $slide) {
       var slideHeight = $slide.innerHeight();
+      var slideWidth = $slide.innerWidth();
       var $scaler = $slide.find('.' + options.classes.scaleSlideWrapper);
       var shouldScale = $container.hasClass(options.classes.scale);
-      var scale = shouldScale ? baseHeight / slideHeight : 1;
+      var scale = shouldScale ? Math.min(baseHeight / slideHeight, baseWidth / slideWidth) : 1;
 
       if (scale === 1) {
         $scaler.css('transform', '');
@@ -73,6 +80,7 @@ works fine.
         rootSlides.push($slide);
       }
     });
+	console.log(rootSlides);
   };
 
   var wrapRootSlideContent = function() {

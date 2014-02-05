@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+<meta content="Asciidoctor 0.1.4" name="generator">
+<title>Live Graph Model Documentation with Graph Gists</title>
+<script src="../../../asciidoc/deck.js/jquery.min.js"></script>
+<script src="../../../asciidoc/deck.js/core/deck.core.js"></script>
+<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/codemirror/deck.codemirror.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/codemirror/themes/default.css" rel="stylesheet">
+<script src="../../../asciidoc/deck.js/extensions/codemirror/codemirror.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/deck.codemirror.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/mode/javascript/javascript.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/mode/css/css.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/cypher/deck.cypher.js"></script>
+<link href="../../../asciidoc/deck.js/extensions/cypher/deck.cypher.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/core/deck.core.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/hash/deck.hash.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/scale/deck.scale.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/goto/deck.goto.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/navigation/deck.navigation.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/status/deck.status.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/themes/style/neotech.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/core/print.css" media="print" rel="stylesheet">
+<script src="../../../asciidoc/deck.js/modernizr.custom.js"></script>
+</head>
+<body class="deck-container article">
+<section class="slide" id="title-slide">
+<h1>Live Graph Model Documentation with Graph Gists</h1>
+</section>
+<div id="preamble">
+<div class="sectionbody">
+<style type="text/css">
+.small {
+   font-size:0.6em;
+}
+</style>
+</div>
+</div>
+
+<section class="slide">
+<h2>Who the hell is this guy?</h2>
+<div class="ulist">
+<ul>
+<li>Michael Hunger</li>
+<li>Developer Advocate Neo Technology</li>
+<li>Love People and Graphs</li>
+<li>@mesirii | <a href="mailto:michael@neotechnology.com">michael@neotechnology.com</a></li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>What will he talk about?</h2>
+<div class="ulist">
+<ul>
+<li class="slide">(Graphs)-[:LOVE]&#8594;(Whiteboards)</li>
+<li class="slide">(Graphs)-[:HATE]&#8594;(Text-Files)</li>
+<li class="slide">Ascii-Art Rocks</li>
+<li class="slide">Really? The GraphGist idea</li>
+<li class="slide">Power Combination of Cool Tools</li>
+<li class="slide">How does it work?</li>
+<li class="slide">Our Community Rocks - The GraphGist Challenge</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>Question for you!</h2>
+<section class="slide">
+<h3>How to discuss/communicate your awesome graph domain model?</h3>
+
+</section>
+
+<section class="slide">
+<h3>What is an easy way to present it in a modern, interactive format?</h3>
+
+</section>
+
+<section class="slide">
+<h3>Draw it by hand?</h3>
+
+</section>
+
+<section class="slide">
+<h3>Need a running database?</h3>
+
+</section>
+
+<section class="slide">
+<h3>Or just a browser?</h3>
+
+</section>
+</section>
+
+<section class="slide">
+<h2>(Graphs)-[:LOVE]&#8594;(Whiteboards)</h2>
+<div class="ulist">
+<ul>
+<li class="slide">The picture vs. 1000 words</li>
+<li class="slide">creative thinking doodles</li>
+<li class="slide">modeling is incremental</li>
+<li class="slide">ongoing discussion, refinement</li>
+<li class="slide">whiteboard, -walls, -tables</li>
+</ul>
+</div>
+</section>
+
+<section class="slide canvas-image" style="background-image: url(img/model4.png)">
+
+</section>
+
+<section class="slide canvas-image" style="background-image: url(img/model5.png)">
+
+</section>
+
+<section class="slide canvas-image" style="background-image: url(img/model6.png)">
+
+</section>
+
+<section class="slide canvas-image" style="background-image: url(img/model7.png)">
+
+</section>
+
+<section class="slide">
+<h2>Graph Model</h2>
+<figure class="graph-diagram">
+<ul class="graph-diagram-markup" data-internal-scale="1.58" data-external-scale="1">
+  <li class="node" data-node-id="0" data-x="-115.53164556962025" data-y="-540.7594936708862">
+    <span class="caption">Person</span><dl class="properties"><dt>name</dt><dd>Bob</dd><dt>age</dt><dd>38</dd></dl></li>
+  <li class="node" data-node-id="1" data-x="-358.9403254972869" data-y="-330.334538878843">
+    <span class="caption">Book</span><dl class="properties"><dt>title</dt><dd>"Graph Databases"</dd><dt>authors</dt><dd>"Ian Robinson, ..."</dd></dl></li>
+  <li class="node" data-node-id="2" data-x="-565.6753022399126" data-y="-595.5646381619613">
+    <span class="caption">Person</span><dl class="properties"><dt>name</dt><dd>Alice</dd><dt>age</dt><dd>34</dd></dl></li>
+  <li class="relationship" data-from="0" data-to="1">
+    <span class="type">Has Read</span><dl class="properties"><dt>date</dt><dd>Jun-03</dd><dt>rating</dt><dd>4</dd></dl></li>
+  <li class="relationship" data-from="0" data-to="2">
+    <span class="type">Friend Of</span>
+  </li>
+  <li class="relationship" data-from="2" data-to="1">
+    <span class="type">Has Read</span><dl class="properties"><dt>date</dt><dd>Dec-05</dd><dt>rating</dt><dd>5</dd></dl></li>
+  <li class="relationship" data-from="2" data-to="0">
+    <span class="type">Friend Of</span>
+  </li>
+</ul></figure>
+</section>
+
+<section class="slide">
+<h2>(Graphs)-[:HATE]&#8594;(Text-Files)</h2>
+<div class="ulist">
+<ul>
+<li class="slide">It&#8217;s the 1000 words</li>
+<li class="slide">Single dimensional</li>
+<li class="slide">No graphics</li>
+<li class="slide">Verbose</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>But Ascii-Art Rocks</h2>
+<div class="ulist">
+<ul>
+<li class="slide">Turn text into pictures</li>
+<li class="slide">The Power of Symbols</li>
+<li class="slide">Graph Patterns Made easy</li>
+<li class="slide">Hacker Friendly</li>
+<li class="slide">Diffs, VCS</li>
+</ul>
+</div>
+</section>
+
+<section class="slide canvas-image" style="background-image: url(img/blank.png)">
+<h1>Cypher</h1>
+</section>
+
+<section class="slide">
+<h2>(Cypher)-[:USES]&#8594;(Ascii-Art)</h2>
+<div class="ulist">
+<ul>
+<li class="slide">Declarative Graph Query Language</li>
+<li class="slide">Graph Pattern Matching</li>
+<li class="slide">Humane, Readable</li>
+<li class="slide">Expressive</li>
+<li class="slide">Read and Write Graphs</li>
+<li class="slide">Tabular Results</li>
+</ul>
+</div>
+</section>
+
+<section class="slide canvas-image" style="background-image: url(img/pattern2.gif)">
+
+</section>
+
+<section class="slide canvas-image" style="background-image: url(img/pattern1.gif)">
+
+</section>
+
+<section class="slide">
+<h2>Cypher Query</h2>
+<section class="slide">
+<h3>Setup</h3>
+<div class="listingblock">
+<div class="content">
+<textarea class="code" mode="cypher">CREATE (neo:Company {name:"Neo"})-[:IN]-&gt;(:Country {tld:"SE"})
+CREATE (:Person {name:"Peter",age:40})-[:WORKS_AT]-&gt;(neo)
+CREATE (:Person {name:"Kenny",age:23})-[:WORKS_AT]-&gt;(neo)
+CREATE (:Person {name:"Kenny",age:23})-[:WORKS_AT]-&gt;(neo)
+CREATE (structr:Company {name:"Structr"})-[:IN]-&gt;(:Country {tld:"DE"})
+CREATE (:Person {name:"Axel",age:39})-[:WORKS_AT]-&gt;(structr)
+CREATE (:Person {name:"Christian",age:25})-[:WORKS_AT]-&gt;(structr)</textarea>
+</div>
+</div>
+</section>
+
+<section class="slide">
+<h3>Query</h3>
+<div class="listingblock">
+<div class="content">
+<textarea class="code" mode="cypher">// Count Hipsters by Country
+MATCH (p:Person)-[:WORKS_AT]-&gt;(:Company)-[:IN]-&gt;(c:Country)
+WHERE p.age &lt; 28
+RETURN c.tld, count(p) as hipsters</textarea>
+</div>
+</div>
+</section>
+</section>
+
+<section class="slide">
+<h2>How do you demo it?</h2>
+<div class="ulist">
+<ul>
+<li>We built our own sandbox</li>
+</ul>
+</div>
+
+<section class="slide">
+<h3>The Neo4j Console</h3>
+<iframe src="http://console.neo4j.org/r/cctayc" width="800" height="400"></iframe>
+</section>
+</section>
+
+<section class="slide">
+<h2>Console - Sandbox, a useful Tool</h2>
+<section class="slide">
+<h3>How does it work?</h3>
+<div class="ulist">
+<ul>
+<li class="slide">In-Memory throwaway Neo4j instances</li>
+<li class="slide">Simple Console UI with Graph Viz and Table Results</li>
+<li class="slide">One Click sharing</li>
+<li class="slide">Repl, SandBox, Bug-Reporter, Modeling Questions</li>
+<li class="slide">Tiny Webapp on Heroku</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h3>People love it</h3>
+
+</section>
+</section>
+
+<section class="slide canvas-image" style="background-image: url(img/Neo4jConsole.jpg)">
+
+</section>
+
+<section class="slide canvas-image" style="background-image: url(img/blank.png)">
+<h1>AsciiDoc</h1>
+</section>
+
+<section class="slide">
+<h2>AsciiDoc - the better Markup Language</h2>
+<div class="ulist">
+<ul>
+<li class="slide">Full Toolchain for book generation</li>
+<li class="slide">lots of options</li>
+<li class="slide">still easy to read text files</li>
+<li class="slide">generates html, pdf, text</li>
+<li class="slide">The Neo4j Manual is pure AsciiDoc goodness</li>
+<li class="slide">Has live queries with embedded Console</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>AsciiDoc Example (source)</h2>
+<div class="listingblock">
+<div class="content">
+<textarea class="code" mode="asciidoc">== Basic AsciiDoc formatting
+
+[width="50%",cols="1m,1a"]
+|===
+| \_Italic_ | _Italic_
+| \*Bold* | *Bold*
+| \`Monospace` | `Monospace`
+| `http://www.neo4j.org/` | http://www.neo4j.org/
+| `http://www.neo4j.org/[neo4j.org]` | http://www.neo4j.org/[neo4j.org]
+| `link:./?5956246[Link to a GraphGist]` | link:./?5956246[Link to a GraphGist]
+|===
+
+Headings:
+
+ = Heading 1
+ == Heading 2
+ === Heading 3
+
+Images:
+
+ image::http://assets.neo4j.org/img/still/cineasts.gif[]</textarea>
+</div>
+</div>
+</section>
+
+<section class="slide canvas-image" style="background-image: url(img/asciidoc_github.jpg)">
+<div class="paragraph canvas-caption"><p class="bottom-right">AsciiDoc Example (rendered source)</p></div>
+</section>
+
+<section class="slide canvas-image" style="background-image: url(img/asciidoc_gist.jpg)">
+<div class="paragraph canvas-caption"><p class="bottom-right">AsciiDoc Example (rendered)</p></div>
+</section>
+
+<section class="slide">
+<h2>AsciiDoctor - the better AsciiDoc</h2>
+<div class="ulist">
+<ul>
+<li class="slide">Reimplementation in Ruby (also jRuby)</li>
+<li class="slide"><strong>Much</strong> faster</li>
+<li class="slide">lots of extensions</li>
+<li class="slide">support for deck.js (you see it)</li>
+<li class="slide">Cross-Compiled to Javascript (Opal.js)</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>Focus, Michael</h2>
+<section class="slide">
+<h3>What was the question again?</h3>
+
+</section>
+
+<section class="slide">
+<h3>How to present a live, graph model?</h3>
+
+</section>
+</section>
+
+<section class="slide">
+<h2>What is a gist?</h2>
+<div class="ulist">
+<ul>
+<li>A useful snippet of information</li>
+<li>Easy to share, fork and change</li>
+<li>Nicely rendered and presented</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>What is a GraphGist?</h2>
+<section class="slide">
+<h3>an AsciiDoc file with:</h3>
+<div class="ulist">
+<ul>
+<li class="slide">a graph domain model (cypher)</li>
+<li class="slide">describing text and pictures</li>
+<li class="slide">some example queries checked against the model</li>
+<li class="slide">interactively executable (Cypher)</li>
+<li class="slide">a Neo4j Console for further exploration</li>
+</ul>
+</div>
+</section>
+</section>
+
+<section class="slide canvas-image" style="background-image: url(img/got_gist.jpg)">
+<div class="paragraph canvas-caption"><p class="bottom-right"><a href="http://gist.neo4j.org/?6029850">http://gist.neo4j.org/?6029850</a></p></div>
+</section>
+
+<section class="slide">
+<h2>What does it look like?</h2>
+<div class="listingblock small">
+<div class="content">
+<textarea class="code">= The Game of Thrones in Neo4j
+
+ image::http://maxdemarzidotcom.files.wordpress.com/2013/06/neoiscoming.jpg?w=580[]
+
+ == The setup
+
+ //hide
+ [source,cypher]
+ ----
+ CREATE
+ (_0 { name:"Westeros" }),
+ (_1 { house:"Tully" }),
+ ...
+ (_13 { name:"Danaerys" }),
+ ...
+ (_28 { name:"Tyrion" }),
+ _1-[:HOUSE]-&gt;_0,
+ _13-[:MARRIED_TO]-&gt;_12,
+ _14-[:CHILD_OF]-&gt;_8,
+ ...
+ _27-[:CHILD_OF]-&gt;_19, _28-[:CHILD_OF]-&gt;_10
+ ----
+
+ //graph
+
+ == Find all children of all houses
+
+ [source, cypher]
+ ----
+ MATCH (westeros)&lt;-[:HOUSE]-(house)&lt;-[:OF_HOUSE]-(ancestor), family=(ancestor)&lt;-[:CHILD_OF*0..]-(last)
+ WHERE westeros.name='Westeros'
+ RETURN house.house, collect(DISTINCT last.name)
+ ----
+
+ //table
+
+ == Find all the children of parents that are siblings
+
+ [source,cypher]
+ ----
+ MATCH (kid)-[:CHILD_OF]-&gt;(parent1)-[:CHILD_OF]-&gt;(ancestor)&lt;-[:CHILD_OF]-(parent2)&lt;-[:CHILD_OF]-(kid)
+ RETURN DISTINCT kid.name as name
+ ----
+
+ //table
+
+ Easy.</textarea>
+</div>
+</div>
+</section>
+
+<section class="slide">
+<h2>What does it look like? (setup)</h2>
+<div class="listingblock">
+<div class="content">
+<textarea class="code">= The Game of Thrones in Neo4j
+
+ image::http://maxdemarzidotcom.files.wordpress.com/2013/06/neoiscoming.jpg?w=580[]
+
+ == The setup
+
+ //hide
+ [source,cypher]
+ ----
+ CREATE
+ (_0 { name:"Westeros" }),
+ (_1 { house:"Tully" }),
+ ...
+ (_13 { name:"Danaerys" }),
+ ...
+ (_28 { name:"Tyrion" }),
+ _1-[:HOUSE]-&gt;_0,
+ _13-[:MARRIED_TO]-&gt;_12,
+ _14-[:CHILD_OF]-&gt;_8,
+ ...
+ _27-[:CHILD_OF]-&gt;_19, _28-[:CHILD_OF]-&gt;_10
+ ----
+
+ //graph</textarea>
+</div>
+</div>
+</section>
+
+<section class="slide">
+<h2>What does it look like? (use-case)</h2>
+<div class="listingblock">
+<div class="content">
+<textarea class="code">== Find all children of all houses
+
+  [source, cypher]
+  ----
+  MATCH (westeros)&lt;-[:HOUSE]-(house)&lt;-[:OF_HOUSE]-(ancestor), family=(ancestor)&lt;-[:CHILD_OF*0..]-(last)
+  WHERE westeros.name='Westeros'
+  RETURN house.house, collect(DISTINCT last.name)
+  ----
+
+  //table
+
+  //graph
+
+  Easy.</textarea>
+</div>
+</div>
+</section>
+
+<section class="slide canvas-image" style="background-image: url(img/graphgist.jpg)">
+
+</section>
+
+<section class="slide canvas-image" style="background-image: url(img/blank.png)">
+<h1>Power Tool Combo</h1>
+</section>
+
+<section class="slide">
+<h2>Power Combination of Cool Tools</h2>
+<div class="ulist">
+<ul>
+<li class="slide">AsciiDoc(tor) running in Browser with Opal.js</li>
+<li class="slide">Cypher</li>
+<li class="slide">Neo4j Console</li>
+<li class="slide">JavaScript (D3.js, jQuery)</li>
+<li class="slide">HTML5 (postMessage)</li>
+<li class="slide">GitHub Gists</li>
+</ul>
+</div>
+
+<section class="slide">
+<h3>The Glue? Javascript</h3>
+
+</section>
+</section>
+
+<section class="slide canvas-image" style="background-image: url(img/swiss-army-knife.jpg)">
+
+</section>
+
+<section class="slide">
+<h2>How does it work?</h2>
+<div class="olist arabic">
+<ol class="arabic">
+<li class="slide">
+Load Gist file from GitHub Gist / Url
+</li>
+<li class="slide">
+Render AsciiDoc to HTML5 on the fly
+</li>
+<li class="slide">
+Write to page / CSS
+</li>
+<li class="slide">
+Placeholder replacement
+</li>
+<li class="slide">
+Instantiate Console IFrame
+</li>
+<li class="slide">
+Find all setup- and use-case queries
+</li>
+<li class="slide">
+Send to Console, Check Results
+</li>
+<li class="slide">
+Render Results as Table or Graph
+</li>
+<li class="slide">
+Reset and Show Console
+</li>
+</ol>
+</div>
+</section>
+
+<section class="slide">
+<h2>Next Step ?</h2>
+<section class="slide">
+<h3>We have a great tool for model documentation</h3>
+
+</section>
+
+<section class="slide">
+<h3>Now we need some models, aka content</h3>
+
+</section>
+
+<section class="slide">
+<h3>Don&#8217;t make something up!</h3>
+
+</section>
+
+<section class="slide">
+<h3>Ask your users, your Community</h3>
+
+</section>
+</section>
+
+<section class="slide">
+<h2>Create a Challenge (or two)</h2>
+<section class="slide">
+<h3>First Challenge (September)</h3>
+<div class="ulist">
+<ul>
+<li>Give me anything</li>
+<li>Nice Prizes (Money, Books, T-Shirts, Tickets)</li>
+<li>Impressive <a href="http://blog.neo4j.org/2013/10/the-first-graphgist-challenge-completed.html">17 submissions in 4 weeks</a></li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h3>Winners</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<a href="http://gist.neo4j.org/?6619085">US Flights &amp; Airports</a> by Nicole White
+</li>
+<li>
+<a href="http://gist.neo4j.org/?github-jotomo%2Fneo4j-gist-challenge%2F%2Flearning-graph%2Flearning-graph.adoc">Learning Graph</a> by Johannes Mockenhaupt
+</li>
+<li>
+<a href="http://gist.neo4j.org/?6506717">Chess Games</a> and Positions by Wes Freeman
+</li>
+</ol>
+</div>
+</section>
+</section>
+
+<section class="slide">
+<h2>Create a Challenge (or two)</h2>
+<section class="slide">
+<h3>Second Challenge (Winter Dec+Jan)</h3>
+<div class="ulist">
+<ul>
+<li>10 Categories from Education, Tranport up to "Show Off"</li>
+<li>Unbelievable <a href="https://github.com/neo4j-contrib/graphgist/wiki">65 submissions in 8 weeks w/ holidays</a></li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h3>Winners</h3>
+<div class="ulist">
+<ul>
+<li>We don&#8217;t know yet</li>
+<li>Looking forward to review</li>
+<li>Check them out</li>
+<li>Feel free to chime in</li>
+</ul>
+</div>
+</section>
+</section>
+
+<section class="slide">
+<h2>That&#8217;s it</h2>
+<section class="slide">
+<h3>Questions ?</h3>
+
+</section>
+
+<section class="slide">
+<h3>Thank You!</h3>
+
+</section>
+</section>
+
+<a class="deck-prev-link" href="#" title="Previous">&#8592;</a>
+<a class="deck-next-link" href="#" title="Next">&#8594;</a>
+<p class="deck-status">
+<span class="deck-status-current"></span>
+/
+<span class="deck-status-total"></span>
+</p>
+<form action="." class="goto-form" method="get">
+<label for="goto-slide">Go to Slide:</label>
+<input id="goto-slide" list="goto-datalist" name="slidenum" type="text">
+<datalist id="goto-data-list"></datalist>
+<input type="submit" value="Go">
+</form>
+<a class="deck-permalink" href="." title="Permalink to this slide">#</a>
+<script src="../../../asciidoc/deck.js/extensions/hash/deck.hash.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/scale/deck.scale.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/goto/deck.goto.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/navigation/deck.navigation.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/status/deck.status.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/arrows/home.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/arrows/d3.v3.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/arrows/arrows-graph-diagram.js"></script>
+<footer>© All Rights Reserved 2013 | Neo Technology, Inc.</footer>
+<img id="logo" src="img/Neo_Technology.jpg">
+<div class="slide">
+<h2>Status of the presenation</h2>
+<h3>Cypher queries execution</h3>
+<div>
+<div id="status"></div>
+<pre id="errors"></pre>
+</div>
+</div>
+<script src="../../../asciidoc/js/checkcypher.js"></script>
+<script>
+  (function($, deck, undefined) {
+    $.deck.defaults.keys['previous'] = [8, 33, 37, 39];
+    $.deck.defaults.keys['next'] = [13, 32, 34, 39];
+  
+    $.extend(true, $[deck].defaults, {
+        countNested: false
+    });
+  
+    $.deck('.slide');
+  })(jQuery, 'deck');
+</script>
+<style>
+  .slide.canvas-image {
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  display: -moz-box;
+  display: -webkit-box;
+  display: -ms-box;
+  display: box;
+  -moz-box-orient: vertical;
+  -webkit-box-orient: vertical;
+  -ms-box-orient: vertical;
+  box-orient: vertical;
+  -moz-box-align: start;
+  -webkit-box-align: start;
+  -ms-box-align: start;
+  box-align: start;
+  -moz-box-pack: start;
+  -webkit-box-pack: start;
+  -ms-box-pack: start;
+  box-pack: start;}
+  
+  .bottom-left {
+    left: 1%;
+    bottom: 20%; }
+  
+  .top-left {
+    left: 1%;
+    top: 20%; }
+  
+  .bottom-right {
+    right: 1%;
+    bottom: 20%; }
+  
+  .top-right {
+    right: 1%;
+    top: 20%; }
+  
+  .center-up {
+    right: 50%;
+    top: 1%;
+  }
+  
+  .center-down {
+    right: 50%;
+    bottom: 1%;
+  }
+  .canvas-image .canvas-caption p {
+    text-align: center;
+    padding-top: 0;
+    padding: 0;
+    -moz-transform: none;
+    -webkit-transform: none;
+    -o-transform: none;
+    -ms-transform: none;
+    transform: none;
+    display: inline;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    font-weight: bold;
+    font-size: 58px;
+    -webkit-box-shadow: 2px 2px 2px #000;
+    -moz-box-shadow: 2px 2px 2px #000;
+    box-shadow: 2px 2px 2px #000;
+    padding: 1rem;
+    color: white; }
+  kbd.keyseq { color: #555555; }
+  kbd:not(.keyseq) {
+    display: inline-block;
+    color: #222222;
+    font-size: 0.7em;
+    line-height: 1.4;
+    background-color: #F7F7F7;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset;
+    margin: -0.15em 0.15em 0 0.15em;
+    padding: 0.2em 0.6em;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  kbd kbd:first-child { margin-left: 0; }
+  kbd kbd:last-child { margin-right: 0; }
+</style>
+</body>
+</html>

@@ -20,6 +20,7 @@
 <link href="../../asciidoc/deck.js/core/deck.core.css" rel="stylesheet">
 <link href="../../asciidoc/deck.js/extensions/hash/deck.hash.css" media="screen" rel="stylesheet">
 <link href="../../asciidoc/deck.js/extensions/scale/deck.scale.css" media="screen" rel="stylesheet">
+<link href="../../asciidoc/deck.js/extensions/goto/deck.goto.css" media="screen" rel="stylesheet">
 <link href="../../asciidoc/deck.js/extensions/navigation/deck.navigation.css" media="screen" rel="stylesheet">
 <link href="../../asciidoc/deck.js/extensions/status/deck.status.css" media="screen" rel="stylesheet">
 <link href="../../asciidoc/deck.js/themes/style/neotech.css" media="screen" rel="stylesheet">
@@ -207,9 +208,16 @@ The console is set up after the executions, with an empty database, for the read
 /
 <span class="deck-status-total"></span>
 </p>
+<form action="." class="goto-form" method="get">
+<label for="goto-slide">Go to Slide:</label>
+<input id="goto-slide" list="goto-datalist" name="slidenum" type="text">
+<datalist id="goto-data-list"></datalist>
+<input type="submit" value="Go">
+</form>
 <a class="deck-permalink" href="." title="Permalink to this slide">#</a>
 <script src="../../asciidoc/deck.js/extensions/hash/deck.hash.js"></script>
 <script src="../../asciidoc/deck.js/extensions/scale/deck.scale.js"></script>
+<script src="../../asciidoc/deck.js/extensions/goto/deck.goto.js"></script>
 <script src="../../asciidoc/deck.js/extensions/navigation/deck.navigation.js"></script>
 <script src="../../asciidoc/deck.js/extensions/status/deck.status.js"></script>
 <script src="../../asciidoc/deck.js/extensions/arrows/home.js"></script>
@@ -225,10 +233,6 @@ The console is set up after the executions, with an empty database, for the read
 <pre id="errors"></pre>
 </div>
 </div>
-<script>
-  d3.selectAll("figure.graph-diagram")
-                        .call(gd.figure().scaling(gd.scaling.centerOrScaleDiagramToFitWindow));
-</script>
 <script src="../../asciidoc/js/checkcypher.js"></script>
 <script>
   (function($, deck, undefined) {

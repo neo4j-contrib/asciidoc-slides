@@ -6,5 +6,6 @@
     - if has_role? 'title'
       %h1=title
     - else
-      %h2=title
+      - header=%(<h#{@level+1}>#{title}</h#{@level+1}>)
+      =header
     =content.chomp

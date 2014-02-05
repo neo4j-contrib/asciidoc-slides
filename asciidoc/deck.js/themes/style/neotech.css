@@ -225,7 +225,7 @@ h1, .vcenter {
 }
 
 h2 {
-    font-size: 2.25em;
+    font-size: 3em;
     font-weight: bold;
     padding-top: .5em;
     margin: 0 0 .66666em 0;
@@ -233,13 +233,13 @@ h2 {
 }
 
 h3 {
-    font-size: 1.4375em;
+    font-size: 2em;
     font-weight: bold;
     margin-bottom: .30435em;
 }
 
 h4 {
-    font-size: 1.25em;
+    font-size: 1.5em;
     font-weight: bold;
     margin-bottom: .25em;
 }
@@ -283,6 +283,7 @@ em {
 
 li {
     padding: .25em 0;
+    font-size: 2em;
     vertical-align: middle;
 }
 

@@ -66,8 +66,6 @@
       %link(rel='stylesheet' media='screen' href="#{deckjs_dir}/themes/style/#{attr :deckjs_theme, 'web-2.0'}.css")
     - if attr? :deckjs_transition != 'none'
       %link(rel='stylesheet' media='screen' href="#{deckjs_dir}/themes/transition/#{attr :deckjs_transition, 'fade'}.css")
-    - else
-      %link(rel='stylesheet' media='screen' href="#{deckjs_dir}/themes/transition/horizontal-slide.css")
     - if attr? :customcss
       %link(rel='stylesheet' href="#{:customcss}.css")
     %link(rel='stylesheet' media='print' href='#{deckjs_dir}/core/print.css')
