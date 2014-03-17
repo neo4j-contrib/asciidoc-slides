@@ -77,7 +77,7 @@ RETURN r.roles
 
 [.labslide]
 == Lab
-=== Change Kevin Bacon’s role in Mystic River from “Sean Dev” to “Sean Devine””
+=== Change Kevin Bacon’s role in Mystic River  from “Sean Dev” to “Sean Devine”
 
 [source,cypher,options="step"]
 ----
