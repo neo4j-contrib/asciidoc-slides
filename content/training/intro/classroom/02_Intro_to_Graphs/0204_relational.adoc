@@ -24,7 +24,7 @@ image::{img}/rel_graph5.png[]
 
 image::{img}/rel_graph6.jpg[]
 
-== Nodes, Relationsihips and ...
+== Nodes, Relationships and ...
 
 image::{img}/rel_graph7.jpg[]
 

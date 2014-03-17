@@ -5,6 +5,6 @@
 
 [source,cypher,options="step"]
 ----
-MATCH (a)-[:ACTED_IN]->(m)<-[:DIRECTED]-(d)
-RETURN a.name, m.title, d.name;
+MATCH (a)-[:ACTED_IN]->(m)<-[:DIRECTED]-(a)
+RETURN a.name, m.title;
 ----
