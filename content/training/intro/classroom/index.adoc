@@ -19,6 +19,7 @@
 :logo: {img}/Neo_Technology.jpg
 :blank:
 :goto:
+:menu:
 :toc:
 :split:
 
