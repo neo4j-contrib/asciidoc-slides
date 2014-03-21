@@ -1,0 +1,1 @@
+./deck2pdf/bin/deck2pdf content/training/intro/classroom/index.html training.pdf
