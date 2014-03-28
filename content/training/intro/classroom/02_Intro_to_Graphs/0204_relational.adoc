@@ -1,33 +1,41 @@
 == Segue: Graphs in a Relational World
 
+== Tables
+
+image::{img}/rel_graph0.jpg[]
+
 == One table 
 
-image::{img}/rel_graph1.png[]
+image::{img}/rel_graph1.jpg[]
 
 == Another one
 
-image::{img}/rel_graph2.png[]
+image::{img}/rel_graph2.jpg[]
 
 == A link table
 
-image::{img}/rel_graph3.png[]
+image::{img}/rel_graph3.jpg[]
 
 == JOINing them
 
-image::{img}/rel_graph4.png[]
+image::{img}/rel_graph4.jpg[]
 
 == This is the data
 
-image::{img}/rel_graph5.png[]
+image::{img}/rel_graph5.jpg[]
 
 == Explicit as a graph
 
 image::{img}/rel_graph6.jpg[]
 
-== Nodes, Relationships and ...
+== Nodes
 
 image::{img}/rel_graph7.jpg[]
 
-== Nodes, Relationships and Labels.
+== Relationships and ...
 
 image::{img}/rel_graph8.jpg[]
+
+== Nodes, Relationships and Labels.
+
+image::{img}/rel_graph9.jpg[]

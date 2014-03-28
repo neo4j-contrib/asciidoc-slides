@@ -13,6 +13,7 @@
 :status:
 :customjs: ../../../../asciidoc/js/checkcypher.js
 :arrows:
+:split:
 :gist-source: https://raw.github.com/neo4j-contrib/gists/master/
 :footer: Copyright (c) 2014, Neo Technology, Inc. All rights reserved. The reproduction or distribution of this copyrighted work is strictly prohibited.
 :img: ../../img
