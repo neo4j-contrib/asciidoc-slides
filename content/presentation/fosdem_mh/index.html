@@ -21,6 +21,7 @@
 <link href="../../../asciidoc/deck.js/extensions/hash/deck.hash.css" media="screen" rel="stylesheet">
 <link href="../../../asciidoc/deck.js/extensions/scale/deck.scale.css" media="screen" rel="stylesheet">
 <link href="../../../asciidoc/deck.js/extensions/goto/deck.goto.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/menu/deck.menu.css" media="screen" rel="stylesheet">
 <link href="../../../asciidoc/deck.js/extensions/navigation/deck.navigation.css" media="screen" rel="stylesheet">
 <link href="../../../asciidoc/deck.js/extensions/status/deck.status.css" media="screen" rel="stylesheet">
 <link href="../../../asciidoc/deck.js/themes/style/neotech.css" media="screen" rel="stylesheet">
@@ -70,30 +71,15 @@
 
 <section class="slide">
 <h2>Question for you!</h2>
-<section class="slide">
-<h3>How to discuss/communicate your awesome graph domain model?</h3>
-
-</section>
-
-<section class="slide">
-<h3>What is an easy way to present it in a modern, interactive format?</h3>
-
-</section>
-
-<section class="slide">
-<h3>Draw it by hand?</h3>
-
-</section>
-
-<section class="slide">
-<h3>Need a running database?</h3>
-
-</section>
-
-<section class="slide">
-<h3>Or just a browser?</h3>
-
-</section>
+<div class="ulist">
+<ul>
+<li class="slide">How to discuss/communicate your awesome graph domain model?</li>
+<li class="slide">What is an easy way to present it in a modern, interactive format?</li>
+<li class="slide">Do you draw the model by hand?</li>
+<li class="slide">Do you need a running database?</li>
+<li class="slide">Or just a browser?</li>
+</ul>
+</div>
 </section>
 
 <section class="slide">
@@ -167,9 +153,33 @@
 <li class="slide">Turn text into pictures</li>
 <li class="slide">The Power of Symbols</li>
 <li class="slide">Graph Patterns Made easy</li>
-<li class="slide">Hacker Friendly</li>
+<li class="slide">Hacker and Mudder Friendly</li>
 <li class="slide">Diffs, VCS</li>
 </ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>But Ascii-Art Rocks</h2>
+<div class="listingblock small">
+<div class="content">
+<pre><code>_                         )      ((   ))     (
+(@)                      /|\      ))_((     /|\                        _
+|-|`\                   / | \    (/\|/\)   / | \                      (@)
+| | -------------------/--|-voV---\`|'/--Vov-|--\---------------------|-|
+|-|                         '^`   (o o)  '^`                          | |
+| |                               `\Y/'                               |-|
+|-|          Welcome to the Mages Lair Multiple User Dungeon          | |
+| |                    Welcome to the Addiction.                      |-|
+|-|                                                                   | |
+| |                                                                   |-|
+|_|___________________________________________________________________| |
+(@)               l   /\ /        ( (       \ /\   l                `\|-|
+                  l /   V          \ \       V   \ l                  (@)
+                  l/               _) )_          \I
+                                   `\ /'
+                                     `</code></pre>
+</div>
 </div>
 </section>
 
@@ -249,11 +259,11 @@ RETURN c.tld, count(p) as hipsters</textarea>
 <h3>How does it work?</h3>
 <div class="ulist">
 <ul>
+<li class="slide">Tiny Webapp on Heroku</li>
 <li class="slide">In-Memory throwaway Neo4j instances</li>
 <li class="slide">Simple Console UI with Graph Viz and Table Results</li>
 <li class="slide">One Click sharing</li>
 <li class="slide">Repl, SandBox, Bug-Reporter, Modeling Questions</li>
-<li class="slide">Tiny Webapp on Heroku</li>
 </ul>
 </div>
 </section>
@@ -281,7 +291,6 @@ RETURN c.tld, count(p) as hipsters</textarea>
 <li class="slide">still easy to read text files</li>
 <li class="slide">generates html, pdf, text</li>
 <li class="slide">The Neo4j Manual is pure AsciiDoc goodness</li>
-<li class="slide">Has live queries with embedded Console</li>
 </ul>
 </div>
 </section>
@@ -428,9 +437,7 @@ Images:
  RETURN DISTINCT kid.name as name
  ----
 
- //table
-
- Easy.</textarea>
+ //table</textarea>
 </div>
 </div>
 </section>
@@ -482,9 +489,7 @@ Images:
 
   //table
 
-  //graph
-
-  Easy.</textarea>
+  //graph</textarea>
 </div>
 </div>
 </section>
@@ -521,7 +526,7 @@ Images:
 </section>
 
 <section class="slide">
-<h2>How does it work?</h2>
+<h2>How does it work (Rendering)?</h2>
 <div class="olist arabic">
 <ol class="arabic">
 <li class="slide">
@@ -536,6 +541,14 @@ Write to page / CSS
 <li class="slide">
 Placeholder replacement
 </li>
+</ol>
+</div>
+</section>
+
+<section class="slide">
+<h2>How does it work (Queries) ?</h2>
+<div class="olist arabic">
+<ol class="arabic" start="5">
 <li class="slide">
 Instantiate Console IFrame
 </li>
@@ -576,32 +589,34 @@ Reset and Show Console
 <h3>Ask your users, your Community</h3>
 
 </section>
+
+<section class="slide">
+<h3>Create a Challenge (or two)</h3>
+
+</section>
 </section>
 
 <section class="slide">
-<h2>Create a Challenge (or two)</h2>
-<section class="slide">
-<h3>First Challenge (September)</h3>
+<h2>First Challenge (September)</h2>
 <div class="ulist">
 <ul>
-<li>Give me anything</li>
-<li>Nice Prizes (Money, Books, T-Shirts, Tickets)</li>
-<li>Impressive <a href="http://blog.neo4j.org/2013/10/the-first-graphgist-challenge-completed.html">17 submissions in 4 weeks</a></li>
+<li class="slide">Give me anything</li>
+<li class="slide">Nice Prizes (Money, Books, T-Shirts, Tickets)</li>
+<li class="slide">Impressive <a href="http://blog.neo4j.org/2013/10/the-first-graphgist-challenge-completed.html">17 submissions in 4 weeks</a></li>
 </ul>
 </div>
-</section>
 
 <section class="slide">
 <h3>Winners</h3>
 <div class="olist arabic">
 <ol class="arabic">
-<li>
+<li class="slide">
 <a href="http://gist.neo4j.org/?6619085">US Flights &amp; Airports</a> by Nicole White
 </li>
-<li>
+<li class="slide">
 <a href="http://gist.neo4j.org/?github-jotomo%2Fneo4j-gist-challenge%2F%2Flearning-graph%2Flearning-graph.adoc">Learning Graph</a> by Johannes Mockenhaupt
 </li>
-<li>
+<li class="slide">
 <a href="http://gist.neo4j.org/?6506717">Chess Games</a> and Positions by Wes Freeman
 </li>
 </ol>
@@ -610,41 +625,57 @@ Reset and Show Console
 </section>
 
 <section class="slide">
-<h2>Create a Challenge (or two)</h2>
-<section class="slide">
-<h3>Second Challenge (Winter Dec+Jan)</h3>
+<h2>Second Challenge (Winter Dec+Jan)</h2>
 <div class="ulist">
 <ul>
-<li>10 Categories from Education, Tranport up to "Show Off"</li>
-<li>Unbelievable <a href="https://github.com/neo4j-contrib/graphgist/wiki">65 submissions in 8 weeks w/ holidays</a></li>
+<li class="slide">10 Categories from Education, Tranport up to Advanced aka. "Show Off"</li>
+<li class="slide">Unbelievable <a href="https://github.com/neo4j-contrib/graphgist/wiki">65 submissions in 8 weeks w/ holidays</a></li>
+<li class="slide">High quality content</li>
+<li class="slide">Hard to choose winners</li>
 </ul>
 </div>
 </section>
 
 <section class="slide">
-<h3>Winners</h3>
+<h2>Winter Challenge Winners</h2>
 <div class="ulist">
 <ul>
-<li>We don&#8217;t know yet</li>
-<li>Looking forward to review</li>
-<li>Check them out</li>
-<li>Feel free to chime in</li>
+<li class="slide"><a href="http://blog.neo4j.org/2014/02/graph-gist-winter-challenge-winners.html">11 Winners in the categories</a>, just 3 examples</li>
+<li class="slide"><a href="http://gist.neo4j.org/?8021754">Organization Learning</a> by @luannem - covering your path through courses and certifications in a learning management system.</li>
+<li class="slide"><a href="http://gist.neo4j.org/?8139605">Single Malt Scotch Whisky</a> by @patbaumgartner is my personal favorite, you certainly know why</li>
+<li class="slide"><a href="http://gist.neo4j.org/?8526106">Amazon Web Services Global Infrastructure Graph</a> by @aidanjcasey represents all regions, zones, services and instance types as a graph</li>
 </ul>
 </div>
 </section>
+
+<section class="slide">
+<h2>What&#8217;s in for you?</h2>
+<div class="ulist">
+<ul>
+<li class="slide">Use them !</li>
+<li class="slide">GraphGists are fun</li>
+<li class="slide">They help you model, communicate and discuss your domain</li>
+<li class="slide">Great for Stackoverflow questions and answers</li>
+<li class="slide">Free to use, any AsciiDoc-File-URL will do</li>
+<li class="slide">Rendered in your Browser</li>
+</ul>
+</div>
 </section>
 
 <section class="slide">
-<h2>That&#8217;s it</h2>
-<section class="slide">
-<h3>Questions ?</h3>
-
+<h2>Can I win something?</h2>
+<div class="ulist">
+<ul>
+<li class="slide">Sure</li>
+<li class="slide">Submit your original GraphGist through this form <a href="http://bit.ly/graphgist">http://bit.ly/graphgist</a></li>
+<li class="slide">Get A T-Shirt</li>
+<li class="slide">Be famous</li>
+</ul>
+</div>
 </section>
 
-<section class="slide">
-<h3>Thank You!</h3>
-
-</section>
+<section class="slide canvas-image" style="background-image: url(img/blank.png)">
+<h1>Questions ? Thank You!</h1>
 </section>
 
 <a class="deck-prev-link" href="#" title="Previous">&#8592;</a>
@@ -664,6 +695,7 @@ Reset and Show Console
 <script src="../../../asciidoc/deck.js/extensions/hash/deck.hash.js"></script>
 <script src="../../../asciidoc/deck.js/extensions/scale/deck.scale.js"></script>
 <script src="../../../asciidoc/deck.js/extensions/goto/deck.goto.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/menu/deck.menu.js"></script>
 <script src="../../../asciidoc/deck.js/extensions/navigation/deck.navigation.js"></script>
 <script src="../../../asciidoc/deck.js/extensions/status/deck.status.js"></script>
 <script src="../../../asciidoc/deck.js/extensions/arrows/home.js"></script>

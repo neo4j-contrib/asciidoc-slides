@@ -9,6 +9,7 @@
 :source-highlighter: codemirror
 :navigation:
 :goto:
+:menu:
 :status:
 :arrows:
 :customjs: ../../../asciidoc/js/checkcypher.js
@@ -67,15 +68,12 @@
 
 == Question for you!
 
-=== How to discuss/communicate your awesome graph domain model?
-
-=== What is an easy way to present it in a modern, interactive format?
-
-=== Draw it by hand?
-
-=== Need a running database?
-
-=== Or just a browser?
+[options="step"]
+* How to discuss/communicate your awesome graph domain model?
+* What is an easy way to present it in a modern, interactive format?
+* Do you draw the model by hand?
+* Do you need a running database?
+* Or just a browser?
 
 == (Graphs)-[:LOVE]->(Whiteboards)
 
@@ -137,8 +135,31 @@
 * Turn text into pictures
 * The Power of Symbols
 * Graph Patterns Made easy
-* Hacker Friendly
+* Hacker and Mudder Friendly
 * Diffs, VCS
+
+== But Ascii-Art Rocks
+
+[role=small]
+----
+
+ _                         )      ((   ))     (
+(@)                      /|\      ))_((     /|\                        _
+|-|`\                   / | \    (/\|/\)   / | \                      (@)
+| | -------------------/--|-voV---\`|'/--Vov-|--\---------------------|-|
+|-|                         '^`   (o o)  '^`                          | |
+| |                               `\Y/'                               |-|
+|-|          Welcome to the Mages Lair Multiple User Dungeon          | |
+| |                    Welcome to the Addiction.                      |-|
+|-|                                                                   | |
+| |                                                                   |-|
+|_|___________________________________________________________________| |
+(@)               l   /\ /        ( (       \ /\   l                `\|-|
+                  l /   V          \ \       V   \ l                  (@)
+                  l/               _) )_          \I
+                                   `\ /'
+                                     `
+----
 
 [canvas-image="{img}/blank.png"]
 == Cypher
@@ -202,11 +223,12 @@ RETURN c.tld, count(p) as hipsters
 === How does it work?
 
 [options="step"]
+* Tiny Webapp on Heroku
 * In-Memory throwaway Neo4j instances
 * Simple Console UI with Graph Viz and Table Results
 * One Click sharing
 * Repl, SandBox, Bug-Reporter, Modeling Questions
-* Tiny Webapp on Heroku
+
 
 === People love it
 
@@ -228,7 +250,6 @@ RETURN c.tld, count(p) as hipsters
 * still easy to read text files
 * generates html, pdf, text
 * The Neo4j Manual is pure AsciiDoc goodness
-* Has live queries with embedded Console 
 
 == AsciiDoc Example (source)
 
@@ -356,8 +377,6 @@ http://gist.neo4j.org/?6029850[]
  ----
  
  //table
- 
- Easy.
 ----
 
 
@@ -408,8 +427,6 @@ http://gist.neo4j.org/?6029850[]
   //table
   
   //graph
-  
-  Easy.
 
 ----
 
@@ -438,13 +455,17 @@ http://gist.neo4j.org/?6029850[]
 [canvas-image="{img}/swiss-army-knife.jpg"]
 == Swiss Army Knife
 
-== How does it work?
+== How does it work (Rendering)?
 
 [options="step"]
 . Load Gist file from GitHub Gist / Url
 . Render AsciiDoc to HTML5 on the fly
 . Write to page / CSS
 . Placeholder replacement
+
+== How does it work (Queries) ?
+
+[options="step",start=5]
 . Instantiate Console IFrame
 . Find all setup- and use-case queries
 . Send to Console, Check Results
@@ -462,36 +483,60 @@ http://gist.neo4j.org/?6029850[]
 
 === Ask your users, your Community
 
-== Create a Challenge (or two)
+=== Create a Challenge (or two)
 
-=== First Challenge (September)
 
+== First Challenge (September)
+
+[options="step"]
 * Give me anything
 * Nice Prizes (Money, Books, T-Shirts, Tickets)
 * Impressive http://blog.neo4j.org/2013/10/the-first-graphgist-challenge-completed.html[17 submissions in 4 weeks]
 
 === Winners
 
+[options="step"]
 . http://gist.neo4j.org/?6619085[US Flights & Airports] by Nicole White
 . http://gist.neo4j.org/?github-jotomo%2Fneo4j-gist-challenge%2F%2Flearning-graph%2Flearning-graph.adoc[Learning Graph] by Johannes Mockenhaupt
 . http://gist.neo4j.org/?6506717[Chess Games] and Positions by Wes Freeman
 
-== Create a Challenge (or two)
+== Second Challenge (Winter Dec+Jan)
 
-=== Second Challenge (Winter Dec+Jan)
-
-* 10 Categories from Education, Tranport up to "Show Off"
+[options="step"]
+* 10 Categories from Education, Tranport up to Advanced aka. "Show Off"
 * Unbelievable https://github.com/neo4j-contrib/graphgist/wiki[65 submissions in 8 weeks w/ holidays]
+* High quality content
+* Hard to choose winners
 
-=== Winners
+== Winter Challenge Winners
 
-* We don't know yet
-* Looking forward to review
-* Check them out
-* Feel free to chime in
+[options="step"]
+* http://blog.neo4j.org/2014/02/graph-gist-winter-challenge-winners.html[11 Winners in the categories], just 3 examples
+* http://gist.neo4j.org/?8021754[Organization Learning] by @luannem - covering your path through courses and certifications in a learning management system.
+* http://gist.neo4j.org/?8139605[Single Malt Scotch Whisky] by @patbaumgartner is my personal favorite, you certainly know why
+* http://gist.neo4j.org/?8526106[Amazon Web Services Global Infrastructure Graph] by @aidanjcasey represents all regions, zones, services and instance types as a graph
 
+== What's in for you?
+
+[options="step"]
+* Use them !
+* GraphGists are fun
+* They help you model, communicate and discuss your domain
+* Great for Stackoverflow questions and answers
+* Free to use, any AsciiDoc-File-URL will do
+* Rendered in your Browser
+
+== Can I win something?
+
+[options="step"]
+* Sure
+* Submit your original GraphGist through this form http://bit.ly/graphgist
+* Get A T-Shirt
+* Be famous
+
+[canvas-image="{img}/blank.png"]
 == That's it
 
-=== Questions ?
-
-=== Thank You!
+++++
+<h1>Questions ? Thank You!</h1>
+++++
