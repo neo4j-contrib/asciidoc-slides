@@ -287,6 +287,10 @@ li {
     vertical-align: middle;
 }
 
+li ol li, li ul li {
+	font-size: 0.8em;
+}
+
 li > ol, li > ul {
     margin-bottom: inherit;
 }
