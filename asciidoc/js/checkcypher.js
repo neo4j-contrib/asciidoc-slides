@@ -17,8 +17,8 @@ function loadScript(url, callback) {
 var status = "Executing queries"
 
 var errors = [];
-$.getScript("../../../../asciidoc/js/presentation.js");
-$.getScript("../../../../asciidoc/js/jquery-ui-1.10.3.custom.min.js", function () {
+$.getScript("../../../asciidoc/js/presentation.js");
+$.getScript("../../../asciidoc/js/jquery-ui-1.10.3.custom.min.js", function () {
     init();
 });
 

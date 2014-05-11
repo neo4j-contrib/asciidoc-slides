@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+<meta content="Asciidoctor 0.1.4" name="generator">
+<title>Neo4j 2.0 (Graphs)-[:FOR]&#8594;(everyone)</title>
+<script src="../../../asciidoc/deck.js/jquery.min.js"></script>
+<script src="../../../asciidoc/deck.js/core/deck.core.js"></script>
+<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/codemirror/deck.codemirror.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/codemirror/themes/default.css" rel="stylesheet">
+<script src="../../../asciidoc/deck.js/extensions/codemirror/codemirror.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/deck.codemirror.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/mode/javascript/javascript.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/mode/css/css.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/cypher/deck.cypher.js"></script>
+<link href="../../../asciidoc/deck.js/extensions/cypher/deck.cypher.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/core/deck.core.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/hash/deck.hash.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/scale/deck.scale.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/goto/deck.goto.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/menu/deck.menu.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/navigation/deck.navigation.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/status/deck.status.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/themes/style/neotech.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/core/print.css" media="print" rel="stylesheet">
+<script src="../../../asciidoc/deck.js/modernizr.custom.js"></script>
+</head>
+<body class="deck-container article">
+<section class="slide" id="title-slide">
+<h1>Neo4j 2.0 (Graphs)-[:FOR]&#8594;(everyone)</h1>
+</section>
+<div id="preamble">
+<div class="sectionbody">
+<style type="text/css">
+.small {
+   font-size:0.6em;
+}
+.big {
+   font-size:1.2em;
+}
+</style>
+</div>
+</div>
+
+<section class="slide">
+<h2>Who the hell is this guy?</h2>
+<div class="ulist">
+<ul>
+<li>Michael Hunger</li>
+<li>Developer Evangelist Neo Technology</li>
+<li>Addicted to Graphs and helping People</li>
+<li>@mesirii | <a href="mailto:michael@neotechnology.com">michael@neotechnology.com</a></li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>What will he talk about?</h2>
+<div class="ulist">
+<ul>
+<li class="slide">Quick history of Neo4j</li>
+<li class="slide">Big changes in 2.0</li>
+<li class="slide">&#8230; and what they mean for you</li>
+<li class="slide">The road ahead</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>Question for you!</h2>
+<div class="ulist">
+<ul>
+<li class="slide">Have you used NoSQL DB&#8217;s? Yes!</li>
+<li class="slide">Have you used Graph Databases?</li>
+<li class="slide">Have you used Neo4j?</li>
+<li class="slide">Have you used Neo4j before 2.0?</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>A quick history of Neo4j</h2>
+<div class="ulist">
+<ul>
+<li class="slide">A small company in Sweden</li>
+<li class="slide">Bang</li>
+<li class="slide">0.x &#8230; small embeddable persistent graph library</li>
+<li class="slide">1.x &#8230; adding indexes, server, first stab of Cypher</li>
+<li class="slide">2.x &#8230; ease of use, data-model, optional schema, Browser</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>The old days</h2>
+<div class="ulist">
+<ul>
+<li class="slide">A "small" graph-library</li>
+<li class="slide">Add neo4j-kernel (+ indexes) to dependencies</li>
+<li class="slide">Use the Java APIs</li>
+<li class="slide">Write tedious Java "POJOs"</li>
+<li class="slide">Write your own wrappers</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>Java API</h2>
+<div class="listingblock big">
+<div class="content">
+<textarea class="code" mode="java">GraphDatabaseService db = new EmbeddedGraphDatabase(PATH);
+Node emil = db.createNode();
+emil.setProperty("name","Emil");
+Node johan = db.createNode();
+johan.setProperty("name","Johan");
+
+Relationship rel =
+  email.createRelationshipTo(johan, DynamicRelationshipType.withName("CO_FOUNDER"));
+rel.setProperty("state","mental");
+db.shutdown();</textarea>
+</div>
+</div>
+
+<section class="slide">
+<h3>That&#8217;s not enough</h3>
+
+</section>
+</section>
+
+<section class="slide">
+<h2>Java API (Transactional)</h2>
+<div class="listingblock big">
+<div class="content">
+<textarea class="code" mode="java">GraphDatabaseService db = new EmbeddedGraphDatabase(PATH);
+   Transaction tx = db.beginTx();
+   try {
+     Node emil = db.createNode();
+     emil.setProperty("name","Emil");
+     Node johan = db.createNode();
+     johan.setProperty("name","Johan");
+
+     Relationship rel =
+       email.createRelationshipTo(johan, DynamicRelationshipType.withName("CO_FOUNDER"));
+     rel.setProperty("state","mental");
+     tx.success();
+   } finally {
+     tx.finish();
+   }
+   db.shutdown();</textarea>
+</div>
+</div>
+</section>
+
+<section class="slide">
+<h2>Upping the Game - Neo4j 1.x</h2>
+<div class="ulist">
+<ul>
+<li class="slide">Indexing</li>
+<li class="slide">Neo4j Server</li>
+<li class="slide">Cypher</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>Indexing (now Legacy)</h2>
+<div class="listingblock big">
+<div class="content">
+<textarea class="code" mode="java">Index&lt;Node&gt; people = db.index().forNodes("People");
+  people.add(node, "name","Emil");
+  IndexHits&lt;Node&gt; result = people.get("name","Emil");
+
+  // Lucene leaks through
+  IndexHits&lt;Node&gt; result = people.get("name:E*");</textarea>
+</div>
+</div>
+</section>
+
+<section class="slide">
+<h2>Neo4j Server</h2>
+<div class="ulist">
+<ul>
+<li class="slide">embed database in jetty</li>
+<li class="slide">add startup scripts</li>
+<li class="slide">expose REST API for Nodes, Relationships, Traversals and Graph-Algos</li>
+<li class="slide">Plugin- and Extension Mechanisms</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>Add a Web-UI</h2>
+<div class="ulist">
+<ul>
+<li class="slide">Visualization</li>
+<li class="slide">Console / Shell</li>
+<li class="slide">Monitoring / Stats</li>
+</ul>
+</div>
+</section>
+
+<section class="slide canvas-image" style="background-image: url(img/server_visualization.jpg)">
+
+</section>
+
+<section class="slide">
+<h2>Neo4j Server Strengths</h2>
+<div class="ulist">
+<ul>
+<li class="slide">easier to use</li>
+<li class="slide">nice Web-UI (for that time)</li>
+<li class="slide">good for exploration and demonstration</li>
+<li class="slide">packaged experience</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>Great for people</h2>
+<div class="ulist">
+<ul>
+<li class="slide">that want to install / deploy a server</li>
+<li class="slide">that don&#8217;t use Java / JVM</li>
+<li class="slide">curl+json is good enough</li>
+<li class="slide">proliferation of non-JVM drivers (Ruby, Python, .Net, PHP, Perl)</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>Some Neo4j Rest Drivers</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="neo4j rest drivers" height="700" src="img/neo4j_rest_drivers.jpg">
+</div>
+</div>
+</section>
+
+<section class="slide">
+<h2>Neo4j Server Weaknesses</h2>
+<div class="ulist">
+<ul>
+<li class="slide">database primitives too fine-grained over the wire</li>
+<li class="slide">explorative REST too verbose</li>
+<li class="slide">no streaming (in the beginning - memory hog)</li>
+<li class="slide">GraphDatabaseService API over the REST API is a leaky abstraction</li>
+<li class="slide">chatty and slow (latency)</li>
+<li class="slide">mirroring an embedded API was never a good idea</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>Cypher for the Rescue</h2>
+<div class="ulist">
+<ul>
+<li class="slide">(people)-[:HATE|LOVE]&#8594;(SQL)</li>
+<li class="slide">(people)-[:KNOW|USE]&#8594;(SQL)</li>
+<li class="slide">steal good ideas from other query languages</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>Good ideas</h2>
+<div class="ulist">
+<ul>
+<li class="slide">Graph Patterns are easy for the brain</li>
+<li class="slide">Readability is king</li>
+<li class="slide">Declarative is good - power to the database</li>
+<li class="slide">Idempotent - expecting structures</li>
+<li class="slide">Easy to integrate - like SQL</li>
+<li class="slide">Execute complex tasks as a single operation <strong>inside</strong> the database</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>Cypher: Refresher</h2>
+<section class="slide">
+<h3>CREATE</h3>
+<div class="listingblock">
+<div class="content">
+<textarea class="code" mode="cypher">CREATE (y:Year {year: 2014})
+FOREACH (m in range(1,12) |
+   MERGE (y)-[:HAS_MONTH]-&gt;(:Month {month:m})
+)</textarea>
+</div>
+</div>
+</section>
+
+<section class="slide">
+<h3>MATCH</h3>
+<div class="listingblock">
+<div class="content">
+<textarea class="code" mode="cypher">MATCH (y:Year {year: 2014})-[:HAS_MONTH]-&gt;(m)-[:HAS_DAY]-&gt;(d),
+      (y)-[:HAS_WEEK]-&gt;(w)-[:HAS_DAY]-&gt;(d)
+WHERE m.month = 2
+RETURN w.week,collect(d)
+ORDER BY w.week ASC
+LIMIT 2</textarea>
+</div>
+</div>
+</section>
+</section>
+
+<section class="slide">
+<h2>Demo</h2>
+<iframe src="http://console.neo4j.org/r/cctayc" width="1500" height="600"></iframe>
+</section>
+
+<section class="slide">
+<h2>Cypher APIs</h2>
+<section class="slide">
+<h3>Embedded</h3>
+<div class="listingblock">
+<div class="content">
+<textarea class="code" mode="java">// re-use this reference
+ExecutionEngine cypher = new ExecutionEngine(gdb);
+
+String QUERY = "MATCH (u:User)-[FRIEND*2]-(friend2) WHERE u.name = {name} RETURN DISTINCT friend2.name";
+ExecutionResult result = cypher.execute(QUERY, map("name","Andrés"))
+
+for (Map&lt;String,Object&gt; row : result) {
+   String friend2 = row.get("friend2.name")
+}</textarea>
+</div>
+</div>
+</section>
+
+<section class="slide">
+<h3>Server API (2.0)</h3>
+<div class="listingblock">
+<div class="content">
+<textarea class="code">:POST /db/data/transaction[/commit] { statements: [
+ {statement: "MATCH (u:User)-[FRIEND*2]-(friend2) WHERE u.name = {name} RETURN DISTINCT friend2.name",
+  parameters: {name:"Andrés"}}
+ , ...
+]}</textarea>
+</div>
+</div>
+</section>
+</section>
+
+<section class="slide">
+<h2>Cypher Drivers (JVM)</h2>
+<div class="ulist">
+<ul>
+<li class="slide">Java - JDBC Driver (Java-Rest-Binding)</li>
+<li class="slide">Scala - AnormCypher</li>
+<li class="slide">Clojure - neocons</li>
+<li class="slide">(J)Ruby - neo4j.rb</li>
+</ul>
+</div>
+
+<section class="slide">
+<h3>Bigger List</h3>
+<div class="ulist">
+<ul>
+<li><a href="http://neo4j.org/drivers">http://neo4j.org/drivers</a></li>
+</ul>
+</div>
+</section>
+</section>
+
+<section class="slide">
+<h2>Cypher Drivers (Non-JVM)</h2>
+<div class="ulist">
+<ul>
+<li class="slide">Ruby - neography</li>
+<li class="slide">Python - py2neo, neo4j-rest-client</li>
+<li class="slide">Ruby - neo4j.rb, neography</li>
+<li class="slide">.Net - Neo4jClient</li>
+<li class="slide">PHP - Neo4jPHP</li>
+<li class="slide">Perl - REST::Neo4p</li>
+<li class="slide">&#8230; many more &#8230;</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>Big Leap Neo4j 2.0</h2>
+<div class="ulist">
+<ul>
+<li class="slide"><strong>first</strong> change to data model - Node-Labels</li>
+<li class="slide">(optional) schema</li>
+<li class="slide">revamped Neo4j-Browser</li>
+<li class="slide">new transactional HTTP-endpoint</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>Node-Labels</h2>
+<section class="slide">
+<h3>How do you add types to a graph?</h3>
+
+</section>
+
+<section class="slide">
+<h3>Answer 1: Cumbersomely</h3>
+<div class="ulist">
+<ul>
+<li class="slide">type nodes</li>
+<li class="slide">type properties</li>
+<li class="slide">type indexes</li>
+</ul>
+</div>
+
+<div class="ulist">
+<ul>
+<li class="slide">confuse and pollute the models</li>
+<li class="slide">complicate queries</li>
+<li class="slide">dense-nodes</li>
+</ul>
+</div>
+</section>
+</section>
+
+<section class="slide">
+<h2>Node-Labels</h2>
+<section class="slide">
+<h3>How do you add types to a graph?</h3>
+
+</section>
+
+<section class="slide">
+<h3>Answer 2: Labels</h3>
+<div class="ulist">
+<ul>
+<li class="slide">0..n labels for each Node</li>
+<li class="slide">built-in construct</li>
+<li class="slide">like a tag (keyword, email-tag)</li>
+<li class="slide">role in a context (:Person:Father:Employee:Developer)</li>
+<li class="slide">fast lookups by label, fast label checks</li>
+</ul>
+</div>
+</section>
+</section>
+
+<section class="slide">
+<h2>Labels in a Graph</h2>
+<div class="paragraph"><p><span class="image"><img alt="property_graph_model" height="700" src="img/property_graph_model.png"></span></p></div>
+</section>
+
+<section class="slide">
+<h2>Labels in Cypher</h2>
+<section class="slide">
+<h3>Create with labels</h3>
+<div class="listingblock big">
+<div class="content">
+<textarea class="code" mode="cypher">CREATE (me:Person:Employee {name:Michael})</textarea>
+</div>
+</div>
+</section>
+
+<section class="slide">
+<h3>Get-or-create with labels (&amp; unique constraint)</h3>
+<div class="listingblock big">
+<div class="content">
+<textarea class="code" mode="cypher">MERGE (me:Person {name:"Michael"})
+ON CREATE SET me:Father</textarea>
+</div>
+</div>
+</section>
+
+<section class="slide">
+<h3>Match, filter, update and return labels</h3>
+<div class="listingblock big">
+<div class="content">
+<textarea class="code" mode="cypher">MATCH (me:Person)
+WHERE me:Employee
+SET me:Developer
+RETURN labels(me)</textarea>
+</div>
+</div>
+</section>
+</section>
+
+<section class="slide">
+<h2>Optional Schema - Indexes</h2>
+<div class="ulist">
+<ul>
+<li>Remember manual indexing?</li>
+<li>Find starting points for graph traversals</li>
+<li>Now: real automatic indexes, based on labels</li>
+</ul>
+</div>
+
+<section class="slide">
+<h3>Create Index</h3>
+<div class="listingblock">
+<div class="content">
+<textarea class="code" mode="cypher">CREATE INDEX ON :Book(isbn)</textarea>
+</div>
+</div>
+</section>
+
+<section class="slide">
+<h3>Use Index</h3>
+<div class="listingblock">
+<div class="content">
+<textarea class="code" mode="cypher">MATCH (b:Book {isbn:"9783-86802-315-2"})&lt;-[:READ]-(reader)-[:READ]-&gt;(other)
+
+RETURN other.title,count(*)
+ORDER BY count(*) DESC
+LIMIT 10</textarea>
+</div>
+</div>
+</section>
+</section>
+
+<section class="slide">
+<h2>Optional Schema - Constraints</h2>
+<div class="ulist">
+<ul>
+<li>Unique Constraints, based on label and property</li>
+<li>Enforced globally and in cluster</li>
+<li>Uses index behind the scenes</li>
+</ul>
+</div>
+
+<section class="slide">
+<h3>Create Constraint</h3>
+<div class="listingblock">
+<div class="content">
+<textarea class="code" mode="cypher">CREATE CONSTRAINT ON (b:Book) ASSERT b.isbn IS UNIQUE;</textarea>
+</div>
+</div>
+</section>
+
+<section class="slide">
+<h3>Use Constraint</h3>
+<div class="listingblock">
+<div class="content">
+<textarea class="code" mode="cypher">MERGE (b:Book {isbn:"9783-86802-315-2"})
+ON CREATE SET b.title = "Neo4j 2.0 – Eine Graphdatenbank für alle",
+              b.url = "http://bit.ly/das-buch"</textarea>
+</div>
+</div>
+</section>
+</section>
+
+<section class="slide">
+<h2>New Neo4j 2.0 Hand!-Book (German)</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="neo4j buch" src="img/neo4j_buch.png" width="400">
+</div>
+</div>
+
+<div class="paragraph"><p><a href="http://bit.ly/das-buch">http://bit.ly/das-buch</a></p></div>
+
+<div class="paragraph"><p>Or visit our booth for a free printed copy.</p></div>
+</section>
+
+<section class="slide">
+<h2>Neo4j Browser</h2>
+<div class="ulist">
+<ul>
+<li>Existing UI was not hipster enough - Rewrite in Angular, D3</li>
+<li>Helpful guides and exploratory Tools</li>
+<li><p>
+Developer Workbench<div class="ulist">
+<ul>
+<li>Create Cypher scripts</li>
+<li>Render, visualize results</li>
+<li>Store frequently used queries</li>
+</ul>
+</div></p></li>
+</ul>
+</div>
+</section>
+
+<section class="slide canvas-image" style="background-image: url(img/neo4j_browser.png)">
+
+</section>
+
+<section class="slide canvas-image" style="background-image: url(img/browser_get_some_data.png)">
+
+</section>
+
+<section class="slide">
+<h2>Transactional HTTP Endpoint</h2>
+<section class="slide">
+<h3>Before</h3>
+<div class="ulist">
+<ul>
+<li class="slide">single Cypher statement per request</li>
+<li class="slide">manual batching</li>
+<li class="slide">verbose response</li>
+<li class="slide">no streaming by default</li>
+<li class="slide">one transaction per http request</li>
+</ul>
+</div>
+</section>
+</section>
+
+<section class="slide">
+<h2>Transactional HTTP Endpoint</h2>
+<section class="slide">
+<h3>Now: Transactional Endpoint</h3>
+<div class="ulist">
+<ul>
+<li class="slide">POST to /db/data/transaction[/commit]</li>
+<li class="slide">multiple statements with parameters</li>
+<li class="slide">returns Transaction-URL</li>
+<li class="slide">continue to read from/write to that URL</li>
+<li class="slide">commit, rollback at the end</li>
+<li class="slide">timeout</li>
+</ul>
+</div>
+</section>
+</section>
+
+<section class="slide canvas-image" style="background-image: url(img/blank.png)">
+<h1>Demo Time</h1>
+</section>
+
+<section class="slide">
+<h2>Next Step Neo4j: 2.1</h2>
+<div class="ulist">
+<ul>
+<li class="slide"><p>
+Import all the things<div class="ulist">
+<ul>
+<li>LOAD CSV</li>
+<li>High-Volume Import (internally)</li>
+</ul>
+</div></p></li>
+<li class="slide">New Cypher Query-Planner (Ronja)</li>
+<li class="slide">HA Improvements</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>The Road Ahead - Neo4j 2.x</h2>
+<div class="ulist">
+<ul>
+<li class="slide">New query planner and runtime for Cypher (Ronja)</li>
+<li class="slide">Simplification &amp; Speedup Transaction-Handling</li>
+<li class="slide">Big Data</li>
+<li class="slide">Performance</li>
+<li class="slide">Integration</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>The Road Ahead - Neo4j 2.x</h2>
+<section class="slide">
+<h3>Transaction Handling</h3>
+<div class="ulist">
+<ul>
+<li class="slide">Move JTA to separate module</li>
+<li class="slide">Less Overhead with Index-Integration</li>
+<li class="slide">Batch-Write-Transactions</li>
+<li class="slide">Faster Lock-Manager</li>
+</ul>
+</div>
+</section>
+</section>
+
+<section class="slide">
+<h2>The Road Ahead - Neo4j 2.x</h2>
+<section class="slide">
+<h3>Big Data</h3>
+<div class="ulist">
+<ul>
+<li class="slide">Currently: Artificial Limit 35 bit (35bn)</li>
+<li class="slide">Increase to 40 bit (1tn)</li>
+<li class="slide">Vertex Centric Processing</li>
+<li class="slide">High-Volume Imports</li>
+</ul>
+</div>
+</section>
+</section>
+
+<section class="slide">
+<h2>The Road Ahead - Neo4j 2.x</h2>
+<section class="slide">
+<h3>Kernel Improvements</h3>
+<div class="ulist">
+<ul>
+<li class="slide">Page Cache</li>
+<li class="slide">Remove Object Cache</li>
+<li class="slide">Cursors</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h3>Indexing</h3>
+<div class="ulist">
+<ul>
+<li class="slide">Adding Fulltext- and Spatial Indexes</li>
+<li class="slide">Generalize Indexing for Predicates</li>
+</ul>
+</div>
+</section>
+</section>
+
+<section class="slide">
+<h2>The Road Ahead - Neo4j 2.x</h2>
+<section class="slide">
+<h3>Cypher</h3>
+<div class="ulist">
+<ul>
+<li class="slide"><p>
+New Query Planner<div class="ulist">
+<ul>
+<li>incremental plan building</li>
+<li>using statistics</li>
+</ul>
+</div></p></li>
+<li class="slide">New Runtime (using byte-code generation)</li>
+<li class="slide">User Defined Functions</li>
+</ul>
+</div>
+</section>
+</section>
+
+<section class="slide canvas-image" style="background-image: url(img/blank.png)">
+<h1>Questions ? Thank You!</h1>
+</section>
+
+<a class="deck-prev-link" href="#" title="Previous">&#8592;</a>
+<a class="deck-next-link" href="#" title="Next">&#8594;</a>
+<p class="deck-status">
+<span class="deck-status-current"></span>
+/
+<span class="deck-status-total"></span>
+</p>
+<form action="." class="goto-form" method="get">
+<label for="goto-slide">Go to Slide:</label>
+<input id="goto-slide" list="goto-datalist" name="slidenum" type="text">
+<datalist id="goto-data-list"></datalist>
+<input type="submit" value="Go">
+</form>
+<a class="deck-permalink" href="." title="Permalink to this slide">#</a>
+<script src="../../../asciidoc/deck.js/extensions/hash/deck.hash.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/scale/deck.scale.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/goto/deck.goto.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/menu/deck.menu.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/navigation/deck.navigation.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/status/deck.status.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/arrows/home.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/arrows/d3.v3.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/arrows/arrows-graph-diagram.js"></script>
+<footer>© All Rights Reserved 2013 | Neo Technology, Inc.</footer>
+<img id="logo" src="img/Neo_Technology.jpg">
+<div class="slide">
+<h2>Status of the presenation</h2>
+<h3>Cypher queries execution</h3>
+<div>
+<div id="status"></div>
+<pre id="errors"></pre>
+</div>
+</div>
+<script src="../../../asciidoc/js/checkcypher.js"></script>
+<script>
+  (function($, deck, undefined) {
+    $.deck.defaults.keys['previous'] = [8, 33, 37, 39];
+    $.deck.defaults.keys['next'] = [13, 32, 34, 39];
+  
+    $.extend(true, $[deck].defaults, {
+        countNested: false
+    });
+  
+    $.deck('.slide');
+  })(jQuery, 'deck');
+</script>
+<style>
+  .slide.canvas-image {
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  display: -moz-box;
+  display: -webkit-box;
+  display: -ms-box;
+  display: box;
+  -moz-box-orient: vertical;
+  -webkit-box-orient: vertical;
+  -ms-box-orient: vertical;
+  box-orient: vertical;
+  -moz-box-align: start;
+  -webkit-box-align: start;
+  -ms-box-align: start;
+  box-align: start;
+  -moz-box-pack: start;
+  -webkit-box-pack: start;
+  -ms-box-pack: start;
+  box-pack: start;}
+  
+  .bottom-left {
+    left: 1%;
+    bottom: 20%; }
+  
+  .top-left {
+    left: 1%;
+    top: 20%; }
+  
+  .bottom-right {
+    right: 1%;
+    bottom: 20%; }
+  
+  .top-right {
+    right: 1%;
+    top: 20%; }
+  
+  .center-up {
+    right: 50%;
+    top: 1%;
+  }
+  
+  .center-down {
+    right: 50%;
+    bottom: 1%;
+  }
+  .canvas-image .canvas-caption p {
+    text-align: center;
+    padding-top: 0;
+    padding: 0;
+    -moz-transform: none;
+    -webkit-transform: none;
+    -o-transform: none;
+    -ms-transform: none;
+    transform: none;
+    display: inline;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    font-weight: bold;
+    font-size: 58px;
+    -webkit-box-shadow: 2px 2px 2px #000;
+    -moz-box-shadow: 2px 2px 2px #000;
+    box-shadow: 2px 2px 2px #000;
+    padding: 1rem;
+    color: white; }
+  kbd.keyseq { color: #555555; }
+  kbd:not(.keyseq) {
+    display: inline-block;
+    color: #222222;
+    font-size: 0.7em;
+    line-height: 1.4;
+    background-color: #F7F7F7;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset;
+    margin: -0.15em 0.15em 0 0.15em;
+    padding: 0.2em 0.6em;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  kbd kbd:first-child { margin-left: 0; }
+  kbd kbd:last-child { margin-right: 0; }
+</style>
+</body>
+</html>

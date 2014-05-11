@@ -1,0 +1,400 @@
+= Neo4j for Java Developers
+:presenter: Neo Technology
+:twitter: neo4j
+:email: info@neotechnology.com
+:backend: deckjs
+:deckjsdir: ../../../asciidoc/deck.js
+:deckjs_theme: neotech
+:icons: font
+:source-highlighter: codemirror
+:navigation:
+:goto:
+:menu:
+:status:
+:arrows:
+:customjs: ../../../asciidoc/js/checkcypher.js
+:gist-source: https://raw.github.com/neo4j-contrib/gists/master/
+:footer: © All Rights Reserved 2013 | Neo Technology, Inc.
+:img: img
+:logo: {img}/Neo_Technology.jpg
+:allow-uri-read:
+:video:
+:docs-link: https://github.com/neo4j-contrib/asciidoc-slides[documentation]
+:download-link: https://github.com/neo4j-contrib/asciidoc-slides/archive/master.zip[download]
+:sectids!:
+:deckjs_transition: none
+
+++++
+<style type="text/css">
+.small {
+   font-size:0.6em;
+}
+.big {
+   font-size:1.2em;
+}
+</style>
+++++
+
+
+== Who the hell is this guy?
+
+* Michael Hunger
+* Developer Advocate Neo Technology
+* Love People and Graphs
+* @mesirii | michael@neotechnology.com
+
+
+
+
+
+
+
+
+
+== What will he talk about?
+
+[options="step"]
+* Quick history of Neo4j 
+* How you used Neo4j from Java
+* What changed with Cypher
+* How to access Neo4j Server from Java
+
+== Question for you!
+
+[options="step"]
+* Have you used NoSQL DB's?
+* Have you used Graph Databases?
+* Have you used Neo4j?
+* Have you used Neo4j from Java?
+
+== A quick history of Neo4j
+
+[options="step"]
+* A small company in Sweden
+* Bang
+* 0.x ... small embeddable persistent graph library
+* 1.x ... adding indexes, server, first stab of Cypher
+* 2.x ... ease of use, data-model, optional schema, Browser
+
+== The old days
+
+[options="step"]
+* Add neo4j-kernel (+ indexes) to dependencies
+* Use the Java APIs
+* Write tedious Java "POJOs" 
+* Write your own wrappers
+
+== Dependencies
+
+[source,xml,role=big]
+----
+<dependency>
+  <groupId>org.neo4j</groupId>
+  <artifactId>neo4j-kernel</artifactId>
+  <version>1.0</version>
+</dependency>
+----
+
+== Java API
+
+[source,java,role=big]
+----
+GraphDatabaseService db = new EmbeddedGraphDatabase(PATH);
+Node emil = db.createNode();
+emil.setProperty("name","Emil");
+Node johan = db.createNode();
+johan.setProperty("name","Johan");
+
+Relationship rel = 
+  email.createRelationshipTo(johan, DynamicRelationshipType.withName("CO_FOUNDER"));
+rel.setProperty("state","mental");
+db.shutdown();
+----
+
+=== That's not enough
+
+== Java API (Transactional)
+
+[source,java,role=big]
+----
+
+   GraphDatabaseService db = new EmbeddedGraphDatabase(PATH);
+   Transaction tx = db.beginTx();
+   try {
+     Node emil = db.createNode();
+     emil.setProperty("name","Emil");
+     Node johan = db.createNode();
+     johan.setProperty("name","Johan");
+
+     Relationship rel = 
+       email.createRelationshipTo(johan, DynamicRelationshipType.withName("CO_FOUNDER"));
+     rel.setProperty("state","mental");
+     tx.success(); 
+   } finally {
+     tx.finish(); 
+   }
+   db.shutdown();
+----
+
+=== Still not crazy enough? Watch this!
+
+== POJOs the hard way
+
+[source,java,role=big]
+----
+public class Person {
+
+   private final Node node;
+   public Person(Node node) {
+     this.node = node;
+   }
+   
+   public String getName() {
+     return (String)node.getProperty("name");
+   }
+
+   public void setName(String name) {
+     node.setProperty("name",name);
+   }
+   public Collection<Person> getFriends() {
+       Collection<Person> friends = new ArrayList<Person>();
+       for (Relationship r : node.getRelationships(FRIENDS)) {
+          friends.add(new Person(r.getOtherNode(node)));
+       }
+       return friends;
+   }
+}
+----
+
+=== Enough Boilerplate?
+
+== Wrappers all the way
+
+[options=step]
+* Tinkerpop + Gremlin
+* jo4neo
+* neo4j.rb (JRuby)
+* Spring Data Neo4j
+
+== Indexing (now Legacy)
+
+[source,java,role=big]
+----
+  Index<Node> people = db.index().forNodes("People");
+  people.add(node, "name","Emil");
+  IndexHits<Node> result = people.get("name","Emil");
+
+  // Lucene leaks through
+  IndexHits<Node> result = people.get("name:E*");
+----
+
+== Neo4j Server
+
+[options=step]
+* embed database in jetty
+* add startup scripts
+* expose REST API for Nodes, Relationships, Traversals and Graph-Algos
+* Plugin- and Extension Mechanisms
+
+== Add a Web-UI
+
+[options=step]
+  * Visualization
+  * Console / Shell
+  * Monitoring / Stats
+
+== Neo4j Server Strengths
+
+[options=step]
+* easier to use
+* nice Web-UI (for back then)
+* good for exploration and demonstration
+* packaged experience
+
+== Great for people
+[options=step]
+* that want to install / deploy a server
+* that don't use Java / JVM
+* curl+json is good enough
+* proliferation of non-JVM drivers (Ruby, Python, .Net, PHP, Perl)
+
+== Neo4j Server Weaknesses
+
+[options=step]
+* database primitives too fine-grained over the wire
+* explorative REST too verbose
+* no streaming (in the beginning - memory hog)
+* Java-REST-Binding is a leaky abstraction
+* GraphDatabaseService API over the REST API
+* chatty and slow (latency)
+* mirroring an embedded API was never a good idea
+
+== Cypher for the Rescue
+
+[options=step]
+* (people)-[:HATE|LOVE]->(SQL)
+* (people)-[:KNOW|USE]->(SQL)
+* some good ideas
+
+== Cypher: Good ideas
+
+[options=step]
+* Graph Patterns are easy for the brain
+* Readability
+* Declarative
+* Idempotent
+* Easier to integrate
+* Complex tasks in a single operation **inside** the database
+
+== Cypher: Refresher
+
+=== CREATE
+
+[source,cypher]
+----
+CREATE (y:Year {year: 2014})
+FOREACH (m in range(1,12) |
+   MERGE (y)-[:HAS_MONTH]->(:Month {month:m})
+)
+----
+
+=== MATCH
+
+[source,cypher]
+----
+MATCH (y:Year {year: 2014})-[:HAS_MONTH]->(m)-[:HAS_DAY]->(d),
+      (y)-[:HAS_WEEK]->(w)-[:HAS_DAY]->(d)
+WHERE m.month = 2
+RETURN w.week,collect(d)
+ORDER BY w.week ASC
+LIMIT 2
+----
+
+== Cypher APIs
+
+=== Embedded
+
+[source,java]
+----
+// keep one reference
+ExecutionEngine cypher = new ExecutionEngine(gdb);
+String QUERY = "MATCH (u:User)-[FRIEND*2]-(friend2) WHERE u.name = {name} RETURN DISTINCT friend2.name";
+
+ExecutionResult result = cypher.execute(QUERY, map("name","Andrés"))
+
+for (Map<String,Object> row : result) {
+   String friend2 = row.get("friend2.name")
+}
+----
+
+=== Server
+
+[source]
+----
+:POST /db/data/transaction[/commit] { statements: [
+ {statement: "MATCH (u:User)-[FRIEND*2]-(friend2) WHERE u.name = {name} RETURN DISTINCT friend2.name",
+  parameters: {name:"Andrés"}}
+ , ... 
+]}
+----
+
+== Cypher Drivers (JVM)
+
+[options=step]
+* Java - JDBC Driver (Java-Rest-Binding)
+* Scala - AnormCypher
+* Clojure - neocons
+* (J)Ruby - neo4j.rb
+
+=== Larger List
+
+
+* http://neo4j.org/drivers
+
+== Cypher Drivers (Non-JVM)
+
+[options=step]
+* Ruby - neography
+* Python - py2neo, neo4j-rest-client
+* Ruby - neo4j.rb, neography
+* .Net - Neo4jClient
+* PHP - Neo4jPHP
+* Perl - REST::Neo4p
+
+== Example: JDBC Driver
+
+[source,java]
+----
+Connection conn = driver.connect("jdbc:neo4j://localhost:7474", props);
+
+PreparedStatement ps = conn.prepareStatement("
+  MATCH user-[:KNOWS]->(friend) WHERE user.name = {1} RETURN friend.name as friends");
+
+ps.setLong(1,”Peter”);
+
+ResultSet rs = ps.executeQuery();
+
+while (rs.next()) {
+  rs.getString("friends");
+}
+----
+
+== Example: AnormCypher (Scala)
+
+[source,scala]
+----
+Neo4jREST.setServer("localhost", 7474, "/db/data/", "username", "password")
+
+// create
+Cypher("""
+   create ({name:"Peter"})-[:KNOWS]>({name:"Andres"})
+"""
+).execute()
+
+// query
+val req = Cypher("""
+  MATCH user-[:KNOWS]-(friend) WHERE user.name = {name} RETURN friend.name as friends
+""")
+
+// result-stream
+val stream = req().on("name" -> "Peter")
+
+// extract (map) results into a string list
+stream.map(row => {row[String]("friends")}).toList
+----
+
+== Example: NeoCons (Clojure)
+
+[source,scala]
+----
+(ns neocons.docs.examples
+  (:require [clojurewerkz.neocons.rest :as nr]
+            [clojurewerkz.neocons.rest.cypher :as cy]))
+
+(defn -main
+  [& args]
+  (nr/connect! "http://username:password@host:port/db/data/")
+  (let [query "MATCH user-[:KNOWS]-(friend) WHERE user.name = {name}  
+               RETURN friend.name as friends"
+        res (cy/tquery query {:name "Peter"})]
+    (println res)))
+----
+
+== A simplistic Java-Neo4j-Webapp 
+
+[options=step]
+* Uses Spark-Java
+* Uses the JDBC Driver
+* Uses jquery + d3
+* https://github.com/jexp/neo4j-movies/tree/master/src/main/java/org/neo4j/example/movies[Let's have a look]
+
+https://github.com/jexp/neo4j-movies[Repository]
+
+// the end
+
+[canvas-image="{img}/blank.png"]
+== That's it
+
+++++
+<h1>Questions ? Thank You!</h1>
+++++
