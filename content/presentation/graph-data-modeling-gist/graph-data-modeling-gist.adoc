@@ -1,0 +1,354 @@
+= Graph Data Modeling
+:presenter: Neo Technology
+:twitter: neo4j
+:email: info@neotechnology.com
+:backend: deckjs
+:deckjsdir: ../../../asciidoc/deck.js
+:deckjs_theme: neotech
+:icons: font
+:source-highlighter: codemirror
+:navigation:
+:goto:
+:menu:
+:status:
+:arrows:
+:customjs: ../../../asciidoc/js/checkcypher.js
+:gist-source: https://raw.github.com/neo4j-contrib/gists/master/
+:footer: © All Rights Reserved 2013 | Neo Technology, Inc.
+:img: ../../img
+:logo: {img}/Neo_Technology.jpg
+:allow-uri-read:
+:video:
+:docs-link: https://github.com/neo4j-contrib/asciidoc-slides[documentation]
+:download-link: https://github.com/neo4j-contrib/asciidoc-slides/archive/master.zip[download]
+:sectids!:
+:deckjs_transition: none
+
+++++
+<style type="text/css">
+.small {
+   font-size:0.6em;
+}
+.big {
+   font-size:1.2em;
+}
+.fullscreen {
+   height:100%;
+   z-index:-1;
+   left:0;
+   top:0;
+   position:absolute;
+}
+</style>
+++++
+
+
+== Who the hell is this guy?
+
+* Michael Hunger
+* Developer Advocate Neo Technology
+* Love People and Graphs
+* @mesirii | michael@neotechnology.com
+
+== Today
+
+* Graph Database
+* Graph Data Modeling
+* Interactive Graph-Documents = GraphGists
+* 3 Examples
+
+* Structr - Graph Application Framework
+* From Model Document to WebApp in 30 mins
+
+== Graph Databases
+
+[options=step]
+* fast for connected data
+* fine grained data model + transactions
+* pre-persist relationships
+* index-free adjacency
+* relationships are data
+* schema free
+
+== Look like this
+
+image:{img}/geomag.jpg[]
+
+== Building Blocks
+
+image:{img}/property_graph_model.png[]
+
+== Modeling Aspects
+
+[options=step]
+* Nodes + Labels
+* Relationships
+* Properties
+* Graph Structure (Normalization)
+* In-Graph-Indexes
+
+== Interactive Graph Documents
+
+image:{img}/got_gist.jpg[height=700]
+
+== Questions for you!
+
+[options=step]
+* How to discuss/communicate your awesome graph domain model?
+* What is an easy way to present it in a modern, interactive format?
+* Draw it by hand?
+* Need a running database?
+* Or just a browser?
+
+== What are GraphGists?
+
+[options=step]
+* Effortless interactive domain models with example queries
+* Literate Programming
+* Combination of Power Tools
+* Simple to write and use
+* Just cool?
+
+
+== What do you need?
+
+[options=step]
+* an AsciiDoc file with:
+* a graph domain model (cypher-setup)
+* describing prose and pictures
+* some example/use-case queries
+
+== GraphGist - Tools
+
+[options=step]
+* GitHub Gist
+* AsciiDoc + AsciiDoctor
+* Cypher-Web-Console
+* D3.js
+* jquery datatable
+* JavaScript
+
+== AsciiDoc
+
+[options=step]
+* The better Markdown (O'Reilly)
+* Asciidoctor is the better AsciiDoc
+* Reimplemented in Ruby (10x faster)
+* Cross-compiled to Javascript (Opal.js)
+
+== Cypher: Refresher
+
+=== CREATE
+
+[source,cypher,role=big]
+----
+CREATE (y:Year {year: 2014})
+FOREACH (m in range(1,12) |
+   MERGE (y)-[:HAS_MONTH]->(:Month {month:m})
+)
+----
+
+=== MATCH
+
+[source,cypher,role=big]
+----
+MATCH (y:Year {year: 2014})-[:HAS_MONTH]->(m)-[:HAS_DAY]->(d),
+      (y)-[:HAS_WEEK]->(w)-[:HAS_DAY]->(d)
+WHERE m.month = 2
+RETURN w.week,collect(d)
+ORDER BY w.week ASC
+LIMIT 2
+----
+
+== The Neo4j Console
+++++
+<iframe src="http://console.neo4j.org/r/GoT" width="1000" height="500"></iframe>
+++++
+
+== D3 Visualization
+
+image:{img}/d3_viz.jpg/[]
+
+== GraphGist - Syntax
+
+[source,asciidoc]
+----
+== Title
+
+Some prose explaining the model.
+
+image:http://assets.neo4j.org/img/neo4j_logo.png[]
+
+=== My Sample Graph
+
+//setup
+[source,cypher]
+ ----
+CREATE (u:User {name:"Michael"})-[:PRESENTS_AT]->(:Conference {name:"JAX",year:"Mainz"}),
+       (u)-[:PRESENTS_AT]->(:Conference {name:"Buzzwords",city:"Berlin"}),
+       (u)-[:PRESENTS_AT]->(:Conference {name:"GotoCon",city:"Amsterdam"})
+ ----
+//graph
+
+=== My Sample Use-Case
+
+[source,cypher]
+ ----
+MATCH (u:User)-[:PRESENTS_AT]->(c:Conference)
+RETURN u as speaker, collect(c.name) as conferences
+ ----
+//table
+
+//console
+
+----
+
+== GraphGist - Demo
+
+[options=step]
+* Create a GitHub Gist (or any accessible URL)
+* Paste link into http://gist.neo4j.org[]'s URL box
+* Done
+* Aehm: Iterably develop model
+
+== Modeling Approach
+
+. Use Case / User Story
+. State the question 
+. Identify nouns -> labels
+. Verbs -> Relationships
+. Graph Patterns from Question
+. Sample data in Cypher
+. Cypher Query from Patterns
+. rinse and repeat
+
+== 3 Sample Domain Models
+
+* http://gist.neo4j.org/?8526106[AWS Infrastructure]
+* http://gist.neo4j.org/?8021754[Organisational Learning]
+* http://gist.neo4j.org/?8681308[Issue Tracking]
+
+== AWS Infrastructure
+
+Wouldn’t it be nice if you could slice and dice through the entire AWS domain of services, data centres and prices all in one spot to optimise your AWS bill? Enter the AWS Global Infrastructure Graph!
+
+image:https://github.com/aidancasey/AWSGraphComp/blob/master/aws.jpg?raw=true[height=600]
+
+[role=big]
+== Question
+
+What is the cheapest compute optimised EC2 instance anywhere in North America?
+
+What is instance type X with the lowest price that different regions located of a continent Y offer?
+
+=== Entities
+
+[options=step,role=small]
+* Service
+* Type
+* Price
+* Region
+* Continent
+
+== Relationships = Graph Patterns
+
+* (:Region)-[:CHARGES]->(:Price)
+* (:Price)-[:FOR_INSTANCE]->(:EC2InstanceType)
+* (:Region)-[:IS_LOCATED_IN]->(:Continent)
+
+== Query for Use-Case
+
+[source,cypher,role=big]
+----
+MATCH (region)-[:IS_LOCATED_IN]->(:Continent{name:'North America'})
+      (region)-[:CHARGES]->(price),
+      (price)-[:FOR_INSTANCE]->(type:EC2InstanceType{family :'Compute optimized'})
+RETURN region, min(price.cost_per_hour) as hourly_cost, type.name as instance_type
+ORDER BY hourly_cost LIMIT 1;
+----
+
+== Use Case: Organisational Learning
+
+http://gist.neo4j.org/?8021754
+
+Learning Management Systems (LMS) are typically deployed in large organizations to support learning processes that align with business goals. These systems tie together their employees, organizations, certifications, courses, jobs in order to supplement business strategy. 
+
+image:https://dl.dropboxusercontent.com/u/15330610/LMS-model.jpg[height=600]
+
+== Question
+
+As an employee, if I am targeting position Y, what certifications for courses am I missing?
+
+=== Entities
+
+[options=step,role=small]
+* Person (employee)
+* Certification
+* Course
+* Work Experience
+* Position
+
+== Relationships
+
+* (:Person)-[:HOLDS]->(:Position)
+* (:Person)-[:COMPLETES]->(:Course)
+* (:Course)-[:AWARDS]->(:Certification)
+* (:Position)-[:REQUIRES]->(:Certification)
+
+== Query
+
+[source,cypher,role=big]
+----
+MATCH (position:Position {name:"Position2"})-[:REQUIRES]->(cert),
+      (cert)<-[:AWARDS]-(course:Course)
+WITH cert,course
+OPTIONAL MATCH (person:Person {name:"Person1"})-[r:COMPLETES]->(course)
+WHERE r IS NULL
+RETURN cert.name as missingCert
+----
+
+== Issue Tracking / Project Managment
+
+http://gist.neo4j.org/?8681308
+
+One aspect of this is efficiently tracking issues and ownership across several projects.
+
+image:http://i.imgur.com/lI2Uktr.png[height=600]
+
+== Use Case: Find all activities of a user by project
+
+=== Entities:
+
+[options=step,role=small]
+* User
+* Project
+* Activity
+
+== Relationships
+
+* (:User)-[:ASSIGNED_TO]->(:Issue)
+* (:Issue)-[:IN_PROJECT]->(:Project)
+* (Activity)-[:ASSOCIATED_WITH]->(:Issue)
+
+* (:User)-[:WORKS_ON]->(:Project) [inferred]
+
+== Query
+
+[source,cypher,role=big]
+----
+MATCH (u:User)-[:ASSIGNED_TO]->(:Issue)-[:IN_PROJECT]->(p:Project),
+      (a:Activity)-[:ASSOCIATED_WITH]->(:Issue)
+WHERE u.name = "Kevin Greene"
+RETURN p.name, collect(a.name) as activities
+----
+
+== And now? What else?
+
+[role=big]
+Go ahead, model your domain. It's easy
+
+If you bring a GraphGist by the end of the conference to our booth **you get a t-shirt**.
+
+And you can create an graph application quickly.
+
+**Enter Structr, Welcome Axel**

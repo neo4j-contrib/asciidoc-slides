@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+<meta content="Asciidoctor 0.1.4" name="generator">
+<title>Graph Data Modeling</title>
+<script src="../../../asciidoc/deck.js/jquery.min.js"></script>
+<script src="../../../asciidoc/deck.js/core/deck.core.js"></script>
+<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/codemirror/deck.codemirror.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/codemirror/themes/default.css" rel="stylesheet">
+<script src="../../../asciidoc/deck.js/extensions/codemirror/codemirror.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/deck.codemirror.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/mode/javascript/javascript.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/mode/css/css.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/cypher/deck.cypher.js"></script>
+<link href="../../../asciidoc/deck.js/extensions/cypher/deck.cypher.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/core/deck.core.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/hash/deck.hash.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/scale/deck.scale.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/goto/deck.goto.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/menu/deck.menu.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/navigation/deck.navigation.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/status/deck.status.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/themes/style/neotech.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/core/print.css" media="print" rel="stylesheet">
+<script src="../../../asciidoc/deck.js/modernizr.custom.js"></script>
+</head>
+<body class="deck-container article">
+<section class="slide" id="title-slide">
+<h1>Graph Data Modeling</h1>
+</section>
+<div id="preamble">
+<div class="sectionbody">
+<style type="text/css">
+.small {
+   font-size:0.6em;
+}
+.big {
+   font-size:1.2em;
+}
+.fullscreen {
+   height:100%;
+   z-index:-1;
+   left:0;
+   top:0;
+   position:absolute;
+}
+</style>
+</div>
+</div>
+
+<section class="slide">
+<h2>Who the hell is this guy?</h2>
+<div class="ulist">
+<ul>
+<li>Michael Hunger</li>
+<li>Developer Advocate Neo Technology</li>
+<li>Love People and Graphs</li>
+<li>@mesirii | <a href="mailto:michael@neotechnology.com">michael@neotechnology.com</a></li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>Today</h2>
+<div class="ulist">
+<ul>
+<li>Graph Database</li>
+<li>Graph Data Modeling</li>
+<li>Interactive Graph-Documents = GraphGists</li>
+<li>3 Examples</li>
+<li>Structr - Graph Application Framework</li>
+<li>From Model Document to WebApp in 30 mins</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>Graph Databases</h2>
+<div class="ulist">
+<ul>
+<li class="slide">fast for connected data</li>
+<li class="slide">fine grained data model + transactions</li>
+<li class="slide">pre-persist relationships</li>
+<li class="slide">index-free adjacency</li>
+<li class="slide">relationships are data</li>
+<li class="slide">schema free</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>Look like this</h2>
+<div class="paragraph"><p><span class="image"><img alt="geomag" src="../../img/geomag.jpg"></span></p></div>
+</section>
+
+<section class="slide">
+<h2>Building Blocks</h2>
+<div class="paragraph"><p><span class="image"><img alt="property_graph_model" src="../../img/property_graph_model.png"></span></p></div>
+</section>
+
+<section class="slide">
+<h2>Modeling Aspects</h2>
+<div class="ulist">
+<ul>
+<li class="slide">Nodes + Labels</li>
+<li class="slide">Relationships</li>
+<li class="slide">Properties</li>
+<li class="slide">Graph Structure (Normalization)</li>
+<li class="slide">In-Graph-Indexes</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>Interactive Graph Documents</h2>
+<div class="paragraph"><p><span class="image"><img alt="got_gist" height="700" src="../../img/got_gist.jpg"></span></p></div>
+</section>
+
+<section class="slide">
+<h2>Questions for you!</h2>
+<div class="ulist">
+<ul>
+<li class="slide">How to discuss/communicate your awesome graph domain model?</li>
+<li class="slide">What is an easy way to present it in a modern, interactive format?</li>
+<li class="slide">Draw it by hand?</li>
+<li class="slide">Need a running database?</li>
+<li class="slide">Or just a browser?</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>What are GraphGists?</h2>
+<div class="ulist">
+<ul>
+<li class="slide">Effortless interactive domain models with example queries</li>
+<li class="slide">Literate Programming</li>
+<li class="slide">Combination of Power Tools</li>
+<li class="slide">Simple to write and use</li>
+<li class="slide">Just cool?</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>What do you need?</h2>
+<div class="ulist">
+<ul>
+<li class="slide">an AsciiDoc file with:</li>
+<li class="slide">a graph domain model (cypher-setup)</li>
+<li class="slide">describing prose and pictures</li>
+<li class="slide">some example/use-case queries</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>GraphGist - Tools</h2>
+<div class="ulist">
+<ul>
+<li class="slide">GitHub Gist</li>
+<li class="slide">AsciiDoc + AsciiDoctor</li>
+<li class="slide">Cypher-Web-Console</li>
+<li class="slide">D3.js</li>
+<li class="slide">jquery datatable</li>
+<li class="slide">JavaScript</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>AsciiDoc</h2>
+<div class="ulist">
+<ul>
+<li class="slide">The better Markdown (O&#8217;Reilly)</li>
+<li class="slide">Asciidoctor is the better AsciiDoc</li>
+<li class="slide">Reimplemented in Ruby (10x faster)</li>
+<li class="slide">Cross-compiled to Javascript (Opal.js)</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>Cypher: Refresher</h2>
+<section class="slide">
+<h3>CREATE</h3>
+<div class="listingblock big">
+<div class="content">
+<textarea class="code" mode="cypher">CREATE (y:Year {year: 2014})
+FOREACH (m in range(1,12) |
+   MERGE (y)-[:HAS_MONTH]-&gt;(:Month {month:m})
+)</textarea>
+</div>
+</div>
+</section>
+
+<section class="slide">
+<h3>MATCH</h3>
+<div class="listingblock big">
+<div class="content">
+<textarea class="code" mode="cypher">MATCH (y:Year {year: 2014})-[:HAS_MONTH]-&gt;(m)-[:HAS_DAY]-&gt;(d),
+      (y)-[:HAS_WEEK]-&gt;(w)-[:HAS_DAY]-&gt;(d)
+WHERE m.month = 2
+RETURN w.week,collect(d)
+ORDER BY w.week ASC
+LIMIT 2</textarea>
+</div>
+</div>
+</section>
+</section>
+
+<section class="slide">
+<h2>The Neo4j Console</h2>
+<iframe src="http://console.neo4j.org/r/GoT" width="1000" height="500"></iframe>
+</section>
+
+<section class="slide">
+<h2>D3 Visualization</h2>
+<div class="paragraph"><p><span class="image"><img alt="d3_viz" src="../../img/d3_viz.jpg"></span></p></div>
+</section>
+
+<section class="slide">
+<h2>GraphGist - Syntax</h2>
+<div class="listingblock">
+<div class="content">
+<textarea class="code" mode="asciidoc">== Title
+
+Some prose explaining the model.
+
+image:http://assets.neo4j.org/img/neo4j_logo.png[]
+
+=== My Sample Graph
+
+//setup
+[source,cypher]
+ ----
+CREATE (u:User {name:"Michael"})-[:PRESENTS_AT]-&gt;(:Conference {name:"JAX",year:"Mainz"}),
+       (u)-[:PRESENTS_AT]-&gt;(:Conference {name:"Buzzwords",city:"Berlin"}),
+       (u)-[:PRESENTS_AT]-&gt;(:Conference {name:"GotoCon",city:"Amsterdam"})
+ ----
+//graph
+
+=== My Sample Use-Case
+
+[source,cypher]
+ ----
+MATCH (u:User)-[:PRESENTS_AT]-&gt;(c:Conference)
+RETURN u as speaker, collect(c.name) as conferences
+ ----
+//table
+
+//console</textarea>
+</div>
+</div>
+</section>
+
+<section class="slide">
+<h2>GraphGist - Demo</h2>
+<div class="ulist">
+<ul>
+<li class="slide">Create a GitHub Gist (or any accessible URL)</li>
+<li class="slide">Paste link into <a href="http://gist.neo4j.org">http://gist.neo4j.org</a>'s URL box</li>
+<li class="slide">Done</li>
+<li class="slide">Aehm: Iterably develop model</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>Modeling Approach</h2>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+Use Case / User Story
+</li>
+<li>
+State the question
+</li>
+<li>
+Identify nouns &#8594; labels
+</li>
+<li>
+Verbs &#8594; Relationships
+</li>
+<li>
+Graph Patterns from Question
+</li>
+<li>
+Sample data in Cypher
+</li>
+<li>
+Cypher Query from Patterns
+</li>
+<li>
+rinse and repeat
+</li>
+</ol>
+</div>
+</section>
+
+<section class="slide">
+<h2>3 Sample Domain Models</h2>
+<div class="ulist">
+<ul>
+<li><a href="http://gist.neo4j.org/?8526106">AWS Infrastructure</a></li>
+<li><a href="http://gist.neo4j.org/?8021754">Organisational Learning</a></li>
+<li><a href="http://gist.neo4j.org/?8681308">Issue Tracking</a></li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>AWS Infrastructure</h2>
+<div class="paragraph"><p>Wouldn’t it be nice if you could slice and dice through the entire AWS domain of services, data centres and prices all in one spot to optimise your AWS bill? Enter the AWS Global Infrastructure Graph!</p></div>
+
+<div class="paragraph"><p><span class="image"><img alt="aws" height="600" src="https://github.com/aidancasey/AWSGraphComp/blob/master/aws.jpg?raw=true"></span></p></div>
+</section>
+
+<section class="big slide">
+<h2>Question</h2>
+<div class="paragraph"><p>What is the cheapest compute optimised EC2 instance anywhere in North America?</p></div>
+
+<div class="paragraph"><p>What is instance type X with the lowest price that different regions located of a continent Y offer?</p></div>
+
+<section class="slide">
+<h3>Entities</h3>
+<div class="ulist small">
+<ul>
+<li class="slide">Service</li>
+<li class="slide">Type</li>
+<li class="slide">Price</li>
+<li class="slide">Region</li>
+<li class="slide">Continent</li>
+</ul>
+</div>
+</section>
+</section>
+
+<section class="slide">
+<h2>Relationships = Graph Patterns</h2>
+<div class="ulist">
+<ul>
+<li>(:Region)-[:CHARGES]&#8594;(:Price)</li>
+<li>(:Price)-[:FOR_INSTANCE]&#8594;(:EC2InstanceType)</li>
+<li>(:Region)-[:IS_LOCATED_IN]&#8594;(:Continent)</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>Query for Use-Case</h2>
+<div class="listingblock big">
+<div class="content">
+<textarea class="code" mode="cypher">MATCH (region)-[:IS_LOCATED_IN]-&gt;(:Continent{name:'North America'})
+      (region)-[:CHARGES]-&gt;(price),
+      (price)-[:FOR_INSTANCE]-&gt;(type:EC2InstanceType{family :'Compute optimized'})
+RETURN region, min(price.cost_per_hour) as hourly_cost, type.name as instance_type
+ORDER BY hourly_cost LIMIT 1;</textarea>
+</div>
+</div>
+</section>
+
+<section class="slide">
+<h2>Use Case: Organisational Learning</h2>
+<div class="paragraph"><p><a href="http://gist.neo4j.org/?8021754">http://gist.neo4j.org/?8021754</a></p></div>
+
+<div class="paragraph"><p>Learning Management Systems (LMS) are typically deployed in large organizations to support learning processes that align with business goals. These systems tie together their employees, organizations, certifications, courses, jobs in order to supplement business strategy.</p></div>
+
+<div class="paragraph"><p><span class="image"><img alt="LMS-model" height="600" src="https://dl.dropboxusercontent.com/u/15330610/LMS-model.jpg"></span></p></div>
+</section>
+
+<section class="slide">
+<h2>Question</h2>
+<div class="paragraph"><p>As an employee, if I am targeting position Y, what certifications for courses am I missing?</p></div>
+
+<section class="slide">
+<h3>Entities</h3>
+<div class="ulist small">
+<ul>
+<li class="slide">Person (employee)</li>
+<li class="slide">Certification</li>
+<li class="slide">Course</li>
+<li class="slide">Work Experience</li>
+<li class="slide">Position</li>
+</ul>
+</div>
+</section>
+</section>
+
+<section class="slide">
+<h2>Relationships</h2>
+<div class="ulist">
+<ul>
+<li>(:Person)-[:HOLDS]&#8594;(:Position)</li>
+<li>(:Person)-[:COMPLETES]&#8594;(:Course)</li>
+<li>(:Course)-[:AWARDS]&#8594;(:Certification)</li>
+<li>(:Position)-[:REQUIRES]&#8594;(:Certification)</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>Query</h2>
+<div class="listingblock big">
+<div class="content">
+<textarea class="code" mode="cypher">MATCH (position:Position {name:"Position2"})-[:REQUIRES]-&gt;(cert),
+      (cert)&lt;-[:AWARDS]-(course:Course)
+WITH cert,course
+OPTIONAL MATCH (person:Person {name:"Person1"})-[r:COMPLETES]-&gt;(course)
+WHERE r IS NULL
+RETURN cert.name as missingCert</textarea>
+</div>
+</div>
+</section>
+
+<section class="slide">
+<h2>Issue Tracking / Project Managment</h2>
+<div class="paragraph"><p><a href="http://gist.neo4j.org/?8681308">http://gist.neo4j.org/?8681308</a></p></div>
+
+<div class="paragraph"><p>One aspect of this is efficiently tracking issues and ownership across several projects.</p></div>
+
+<div class="paragraph"><p><span class="image"><img alt="lI2Uktr" height="600" src="http://i.imgur.com/lI2Uktr.png"></span></p></div>
+</section>
+
+<section class="slide">
+<h2>Use Case: Find all activities of a user by project</h2>
+<section class="slide">
+<h3>Entities:</h3>
+<div class="ulist small">
+<ul>
+<li class="slide">User</li>
+<li class="slide">Project</li>
+<li class="slide">Activity</li>
+</ul>
+</div>
+</section>
+</section>
+
+<section class="slide">
+<h2>Relationships</h2>
+<div class="ulist">
+<ul>
+<li>(:User)-[:ASSIGNED_TO]&#8594;(:Issue)</li>
+<li>(:Issue)-[:IN_PROJECT]&#8594;(:Project)</li>
+<li>(Activity)-[:ASSOCIATED_WITH]&#8594;(:Issue)</li>
+<li>(:User)-[:WORKS_ON]&#8594;(:Project) [inferred]</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>Query</h2>
+<div class="listingblock big">
+<div class="content">
+<textarea class="code" mode="cypher">MATCH (u:User)-[:ASSIGNED_TO]-&gt;(:Issue)-[:IN_PROJECT]-&gt;(p:Project),
+      (a:Activity)-[:ASSOCIATED_WITH]-&gt;(:Issue)
+WHERE u.name = "Kevin Greene"
+RETURN p.name, collect(a.name) as activities</textarea>
+</div>
+</div>
+</section>
+
+<section class="slide">
+<h2>And now? What else?</h2>
+<div class="paragraph big"><p>Go ahead, model your domain. It&#8217;s easy</p></div>
+
+<div class="paragraph"><p>If you bring a GraphGist by the end of the conference to our booth <strong>you get a t-shirt</strong>.</p></div>
+
+<div class="paragraph"><p>And you can create an graph application quickly.</p></div>
+
+<div class="paragraph"><p><strong>Enter Structr, Welcome Axel</strong></p></div>
+</section>
+
+<a class="deck-prev-link" href="#" title="Previous">&#8592;</a>
+<a class="deck-next-link" href="#" title="Next">&#8594;</a>
+<p class="deck-status">
+<span class="deck-status-current"></span>
+/
+<span class="deck-status-total"></span>
+</p>
+<form action="." class="goto-form" method="get">
+<label for="goto-slide">Go to Slide:</label>
+<input id="goto-slide" list="goto-datalist" name="slidenum" type="text">
+<datalist id="goto-data-list"></datalist>
+<input type="submit" value="Go">
+</form>
+<a class="deck-permalink" href="." title="Permalink to this slide">#</a>
+<script src="../../../asciidoc/deck.js/extensions/hash/deck.hash.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/scale/deck.scale.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/goto/deck.goto.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/menu/deck.menu.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/navigation/deck.navigation.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/status/deck.status.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/arrows/home.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/arrows/d3.v3.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/arrows/arrows-graph-diagram.js"></script>
+<footer>© All Rights Reserved 2013 | Neo Technology, Inc.</footer>
+<img id="logo" src="../../img/Neo_Technology.jpg">
+<div class="slide">
+<h2>Status of the presenation</h2>
+<h3>Cypher queries execution</h3>
+<div>
+<div id="status"></div>
+<pre id="errors"></pre>
+</div>
+</div>
+<script src="../../../asciidoc/js/checkcypher.js"></script>
+<script>
+  (function($, deck, undefined) {
+    $.deck.defaults.keys['previous'] = [8, 33, 37, 39];
+    $.deck.defaults.keys['next'] = [13, 32, 34, 39];
+  
+    $.extend(true, $[deck].defaults, {
+        countNested: false
+    });
+  
+    $.deck('.slide');
+  })(jQuery, 'deck');
+</script>
+<style>
+  .slide.canvas-image {
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  display: -moz-box;
+  display: -webkit-box;
+  display: -ms-box;
+  display: box;
+  -moz-box-orient: vertical;
+  -webkit-box-orient: vertical;
+  -ms-box-orient: vertical;
+  box-orient: vertical;
+  -moz-box-align: start;
+  -webkit-box-align: start;
+  -ms-box-align: start;
+  box-align: start;
+  -moz-box-pack: start;
+  -webkit-box-pack: start;
+  -ms-box-pack: start;
+  box-pack: start;}
+  
+  .bottom-left {
+    left: 1%;
+    bottom: 20%; }
+  
+  .top-left {
+    left: 1%;
+    top: 20%; }
+  
+  .bottom-right {
+    right: 1%;
+    bottom: 20%; }
+  
+  .top-right {
+    right: 1%;
+    top: 20%; }
+  
+  .center-up {
+    right: 50%;
+    top: 1%;
+  }
+  
+  .center-down {
+    right: 50%;
+    bottom: 1%;
+  }
+  .canvas-image .canvas-caption p {
+    text-align: center;
+    padding-top: 0;
+    padding: 0;
+    -moz-transform: none;
+    -webkit-transform: none;
+    -o-transform: none;
+    -ms-transform: none;
+    transform: none;
+    display: inline;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    font-weight: bold;
+    font-size: 58px;
+    -webkit-box-shadow: 2px 2px 2px #000;
+    -moz-box-shadow: 2px 2px 2px #000;
+    box-shadow: 2px 2px 2px #000;
+    padding: 1rem;
+    color: white; }
+  kbd.keyseq { color: #555555; }
+  kbd:not(.keyseq) {
+    display: inline-block;
+    color: #222222;
+    font-size: 0.7em;
+    line-height: 1.4;
+    background-color: #F7F7F7;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset;
+    margin: -0.15em 0.15em 0 0.15em;
+    padding: 0.2em 0.6em;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  kbd kbd:first-child { margin-left: 0; }
+  kbd kbd:last-child { margin-right: 0; }
+</style>
+</body>
+</html>
