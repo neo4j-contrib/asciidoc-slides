@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+<meta content="Asciidoctor 0.1.4" name="generator">
+<title>Importing Git History into Neo4j</title>
+<script src="../../../asciidoc/deck.js/jquery.min.js"></script>
+<script src="../../../asciidoc/deck.js/core/deck.core.js"></script>
+<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/codemirror/deck.codemirror.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/codemirror/themes/default.css" rel="stylesheet">
+<script src="../../../asciidoc/deck.js/extensions/codemirror/codemirror.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/deck.codemirror.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/mode/javascript/javascript.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/mode/css/css.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/cypher/deck.cypher.js"></script>
+<link href="../../../asciidoc/deck.js/extensions/cypher/deck.cypher.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/core/deck.core.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/hash/deck.hash.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/scale/deck.scale.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/goto/deck.goto.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/menu/deck.menu.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/navigation/deck.navigation.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/status/deck.status.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/themes/style/neotech.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/core/print.css" media="print" rel="stylesheet">
+<script src="../../../asciidoc/deck.js/modernizr.custom.js"></script>
+</head>
+<body class="deck-container article">
+<section class="slide" id="title-slide">
+<h1>Importing Git History into Neo4j</h1>
+</section>
+<div id="preamble">
+<div class="sectionbody">
+<style type="text/css">
+.small {
+   font-size:0.6em;
+}
+.big {
+   font-size:1.2em;
+}
+.center {
+   position:absolute;
+   left: 20%;
+   top: 20%;
+   bottom: 20%;
+}
+table, td {
+  border: none;
+}
+</style>
+</div>
+</div>
+
+<section class="slide">
+<h2>Who the hell is this guy?</h2>
+<div class="ulist">
+<ul>
+<li>Michael Hunger</li>
+<li>Developer Evangelist Neo Technology</li>
+<li>Addicted to Graphs and helping People</li>
+<li>@mesirii | <a href="mailto:michael@neotechnology.com">michael@neotechnology.com</a></li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>What will he talk about?</h2>
+<div class="ulist">
+<ul>
+<li class="slide">Importing at git log into Neo4j</li>
+<li class="slide">Compare two approaches</li>
+<li class="slide">Generating Cypher statements</li>
+<li class="slide">LOAD CSV</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>Question for you!</h2>
+<div class="ulist">
+<ul>
+<li class="slide">Have you used NoSQL DB&#8217;s? Yes!</li>
+<li class="slide">Have you used Graph Databases?</li>
+<li class="slide">Have you used Neo4j?</li>
+<li class="slide">Have you used Neo4j before 2.1?</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>It started with</h2>
+<blockquote class="twitter-tweet" lang="en"><p>View your <a href="https://twitter.com/search?q=%23git&amp;src=hash">#git</a> commit graph in <a href="https://twitter.com/neo4j">@neo4j</a> with this (q&amp;d) <a href="https://twitter.com/search?q=%23python&amp;src=hash">#python</a> script: <a href="http://t.co/ToPFxYO08a"><a href="http://t.co/ToPFxYO08a">http://t.co/ToPFxYO08a</a></a></p>&mdash; Paul Horn (@knutwalker) <a href="https://twitter.com/knutwalker/statuses/470277723106344960">May 24, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<div class="paragraph"><p><a href="https://gist.github.com/knutwalker/d0ef536ec6ceafba570a">https://gist.github.com/knutwalker/d0ef536ec6ceafba570a</a></p></div>
+
+<section class="slide">
+<h3>Thank you Paul!</h3>
+
+</section>
+</section>
+
+<section class="slide">
+<h2>The approach</h2>
+<div class="ulist">
+<ul>
+<li>Use git log formatted output<br>
+git log --format:format="<em>%H</em>\t'%ai'\t'%at'"</li>
+<li>one big cypher statement</li>
+<li>use identifiers to connect commits to their parents</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>Data Model</h2>
+<figure class="graph-diagram">
+<ul class="graph-diagram-markup" data-internal-scale="2.63" data-external-scale="0.75">
+  <li class="node" data-node-id="0" data-x="-266.9168926420667" data-y="-51.22776031494141">
+    <span class="caption">Commit</span><dl class="properties"><dt>sha1</dt><dd>3438789sdf98s</dd><dt>subject</dt><dd>"I did this"</dd><dt>author_email</dt><dd>foo@bar.com</dd><dt>author_name</dt><dd>"Foo Bar"</dd></dl></li>
+  <li class="node" data-node-id="1" data-x="-56.15291400959831" data-y="-79.67004778003988">
+    <span class="caption">Commit</span>
+  </li>
+  <li class="node" data-node-id="2" data-x="104.10864487675134" data-y="-206.32936951269312">
+    <span class="caption">Commit</span>
+  </li>
+  <li class="node" data-node-id="3" data-x="-5.9914297455789995" data-y="-267.2061829685237">
+    <span class="caption">Commit</span>
+  </li>
+  <li class="relationship" data-from="0" data-to="1">
+    <span class="type">PARENT</span>
+  </li>
+  <li class="relationship" data-from="1" data-to="2">
+    <span class="type">PARENT</span>
+  </li>
+  <li class="relationship" data-from="1" data-to="3">
+    <span class="type">PARENT</span>
+  </li>
+</ul>
+</figure>
+
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note" title="Note"></i>
+</td>
+<td class="content">
+Not very graphy yet.
+</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="slide">
+<h2>Script Cypher Output</h2>
+<div class="listingblock big">
+<div class="content">
+<textarea class="code" mode="cypher">CREATE (c_0d952d4bb4c497146057ba28cf000bd0443902cd:Commit {author_email:'github@jexp.de',date_iso_8601:'2014-05-16 13:43:05 +0200',parents:['cfd697ee54108ba0e16da296f6d33f230e8bb4a2'],refs:['HEAD', 'origin/master', 'origin/gh-pages', 'origin/HEAD', 'master', 'gh-pages'],sha1:'0d952d4bb4c497146057ba28cf000bd0443902cd',subject:'presentation from jax',timestamp:'1400240585'})
+CREATE (c_cfd697ee54108ba0e16da296f6d33f230e8bb4a2:Commit {author_email:'github@jexp.de',date_iso_8601:'2014-05-11 19:43:41 +0200',parents:['edf81fde813d3feedd9b12af12dd3ee145d9ff78', '31a6f819eaef8c704088838340a26fd8b7babd00'],refs:['x'],sha1:'cfd697ee54108ba0e16da296f6d33f230e8bb4a2',subject:'merge',timestamp:'1399830221'})
+CREATE (c_31a6f819eaef8c704088838340a26fd8b7babd00:Commit {author_email:'github@jexp.de',date_iso_8601:'2014-05-11 19:25:54 +0200',parents:['df20f18c13a29e563d96c6c95b9f77930699f6bc'],refs:['mh'],sha1:'31a6f819eaef8c704088838340a26fd8b7babd00',subject:'renamed fosdem presentation to graphgist',timestamp:'1399829154'})
+CREATE (c_edf81fde813d3feedd9b12af12dd3ee145d9ff78:Commit)
+CREATE (c_df20f18c13a29e563d96c6c95b9f77930699f6bc:Commit)
+CREATE
+  (c_0d952d4bb4c497146057ba28cf000bd0443902cd)&lt;-[:PARENT]-(c_cfd697ee54108ba0e16da296f6d33f230e8bb4a2),
+  (c_cfd697ee54108ba0e16da296f6d33f230e8bb4a2)&lt;-[:PARENT]-(c_edf81fde813d3feedd9b12af12dd3ee145d9ff78),
+  (c_cfd697ee54108ba0e16da296f6d33f230e8bb4a2)&lt;-[:PARENT]-(c_31a6f819eaef8c704088838340a26fd8b7babd00),
+  (c_31a6f819eaef8c704088838340a26fd8b7babd00)&lt;-[:PARENT]-(c_df20f18c13a29e563d96c6c95b9f77930699f6bc)
+RETURN c_0d952d4bb4c497146057ba28cf000bd0443902cd;</textarea>
+</div>
+</div>
+
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note" title="Note"></i>
+</td>
+<td class="content">
+One Big Statement
+</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="slide">
+<h2>Run the Import</h2>
+<div class="listingblock">
+<div class="content">
+<textarea class="code" mode="bash">time ~/Downloads/neo4j-community-2.1.0-RC2/bin/neo4j-shell -path git.db -file git.cql -q
+
+Transaction started
++-------------------+
+| No data returned. |
++-------------------+
+Nodes created: 1
+Properties set: 9
+Labels added: 1
+94 ms
+
+....
+
++-------------------+
+| No data returned. |
++-------------------+
+Relationships created: 1
+3 ms
+Transaction committed
+
+real	3m23.570s
+user	3m28.064s
+sys	0m7.741s</textarea>
+</div>
+</div>
+</section>
+
+<section class="slide">
+<h2>I don&#8217;t know Python</h2>
+<div class="paragraph"><p>but did some changes anyway:</p></div>
+
+<div class="ulist">
+<ul>
+<li>one cypher statement per line</li>
+<li>fixing non US-ASCII characters</li>
+<li>more commit attributes</li>
+<li>graph-refactoring</li>
+<li>visualize &amp; style in Neo4j browser</li>
+</ul>
+</div>
+</section>
+
+<section class="slide canvas-image" style="background-image: url(img/git2neo.jpg)">
+<section class="slide">
+<h3>So we were got here</h3>
+<blockquote class="twitter-tweet" lang="en"><p>Playing around with git log data of neo4j in <a href="https://twitter.com/neo4j">@Neo4j</a>. Thanks again <a href="https://twitter.com/knutwalker">@knutwalker</a> for the script. <a href="https://t.co/u6PjgXPHxH"><a href="https://t.co/u6PjgXPHxH">https://t.co/u6PjgXPHxH</a></a> <a href="http://t.co/C39DvHzGur">pic.twitter.com/C39DvHzGur</a></p>&mdash; Michael Hunger (@mesirii) <a href="https://twitter.com/mesirii/statuses/470692670202191873">May 25, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<div class="paragraph"><p><a href="https://gist.github.com/jexp/844cf610db4951308574">https://gist.github.com/jexp/844cf610db4951308574</a></p></div>
+</section>
+</section>
+
+<section class="slide">
+<h2>Script Cypher Output</h2>
+<div class="listingblock big">
+<div class="content">
+<textarea class="code" mode="cypher">BEGIN
+create constraint on (c:Commit) assert c.sha1 is unique;
+COMMIT
+BEGIN
+CREATE (:Commit {author_email:'foo@bar.com',date_iso_8601:'2014-05-22 20:53:05 +0200',parents:['b6393fc9d5c065fd42644caad600a9b7ac911ae2'],refs:['HEAD', 'origin/master', 'master', 'in-index'],sha1:'934cacf9fe6cd0188be642b3e609b529edaad527',subject:'Some commit message',timestamp:'1400784785'});
+
+CREATE (:Commit {author_email:'bar@foo.com',date_iso_8601:'2014-05-22 13:22:10 +0200',parents:['7765539ff17310f2c736ee7f0a8fc5e05180e262', '2d3abe010c36214b71c9bbbcaa9f6063947068de'],sha1:'b6393fc9d5c065fd42644caad600a9b7ac911ae2',subject:'Merge pull request #2445 from foo/bar',timestamp:'1400757730'});
+...
+MATCH (parent:Commit {sha1:"934cacf9fe6cd0188be642b3e609b529edaad527"}),
+      (child:Commit {sha1:"b6393fc9d5c065fd42644caad600a9b7ac911ae2"})
+CREATE (parent)&lt;-[:PARENT]-(child);
+...
+COMMIT</textarea>
+</div>
+</div>
+
+<div class="paragraph"><p>One statement per line</p></div>
+</section>
+
+<section class="slide">
+<h2>Refactoring</h2>
+<section class="slide">
+<h3>Create Users</h3>
+<div class="listingblock big">
+<div class="content">
+<textarea class="code" mode="cypher">create constraint on (u:User) assert u.email is unique;
+create index on :User(name);
+
+MATCH (c:Commit)
+MERGE (a:Author:User {email:c.author_email}) ON CREATE SET a.name = c.author_name
+CREATE (a)-[:AUTHORED]-&gt;(c);</textarea>
+</div>
+</div>
+</section>
+</section>
+
+<section class="slide">
+<h2>Data Model</h2>
+<figure class="graph-diagram">
+<ul class="graph-diagram-markup" data-internal-scale="2.63" data-external-scale="0.5">
+  <li class="node" data-node-id="0" data-x="-414.7326230959642" data-y="-44.91645827492838">
+    <span class="caption">Commit</span><dl class="properties"><dt>sha1</dt><dd>3438789sdf98s</dd><dt>subject</dt><dd>"I did this"</dd></dl></li>
+  <li class="node" data-node-id="1" data-x="-56.15291400959831" data-y="-79.67004778003988">
+    <span class="caption">Commit</span>
+  </li>
+  <li class="node" data-node-id="2" data-x="104.10864487675134" data-y="-206.32936951269312">
+    <span class="caption">Commit</span>
+  </li>
+  <li class="node" data-node-id="3" data-x="104.10864487675134" data-y="15.547644666802626">
+    <span class="caption">Commit</span>
+  </li>
+  <li class="node" data-node-id="4" data-x="-507.38871364811047" data-y="-206.32936951269312">
+    <span class="caption">User</span><dl class="properties"><dt>name</dt><dd>"Foo Bar"</dd><dt>email</dt><dd>"<a href="mailto:foo@bar.com">foo@bar.com</a>"</dd></dl></li>
+  <li class="node" data-node-id="5" data-x="-179.80228792487887" data-y="-153.21541889901388">
+    <span class="caption">Day</span><dl class="properties"><dt>date</dt><dd>"2014-05-26"</dd><dt>day</dt><dd>26</dd></dl></li>
+  <li class="node" data-node-id="6" data-x="-282.5550212207402" data-y="-206.32936951269312">
+    <span class="caption">Month</span><dl class="properties"><dt>month</dt><dd>05</dd></dl></li>
+  <li class="node" data-node-id="7" data-x="-205.8444828860205" data-y="-304.7478132936894">
+    <span class="caption">Year</span><dl class="properties"><dt>year</dt><dd>2014</dd></dl></li>
+  <li class="relationship" data-from="0" data-to="1">
+    <span class="type">PARENT</span>
+  </li>
+  <li class="relationship" data-from="1" data-to="2">
+    <span class="type">PARENT</span>
+  </li>
+  <li class="relationship" data-from="1" data-to="3">
+    <span class="type">PARENT</span>
+  </li>
+  <li class="relationship" data-from="4" data-to="0">
+    <span class="type">AUTHORED</span>
+  </li>
+  <li class="relationship" data-from="1" data-to="5"></li>
+  <li class="relationship" data-from="5" data-to="6"></li>
+  <li class="relationship" data-from="6" data-to="7"></li>
+</ul>
+</figure>
+
+<section class="slide">
+<h3>Create Time Tree (day level)</h3>
+<div class="listingblock big">
+<div class="content">
+<textarea class="code" mode="cypher">create constraint on (y:Year) assert y.year is unique;
+
+MATCH (c:Commit)
+MERGE (y:Year {year:substring(c.date,0,4)})
+MERGE (m:Month {month:substring(c.date,5,2)})-[:IN_YEAR]-&gt;(y)
+MERGE (d:Day {date:c.date, day:substring(c.date,8,2)})-[:IN_MONTH]-&gt;(m)
+CREATE (c)-[:ON_DAY]-&gt;(d);</textarea>
+</div>
+</div>
+</section>
+</section>
+
+<section class="slide">
+<h2>Mark and rubber ducks</h2>
+<div class="ulist">
+<ul>
+<li class="slide">Talked to <a href="http://twitter.com/markhneedham">Mark Needham</a> about it</li>
+<li class="slide">I <strong>realized</strong>, the git log format is actually CSV</li>
+<li class="slide">So "LOAD CSV #FTW"</li>
+<li class="slide">It&#8217;s soo much easier</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>LOAD CSV Syntax</h2>
+<div class="listingblock big">
+<div class="content">
+<textarea class="code" mode="cypher">[USING PERIODIC COMMIT [10000]]
+LOAD CSV [WITH HEADERS] FROM "http://friends.csv" AS line
+MATCH (me:User {name:line.user})
+CREATE (me)-[:FRIEND]-&gt;(friend:User {name: line.friend})
+RETURN COUNT(*);</textarea>
+</div>
+</div>
+</section>
+
+<section class="slide">
+<h2>The secret of LOAD CSV</h2>
+<section class="slide">
+<h3>ETL Powertool</h3>
+<div class="ulist">
+<ul>
+<li class="slide">combines multiple aspects in <strong>a single operation</strong></li>
+<li class="slide">loading / ingesting CSV data from an URI</li>
+<li class="slide">direct mapping in complex graph/domain structure</li>
+<li class="slide">data conversion</li>
+<li class="slide">supports complex computations</li>
+<li class="slide">create or merge data, relationships and structure</li>
+</ul>
+</div>
+</section>
+</section>
+
+<section class="slide">
+<h2>Generate CSV</h2>
+<table class="tableblock frame-all grid-all" style="width:100%">
+<colgroup>
+<col style="width:25%">
+<col style="width:25%">
+<col style="width:25%">
+<col style="width:25%">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">What</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Format</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">What</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Format</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">sha1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">%H</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">hash</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">%h</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">parents</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">%P</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">refs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">%d</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">author_email</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">%ae</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">author_name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">%an</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">timestamp</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">%at</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">date_time</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">%ai (ISO)</p></td>
+</tr>
+</tbody>
+</table>
+
+<div class="listingblock big slide">
+<div class="content">
+<textarea class="code" mode="bash">echo sha1,hash,parents,author_email,author_name,refs,subject,timestamp,date_time &gt; ~/DropBox/Public/git.csv
+
+git log --reverse --format='format:"%H","%h","%P","%ae","%an","%d", "%s","%at","%ai"' &gt;&gt; ~/DropBox/Public/git.csv</textarea>
+</div>
+</div>
+</section>
+
+<section class="slide">
+<h2>Example Content</h2>
+<div class="listingblock">
+<div class="content">
+<textarea class="code" mode="csv">sha1,hash,parents,autor_email,author_name,refs,subject,timestamp,date_time
+"a9caf3f600c1c63aa8cc40db59bac53cabca2e50","a9caf3f","934cacf9fe6cd0188be642b3e609b529edaad527","github@jexp.de","Michael Hunger"," (HEAD, jexp/in-index, in-index)","Index Support for IN Predicates","1401011766","2014-05-25 11:56:06 +0200"
+"934cacf9fe6cd0188be642b3e609b529edaad527","934cacf","b6393fc9d5c065fd42644caad600a9b7ac911ae2","andres@neotechnology.com","Andres Taylor"," (origin/master, master)","Typo","1400784785","2014-05-22 20:53:05 +0200"
+"b6393fc9d5c065fd42644caad600a9b7ac911ae2","b6393fc","7765539ff17310f2c736ee7f0a8fc5e05180e262 2d3abe010c36214b71c9bbbcaa9f6063947068de","magnus.vejlstrup@neopersistence.com","magnusvejlstrup","","Merge pull request #2445 from jexp/batch-inserter-done","1400757730","2014-05-22 13:22:10 +0200"
+"2d3abe010c36214b71c9bbbcaa9f6063947068de","2d3abe0","7765539ff17310f2c736ee7f0a8fc5e05180e262","github@jexp.de","Michael Hunger"," (jexp/batch-inserter-done)","fix bug in batch-insertion, CalculateDenseNodesStep. No call to super to shut down the Executor","1400757147","2014-05-22 13:12:27 +0200"
+"7765539ff17310f2c736ee7f0a8fc5e05180e262","7765539","ff1177cb989eb78084ebcdcd73b92dd26088d7b4","andres@neotechnology.com","Andres Taylor","","Fix unit test so it runs predictably","1400750553","2014-05-22 11:22:33 +0200"
+"ff1177cb989eb78084ebcdcd73b92dd26088d7b4","ff1177c","7172b752f0d3c10916a7b0f0e46000a350748c16 28b8b87201e11e9456e0c1ed6cf466186524cb77","lassewesth@gmail.com","Lasse Westh-Nielsen","","Merge pull request #2438 from benbc/2.1-more-udc-stats","1400748892","2014-05-22 10:54:52 +0200"
+"7172b752f0d3c10916a7b0f0e46000a350748c16","7172b75","3cdbfe347698b420bd093b6efe6e5c1dc2a73d61","rickardoberg@gmail.com","Rickard Öberg","","Updated Logback to 1.1.2","1400748717","2014-05-22 16:51:57 +0800"
+"28b8b87201e11e9456e0c1ed6cf466186524cb77","28b8b87","3cdbfe347698b420bd093b6efe6e5c1dc2a73d61","ben@bridesmere.com","Ben Butler-Cole","","Add UDC stats for numbers of IDs in use in store.","1400668829","2014-05-21 11:40:29 +0100"
+"3cdbfe347698b420bd093b6efe6e5c1dc2a73d61","3cdbfe3","86f576fa933f4b3210bde6577b27034633dc3ef3","lassewesth@gmail.com","Lasse Westh-Nielsen","","ensure launch script does not warn when using OpenJDK","1400671622","2014-05-21 13:27:02 +0200"</textarea>
+</div>
+</div>
+</section>
+
+<section class="slide">
+<h2>Import with LOAD CSV - Indexes and Constraints</h2>
+<div class="listingblock big">
+<div class="content">
+<textarea class="code" mode="cypher">CREATE CONSTRAINT ON (c:Commit) ASSERT c.sha1 IS UNIQUE;
+CREATE INDEX ON :Commit(hash);
+CREATE INDEX ON :Commit(date);
+
+CREATE CONSTRAINT ON (u:User) ASSERT u.email IS UNIQUE;
+CREATE INDEX ON :User(name);
+
+CREATE CONSTRAINT ON (y:Year) ASSERT y.year IS UNIQUE;</textarea>
+</div>
+</div>
+</section>
+
+<section class="slide">
+<h2>Import with LOAD CSV - Load the Data</h2>
+<div class="listingblock big">
+<div class="content">
+<textarea class="code" mode="cypher">USING PERIODIC COMMIT 10000
+
+LOAD CSV WITH headers FROM "https://dl.dropboxusercontent.com/u/14493611/git.csv" as line
+CREATE (c:Commit {sha1: line.sha1, hash:line.hash, subject:line.subject,
+    date_time:line.date_time, date:substring(line.date_time,0,10), timestamp:toInt(line.timestamp),
+    parents:split(line.parents," "),
+    refs:case when size(line.refs) &gt; 0 then split(substring(line.refs,2,length(line.refs)-3),", ") else null end})
+
+MERGE (u:User:Author {email:line.author_email}) ON CREATE SET u.name = line.author_name
+CREATE (u)-[:AUTHORED]-&gt;(c)
+
+MERGE (y:Year {year:substring(line.date_time,0,4)})
+MERGE (m:Month {month:substring(line.date_time,5,2)})-[:IN_YEAR]-&gt;(y)
+MERGE (d:Day {date:substring(line.date_time,0,10), day:substring(line.date_time,8,2)})-[:IN_MONTH]-&gt;(m)
+CREATE (c)-[:ON_DAY]-&gt;(d)
+WITH c,line
+WHERE line.parents &lt;&gt; ""
+UNWIND split(line.parents," ") as parent_sha1
+MATCH (parent:Commit {sha1 : parent_sha1})
+CREATE (c)-[:PARENT]-&gt;(parent)
+;</textarea>
+</div>
+</div>
+
+<div class="listingblock">
+<div class="content">
+<textarea class="code">Nodes created: 54451
+Relationships created: 81390
+Properties set: 217364
+Labels added: 54588
+108057 ms -&gt; 1min 50 s</textarea>
+</div>
+</div>
+</section>
+
+<section class="slide canvas-image" style="background-image: url(img/blank.png)">
+<h1>Thank You! Questions ?</h1>
+</section>
+
+<a class="deck-prev-link" href="#" title="Previous">&#8592;</a>
+<a class="deck-next-link" href="#" title="Next">&#8594;</a>
+<p class="deck-status">
+<span class="deck-status-current"></span>
+/
+<span class="deck-status-total"></span>
+</p>
+<form action="." class="goto-form" method="get">
+<label for="goto-slide">Go to Slide:</label>
+<input id="goto-slide" list="goto-datalist" name="slidenum" type="text">
+<datalist id="goto-data-list"></datalist>
+<input type="submit" value="Go">
+</form>
+<a class="deck-permalink" href="." title="Permalink to this slide">#</a>
+<script src="../../../asciidoc/deck.js/extensions/hash/deck.hash.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/scale/deck.scale.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/goto/deck.goto.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/menu/deck.menu.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/navigation/deck.navigation.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/status/deck.status.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/arrows/home.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/arrows/d3.v3.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/arrows/arrows-graph-diagram.js"></script>
+<footer>© All Rights Reserved 2013 | Neo Technology, Inc.</footer>
+<img id="logo" src="img/Neo_Technology.jpg">
+<div class="slide">
+<h2>Status of the presenation</h2>
+<h3>Cypher queries execution</h3>
+<div>
+<div id="status"></div>
+<pre id="errors"></pre>
+</div>
+</div>
+<script src="../../../asciidoc/js/checkcypher.js"></script>
+<script>
+  (function($, deck, undefined) {
+    $.deck.defaults.keys['previous'] = [8, 33, 37, 39];
+    $.deck.defaults.keys['next'] = [13, 32, 34, 39];
+  
+    $.extend(true, $[deck].defaults, {
+        countNested: false
+    });
+  
+    $.deck('.slide');
+  })(jQuery, 'deck');
+</script>
+<style>
+  .slide.canvas-image {
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  display: -moz-box;
+  display: -webkit-box;
+  display: -ms-box;
+  display: box;
+  -moz-box-orient: vertical;
+  -webkit-box-orient: vertical;
+  -ms-box-orient: vertical;
+  box-orient: vertical;
+  -moz-box-align: start;
+  -webkit-box-align: start;
+  -ms-box-align: start;
+  box-align: start;
+  -moz-box-pack: start;
+  -webkit-box-pack: start;
+  -ms-box-pack: start;
+  box-pack: start;}
+  
+  .bottom-left {
+    left: 1%;
+    bottom: 20%; }
+  
+  .top-left {
+    left: 1%;
+    top: 20%; }
+  
+  .bottom-right {
+    right: 1%;
+    bottom: 20%; }
+  
+  .top-right {
+    right: 1%;
+    top: 20%; }
+  
+  .center-up {
+    right: 50%;
+    top: 1%;
+  }
+  
+  .center-down {
+    right: 50%;
+    bottom: 1%;
+  }
+  .canvas-image .canvas-caption p {
+    text-align: center;
+    padding-top: 0;
+    padding: 0;
+    -moz-transform: none;
+    -webkit-transform: none;
+    -o-transform: none;
+    -ms-transform: none;
+    transform: none;
+    display: inline;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    font-weight: bold;
+    font-size: 58px;
+    -webkit-box-shadow: 2px 2px 2px #000;
+    -moz-box-shadow: 2px 2px 2px #000;
+    box-shadow: 2px 2px 2px #000;
+    padding: 1rem;
+    color: white; }
+  kbd.keyseq { color: #555555; }
+  kbd:not(.keyseq) {
+    display: inline-block;
+    color: #222222;
+    font-size: 0.7em;
+    line-height: 1.4;
+    background-color: #F7F7F7;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset;
+    margin: -0.15em 0.15em 0 0.15em;
+    padding: 0.2em 0.6em;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  kbd kbd:first-child { margin-left: 0; }
+  kbd kbd:last-child { margin-right: 0; }
+</style>
+</body>
+</html>
