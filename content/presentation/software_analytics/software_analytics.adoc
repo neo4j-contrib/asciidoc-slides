@@ -1,0 +1,498 @@
+= Using AsciiArt to Analyse your SourceCode with Neo4j and OSS Tools
+:presenter: Michael Hunger
+:twitter: mesirii
+:email: michael@neo4j.org
+:backend: deckjs
+:deckjsdir: ../../../asciidoc/deck.js
+:deckjs_theme: neotech
+:icons: font
+:source-highlighter: codemirror
+:navigation:
+:goto:
+:menu:
+:status:
+:arrows:
+:customjs: ../../../asciidoc/js/checkcypher.js
+:gist-source: https://raw.github.com/neo4j-contrib/gists/master/
+:footer: © All Rights Reserved 2014 | Neo Technology, Inc.
+:img: img
+:logo: {img}/neo4j-logo.png
+:allow-uri-read:
+:video:
+:docs-link: https://github.com/neo4j-contrib/asciidoc-slides[documentation]
+:download-link: https://github.com/neo4j-contrib/asciidoc-slides/archive/master.zip[download]
+:sectids!:
+:deckjs_transition: none
+
+++++
+<style type="text/css">
+#logo {
+ width: 200px;
+}
+.small {
+   font-size:0.5em;
+}
+</style>
+++++
+
+// = Using AsciiArt to Analyse your SourceCode with Neo4j and OSS Tools
+
+
+== Who the hell is this guy?
+
+* Michael Hunger
+* Developer Advocate Neo Technology
+* Love People and Graphs
+* @mesirii | michael@neotechnology.com
+
+
+== What will he talk about?
+
+//[options="step"]
+* What is this Neo4j Graphdatabase thing?
+* Ascii-Art Rocks
+* Graphs in Your Code - The Idea
+* Having Fun with your Code and jQAssistant
+* Gimme More
+
+== What is a Graph Database ?
+
+//[options="step"]
+* labeled Nodes
+* directed, typed Relationships
+* arbitrary Properties on each
+
+== Property Graph Model
+
+image::{img}/property_graph_model.png[width=60%]
+
+== What makes it special ?
+
+//[options=step]
+* close to the object model
+* prematerialize relationships
+* traversals in linear time
+* sparse, heterogenous data + schema free
+* local queries - explore the neighbourhood
+* whiteboard-friendly
+
+== Where can/should I use it ?
+
+* Impact Analysis (Network, Software)
+* Routing / Logistics
+* Recommendation, Dating, Job-Search
+* Sciene (Metadata, Drug Research)
+* Masterdata, Hierarchy-Mgmt
+* Fraud-Detection, Market-Analysis
+* Social, .... and many more
+
+[canvas-image="{img}/model4.png"]
+== Drawing
+
+[role="canvas-caption", position="bottom-left"]
+(Graphs)-[:LOVE]->(Whiteboards)
+
+[canvas-image="{img}/model5.png"]
+== Drawing Overlay
+
+[canvas-image="{img}/model6.png"]
+== Graph
+
+[canvas-image="{img}/model7.png"]
+== Graph
+
+== Ascii-Art Rocks
+
+//[options="step"]
+* Turn text into pictures
+* Turn picture into text
+* The Power of Symbols
+* Graph Patterns Made easy
+* Hacker and Mudder Friendly
+* Diffs, VCS
+
+== Ascii-Art Rocks
+
+----
+
+ _                         )      ((   ))     (
+(@)                      /|\      ))_((     /|\                        _
+|-|`\                   / | \    (/\|/\)   / | \                      (@)
+| | -------------------/--|-voV---\`|'/--Vov-|--\---------------------|-|
+|-|                         '^`   (o o)  '^`                          | |
+| |                               `\Y/'                               |-|
+|-|          Welcome to the Mages Lair Multiple User Dungeon          | |
+| |                    Welcome to the Addiction.                      |-|
+|-|                                                                   | |
+| |                                                                   |-|
+|_|___________________________________________________________________| |
+(@)               l   /\ /        ( (       \ /\   l                `\|-|
+                  l /   V          \ \       V   \ l                  (@)
+                  l/               _) )_          \I
+                                   `\ /'
+                                     `
+----
+
+[canvas-image="{img}/blank.png"]
+== Cypher
+
+++++
+<h1>Cypher</h1>
+++++
+
+== (Cypher)-[:USES]->(Ascii-Art)
+
+//[options="step"]
+* Declarative Graph Query Language
+* Graph Pattern Matching
+* Humane, Readable
+* Expressive
+* Read and Write Graphs
+* Tabular Results
+
+[canvas-image="{img}/pattern2.gif"]
+== Cypher Query
+
+[canvas-image="{img}/pattern1.gif"]
+== Cypher Pattern
+
+== Cypher Query - Example Geekout
+
+=== Setup
+
+[source,cypher]
+----
+CREATE (:Year {year:2014})<-[:IN_YEAR]-(geekout:Conference {name:"Geekout"})
+        -[:LOCATION]->(:City {name:"Tallinn"})
+CREATE (track:Track {name:"Room 1"})-[:TRACK_OF]->(geekout)
+
+MERGE (speaker:Attendee:Speaker {name:"Hadi Hariri"}) MERGE (geekout)<-[:ATTENDS]-(speaker)
+
+CREATE (speaker)-[:PRESENTS]->(session:Session {title:"Mouseless IDE"})<-[:IN_TRACK]-(track)
+
+FOREACH (name in ["Java","IDE","Development"] | 
+   MERGE (topic:Topic {name:name}) 
+   CREATE (session)-[:HAS_TOPIC]->(topic)))
+----
+
+=== Query
+
+[source,cypher]
+----
+// Which Speakers entertain you with Java ?
+MATCH (t:Topic {name:"Java"})<-[:HAS_TOPIC]-(session)<-[:PRESENTS]-(speaker), 
+      (session)<-[:IN_TRACK]-(track)
+
+RETURN speaker.name as speaker, {time:session.time, session:session.title} as session, 
+       track.name as track
+ORDER BY session.time
+----
+
+== Geekout 2014 GraphGist
+
+image::{img}/geekout2014.jpg[width=70%]
+
+http://www.neo4j.org/graphgist?9501ecbc0c4ef11f8d6e[Interactive GraphGist Document]
+http://worldcup.neo4j.org[WorldCup]
+
+== Software Analytics - Approach
+
+//[options="step"]
+. look at one interesting aspect
+. which insights would be cool?
+. model it as a graph
+. get data
+. import into graph model
+. enrich graph model with concepts / structure
+. query for insights
+
+== (Code)-[:IS_A]->(Graph)
+
+//[options="step"]
+* AST, ByteCode, Source-Code
+* Inheritance, Composition, Dependencies
+* Transitive Module and Library dependencies
+* Dependency injection config
+* Data model (db) <-> object model
+* Runtime characteristics: call graph, heap
+* Version control, repositories, issues
+
+== jQAssistant
+
+//[options="step"]
+* Open Source Software Analytics Tool
+* Plugins for Java, JEE, JPA, Maven, Gradle, SonarJ ...
+* All Cypher based
+* Technical and Domain Concept Definitions
+* Compute Software Metrics 
+* Declare and Validate Architectural Rules
+* Integrated in Build Process
+
+== jQAssistant
+
+image::https://github.com/buschmais/jqassistant/wiki/images/logo_jqa-small.png[]
+
+Actively Looking for Contributions
+
+http://github.com/buschmais/jqassistant
+
+== Modeling Source Code as a Graph
+
+image::{img}/jqassistant_model.png[height=700]
+
+== Java software graph model : Nodes
+
+ * Artifact
+ * Package
+ * Type, Class, Interface, Annotation, Enum
+ * Method, Constructor, Parameter
+ * Field
+ * Value, Class, Annotation, Enum, Primitive, Array
+
+== Java software graph model: Relationships
+
+ * CONTAINS, DECLARES
+ * EXTENDS, IMPLEMENTS
+ * RETURNS, THROWS, INVOKES, HAS, IS
+ * ANNOTATED_BY, OF_TYPE
+
+== Approach
+
+//[options=step]
+. Scan your project with +
+  Plugins for Code (Java-ASM), Config, Metadata
+. Import into Neo4j
+. Enrich with declared technical and domain concepts
+. On top of those concepts
+. Software-Metrics queries
+. Architectural-Rules queries
+
+== Query the Data
+
+image::{img}/jqassistant_query.png[height=700]
+
+[canvas-image="{img}/blank.png"]
+== Demo
+
+++++
+<h1>Demo</h1>
+++++
+
+== Analyzing A Maven Repository
+
+Rickard Öberg
+
+This little nifty tool will allow you to import your local Maven repository information into a Neo4j graph, in particular dependencies between artifacts. 
+
+You can then take this graph and put it into a Neo4j server,  and perform Cypher queries on it. 
+
+Or whatever else awesome you want to do.
+
+----
+mvn compile exec:java -Dexec.mainClass=com.github.rickardoberg.neomvn.Main \
+  -Dexec.arguments="$HOME/.m2/repository"
+----
+
+https://github.com/rickardoberg/neomvn#example-queries
+
+== NeoMVN: Example Queries
+
+=== Find all transitive dependencies of all artifacts with "org.neo4j" groups
+
+[source,cypher]
+----
+MATCH (group:Group {groupId:'org.neo4j'}),
+      (group)-[:HAS_ARTIFACT]->(artifact)-[:HAS_VERSION]->(version)<-[:HAS_DEPENDENCY]-(dependent)
+
+WHERE left(dependent.groupId,9)<>group.groupId
+RETURN DISTINCT dependent.artifactId, dependent.groupId
+----
+
+=== Which version of JUnit is the most popular
+ 
+[source,cypher]
+----
+MATCH (group:Group {groupId:'junit'})
+MATCH (group)-[:HAS_ARTIFACT]->(artifact)-[:HAS_VERSION]->(version)<-[:HAS_DEPENDENCY]-(dependent)
+RETURN version.version, count(dependent) as depCount
+ORDER BY depCount DESC
+----
+
+== Query a JVM Heapdump
+
+//[options=step]
+. Get a heap-dump with +jmap+ +
+  +jmap -dump:format=b,file=dump.hprof <pid>+
+. Use +jhat dump.hprof+ find the /oql endpoint 
+. run the _OQL_ script to generate _Cypher_ code
+. Import into Neo4j
+. Run arbitrary queries
+. Visualize
+
+== Graph Domain Model
+
+image::{img}/graph_model_deadlock.png[width=80%]
+
+== OQL to Generate Cypher
+
+[source,javascript]
+----
+select (function () {
+  var entries = filter(p.waitingTxMap.data.table, function(it) { return it; });
+  var resources = "";
+
+  var idSeq = 0;
+
+  for ( var i = 0; i < entries.length; i++ ) {
+    var resource = entries[i].value.resource;
+    var index = resource.index.toString();
+    var key = resource.key.toString();
+    var indexNameIndexKey = index + "_" + key;
+    var indexName = "n" + idSeq++;
+
+    var resourceName = "";
+
+    var tx = entries[i].key;
+    var txName = "n" + idSeq++;
+
+    var cypher =  "MERGE (" + txName + ":Tx {txId:" + tx.eventIdentifier + "})<br />";
+    cypher     += "MERGE (" + indexName + ":IndexLock {indexLockId:'" + indexNameIndexKey + "'})<br />";  
+    cypher     += "CREATE (" + txName + ")-[:WAITING_ON]->(" + indexName + ")<br />";  
+
+    resources += cypher + "<br />";
+  }
+
+...
+
+  return resources;
+})()
+from org.neo4j.kernel.impl.transaction.RagManager p
+----
+
+//// 
+replace ... with
+function extractList(linkedList) {
+  var list = [];
+  var element = linkedList.first;
+  while (element) {
+    list.push(element.item.eventIdentifier);
+    element = element.next;
+  }
+  return list;
+}
+
+var entries = filter(p.resourceMap.table, function(it) { return it; });
+
+for ( var i = 0; i < entries.length; i++ ) {
+  var txs = extractList(entries[i].value);
+  var resourceLabel, resourceProperty, resourceId;
+  if (entries[i].key.resource.nodeId) {
+    resourceLabel = "Node";
+    resourceProperty = "nodeId";
+    resourceId = entries[i].key.resource.nodeId;
+  } else {
+    resourceLabel = "IndexLock";
+    resourceProperty = "indexLockId";
+    var resource = entries[i].key.resource;
+    var index = resource.index.toString();
+    var key = resource.key.toString();
+    resourceId = "'" + index + "_" + key + "'";      
+  }
+  var resourceName = "n" + idSeq++;
+  var cypher = "MERGE (" + resourceName + ":" + resourceLabel + " {" + resourceProperty + ":" + resourceId + "})<br />";
+  for(var j=0; j < txs.length; j++) {
+    var txName = "n" + idSeq++;
+    cypher += "MERGE (" + txName + ":Tx {txId:" + txs[j] + "})<br />";
+    cypher += "CREATE (" + resourceName + ")<-[:HOLDS_LOCK_ON]-(" + txName + ")";
+  }
+  resources += cypher + "<br />";
+}
+////
+
+== Visualization of a Deadlock Scenario
+
+image::{img}/visualization_deadlock.png[height=700]
+
+== JVM heap analysis using Neo4j 
+
+Nat Pryce, James Richardson (Software Engineers, Sky) 
+
+* Use Neo4J for ad-hoc analysis of heap use in a proprietary embedded JVM that's deployed in one of the most widely used consumer products in the UK (Sky Box). 
+* Used Cypher queries that uncovered surprising aspects of their code, platform and the Java compiler. 
+* **And finding a memory leaking JSON parser with a Cypher query.**
+
+== Heap Model
+
+image::{img}/neo4j_heap.jpg[height=700]
+
+From Nat's https://docs.google.com/a/neopersistence.com/presentation/d/19jpRrhOKTugvPal4bdM2ovm-2v5r2dpomfy1oBobuWo/pub[Graph Schema Modeling Approach]
+
+Talk at Accu 2014: Looking for Smoking Guns in a Haystack - using a graph database for JVM heap analysis
+
+////
+Looking for Smoking Guns in a Haystack - using a graph database for JVM heap analysis
+experience report: 90 minutes
+James Richardson
+Nat Pryce
+Late in the development of a major new feature for one of the most widely used consumer products in the UK we encountered potentially show-stopping memory fragmentation issues. Our platform uses a proprietary embedded JVM that has limited diagnostic tooling. We therefore had to build our own tools under intense time pressure. We used an open source graph database (Neo4J) and its query language to rapidly build an ad-hoc analysis tool, and successfully used it to track down and eliminate the problematic code from our product. We will discuss some of the challenges we faced using Neo4J for interactive analysis of quite large data imports (80K nodes, 150k relationships) and how we overcame them. We will then demonstrate (with live-coding) some queries to show the audience surprising aspects of our code, platform and Oracle's Java compiler. 
+
+Many aspects of software can be modelled as graphs. Our experience shows that graph databases are a powerful foundation upon which to build software development tools. Thanks to increasing commoditization, we believe graph databases hold a lot of promise for non-mainstream programming platforms that are usually underserved by tool vendors.
+////
+
+=== Using graphs for source code analysis
+
+http://urma.com[Raoul-Gabriel Urma] (PhD in Computer Science, The University of Cambridge)  
+
+Did you know that the source code of software that you engineer every day can also be represented as graphs?  
+
+In this talk, we demonstrate how you can perform program analysis using Neo4j.  
+
+We describe a prototype that stores a graph representation of the source code of Java programs in Neo4j. 
+We can then query the graph using Cypher and we'll show various examples of possible queries such as “find me all recursive methods” and “find me all subtypes of a given type”.  
+
+This talk is based on Raoul-Gabriel's  research paper 
+http://www.cl.cam.ac.uk/~am21/pk-urma-mycroft-scp.pdf['Source-Code Queries with Graph Databases—with Application to Programming Language Usage and Evolution']
+
+== Source Control, Issues, Social Coding
+
+* What can you learn from commits
+* about the code
+ * Class Toxicity, Frequency of Change (Feathers)
+* about the people
+ * checkin times, collaboration, commit-size, commit-frequency
+* Issues
+ * bug-rich classes (separation of concerns?)
+
+== Example: Import Git Commit Logs into Neo4j
+
+* +git log --format+ emits CSV
+* Graph Model
+* LOAD CSV with Cypher
+* Create / Update complex Graph Structure
+
+http://jexp.de/blog/2014/06/using-load-csv-to-import-git-history-into-neo4j/[Blog Post] 
+
+== Visualization
+
+image::{img}/git2neo2.jpg[]
+
+== Finally: Some Eye Candy
+
+Isaac & Nash (Software Engineers at Leap Motion)
+
+* Leap Motion Software 
+ * Inheritance Hierarchy, Call Graph
+* Render to .dot file
+* Use dotparse.js to read it in
+* WebGL enabled Three.js rendering
+* LeapMotion SDK 2.x beta
+
+Let's have a look: http://cabbibo.github.io/Leap-Object-Controls/[Demo]
+https://github.com/leapmotion/Leap-Three-Camera-Controls[Source]
+
+[canvas-image="{img}/blank.png"]
+== That's it
+
+++++
+<h1>Questions ? Thank You!</h1>
+++++

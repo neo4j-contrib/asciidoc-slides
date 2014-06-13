@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+<meta content="Asciidoctor 0.1.4" name="generator">
+<title>Using AsciiArt to Analyse your SourceCode with Neo4j and OSS Tools</title>
+<script src="../../../asciidoc/deck.js/jquery.min.js"></script>
+<script src="../../../asciidoc/deck.js/core/deck.core.js"></script>
+<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/codemirror/deck.codemirror.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/codemirror/themes/default.css" rel="stylesheet">
+<script src="../../../asciidoc/deck.js/extensions/codemirror/codemirror.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/deck.codemirror.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/mode/javascript/javascript.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/mode/css/css.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/cypher/deck.cypher.js"></script>
+<link href="../../../asciidoc/deck.js/extensions/cypher/deck.cypher.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/core/deck.core.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/hash/deck.hash.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/scale/deck.scale.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/goto/deck.goto.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/menu/deck.menu.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/navigation/deck.navigation.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/status/deck.status.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/themes/style/neotech.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/core/print.css" media="print" rel="stylesheet">
+<script src="../../../asciidoc/deck.js/modernizr.custom.js"></script>
+</head>
+<body class="deck-container article">
+<section class="slide" id="title-slide">
+<h1>Using AsciiArt to Analyse your SourceCode with Neo4j and OSS Tools</h1>
+</section>
+<div id="preamble">
+<div class="sectionbody">
+<style type="text/css">
+#logo {
+ width: 200px;
+}
+.small {
+   font-size:0.5em;
+}
+</style>
+</div>
+</div>
+
+<section class="slide">
+<h2>Who the hell is this guy?</h2>
+<div class="ulist">
+<ul>
+<li>Michael Hunger</li>
+<li>Developer Advocate Neo Technology</li>
+<li>Love People and Graphs</li>
+<li>@mesirii | <a href="mailto:michael@neotechnology.com">michael@neotechnology.com</a></li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>What will he talk about?</h2>
+<div class="ulist">
+<ul>
+<li>What is this Neo4j Graphdatabase thing?</li>
+<li>Ascii-Art Rocks</li>
+<li>Graphs in Your Code - The Idea</li>
+<li>Having Fun with your Code and jQAssistant</li>
+<li>Gimme More</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>What is a Graph Database ?</h2>
+<div class="ulist">
+<ul>
+<li>labeled Nodes</li>
+<li>directed, typed Relationships</li>
+<li>arbitrary Properties on each</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>Property Graph Model</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="property graph model" src="img/property_graph_model.png" width="60%">
+</div>
+</div>
+</section>
+
+<section class="slide">
+<h2>What makes it special ?</h2>
+<div class="ulist">
+<ul>
+<li>close to the object model</li>
+<li>prematerialize relationships</li>
+<li>traversals in linear time</li>
+<li>sparse, heterogenous data + schema free</li>
+<li>local queries - explore the neighbourhood</li>
+<li>whiteboard-friendly</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>Where can/should I use it ?</h2>
+<div class="ulist">
+<ul>
+<li>Impact Analysis (Network, Software)</li>
+<li>Routing / Logistics</li>
+<li>Recommendation, Dating, Job-Search</li>
+<li>Sciene (Metadata, Drug Research)</li>
+<li>Masterdata, Hierarchy-Mgmt</li>
+<li>Fraud-Detection, Market-Analysis</li>
+<li>Social, &#8230;. and many more</li>
+</ul>
+</div>
+</section>
+
+<section class="slide canvas-image" style="background-image: url(img/model4.png)">
+<div class="paragraph canvas-caption"><p class="bottom-left">(Graphs)-[:LOVE]&#8594;(Whiteboards)</p></div>
+</section>
+
+<section class="slide canvas-image" style="background-image: url(img/model5.png)">
+
+</section>
+
+<section class="slide canvas-image" style="background-image: url(img/model6.png)">
+
+</section>
+
+<section class="slide canvas-image" style="background-image: url(img/model7.png)">
+
+</section>
+
+<section class="slide">
+<h2>Ascii-Art Rocks</h2>
+<div class="ulist">
+<ul>
+<li>Turn text into pictures</li>
+<li>Turn picture into text</li>
+<li>The Power of Symbols</li>
+<li>Graph Patterns Made easy</li>
+<li>Hacker and Mudder Friendly</li>
+<li>Diffs, VCS</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>Ascii-Art Rocks</h2>
+<div class="listingblock">
+<div class="content">
+<pre><code>_                         )      ((   ))     (
+(@)                      /|\      ))_((     /|\                        _
+|-|`\                   / | \    (/\|/\)   / | \                      (@)
+| | -------------------/--|-voV---\`|'/--Vov-|--\---------------------|-|
+|-|                         '^`   (o o)  '^`                          | |
+| |                               `\Y/'                               |-|
+|-|          Welcome to the Mages Lair Multiple User Dungeon          | |
+| |                    Welcome to the Addiction.                      |-|
+|-|                                                                   | |
+| |                                                                   |-|
+|_|___________________________________________________________________| |
+(@)               l   /\ /        ( (       \ /\   l                `\|-|
+                  l /   V          \ \       V   \ l                  (@)
+                  l/               _) )_          \I
+                                   `\ /'
+                                     `</code></pre>
+</div>
+</div>
+</section>
+
+<section class="slide canvas-image" style="background-image: url(img/blank.png)">
+<h1>Cypher</h1>
+</section>
+
+<section class="slide">
+<h2>(Cypher)-[:USES]&#8594;(Ascii-Art)</h2>
+<div class="ulist">
+<ul>
+<li>Declarative Graph Query Language</li>
+<li>Graph Pattern Matching</li>
+<li>Humane, Readable</li>
+<li>Expressive</li>
+<li>Read and Write Graphs</li>
+<li>Tabular Results</li>
+</ul>
+</div>
+</section>
+
+<section class="slide canvas-image" style="background-image: url(img/pattern2.gif)">
+
+</section>
+
+<section class="slide canvas-image" style="background-image: url(img/pattern1.gif)">
+
+</section>
+
+<section class="slide">
+<h2>Cypher Query - Example Geekout</h2>
+<section class="slide">
+<h3>Setup</h3>
+<div class="listingblock">
+<div class="content">
+<textarea class="code" mode="cypher">CREATE (:Year {year:2014})&lt;-[:IN_YEAR]-(geekout:Conference {name:"Geekout"})
+        -[:LOCATION]-&gt;(:City {name:"Tallinn"})
+CREATE (track:Track {name:"Room 1"})-[:TRACK_OF]-&gt;(geekout)
+
+MERGE (speaker:Attendee:Speaker {name:"Hadi Hariri"}) MERGE (geekout)&lt;-[:ATTENDS]-(speaker)
+
+CREATE (speaker)-[:PRESENTS]-&gt;(session:Session {title:"Mouseless IDE"})&lt;-[:IN_TRACK]-(track)
+
+FOREACH (name in ["Java","IDE","Development"] |
+   MERGE (topic:Topic {name:name})
+   CREATE (session)-[:HAS_TOPIC]-&gt;(topic)))</textarea>
+</div>
+</div>
+</section>
+
+<section class="slide">
+<h3>Query</h3>
+<div class="listingblock">
+<div class="content">
+<textarea class="code" mode="cypher">// Which Speakers entertain you with Java ?
+MATCH (t:Topic {name:"Java"})&lt;-[:HAS_TOPIC]-(session)&lt;-[:PRESENTS]-(speaker),
+      (session)&lt;-[:IN_TRACK]-(track)
+
+RETURN speaker.name as speaker, {time:session.time, session:session.title} as session,
+       track.name as track
+ORDER BY session.time</textarea>
+</div>
+</div>
+</section>
+</section>
+
+<section class="slide">
+<h2>Geekout 2014 GraphGist</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="geekout2014" src="img/geekout2014.jpg" width="70%">
+</div>
+</div>
+
+<div class="paragraph"><p><a href="http://www.neo4j.org/graphgist?9501ecbc0c4ef11f8d6e">Interactive GraphGist Document</a>
+<a href="http://worldcup.neo4j.org">WorldCup</a></p></div>
+</section>
+
+<section class="slide">
+<h2>Software Analytics - Approach</h2>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+look at one interesting aspect
+</li>
+<li>
+which insights would be cool?
+</li>
+<li>
+model it as a graph
+</li>
+<li>
+get data
+</li>
+<li>
+import into graph model
+</li>
+<li>
+enrich graph model with concepts / structure
+</li>
+<li>
+query for insights
+</li>
+</ol>
+</div>
+</section>
+
+<section class="slide">
+<h2>(Code)-[:IS_A]&#8594;(Graph)</h2>
+<div class="ulist">
+<ul>
+<li>AST, ByteCode, Source-Code</li>
+<li>Inheritance, Composition, Dependencies</li>
+<li>Transitive Module and Library dependencies</li>
+<li>Dependency injection config</li>
+<li>Data model (db) &lt;&#8594; object model</li>
+<li>Runtime characteristics: call graph, heap</li>
+<li>Version control, repositories, issues</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>jQAssistant</h2>
+<div class="ulist">
+<ul>
+<li>Open Source Software Analytics Tool</li>
+<li>Plugins for Java, JEE, JPA, Maven, Gradle, SonarJ &#8230;</li>
+<li>All Cypher based</li>
+<li>Technical and Domain Concept Definitions</li>
+<li>Compute Software Metrics</li>
+<li>Declare and Validate Architectural Rules</li>
+<li>Integrated in Build Process</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>jQAssistant</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="logo jqa small" src="https://github.com/buschmais/jqassistant/wiki/images/logo_jqa-small.png">
+</div>
+</div>
+
+<div class="paragraph"><p>Actively Looking for Contributions</p></div>
+
+<div class="paragraph"><p><a href="http://github.com/buschmais/jqassistant">http://github.com/buschmais/jqassistant</a></p></div>
+</section>
+
+<section class="slide">
+<h2>Modeling Source Code as a Graph</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="jqassistant model" height="700" src="img/jqassistant_model.png">
+</div>
+</div>
+</section>
+
+<section class="slide">
+<h2>Java software graph model : Nodes</h2>
+<div class="ulist">
+<ul>
+<li>Artifact</li>
+<li>Package</li>
+<li>Type, Class, Interface, Annotation, Enum</li>
+<li>Method, Constructor, Parameter</li>
+<li>Field</li>
+<li>Value, Class, Annotation, Enum, Primitive, Array</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>Java software graph model: Relationships</h2>
+<div class="ulist">
+<ul>
+<li>CONTAINS, DECLARES</li>
+<li>EXTENDS, IMPLEMENTS</li>
+<li>RETURNS, THROWS, INVOKES, HAS, IS</li>
+<li>ANNOTATED_BY, OF_TYPE</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>Approach</h2>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+Scan your project with<br>
+Plugins for Code (Java-ASM), Config, Metadata
+</li>
+<li>
+Import into Neo4j
+</li>
+<li>
+Enrich with declared technical and domain concepts
+</li>
+<li>
+On top of those concepts
+</li>
+<li>
+Software-Metrics queries
+</li>
+<li>
+Architectural-Rules queries
+</li>
+</ol>
+</div>
+</section>
+
+<section class="slide">
+<h2>Query the Data</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="jqassistant query" height="700" src="img/jqassistant_query.png">
+</div>
+</div>
+</section>
+
+<section class="slide canvas-image" style="background-image: url(img/blank.png)">
+<h1>Demo</h1>
+</section>
+
+<section class="slide">
+<h2>Analyzing A Maven Repository</h2>
+<div class="paragraph"><p>Rickard Öberg</p></div>
+
+<div class="paragraph"><p>This little nifty tool will allow you to import your local Maven repository information into a Neo4j graph, in particular dependencies between artifacts.</p></div>
+
+<div class="paragraph"><p>You can then take this graph and put it into a Neo4j server,  and perform Cypher queries on it.</p></div>
+
+<div class="paragraph"><p>Or whatever else awesome you want to do.</p></div>
+
+<div class="listingblock">
+<div class="content">
+<pre><code>mvn compile exec:java -Dexec.mainClass=com.github.rickardoberg.neomvn.Main \
+  -Dexec.arguments="$HOME/.m2/repository"</code></pre>
+</div>
+</div>
+
+<div class="paragraph"><p><a href="https://github.com/rickardoberg/neomvn#example-queries">https://github.com/rickardoberg/neomvn#example-queries</a></p></div>
+</section>
+
+<section class="slide">
+<h2>NeoMVN: Example Queries</h2>
+<section class="slide">
+<h3>Find all transitive dependencies of all artifacts with "org.neo4j" groups</h3>
+<div class="listingblock">
+<div class="content">
+<textarea class="code" mode="cypher">MATCH (group:Group {groupId:'org.neo4j'}),
+      (group)-[:HAS_ARTIFACT]-&gt;(artifact)-[:HAS_VERSION]-&gt;(version)&lt;-[:HAS_DEPENDENCY]-(dependent)
+
+WHERE left(dependent.groupId,9)&lt;&gt;group.groupId
+RETURN DISTINCT dependent.artifactId, dependent.groupId</textarea>
+</div>
+</div>
+</section>
+
+<section class="slide">
+<h3>Which version of JUnit is the most popular</h3>
+<div class="listingblock">
+<div class="content">
+<textarea class="code" mode="cypher">MATCH (group:Group {groupId:'junit'})
+MATCH (group)-[:HAS_ARTIFACT]-&gt;(artifact)-[:HAS_VERSION]-&gt;(version)&lt;-[:HAS_DEPENDENCY]-(dependent)
+RETURN version.version, count(dependent) as depCount
+ORDER BY depCount DESC</textarea>
+</div>
+</div>
+</section>
+</section>
+
+<section class="slide">
+<h2>Query a JVM Heapdump</h2>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+Get a heap-dump with <code>jmap</code><br>
+<code>jmap -dump:format=b,file=dump.hprof &lt;pid&gt;</code>
+</li>
+<li>
+Use <code>jhat dump.hprof</code> find the /oql endpoint
+</li>
+<li>
+run the <em>OQL</em> script to generate <em>Cypher</em> code
+</li>
+<li>
+Import into Neo4j
+</li>
+<li>
+Run arbitrary queries
+</li>
+<li>
+Visualize
+</li>
+</ol>
+</div>
+</section>
+
+<section class="slide">
+<h2>Graph Domain Model</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="graph model deadlock" src="img/graph_model_deadlock.png" width="80%">
+</div>
+</div>
+</section>
+
+<section class="slide">
+<h2>OQL to Generate Cypher</h2>
+<div class="listingblock">
+<div class="content">
+<textarea class="code" mode="javascript">select (function () {
+  var entries = filter(p.waitingTxMap.data.table, function(it) { return it; });
+  var resources = "";
+
+  var idSeq = 0;
+
+  for ( var i = 0; i &lt; entries.length; i++ ) {
+    var resource = entries[i].value.resource;
+    var index = resource.index.toString();
+    var key = resource.key.toString();
+    var indexNameIndexKey = index + "_" + key;
+    var indexName = "n" + idSeq++;
+
+    var resourceName = "";
+
+    var tx = entries[i].key;
+    var txName = "n" + idSeq++;
+
+    var cypher =  "MERGE (" + txName + ":Tx {txId:" + tx.eventIdentifier + "})&lt;br /&gt;";
+    cypher     += "MERGE (" + indexName + ":IndexLock {indexLockId:'" + indexNameIndexKey + "'})&lt;br /&gt;";
+    cypher     += "CREATE (" + txName + ")-[:WAITING_ON]-&gt;(" + indexName + ")&lt;br /&gt;";
+
+    resources += cypher + "&lt;br /&gt;";
+  }
+
+...
+
+  return resources;
+})()
+from org.neo4j.kernel.impl.transaction.RagManager p</textarea>
+</div>
+</div>
+</section>
+
+<section class="slide">
+<h2>Visualization of a Deadlock Scenario</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="visualization deadlock" height="700" src="img/visualization_deadlock.png">
+</div>
+</div>
+</section>
+
+<section class="slide">
+<h2>JVM heap analysis using Neo4j</h2>
+<div class="paragraph"><p>Nat Pryce, James Richardson (Software Engineers, Sky)</p></div>
+
+<div class="ulist">
+<ul>
+<li>Use Neo4J for ad-hoc analysis of heap use in a proprietary embedded JVM that&#8217;s deployed in one of the most widely used consumer products in the UK (Sky Box).</li>
+<li>Used Cypher queries that uncovered surprising aspects of their code, platform and the Java compiler.</li>
+<li><strong>And finding a memory leaking JSON parser with a Cypher query.</strong></li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>Heap Model</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="neo4j heap" height="700" src="img/neo4j_heap.jpg">
+</div>
+</div>
+
+<div class="paragraph"><p>From Nat&#8217;s <a href="https://docs.google.com/a/neopersistence.com/presentation/d/19jpRrhOKTugvPal4bdM2ovm-2v5r2dpomfy1oBobuWo/pub">Graph Schema Modeling Approach</a></p></div>
+
+<div class="paragraph"><p>Talk at Accu 2014: Looking for Smoking Guns in a Haystack - using a graph database for JVM heap analysis</p></div>
+
+<section class="slide">
+<h3>Using graphs for source code analysis</h3>
+<div class="paragraph"><p><a href="http://urma.com">Raoul-Gabriel Urma</a> (PhD in Computer Science, The University of Cambridge)</p></div>
+
+<div class="paragraph"><p>Did you know that the source code of software that you engineer every day can also be represented as graphs?</p></div>
+
+<div class="paragraph"><p>In this talk, we demonstrate how you can perform program analysis using Neo4j.</p></div>
+
+<div class="paragraph"><p>We describe a prototype that stores a graph representation of the source code of Java programs in Neo4j.
+We can then query the graph using Cypher and we&#8217;ll show various examples of possible queries such as “find me all recursive methods” and “find me all subtypes of a given type”.</p></div>
+
+<div class="paragraph"><p>This talk is based on Raoul-Gabriel&#8217;s  research paper
+<a href="http://www.cl.cam.ac.uk/~am21/pk-urma-mycroft-scp.pdf"><em>Source-Code Queries with Graph Databases—with Application to Programming Language Usage and Evolution</em></a></p></div>
+</section>
+</section>
+
+<section class="slide">
+<h2>Source Control, Issues, Social Coding</h2>
+<div class="ulist">
+<ul>
+<li>What can you learn from commits</li>
+<li>about the code</li>
+<li>Class Toxicity, Frequency of Change (Feathers)</li>
+<li>about the people</li>
+<li>checkin times, collaboration, commit-size, commit-frequency</li>
+<li>Issues</li>
+<li>bug-rich classes (separation of concerns?)</li>
+</ul>
+</div>
+</section>
+
+<section class="slide">
+<h2>Example: Import Git Commit Logs into Neo4j</h2>
+<div class="ulist">
+<ul>
+<li><code>git log --format</code> emits CSV</li>
+<li>Graph Model</li>
+<li>LOAD CSV with Cypher</li>
+<li>Create / Update complex Graph Structure</li>
+</ul>
+</div>
+
+<div class="paragraph"><p><a href="http://jexp.de/blog/2014/06/using-load-csv-to-import-git-history-into-neo4j/">Blog Post</a></p></div>
+</section>
+
+<section class="slide">
+<h2>Visualization</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="git2neo2" src="img/git2neo2.jpg">
+</div>
+</div>
+</section>
+
+<section class="slide">
+<h2>Finally: Some Eye Candy</h2>
+<div class="paragraph"><p>Isaac &amp; Nash (Software Engineers at Leap Motion)</p></div>
+
+<div class="ulist">
+<ul>
+<li>Leap Motion Software</li>
+<li>Inheritance Hierarchy, Call Graph</li>
+<li>Render to .dot file</li>
+<li>Use dotparse.js to read it in</li>
+<li>WebGL enabled Three.js rendering</li>
+<li>LeapMotion SDK 2.x beta</li>
+</ul>
+</div>
+
+<div class="paragraph"><p>Let&#8217;s have a look: <a href="http://cabbibo.github.io/Leap-Object-Controls/">Demo</a>
+<a href="https://github.com/leapmotion/Leap-Three-Camera-Controls">Source</a></p></div>
+</section>
+
+<section class="slide canvas-image" style="background-image: url(img/blank.png)">
+<h1>Questions ? Thank You!</h1>
+</section>
+
+<a class="deck-prev-link" href="#" title="Previous">&#8592;</a>
+<a class="deck-next-link" href="#" title="Next">&#8594;</a>
+<p class="deck-status">
+<span class="deck-status-current"></span>
+/
+<span class="deck-status-total"></span>
+</p>
+<form action="." class="goto-form" method="get">
+<label for="goto-slide">Go to Slide:</label>
+<input id="goto-slide" list="goto-datalist" name="slidenum" type="text">
+<datalist id="goto-data-list"></datalist>
+<input type="submit" value="Go">
+</form>
+<a class="deck-permalink" href="." title="Permalink to this slide">#</a>
+<script src="../../../asciidoc/deck.js/extensions/hash/deck.hash.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/scale/deck.scale.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/goto/deck.goto.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/menu/deck.menu.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/navigation/deck.navigation.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/status/deck.status.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/arrows/home.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/arrows/d3.v3.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/arrows/arrows-graph-diagram.js"></script>
+<footer>© All Rights Reserved 2014 | Neo Technology, Inc.</footer>
+<img id="logo" src="img/neo4j-logo.png">
+<div class="slide">
+<h2>Status of the presenation</h2>
+<h3>Cypher queries execution</h3>
+<div>
+<div id="status"></div>
+<pre id="errors"></pre>
+</div>
+</div>
+<script src="../../../asciidoc/js/checkcypher.js"></script>
+<script>
+  (function($, deck, undefined) {
+    $.deck.defaults.keys['previous'] = [8, 33, 37, 39];
+    $.deck.defaults.keys['next'] = [13, 32, 34, 39];
+  
+    $.extend(true, $[deck].defaults, {
+        countNested: false
+    });
+  
+    $.deck('.slide');
+  })(jQuery, 'deck');
+</script>
+<style>
+  .slide.canvas-image {
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  display: -moz-box;
+  display: -webkit-box;
+  display: -ms-box;
+  display: box;
+  -moz-box-orient: vertical;
+  -webkit-box-orient: vertical;
+  -ms-box-orient: vertical;
+  box-orient: vertical;
+  -moz-box-align: start;
+  -webkit-box-align: start;
+  -ms-box-align: start;
+  box-align: start;
+  -moz-box-pack: start;
+  -webkit-box-pack: start;
+  -ms-box-pack: start;
+  box-pack: start;}
+  
+  .bottom-left {
+    left: 1%;
+    bottom: 20%; }
+  
+  .top-left {
+    left: 1%;
+    top: 20%; }
+  
+  .bottom-right {
+    right: 1%;
+    bottom: 20%; }
+  
+  .top-right {
+    right: 1%;
+    top: 20%; }
+  
+  .center-up {
+    right: 50%;
+    top: 1%;
+  }
+  
+  .center-down {
+    right: 50%;
+    bottom: 1%;
+  }
+  .canvas-image .canvas-caption p {
+    text-align: center;
+    padding-top: 0;
+    padding: 0;
+    -moz-transform: none;
+    -webkit-transform: none;
+    -o-transform: none;
+    -ms-transform: none;
+    transform: none;
+    display: inline;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    font-weight: bold;
+    font-size: 58px;
+    -webkit-box-shadow: 2px 2px 2px #000;
+    -moz-box-shadow: 2px 2px 2px #000;
+    box-shadow: 2px 2px 2px #000;
+    padding: 1rem;
+    color: white; }
+  kbd.keyseq { color: #555555; }
+  kbd:not(.keyseq) {
+    display: inline-block;
+    color: #222222;
+    font-size: 0.7em;
+    line-height: 1.4;
+    background-color: #F7F7F7;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset;
+    margin: -0.15em 0.15em 0 0.15em;
+    padding: 0.2em 0.6em;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  kbd kbd:first-child { margin-left: 0; }
+  kbd kbd:last-child { margin-right: 0; }
+</style>
+</body>
+</html>
