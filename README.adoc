@@ -1,6 +1,8 @@
-== Producing html
+= ASCII Doc Slides
 
-This is what you install (in your terminal):
+This tool set lets you create deck.js presntations on top of ASCII Doc files.
+
+This is what you install (from your terminal):
 
 - Install asciidoctor
 [source,bash]
@@ -18,7 +20,7 @@ Make sure you're using at least asciidoctor 0.1.4.
 - execute asciidoctor to produce Deck.js HTML5 output from the asciidoc source files
 [source,bash]
 ----
-asciidoctor -T ./asciidoctor-backends/haml/deckjs -a allow-uri-read -a presenter="Your Name"  index.adoc
+asciidoctor -T ./asciidoc/asciidoctor-backends/haml/deckjs -a allow-uri-read -a presenter="Your Name"  index.adoc
 ----
 
 or
