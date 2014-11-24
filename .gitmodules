@@ -1,0 +1,3 @@
+[submodule "content/training"]
+	path = content/training
+	url = git@github.com:neo-technology/training-slides.git
