@@ -362,7 +362,7 @@ CREATE CONSTRAINT ON (y:Year) ASSERT y.year IS UNIQUE;
 == Import with LOAD CSV - Load the Data
 [source,cypher,role=big]
 ----
-USING PERIODIC COMMIT 10000
+USING PERIODIC COMMIT 1000
 
 LOAD CSV WITH headers FROM "https://dl.dropboxusercontent.com/u/14493611/git.csv" as line
 CREATE (c:Commit {sha1: line.sha1, hash:line.hash, subject:line.subject,
@@ -379,21 +379,47 @@ MERGE (d:Day {date:substring(line.date_time,0,10), day:substring(line.date_time,
 CREATE (c)-[:ON_DAY]->(d)
 WITH c,line
 WHERE line.parents <> ""
-UNWIND split(line.parents," ") as parent_sha1
-MATCH (parent:Commit {sha1 : parent_sha1})
-CREATE (c)-[:PARENT]->(parent)
-;
+FOREACH (parent_sha1 in split(line.parents," ") |
+   MERGE (parent:Commit {sha1 : parent_sha1})
+   CREATE (c)-[:PARENT]->(parent));
 ----
-
 
 [source]
 ----
-Nodes created: 54451
-Relationships created: 81390
-Properties set: 217364
-Labels added: 54588
-108057 ms -> 1min 50 s
+Nodes created: 26068
+Relationships created: 77208
+Properties set: 174360
+Labels added: 26189
+37941 ms 
 ----
+
+MATCH (u:User)--()
+WITH u, count(*) as cnt
+ORDER BY cnt DESC
+WITH collect(u) as users
+UNWIND reduce(a=[], u in users | case when u.name in [x in a | x.name] then a else a + [u] end) as u
+RETURN u.name, u.email
+
+// find the most frequently used user first
+MATCH (u:User)--()
+WITH u, count(*) as cnt
+ORDER BY cnt DESC
+WITH collect(u) as users
+// only use the first-mentioned user, by name
+UNWIND reduce(a=[], usr in users | case when usr.name in [x in a | x.name] then a else a + [usr] end) as ux
+// work around the type checking (u is Node and Any)
+MATCH (u1) WHERE id(u1) = id(ux)
+// find matching secodary user
+MATCH (u2:User {name:u1.name})
+WHERE u1 <> u2
+// replace relationship
+MATCH (u2)-[r:AUTHORED]->(c:Commit)
+MERGE (u1)-[r2:AUTHORED]->(c)
+ON CREATE SET r2 = r
+WITH u1,u2,count(*) as cnt,collect(r) as rels
+FOREACH (r in rels | DELETE r)
+DELETE u2
+RETURN u1,cnt as new_rels
 
 [canvas-image="{img}/blank.png"]
 == That's it
