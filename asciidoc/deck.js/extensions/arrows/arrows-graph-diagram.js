@@ -177,7 +177,7 @@ gd = {};
             this.style = styleSet(model.stylePrototype.node);
         };
 
-        var Relationship = function(start, end) {
+        var Relationship = function(start, end, directed) {
             var relationshipType;
             var classes = [];
             var properties = new Properties(model.stylePrototype.relationshipProperties);
@@ -202,6 +202,7 @@ gd = {};
 
             this.start = start;
             this.end = end;
+            this.directed = directed;
 
             this.reverse = function() {
                 var oldStart = this.start;
@@ -268,8 +269,8 @@ gd = {};
             relationships.splice(relationships.indexOf(relationship), 1);
         };
 
-        model.createRelationship = function(start, end) {
-            var relationship = new Relationship(start, end);
+        model.createRelationship = function(start, end, directed) {
+            var relationship = new Relationship(start, end, directed);
             relationships.push(relationship);
             return relationship;
         };
@@ -382,7 +383,8 @@ gd = {};
                 return gd.horizontalArrowOutline(
                     start.radius.startRelationship(),
                     (length - end.radius.endRelationship()),
-                    arrowWidth );
+                    arrowWidth, 
+                    relationship.directed);
             }
             return gd.curvedArrowOutline(
                 start.radius.startRelationship(),
@@ -714,7 +716,13 @@ gd = {};
                 var relationshipMarkup = d3.select(this);
                 var fromId = relationshipMarkup.attr("data-from");
                 var toId = relationshipMarkup.attr("data-to");
-                var relationship = model.createRelationship(model.lookupNode(fromId), model.lookupNode(toId));
+                var undirected = relationshipMarkup.attr("data-undirected");
+                if (undirected === null) {
+                    undirected = false;
+                } else {
+                    undirected = true;
+                }
+                var relationship = model.createRelationship(model.lookupNode(fromId), model.lookupNode(toId), !undirected);
                 relationship.class(relationshipMarkup.attr("class") || "");
                 relationshipMarkup.select("span.type" ).each(function() {
                     relationship.relationshipType(d3.select(this).text());
@@ -783,13 +791,14 @@ gd = {};
         return markup;
     }();
 
-    gd.horizontalArrowOutline = function(start, end, arrowWidth) {
+    gd.horizontalArrowOutline = function(start, end, arrowWidth, directed) {
         var shaftRadius = arrowWidth / 2;
         var headRadius = arrowWidth * 2;
         var headLength = headRadius * 2;
         var shoulder = start < end ? end - headLength : end + headLength;
-        return {
-            outline: [
+        var outline;
+        if (directed) {
+            outline = [
                 "M", start, shaftRadius,
                 "L", shoulder, shaftRadius,
                 "L", shoulder, headRadius,
@@ -798,7 +807,18 @@ gd = {};
                 "L", shoulder, -shaftRadius,
                 "L", start, -shaftRadius,
                 "Z"
-            ].join(" "),
+            ]
+        } else {
+            outline = [
+                "M", start, shaftRadius,
+                "L", end, shaftRadius,
+                "L", end, -shaftRadius,
+                "L", start, -shaftRadius,
+                "Z"
+            ]
+        }
+        return {
+            outline: outline.join(" "),
             apex: {
                 x: start + (shoulder - start) / 2,
                 y: 0

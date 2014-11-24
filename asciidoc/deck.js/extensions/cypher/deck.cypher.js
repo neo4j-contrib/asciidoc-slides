@@ -96,7 +96,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     curPunc = void 0;
     funcs = wordRegexp(["str", "min", "labels", "max", "type", "lower", "upper", "length", "type", "id", "coalesce", "head", "last", "nodes", "relationships", "extract", "filter", "tail", "range", "reduce", "abs", "round", "sqrt", "sign", "replace", "substring", "left", "right", "ltrim", "rtrim", "trim", "collect", "distinct"]);
     preds = wordRegexp(["all", "any", "none", "single", "not", "in", "has", "and", "or"]);
-    keywords = wordRegexp(["start", "merge", "using", "on create", "on match", "match", "index on", "drop", "where", "with", "limit", "skip", "order", "by", "return", "create", "delete", "set", "unique"]);
+    keywords = wordRegexp(["start", "merge", "using", "on create", "on match", "match", "index", "on", "drop", "where", "with", "limit", "skip", "order", "by", "return", "create", "delete", "set", "remove", "unique", "optional", "foreach", "load", "csv", "as", "from"]);
     operatorChars = /[*+\-<>=&|~]/;
     return {
       startState: function(base) {

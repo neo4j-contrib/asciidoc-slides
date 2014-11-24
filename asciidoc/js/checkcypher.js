@@ -17,8 +17,8 @@ function loadScript(url, callback) {
 var status = "Executing queries"
 
 var errors = [];
-$.getScript("../../../asciidoc/js/presentation.js");
-$.getScript("../../../asciidoc/js/jquery-ui-1.10.3.custom.min.js", function () {
+$.getScript("/asciidoc/js/presentation.js");
+$.getScript("/asciidoc/js/jquery-ui-1.10.3.custom.min.js", function () {
     init();
 });
 
@@ -124,7 +124,7 @@ function handleBlock(cypherblocks, statements, done) {
         }
     }
 }
-const CONSOLE_URL = "http://neo4j-console-21.herokuapp.com/console";
+const CONSOLE_URL = "http://neo4j-console-20.herokuapp.com/console";
 
 function executeStatements(statements, done) {
     if (statements.length == 0) {
@@ -162,7 +162,7 @@ function splitStringIntoStatements(content, statements) {
         if (line.trim().endsWith(";")) {
             statements.push(currentStatement + line.trim().slice(0, -1));
         } else {
-            currentStatement = currentStatement + line;
+            currentStatement = currentStatement + line + " ";
         }
     }
 }

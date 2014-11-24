@@ -91,19 +91,31 @@ a:hover, a:active {
     outline: none;
 }
 
-ul, ol {
+.slide a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
     margin-left: 2em;
     vertical-align: top;
 }
 
 ol {
     list-style-type: decimal;
+    list-style-position: outside;
+    margin-left: 5em;
+    vertical-align: top;
 }
 
 nav ul, nav li {
     margin: 0;
     list-style: none;
     list-style-image: none;
+}
+
+ul li {
+    list-style-type: circle;
 }
 
 small {
@@ -225,9 +237,9 @@ h1, .vcenter {
 }
 
 h2 {
-    font-size: 3em;
+    font-size: 2.5em;
     font-weight: bold;
-    padding-top: .5em;
+    padding-top: .3em;
     margin: 0 0 .66666em 0;
     border-bottom: 3px solid #888;
 }
@@ -265,8 +277,12 @@ video, iframe, img {
     margin: 0 auto;
 }
 
-p, blockquote, iframe, img, ul, ol, pre, video {
+blockquote, iframe, img, ul, ol, pre, video {
     margin-bottom: 1em;
+}
+
+p {
+    margin-bottom: 0.5em;
 }
 
 pre {
@@ -275,6 +291,28 @@ pre {
     word-wrap: break-word;
     padding: 1em;
     border: 1px solid #888;
+    line-height: 1.5;
+}
+
+.deck-container .slide .CodeMirror pre span, .deck-container .slide .CodeMirror .CodeMirror-gutter-text pre {
+    font-size: 1.5em;
+}
+
+.deck-container .slide .CodeMirror .CodeMirror-gutter-text {
+    margin-right: 0.3em;
+}
+
+.deck-container .slide .CodeMirror .CodeMirror-lines {
+    margin-left: 0.3em;
+}
+
+.CodeMirror {
+    margin-top: 0.5em;
+    margin-bottom: 3em;
+}
+
+.deck-container .slide .CodeMirror {
+    border: none;
 }
 
 em {
@@ -287,6 +325,10 @@ li {
     vertical-align: middle;
 }
 
+p {
+    font-size: 2em;
+}
+
 li ol li, li ul li {
 	font-size: 0.8em;
 }
@@ -296,9 +338,9 @@ li > ol, li > ul {
 }
 
 .deck-container {
-    font-size: 16px;
+    font-size: 100%;
     line-height: 1.25;
-    color: rgb(109, 96, 77);
+    color: #333; /*rgb(109, 96, 77);*/
 }
 
 .slide {
@@ -309,17 +351,17 @@ li > ol, li > ul {
 
 h1, h2, h3, h4, h5, h6 {
     /*font-family: "Hoefler Text", Constantia, Palatino, "Palatino Linotype", "Book Antiqua", Georgia, serif;*/
-    font-family: "Nanum Gothic", "sans-serif";
+    /*font-family: "Nanum Gothic", "sans-serif";*/
 }
 
 h1 {
-    color: rgb(176, 54, 43);
-    font-weight: bolder;
+    color: rgb(15, 87, 136);
+    font-weight: normal;
 }
 
 h2 {
-    color: rgb(176, 54, 43);
-    font-weight: bolder;
+    color: rgb(15, 87, 136); /*rgb(176, 54, 43);*/
+    font-weight: normal;
     border-bottom: 0;
 }
 
@@ -330,8 +372,8 @@ h2 {
 }*/
 
 h3 {
-    color: rgb(176, 54, 43);
-    font-weight: bolder;
+    color: #666; /*rgb(176, 54, 43);*/
+    font-weight: normal;
 }
 
 pre {
@@ -377,8 +419,8 @@ pre {
 }*/
 
 code {
-    color: #000000;
-    font-size: 200%;
+    color: #B0362B;
+    font-size: 80%;
     font:bold;
 }
 
@@ -450,7 +492,7 @@ blockquote:before {
     color: #fff;
 }
 
-a, a:hover, a:focus, a:active, a:visited {
+a, a:hover, a:focus, a:active {
     color: rgb(109, 96, 77);
     text-decoration: underline;
 
@@ -461,7 +503,7 @@ a:hover, a:focus {
 }
 
 .deck-container {
-    font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+    font-family: "Open Sans", "Gill Sans", "Gill Sans MT", 'Helvetica Neue', Helvetica, Helvetica, Arial, Calibri, sans-serif;
     font-size: 1.75em;
     background: #ffffff;
     /* Old browsers */
@@ -483,7 +525,7 @@ a:hover, a:focus {
 }
 
 .deck-container > .slide {
-    padding: 0 48px;
+    padding: 1em 2em 1em 3em;
 }
 
 .slide .deck-before, .slide .deck-previous {
@@ -514,6 +556,8 @@ a:hover, a:focus {
 
 .deck-status {
     font-size: 0.6666em;
+    right: 50%;
+    bottom: 50px;
 }
 
 .deck-menu .slide {
@@ -539,16 +583,25 @@ a:hover, a:focus {
     box-shadow: 0 15px 10px -10px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
 }
 
-#logo {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    width: 100px;
+#logo, #logo2 {
+    position: absolute;
     z-index: 100;
+    bottom: 0; 
+    width: 150px;  
+    padding-bottom: 20px; 
 }
 
+#logo {
+    left: 30px;
+}
+
+#logo2 {
+    right: 30px;
+}
+
+
 pre.highlight {
-    color: red;
+    color: #B0362B;
 }
 
 footer {
@@ -569,7 +622,7 @@ footer {
 }
 
 .highlight {
-    color: red;
+    color: #B0362B;
 }
 
 .labslide {
@@ -585,7 +638,16 @@ table,td {
 }
 
 th {
-    border: solid thick;
+    border: solid thin;
+    text-align: left;
+}
+
+td, th {
+   padding: 0.5em; 
+}
+
+td p {
+    margin-bottom: 0;
 }
 
 figure,table {
@@ -603,5 +665,80 @@ figure,table {
     color: #0000ff;
 }
 
+.img-ref {
+    font-size: 0.5em;
+    position: absolute;
+    right: 2em;
+    bottom: 2.5em;
+}
 
+.img-ref p {
+    font-size: 1em;
+}
 
+.img-ref, .img-ref a {
+    color: white;
+    text-decoration: none;
+}
+
+.img-ref.dark, .img-ref.dark a {
+    color: #222;
+}
+
+ul.condensed-75 {
+  font-size: 0.75em;
+  line-height: 1.25;
+}
+
+ul.condensed-65 {
+  font-size: 0.65em;
+  line-height: 1.25;
+}
+
+ul.condensed-50 {
+  font-size: 0.5em;
+  line-height: 1.25;
+}
+
+section.canvas-image {
+    z-index: 1000;
+}
+
+.subtitle, .subtitle2 {
+    left: 0;
+    right: 0;
+    top: 50%;
+    text-align: center;
+    display: inline;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    font-weight: normal;
+    font-size: 0.5em;
+    padding: 0.5em;
+    color: white; 
+}
+
+.subtitle2 {
+    -webkit-transform: translate(0, 100%);
+    -moz-transform: translate(0, 100%);
+    -ms-transform: translate(0, 100%);
+    -o-transform: translate(0, 100%);
+    transform: translate(0, 100%);
+}
+
+h1 {
+    display: none;
+}
+
+.hidden-title h2 {
+    display: none;
+}
+
+.listingblock.small {
+    font-size: 0.35em;
+}
+
+.canvas-image {
+    background-size: cover;
+    background-position: center;
+}

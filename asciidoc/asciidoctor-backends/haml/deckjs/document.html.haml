@@ -13,6 +13,7 @@
       - deckjs_dir = "#{attr :deckjsdir}"
       %script(src='#{deckjs_dir}/jquery.min.js')
       %script(src='#{deckjs_dir}/core/deck.core.js')
+    %link(rel='stylesheet'){:href=>'http://fonts.googleapis.com/css?family=Open+Sans:800,400,600,300'}
     
     - unless (attr :stylesheet, '').empty?
       %link(rel='stylesheet'){:href=>normalize_web_path((attr :stylesheet), (attr :stylesdir, ''))}
@@ -37,12 +38,13 @@
       %script hljs.initHighlightingOnLoad()
     - when 'codemirror'
       %link(rel='stylesheet' href="#{deckjs_dir}/extensions/codemirror/deck.codemirror.css")
-      %link(rel='stylesheet' href="#{deckjs_dir}/extensions/codemirror/themes/default.css")
+      %link(rel='stylesheet' href="#{deckjs_dir}/extensions/codemirror/themes/iq.css")
       %script(src="#{deckjs_dir}/extensions/codemirror/codemirror.js")
       %script(src="#{deckjs_dir}/extensions/codemirror/deck.codemirror.js")
       %script(src="#{deckjs_dir}/extensions/codemirror/mode/javascript/javascript.js")
       %script(src="#{deckjs_dir}/extensions/codemirror/mode/css/css.js")
       %script(src="#{deckjs_dir}/extensions/codemirror/mode/htmlmixed/htmlmixed.js")
+      %script(src="#{deckjs_dir}/extensions/codemirror/mode/plsql/plsql.js")
       %script(src="#{deckjs_dir}/extensions/cypher/deck.cypher.js")
       %link(rel='stylesheet' href="#{deckjs_dir}/extensions/cypher/deck.cypher.css")
     - when 'prettify'
@@ -72,37 +74,33 @@
     %script(src='#{deckjs_dir}/modernizr.custom.js')
   %body{:id=>@id, :class=>['deck-container', doctype], :style=>("max-width: #{attr 'max-width'};" if (attr? 'max-width'))}
     - unless noheader
-      %section(class='slide' id='title-slide')
-        - unless notitle
-          %h1=@header.title
-        - if attr? :author
-          %span#author=attr :author
-          %br
-          - if attr? :email
-            %span#email=sub_macros(attr :email)
+      - unless attr? :hidetitle
+        %section(class='slide' id='title-slide')
+          - unless notitle
+            %h1=@header.title
+          - if attr? :author
+            %span#author=attr :author
             %br
-          - if (authorcount = (attr :authorcount).to_i) > 1
-            - (2..authorcount).each do |idx|
-              %span{:id=>"author#{idx}", :class=>"author"}=(attr "author_#{idx}")
+            - if attr? :email
+              %span#email=sub_macros(attr :email)
               %br
-              - if attr? "email_#{idx}"
-                %span{:id=>"email#{idx}", :class=>"email"}=sub_macros(attr "email_#{idx}")
-        - if attr? :revnumber
-          %span#revnumber #{((attr 'version-label') || '').downcase} #{attr :revnumber}#{',' if (attr? :revdate)}
-        - if attr? :revdate
-          %span#revdate=attr :revdate
-        - if attr? :revremark
-          %br
-          %span#revremark=attr :revremark
+            - if (authorcount = (attr :authorcount).to_i) > 1
+              - (2..authorcount).each do |idx|
+                %span{:id=>"author#{idx}", :class=>"author"}=(attr "author_#{idx}")
+                %br
+                - if attr? "email_#{idx}"
+                  %span{:id=>"email#{idx}", :class=>"email"}=sub_macros(attr "email_#{idx}")
+          - if attr? :revnumber
+            %span#revnumber #{((attr 'version-label') || '').downcase} #{attr :revnumber}#{',' if (attr? :revdate)}
+          - if attr? :revdate
+            %span#revdate=attr :revdate
+          - if attr? :revremark
+            %br
+            %span#revremark=attr :revremark
       =content
     - if attr? :navigation
       %a(href='#' class='deck-prev-link' title='Previous') &#8592;
       %a(href='#' class='deck-next-link' title='Next') &#8594;
-    - if attr? :status
-      %p.deck-status
-        %span.deck-status-current
-        \/
-        %span.deck-status-total
     - if attr? :goto
       %form(action='.' method='get' class='goto-form')
         %label(for='goto-slide') Go to Slide:
@@ -131,17 +129,25 @@
       %script(src='#{deckjs_dir}/extensions/arrows/home.js')
       %script(src='#{deckjs_dir}/extensions/arrows/d3.v3.js')
       %script(src='#{deckjs_dir}/extensions/arrows/arrows-graph-diagram.js')
+      %script(src='#{deckjs_dir}/extensions/arrows/arrows-init.js')
     - if attr? :footer
       %footer=attr :footer
     - if attr? :logo
       %img#logo(src='#{attr :logo}') 
-      
-      %div.slide
-        %h2 Status of the presenation
-        %h3 Cypher queries execution
+    - if attr? :logo2
+      %img#logo2(src='#{attr :logo2}') 
+    - if attr? :status
+      %p.deck-status
+        %span.deck-status-current
+        \/
+        %span.deck-status-total
+
+      %div.slide.cypher-status
+        %h2 Status of the presentation
+        %p Cypher queries execution
         %div
           %div#status
-          %pre#errors
+          %pre#errors(style='overflow-y:scroll;font-size:small')
     - if attr? :customjs   
       %script(src="#{attr :customjs}")
     :javascript
@@ -204,23 +210,30 @@
         bottom: 1%;
       }
       .canvas-image .canvas-caption p {
+        -webkit-transform: translate(0, -50%);
+        -moz-transform: translate(0, -50%);
+        -ms-transform: translate(0, -50%);
+        -o-transform: translate(0, -50%);
+        transform: translate(0, -100%);
+      }
+      .canvas-image .canvas-title p {
+        -webkit-transform: translate(0, -100%);
+        -moz-transform: translate(0, -100%);
+        -ms-transform: translate(0, -100%);
+        -o-transform: translate(0, -100%);
+        transform: translate(0, -100%);
+      }
+      .canvas-image .canvas-caption p, .canvas-image .canvas-title p {
+        left: 0;
+        right: 0;
+        top: 50%;
         text-align: center;
-        padding-top: 0;
-        padding: 0;
-        -moz-transform: none;
-        -webkit-transform: none;
-        -o-transform: none;
-        -ms-transform: none;
-        transform: none;
         display: inline;
         position: absolute;
         background-color: rgba(0, 0, 0, 0.7);
-        font-weight: bold;
-        font-size: 58px;
-        -webkit-box-shadow: 2px 2px 2px #000;
-        -moz-box-shadow: 2px 2px 2px #000;
-        box-shadow: 2px 2px 2px #000;
-        padding: 1rem;
+        font-weight: normal;
+        font-size: 3em;
+        padding: 1em;
         color: white; }
       kbd.keyseq { color: #555555; }
       kbd:not(.keyseq) {
