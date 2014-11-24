@@ -124,7 +124,7 @@ function handleBlock(cypherblocks, statements, done) {
         }
     }
 }
-const CONSOLE_URL = "http://neo4j-console-20.herokuapp.com/console";
+const CONSOLE_URL = "http://neo4j-console-21.herokuapp.com/console";
 
 function executeStatements(statements, done) {
     if (statements.length == 0) {
