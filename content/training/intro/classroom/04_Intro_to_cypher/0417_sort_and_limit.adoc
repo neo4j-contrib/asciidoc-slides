@@ -1,9 +1,0 @@
-== Sort and limit
-
-[source,cypher,options="step"]
-----
-MATCH (a)-[:ACTED_IN]->(m)<-[:DIRECTED]-(d)
-RETURN a.name, d.name, count(*) AS count
-ORDER BY count DESC
-LIMIT 5
-----
