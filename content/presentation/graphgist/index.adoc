@@ -1,33 +1,9 @@
 = Live Graph Model Documentation with Graph Gists
-:presenter: Neo Technology
-:twitter: neo4j
-:email: info@neotechnology.com
-:backend: deckjs
-:deckjsdir: ../../../asciidoc/deck.js
-:deckjs_theme: neotech
-:icons: font
-:source-highlighter: codemirror
-:navigation:
-:goto:
-:menu:
-:status:
-:arrows:
-:customjs: ../../../asciidoc/js/checkcypher.js
-:gist-source: https://raw.github.com/neo4j-contrib/gists/master/
-:footer: © All Rights Reserved 2013 | Neo Technology, Inc.
-:img: img
-:logo: {img}/Neo_Technology.jpg
-:allow-uri-read:
-:video:
-:docs-link: https://github.com/neo4j-contrib/asciidoc-slides[documentation]
-:download-link: https://github.com/neo4j-contrib/asciidoc-slides/archive/master.zip[download]
-:sectids!:
-:deckjs_transition: none
-
+<
 ++++
 <style type="text/css">
 .small {
-   font-size:0.6em;
+   font-size:0.5em;
 }
 </style>
 ++++
@@ -57,7 +33,7 @@
 
 == What will he talk about?
 
-[options="step"]
+//[options="step"]
 * (Graphs)-[:LOVE]->(Whiteboards)
 * (Graphs)-[:HATE]->(Text-Files)
 * Ascii-Art Rocks
@@ -68,7 +44,7 @@
 
 == Question for you!
 
-[options="step"]
+//[options="step"]
 * How to discuss/communicate your awesome graph domain model?
 * What is an easy way to present it in a modern, interactive format?
 * Do you draw the model by hand?
@@ -77,7 +53,7 @@
 
 == (Graphs)-[:LOVE]->(Whiteboards)
 
-[options="step"]
+//[options="step"]
 * The picture vs. 1000 words
 * creative thinking doodles
 * modeling is incremental
@@ -101,7 +77,7 @@
 
 ++++
 <figure class="graph-diagram">
-<ul class="graph-diagram-markup" data-internal-scale="1.58" data-external-scale="1">
+<ul class="graph-diagram-markup" data-internal-scale="1.58" data-external-scale=".75">
   <li class="node" data-node-id="0" data-x="-115.53164556962025" data-y="-540.7594936708862">
     <span class="caption">Person</span><dl class="properties"><dt>name</dt><dd>Bob</dd><dt>age</dt><dd>38</dd></dl></li>
   <li class="node" data-node-id="1" data-x="-358.9403254972869" data-y="-330.334538878843">
@@ -123,7 +99,7 @@
 
 == (Graphs)-[:HATE]->(Text-Files)
 
-[options="step"]
+//[options="step"]
 * It's the 1000 words
 * Single dimensional
 * No graphics
@@ -131,7 +107,7 @@
 
 == But Ascii-Art Rocks
 
-[options="step"]
+//[options="step"]
 * Turn text into pictures
 * The Power of Symbols
 * Graph Patterns Made easy
@@ -170,7 +146,7 @@
 
 == (Cypher)-[:USES]->(Ascii-Art)
 
-[options="step"]
+//[options="step"]
 * Declarative Graph Query Language
 * Graph Pattern Matching
 * Humane, Readable
@@ -222,7 +198,7 @@ RETURN c.tld, count(p) as hipsters
 
 === How does it work?
 
-[options="step"]
+//[options="step"]
 * Tiny Webapp on Heroku
 * In-Memory throwaway Neo4j instances
 * Simple Console UI with Graph Viz and Table Results
@@ -244,7 +220,7 @@ RETURN c.tld, count(p) as hipsters
 
 == AsciiDoc - the better Markup Language
 
-[options="step"]
+//[options="step"]
 * Full Toolchain for book generation
 * lots of options
 * still easy to read text files
@@ -292,7 +268,7 @@ AsciiDoc Example (rendered)
 
 == AsciiDoctor - the better AsciiDoc
 
-[options="step"]
+//[options="step"]
 * Reimplementation in Ruby (also jRuby)
 * **Much** faster
 * lots of extensions
@@ -307,6 +283,7 @@ AsciiDoc Example (rendered)
 
 == What is a gist?
 
+//[options="step"]
 * A useful snippet of information
 * Easy to share, fork and change
 * Nicely rendered and presented
@@ -315,7 +292,7 @@ AsciiDoc Example (rendered)
 
 === an AsciiDoc file with:
 
-[options="step"]
+//[options="step"]
 * a graph domain model (cypher)
 * describing text and pictures
 * some example queries checked against the model
@@ -328,7 +305,7 @@ AsciiDoc Example (rendered)
 [role="canvas-caption", position="bottom-right"] 
 http://gist.neo4j.org/?6029850[]
 
-== What does it look like?
+== Full Source
 
 [source,role=small]
 ----
@@ -380,7 +357,7 @@ http://gist.neo4j.org/?6029850[]
 ----
 
 
-== What does it look like? (setup)
+== Source: Setup
 
 [source]
 ----
@@ -411,7 +388,7 @@ http://gist.neo4j.org/?6029850[]
 
 ----
 
-== What does it look like? (use-case)
+== Source: Use-Case
 
 [source]
 ----
@@ -442,7 +419,7 @@ http://gist.neo4j.org/?6029850[]
 
 == Power Combination of Cool Tools
 
-[options="step"]
+//[options="step"]
 * AsciiDoc(tor) running in Browser with Opal.js
 * Cypher
 * Neo4j Console
@@ -457,7 +434,7 @@ http://gist.neo4j.org/?6029850[]
 
 == How does it work (Rendering)?
 
-[options="step"]
+//[options="step"]
 . Load Gist file from GitHub Gist / Url
 . Render AsciiDoc to HTML5 on the fly
 . Write to page / CSS
@@ -465,7 +442,7 @@ http://gist.neo4j.org/?6029850[]
 
 == How does it work (Queries) ?
 
-[options="step",start=5]
+//[options="step",start=5]
 . Instantiate Console IFrame
 . Find all setup- and use-case queries
 . Send to Console, Check Results
@@ -473,44 +450,41 @@ http://gist.neo4j.org/?6029850[]
 . Reset and Show Console
 
 
-== Next Step ?
+== Next Steps ?
 
-=== We have a great tool for model documentation
-
-=== Now we need some models, aka content
-
-=== Don't make something up!
-
-=== Ask your users, your Community
-
-=== Create a Challenge (or two)
+//[options="step"]
+* We have a great tool for model documentation
+* Now we need some graph models, content
+* Don't make something up!
+* Ask your users, your Community
+* Create a Challenge (or two)
 
 
 == First Challenge (September)
 
-[options="step"]
+//[options="step"]
 * Give me anything
 * Nice Prizes (Money, Books, T-Shirts, Tickets)
 * Impressive http://blog.neo4j.org/2013/10/the-first-graphgist-challenge-completed.html[17 submissions in 4 weeks]
 
 === Winners
 
-[options="step"]
+//[options="step"]
 . http://gist.neo4j.org/?6619085[US Flights & Airports] by Nicole White
 . http://gist.neo4j.org/?github-jotomo%2Fneo4j-gist-challenge%2F%2Flearning-graph%2Flearning-graph.adoc[Learning Graph] by Johannes Mockenhaupt
 . http://gist.neo4j.org/?6506717[Chess Games] and Positions by Wes Freeman
 
 == Second Challenge (Winter Dec+Jan)
 
-[options="step"]
-* 10 Categories from Education, Tranport up to Advanced aka. "Show Off"
+//[options="step"]
+* 10 Categories from Education, Transport up to Advanced aka. "Show Off"
 * Unbelievable https://github.com/neo4j-contrib/graphgist/wiki[65 submissions in 8 weeks w/ holidays]
 * High quality content
 * Hard to choose winners
 
 == Winter Challenge Winners
 
-[options="step"]
+//[options="step"]
 * http://blog.neo4j.org/2014/02/graph-gist-winter-challenge-winners.html[11 Winners in the categories], just 3 examples
 * http://gist.neo4j.org/?8021754[Organization Learning] by @luannem - covering your path through courses and certifications in a learning management system.
 * http://gist.neo4j.org/?8139605[Single Malt Scotch Whisky] by @patbaumgartner is my personal favorite, you certainly know why
@@ -518,7 +492,7 @@ http://gist.neo4j.org/?6029850[]
 
 == What's in for you?
 
-[options="step"]
+//[options="step"]
 * Use them !
 * GraphGists are fun
 * They help you model, communicate and discuss your domain
@@ -528,7 +502,7 @@ http://gist.neo4j.org/?6029850[]
 
 == Can I win something?
 
-[options="step"]
+//[options="step"]
 * Sure
 * Submit your original GraphGist through this form http://bit.ly/graphgist
 * Get A T-Shirt
