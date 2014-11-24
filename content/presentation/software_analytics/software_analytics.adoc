@@ -48,7 +48,7 @@
 
 == What will he talk about?
 
-//[options="step"]
+[options="step"]
 * What is this Neo4j Graphdatabase thing?
 * Ascii-Art Rocks
 * Graphs in Your Code - The Idea
@@ -57,7 +57,7 @@
 
 == What is a Graph Database ?
 
-//[options="step"]
+[options="step"]
 * labeled Nodes
 * directed, typed Relationships
 * arbitrary Properties on each
@@ -68,7 +68,7 @@ image::{img}/property_graph_model.png[width=60%]
 
 == What makes it special ?
 
-//[options=step]
+[options=step]
 * close to the object model
 * prematerialize relationships
 * traversals in linear time
@@ -103,7 +103,7 @@ image::{img}/property_graph_model.png[width=60%]
 
 == Ascii-Art Rocks
 
-//[options="step"]
+[options="step"]
 * Turn text into pictures
 * Turn picture into text
 * The Power of Symbols
@@ -142,7 +142,7 @@ image::{img}/property_graph_model.png[width=60%]
 
 == (Cypher)-[:USES]->(Ascii-Art)
 
-//[options="step"]
+[options="step"]
 * Declarative Graph Query Language
 * Graph Pattern Matching
 * Humane, Readable
@@ -197,7 +197,7 @@ http://worldcup.neo4j.org[WorldCup]
 
 == Software Analytics - Approach
 
-//[options="step"]
+[options="step"]
 . look at one interesting aspect
 . which insights would be cool?
 . model it as a graph
@@ -208,7 +208,7 @@ http://worldcup.neo4j.org[WorldCup]
 
 == (Code)-[:IS_A]->(Graph)
 
-//[options="step"]
+[options="step"]
 * AST, ByteCode, Source-Code
 * Inheritance, Composition, Dependencies
 * Transitive Module and Library dependencies
@@ -219,7 +219,7 @@ http://worldcup.neo4j.org[WorldCup]
 
 == jQAssistant
 
-//[options="step"]
+[options="step"]
 * Open Source Software Analytics Tool
 * Plugins for Java, JEE, JPA, Maven, Gradle, SonarJ ...
 * All Cypher based
@@ -258,7 +258,7 @@ image::{img}/jqassistant_model.png[height=700]
 
 == Approach
 
-//[options=step]
+[options=step]
 . Scan your project with +
   Plugins for Code (Java-ASM), Config, Metadata
 . Import into Neo4j
@@ -320,7 +320,7 @@ ORDER BY depCount DESC
 
 == Query a JVM Heapdump
 
-//[options=step]
+[options=step]
 . Get a heap-dump with +jmap+ +
   +jmap -dump:format=b,file=dump.hprof <pid>+
 . Use +jhat dump.hprof+ find the /oql endpoint 
@@ -439,7 +439,49 @@ Late in the development of a major new feature for one of the most widely used c
 Many aspects of software can be modelled as graphs. Our experience shows that graph databases are a powerful foundation upon which to build software development tools. Thanks to increasing commoditization, we believe graph databases hold a lot of promise for non-mainstream programming platforms that are usually underserved by tool vendors.
 ////
 
-=== Using graphs for source code analysis
+== Software Analytics & Evolution
+
+Analytics of (legacy) Software Systems
+
+for modernization, insight gathering, testing, architecture retrieval
+
+* Domain Knowledge Extraction
+// Understand the meaning of your source code. Extraction of domain knowledge from source code as mathematical formulas, figures, decision tables or state charts. Automated redocumentation of complex technical software.
+* Software Architecture Analysis
+// Define reference software architectures and continuously check your architecture compliance. Manage, preserve, and share the knowledge that comes along with architectural decisions.
+* Query Software Systems
+//Use a central, graph-based repository to effectively query your own software system. Implement custom queries to identify interesting dependencies within your source code.
+* Knowledge Driven Testing
+// Make use of logic models to automate the generation of test cases for your software system (model-based testing). Extract knowledge from software repositories to focus your quality assurance effort.
+* Measure Software Systems
+//Software metrics allow the measuring of large scale software systems. Identify error prone parts within your software system or simply identify complex parts in your software that will be hard to maintain in the future.
+* Domain Specific Programming
+// Design of domain specific languages (DSL) to automate the generation of source code from extracted domain models. End user programming of complex technical systems.
+
+http://scch.at/en/sae-overview[Software Competence Center Hagenberg, Austria]
+image::http://scch.at/files/assets/images/scch-logo.gif[right]
+
+== Graph Querying
+
+[options=step]
+* Parsing of C, FORTRAN - source-code using Antlr
+* Building of a graph model
+* Allow for querying, software analytics, metrics, visualization
+
+=== Quick Demo
+
+http://codeanalytics.scch.at/#query-neo4j[Demo]
+
+== Putty Source Code - functions reading structures
+
+++++
+<blockquote class="twitter-tweet" lang="en"><p>one last visu for <a href="https://twitter.com/GraphConnect">@GraphConnect</a> <a href="https://twitter.com/hashtag/ShowMeYourGraph?src=hash">#ShowMeYourGraph</a> putty source code functions reading structures, complexity + effort <a href="http://t.co/etN495kVkB">pic.twitter.com/etN495kVkB</a></p>&mdash; Wolfgang Beer (@wolfgangscch) <a href="https://twitter.com/wolfgangscch/status/517308839352631296">October 1, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+++++
+
+//image::{img}/putty_sourcecode_wolfgang_beer.png[width=500]
+
+== Using graphs for source code analysis
 
 http://urma.com[Raoul-Gabriel Urma] (PhD in Computer Science, The University of Cambridge)  
 

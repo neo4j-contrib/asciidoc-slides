@@ -3,7 +3,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
-<meta content="Asciidoctor 0.1.4" name="generator">
+<meta content="Asciidoctor 1.5.1" name="generator">
 <title>Using AsciiArt to Analyse your SourceCode with Neo4j and OSS Tools</title>
 <script src="../../../asciidoc/deck.js/jquery.min.js"></script>
 <script src="../../../asciidoc/deck.js/core/deck.core.js"></script>
@@ -44,7 +44,6 @@
 </style>
 </div>
 </div>
-
 <section class="slide">
 <h2>Who the hell is this guy?</h2>
 <div class="ulist">
@@ -56,31 +55,28 @@
 </ul>
 </div>
 </section>
-
 <section class="slide">
 <h2>What will he talk about?</h2>
 <div class="ulist">
 <ul>
-<li>What is this Neo4j Graphdatabase thing?</li>
-<li>Ascii-Art Rocks</li>
-<li>Graphs in Your Code - The Idea</li>
-<li>Having Fun with your Code and jQAssistant</li>
-<li>Gimme More</li>
+<li class="slide">What is this Neo4j Graphdatabase thing?</li>
+<li class="slide">Ascii-Art Rocks</li>
+<li class="slide">Graphs in Your Code - The Idea</li>
+<li class="slide">Having Fun with your Code and jQAssistant</li>
+<li class="slide">Gimme More</li>
 </ul>
 </div>
 </section>
-
 <section class="slide">
 <h2>What is a Graph Database ?</h2>
 <div class="ulist">
 <ul>
-<li>labeled Nodes</li>
-<li>directed, typed Relationships</li>
-<li>arbitrary Properties on each</li>
+<li class="slide">labeled Nodes</li>
+<li class="slide">directed, typed Relationships</li>
+<li class="slide">arbitrary Properties on each</li>
 </ul>
 </div>
 </section>
-
 <section class="slide">
 <h2>Property Graph Model</h2>
 <div class="imageblock">
@@ -89,21 +85,19 @@
 </div>
 </div>
 </section>
-
 <section class="slide">
 <h2>What makes it special ?</h2>
 <div class="ulist">
 <ul>
-<li>close to the object model</li>
-<li>prematerialize relationships</li>
-<li>traversals in linear time</li>
-<li>sparse, heterogenous data + schema free</li>
-<li>local queries - explore the neighbourhood</li>
-<li>whiteboard-friendly</li>
+<li class="slide">close to the object model</li>
+<li class="slide">prematerialize relationships</li>
+<li class="slide">traversals in linear time</li>
+<li class="slide">sparse, heterogenous data + schema free</li>
+<li class="slide">local queries - explore the neighbourhood</li>
+<li class="slide">whiteboard-friendly</li>
 </ul>
 </div>
 </section>
-
 <section class="slide">
 <h2>Where can/should I use it ?</h2>
 <div class="ulist">
@@ -114,41 +108,35 @@
 <li>Sciene (Metadata, Drug Research)</li>
 <li>Masterdata, Hierarchy-Mgmt</li>
 <li>Fraud-Detection, Market-Analysis</li>
-<li>Social, &#8230;. and many more</li>
+<li>Social, &#8230;&#8203;. and many more</li>
 </ul>
 </div>
 </section>
-
 <section class="slide canvas-image" style="background-image: url(img/model4.png)">
 <div class="paragraph canvas-caption"><p class="bottom-left">(Graphs)-[:LOVE]&#8594;(Whiteboards)</p></div>
 </section>
-
 <section class="slide canvas-image" style="background-image: url(img/model5.png)">
 
 </section>
-
 <section class="slide canvas-image" style="background-image: url(img/model6.png)">
 
 </section>
-
 <section class="slide canvas-image" style="background-image: url(img/model7.png)">
 
 </section>
-
 <section class="slide">
 <h2>Ascii-Art Rocks</h2>
 <div class="ulist">
 <ul>
-<li>Turn text into pictures</li>
-<li>Turn picture into text</li>
-<li>The Power of Symbols</li>
-<li>Graph Patterns Made easy</li>
-<li>Hacker and Mudder Friendly</li>
-<li>Diffs, VCS</li>
+<li class="slide">Turn text into pictures</li>
+<li class="slide">Turn picture into text</li>
+<li class="slide">The Power of Symbols</li>
+<li class="slide">Graph Patterns Made easy</li>
+<li class="slide">Hacker and Mudder Friendly</li>
+<li class="slide">Diffs, VCS</li>
 </ul>
 </div>
 </section>
-
 <section class="slide">
 <h2>Ascii-Art Rocks</h2>
 <div class="listingblock">
@@ -172,33 +160,28 @@
 </div>
 </div>
 </section>
-
 <section class="slide canvas-image" style="background-image: url(img/blank.png)">
 <h1>Cypher</h1>
 </section>
-
 <section class="slide">
 <h2>(Cypher)-[:USES]&#8594;(Ascii-Art)</h2>
 <div class="ulist">
 <ul>
-<li>Declarative Graph Query Language</li>
-<li>Graph Pattern Matching</li>
-<li>Humane, Readable</li>
-<li>Expressive</li>
-<li>Read and Write Graphs</li>
-<li>Tabular Results</li>
+<li class="slide">Declarative Graph Query Language</li>
+<li class="slide">Graph Pattern Matching</li>
+<li class="slide">Humane, Readable</li>
+<li class="slide">Expressive</li>
+<li class="slide">Read and Write Graphs</li>
+<li class="slide">Tabular Results</li>
 </ul>
 </div>
 </section>
-
 <section class="slide canvas-image" style="background-image: url(img/pattern2.gif)">
 
 </section>
-
 <section class="slide canvas-image" style="background-image: url(img/pattern1.gif)">
 
 </section>
-
 <section class="slide">
 <h2>Cypher Query - Example Geekout</h2>
 <section class="slide">
@@ -219,7 +202,6 @@ FOREACH (name in ["Java","IDE","Development"] |
 </div>
 </div>
 </section>
-
 <section class="slide">
 <h3>Query</h3>
 <div class="listingblock">
@@ -235,7 +217,6 @@ ORDER BY session.time</textarea>
 </div>
 </section>
 </section>
-
 <section class="slide">
 <h2>Geekout 2014 GraphGist</h2>
 <div class="imageblock">
@@ -243,70 +224,65 @@ ORDER BY session.time</textarea>
 <img alt="geekout2014" src="img/geekout2014.jpg" width="70%">
 </div>
 </div>
-
 <div class="paragraph"><p><a href="http://www.neo4j.org/graphgist?9501ecbc0c4ef11f8d6e">Interactive GraphGist Document</a>
 <a href="http://worldcup.neo4j.org">WorldCup</a></p></div>
 </section>
-
 <section class="slide">
 <h2>Software Analytics - Approach</h2>
 <div class="olist arabic">
 <ol class="arabic">
-<li>
+<li class="slide">
 look at one interesting aspect
 </li>
-<li>
+<li class="slide">
 which insights would be cool?
 </li>
-<li>
+<li class="slide">
 model it as a graph
 </li>
-<li>
+<li class="slide">
 get data
 </li>
-<li>
+<li class="slide">
 import into graph model
 </li>
-<li>
+<li class="slide">
 enrich graph model with concepts / structure
 </li>
-<li>
+<li class="slide">
 query for insights
 </li>
 </ol>
 </div>
 </section>
-
 <section class="slide">
 <h2>(Code)-[:IS_A]&#8594;(Graph)</h2>
 <div class="ulist">
 <ul>
-<li>AST, ByteCode, Source-Code</li>
-<li>Inheritance, Composition, Dependencies</li>
-<li>Transitive Module and Library dependencies</li>
-<li>Dependency injection config</li>
-<li>Data model (db) &lt;&#8594; object model</li>
-<li>Runtime characteristics: call graph, heap</li>
-<li>Version control, repositories, issues</li>
+<li class="slide">AST, ByteCode, Source-Code</li>
+<li class="slide">Inheritance, Composition, Dependencies</li>
+<li class="slide">Transitive Module and Library dependencies</li>
+<li class="slide">Dependency injection config</li>
+<li class="slide">Data model (db) &lt;&#8594; object model</li>
+<li class="slide">Runtime characteristics: call graph, heap</li>
+<li class="slide">Version control, repositories, issues</li>
 </ul>
 </div>
 </section>
-
 <section class="slide">
 <h2>jQAssistant</h2>
 <div class="ulist">
 <ul>
-<li>Open Source Software Analytics Tool</li>
-<li>Plugins for Java, JEE, JPA, Maven, Gradle, SonarJ &#8230;</li>
-<li>All Cypher based</li>
-<li>Technical and Domain Concept Definitions</li>
-<li>Compute Software Metrics</li>
-<li>Declare and Validate Architectural Rules</li>
-<li>Integrated in Build Process</li>
+<li class="slide">Open Source Software Analytics Tool</li>
+<li class="slide">Plugins for Java, JEE, JPA, Maven, Gradle, SonarJ &#8230;&#8203;</li>
+<li class="slide">All Cypher based</li>
+<li class="slide">Technical and Domain Concept Definitions</li>
+<li class="slide">Compute Software Metrics</li>
+<li class="slide">Declare and Validate Architectural Rules</li>
+<li class="slide">Integrated in Build Process</li>
 </ul>
 </div>
 </section>
-
 <section class="slide">
 <h2>jQAssistant</h2>
 <div class="imageblock">
@@ -314,12 +290,9 @@ query for insights
 <img alt="logo jqa small" src="https://github.com/buschmais/jqassistant/wiki/images/logo_jqa-small.png">
 </div>
 </div>
-
 <div class="paragraph"><p>Actively Looking for Contributions</p></div>
-
-<div class="paragraph"><p><a href="http://github.com/buschmais/jqassistant">http://github.com/buschmais/jqassistant</a></p></div>
+<div class="paragraph"><p><a class="bare" href="http://github.com/buschmais/jqassistant">http://github.com/buschmais/jqassistant</a></p></div>
 </section>
-
 <section class="slide">
 <h2>Modeling Source Code as a Graph</h2>
 <div class="imageblock">
@@ -328,7 +301,6 @@ query for insights
 </div>
 </div>
 </section>
-
 <section class="slide">
 <h2>Java software graph model : Nodes</h2>
 <div class="ulist">
@@ -342,7 +314,6 @@ query for insights
 </ul>
 </div>
 </section>
-
 <section class="slide">
 <h2>Java software graph model: Relationships</h2>
 <div class="ulist">
@@ -354,34 +325,32 @@ query for insights
 </ul>
 </div>
 </section>
-
 <section class="slide">
 <h2>Approach</h2>
 <div class="olist arabic">
 <ol class="arabic">
-<li>
+<li class="slide">
 Scan your project with<br>
 Plugins for Code (Java-ASM), Config, Metadata
 </li>
-<li>
+<li class="slide">
 Import into Neo4j
 </li>
-<li>
+<li class="slide">
 Enrich with declared technical and domain concepts
 </li>
-<li>
+<li class="slide">
 On top of those concepts
 </li>
-<li>
+<li class="slide">
 Software-Metrics queries
 </li>
-<li>
+<li class="slide">
 Architectural-Rules queries
 </li>
 </ol>
 </div>
 </section>
-
 <section class="slide">
 <h2>Query the Data</h2>
 <div class="imageblock">
@@ -390,31 +359,23 @@ Architectural-Rules queries
 </div>
 </div>
 </section>
-
 <section class="slide canvas-image" style="background-image: url(img/blank.png)">
 <h1>Demo</h1>
 </section>
-
 <section class="slide">
 <h2>Analyzing A Maven Repository</h2>
 <div class="paragraph"><p>Rickard Öberg</p></div>
-
 <div class="paragraph"><p>This little nifty tool will allow you to import your local Maven repository information into a Neo4j graph, in particular dependencies between artifacts.</p></div>
-
 <div class="paragraph"><p>You can then take this graph and put it into a Neo4j server,  and perform Cypher queries on it.</p></div>
-
 <div class="paragraph"><p>Or whatever else awesome you want to do.</p></div>
-
 <div class="listingblock">
 <div class="content">
 <pre><code>mvn compile exec:java -Dexec.mainClass=com.github.rickardoberg.neomvn.Main \
   -Dexec.arguments="$HOME/.m2/repository"</code></pre>
 </div>
 </div>
-
-<div class="paragraph"><p><a href="https://github.com/rickardoberg/neomvn#example-queries">https://github.com/rickardoberg/neomvn#example-queries</a></p></div>
+<div class="paragraph"><p><a class="bare" href="https://github.com/rickardoberg/neomvn#example-queries">https://github.com/rickardoberg/neomvn#example-queries</a></p></div>
 </section>
-
 <section class="slide">
 <h2>NeoMVN: Example Queries</h2>
 <section class="slide">
@@ -429,7 +390,6 @@ RETURN DISTINCT dependent.artifactId, dependent.groupId</textarea>
 </div>
 </div>
 </section>
-
 <section class="slide">
 <h3>Which version of JUnit is the most popular</h3>
 <div class="listingblock">
@@ -442,34 +402,32 @@ ORDER BY depCount DESC</textarea>
 </div>
 </section>
 </section>
-
 <section class="slide">
 <h2>Query a JVM Heapdump</h2>
 <div class="olist arabic">
 <ol class="arabic">
-<li>
-Get a heap-dump with <code>jmap</code><br>
-<code>jmap -dump:format=b,file=dump.hprof &lt;pid&gt;</code>
+<li class="slide">
+Get a heap-dump with jmap<br>
+jmap -dump:format=b,file=dump.hprof &lt;pid&gt;
 </li>
-<li>
-Use <code>jhat dump.hprof</code> find the /oql endpoint
+<li class="slide">
+Use jhat dump.hprof find the /oql endpoint
 </li>
-<li>
+<li class="slide">
 run the <em>OQL</em> script to generate <em>Cypher</em> code
 </li>
-<li>
+<li class="slide">
 Import into Neo4j
 </li>
-<li>
+<li class="slide">
 Run arbitrary queries
 </li>
-<li>
+<li class="slide">
 Visualize
 </li>
 </ol>
 </div>
 </section>
-
 <section class="slide">
 <h2>Graph Domain Model</h2>
 <div class="imageblock">
@@ -478,7 +436,6 @@ Visualize
 </div>
 </div>
 </section>
-
 <section class="slide">
 <h2>OQL to Generate Cypher</h2>
 <div class="listingblock">
@@ -516,7 +473,6 @@ from org.neo4j.kernel.impl.transaction.RagManager p</textarea>
 </div>
 </div>
 </section>
-
 <section class="slide">
 <h2>Visualization of a Deadlock Scenario</h2>
 <div class="imageblock">
@@ -525,11 +481,9 @@ from org.neo4j.kernel.impl.transaction.RagManager p</textarea>
 </div>
 </div>
 </section>
-
 <section class="slide">
 <h2>JVM heap analysis using Neo4j</h2>
 <div class="paragraph"><p>Nat Pryce, James Richardson (Software Engineers, Sky)</p></div>
-
 <div class="ulist">
 <ul>
 <li>Use Neo4J for ad-hoc analysis of heap use in a proprietary embedded JVM that&#8217;s deployed in one of the most widely used consumer products in the UK (Sky Box).</li>
@@ -538,7 +492,6 @@ from org.neo4j.kernel.impl.transaction.RagManager p</textarea>
 </ul>
 </div>
 </section>
-
 <section class="slide">
 <h2>Heap Model</h2>
 <div class="imageblock">
@@ -546,27 +499,55 @@ from org.neo4j.kernel.impl.transaction.RagManager p</textarea>
 <img alt="neo4j heap" height="700" src="img/neo4j_heap.jpg">
 </div>
 </div>
-
 <div class="paragraph"><p>From Nat&#8217;s <a href="https://docs.google.com/a/neopersistence.com/presentation/d/19jpRrhOKTugvPal4bdM2ovm-2v5r2dpomfy1oBobuWo/pub">Graph Schema Modeling Approach</a></p></div>
-
 <div class="paragraph"><p>Talk at Accu 2014: Looking for Smoking Guns in a Haystack - using a graph database for JVM heap analysis</p></div>
-
+</section>
 <section class="slide">
-<h3>Using graphs for source code analysis</h3>
+<h2>Software Analytics &amp; Evolution</h2>
+<div class="paragraph"><p>Analytics of (legacy) Software Systems</p></div>
+<div class="paragraph"><p>for modernization, insight gathering, testing, architecture retrieval</p></div>
+<div class="ulist">
+<ul>
+<li>Domain Knowledge Extraction</li>
+<li>Software Architecture Analysis</li>
+<li>Query Software Systems</li>
+<li>Knowledge Driven Testing</li>
+<li>Measure Software Systems</li>
+<li>Domain Specific Programming</li>
+</ul>
+</div>
+<div class="paragraph"><p><a href="http://scch.at/en/sae-overview">Software Competence Center Hagenberg, Austria</a>
+image::http://scch.at/files/assets/images/scch-logo.gif[right]</p></div>
+</section>
+<section class="slide">
+<h2>Graph Querying</h2>
+<div class="ulist">
+<ul>
+<li class="slide">Parsing of C, FORTRAN - source-code using Antlr</li>
+<li class="slide">Building of a graph model</li>
+<li class="slide">Allow for querying, software analytics, metrics, visualization</li>
+</ul>
+</div>
+<section class="slide">
+<h3>Quick Demo</h3>
+<div class="paragraph"><p><a href="http://codeanalytics.scch.at/#query-neo4j">Demo</a></p></div>
+</section>
+</section>
+<section class="slide">
+<h2>Putty Source Code - functions reading structures</h2>
+<blockquote class="twitter-tweet" lang="en"><p>one last visu for <a href="https://twitter.com/GraphConnect">@GraphConnect</a> <a href="https://twitter.com/hashtag/ShowMeYourGraph?src=hash">#ShowMeYourGraph</a> putty source code functions reading structures, complexity + effort <a href="http://t.co/etN495kVkB">pic.twitter.com/etN495kVkB</a></p>&mdash; Wolfgang Beer (@wolfgangscch) <a href="https://twitter.com/wolfgangscch/status/517308839352631296">October 1, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</section>
+<section class="slide">
+<h2>Using graphs for source code analysis</h2>
 <div class="paragraph"><p><a href="http://urma.com">Raoul-Gabriel Urma</a> (PhD in Computer Science, The University of Cambridge)</p></div>
-
 <div class="paragraph"><p>Did you know that the source code of software that you engineer every day can also be represented as graphs?</p></div>
-
 <div class="paragraph"><p>In this talk, we demonstrate how you can perform program analysis using Neo4j.</p></div>
-
 <div class="paragraph"><p>We describe a prototype that stores a graph representation of the source code of Java programs in Neo4j.
 We can then query the graph using Cypher and we&#8217;ll show various examples of possible queries such as “find me all recursive methods” and “find me all subtypes of a given type”.</p></div>
-
 <div class="paragraph"><p>This talk is based on Raoul-Gabriel&#8217;s  research paper
-<a href="http://www.cl.cam.ac.uk/~am21/pk-urma-mycroft-scp.pdf"><em>Source-Code Queries with Graph Databases—with Application to Programming Language Usage and Evolution</em></a></p></div>
+<a href="http://www.cl.cam.ac.uk/~am21/pk-urma-mycroft-scp.pdf">'Source-Code Queries with Graph Databases—with Application to Programming Language Usage and Evolution'</a></p></div>
 </section>
-</section>
-
 <section class="slide">
 <h2>Source Control, Issues, Social Coding</h2>
 <div class="ulist">
@@ -581,21 +562,18 @@ We can then query the graph using Cypher and we&#8217;ll show various examples o
 </ul>
 </div>
 </section>
-
 <section class="slide">
 <h2>Example: Import Git Commit Logs into Neo4j</h2>
 <div class="ulist">
 <ul>
-<li><code>git log --format</code> emits CSV</li>
+<li>git log --format emits CSV</li>
 <li>Graph Model</li>
 <li>LOAD CSV with Cypher</li>
 <li>Create / Update complex Graph Structure</li>
 </ul>
 </div>
-
 <div class="paragraph"><p><a href="http://jexp.de/blog/2014/06/using-load-csv-to-import-git-history-into-neo4j/">Blog Post</a></p></div>
 </section>
-
 <section class="slide">
 <h2>Visualization</h2>
 <div class="imageblock">
@@ -604,11 +582,9 @@ We can then query the graph using Cypher and we&#8217;ll show various examples o
 </div>
 </div>
 </section>
-
 <section class="slide">
 <h2>Finally: Some Eye Candy</h2>
 <div class="paragraph"><p>Isaac &amp; Nash (Software Engineers at Leap Motion)</p></div>
-
 <div class="ulist">
 <ul>
 <li>Leap Motion Software</li>
@@ -619,15 +595,12 @@ We can then query the graph using Cypher and we&#8217;ll show various examples o
 <li>LeapMotion SDK 2.x beta</li>
 </ul>
 </div>
-
 <div class="paragraph"><p>Let&#8217;s have a look: <a href="http://cabbibo.github.io/Leap-Object-Controls/">Demo</a>
 <a href="https://github.com/leapmotion/Leap-Three-Camera-Controls">Source</a></p></div>
 </section>
-
 <section class="slide canvas-image" style="background-image: url(img/blank.png)">
 <h1>Questions ? Thank You!</h1>
 </section>
-
 <a class="deck-prev-link" href="#" title="Previous">&#8592;</a>
 <a class="deck-next-link" href="#" title="Next">&#8594;</a>
 <p class="deck-status">
