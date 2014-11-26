@@ -1,0 +1,84 @@
+= OSCON - Conference Data Model
+:presenter: Neo Technology
+:twitter: neo4j
+:email: info@neotechnology.com
+:backend: deckjs
+:deckjsdir: ../../../asciidoc/deck.js
+:deckjs_theme: neotech
+:icons: font
+:source-highlighter: codemirror
+:navigation:
+:goto:
+:menu:
+:status:
+:arrows:
+:customjs: ../../../asciidoc/js/checkcypher.js
+:gist-source: https://raw.github.com/neo4j-contrib/gists/master/
+:footer: © All Rights Reserved 2013 | Neo Technology, Inc.
+:img: img
+:logo: {img}/Neo_Technology.jpg
+:allow-uri-read:
+:video:
+:docs-link: https://github.com/neo4j-contrib/asciidoc-slides[documentation]
+:download-link: https://github.com/neo4j-contrib/asciidoc-slides/archive/master.zip[download]
+:sectids!:
+:deckjs_transition: none
+
+== Setup
+
+For my [OSCON Programmers Blog] I decided to go with a conference data model. 
+It consists of conferences, venues, tracks, sessions, attendees, tags and relationships like +RATED+, +PRESENTED+, +AT_CONFERENCE+. See the picture for details.
+
+image::https://dl.dropboxusercontent.com/u/14493611/confence.gif[]
+
+Setting up some data with it, we can run simple queries on the data model.
+
+== Like this one
+
+//setup
+//hide
+[source,cypher]
+----
+create (oscon:Conference {name:"OSCON"})-[:AT_VENUE]->(:Venue {name:"Portland Conference Center"}),
+       (michael:Person {name:"Michael"}),
+       (allison:Person {name:"Allison"}),
+       (tutorial:Session {name:"Neo4j-Tutorial"})-[:IN_TRACK]->(:Track {name:"Tutorials"})-[:AT_CONFERENCE]->(oscon),
+       (tutorial)-[:TAGGED]->(:Tag {tag:"Database"}),
+
+(michael)-[:PRESENTED]->(tutorial),
+(allison)-[:ATTENDED]->(tutorial)
+----
+
+//graph
+
+Now we can answer some questions, e.g. 
+
+
+== Tagged Sessions and their Tracks
+
+Show all sessions that are related to _Databases_ and in which Tracks they are
+
+[source,cypher]
+----
+MATCH (track:Track)<-[:IN_TRACK]-(session)-[:TAGGED]->(t:Tag)
+WHERE t.tag = "Database"
+RETURN session.name as session, track.name as track
+----
+
+== Who are the presenters and their sessions
+
+[source,cypher]
+----
+MATCH (session)<-[:PRESENTED]-(p:Person)
+RETURN p.name as presenter, session.name
+----
+
+== Who attends the conference
+
+[source,cypher]
+----
+MATCH (c:Conference)<-[:AT_CONFERENCE]-()<-[:IN_TRACK]-(session)<-[:ATTENDED|PRESENTED]-(p:Person)
+WHERE c.name = "OSCON"
+RETURN distinct p
+----
+

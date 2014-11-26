@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+<meta content="Asciidoctor 1.5.1" name="generator">
+<title>Multi Dimensional Graph Queries with Neo4j</title>
+<script src="../../../asciidoc/deck.js/jquery.min.js"></script>
+<script src="../../../asciidoc/deck.js/core/deck.core.js"></script>
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:800,400,600,300" rel="stylesheet">
+<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/codemirror/deck.codemirror.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/codemirror/themes/iq.css" rel="stylesheet">
+<script src="../../../asciidoc/deck.js/extensions/codemirror/codemirror.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/deck.codemirror.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/mode/javascript/javascript.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/mode/css/css.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/mode/plsql/plsql.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/cypher/deck.cypher.js"></script>
+<link href="../../../asciidoc/deck.js/extensions/cypher/deck.cypher.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/core/deck.core.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/hash/deck.hash.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/scale/deck.scale.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/goto/deck.goto.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/menu/deck.menu.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/navigation/deck.navigation.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/status/deck.status.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/toc/deck.toc.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/themes/style/neotech-iq.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/core/print.css" media="print" rel="stylesheet">
+<script src="../../../asciidoc/deck.js/modernizr.custom.js"></script>
+</head>
+<body class="deck-container article">
+<div id="preamble">
+<div class="sectionbody">
+<style type="text/css">
+.normal {
+  font-size:.8em;
+}
+.small {
+  font-size:.4em;
+}
+p:empty {
+    display:none;
+}
+p {
+  margin-bottom:0.3em;
+}
+</style>
+</div>
+</div>
+<section class="slide canvas-image" id="_multi_dimensional_graph_queries_with_neo4j" style="background-image: url(../../img/graph.jpg)">
+<div class="paragraph canvas-title"><p class="center">Multi Dimensional Graph Queries with Neo4j</p></div>
+<div class="paragraph subtitle"><p>Data2Day Karlsruhe 2014</p></div>
+<div class="paragraph subtitle2"><p>Peter Neubauer, Michael Hunger</p></div>
+<div class="img-ref dark">
+derivative of <a href="https://www.flickr.com/photos/generated/416810">"Node.Garden, Gallery of Computation"</a> by <a href="https://www.flickr.com/photos/generated/">Jared Tarbell</a> / <a href="http://creativecommons.org/licenses/by/2.0/">CC BY</a>
+<div>
+</section>
+<section class="slide" id="_agenda">
+<h2>Agenda</h2>
+<div class="ulist">
+<ul>
+<li><p>
+Introduction:<div class="ulist">
+<ul>
+<li>Graph Database,</li>
+<li>Property Graph Model</li>
+<li>Use-Cases</li>
+<li>JOIN-Optimization</li>
+</ul>
+</div></p></li>
+<li><p>
+Dimensions<div class="ulist">
+<ul>
+<li>Modeling, Examples</li>
+<li>Creating / Querying</li>
+</ul>
+</div></p></li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_what_is_a_graph">
+<h2>What is a graph?</h2>
+<div class="ulist">
+<ul>
+<li class="slide">A representation of a set of objects and their connections</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_nodes">
+<h2>Nodes</h2>
+<figure class="graph-diagram">
+<ul class="graph-diagram-markup" data-internal-scale="1" data-external-scale="1">
+  <li class="node" data-node-id="0" data-x="1" data-y="0">
+    <span class="caption">Node</span>
+  </li>
+</ul>
+</figure>
+</section>
+<section class="slide" id="_relationships_directed">
+<h2>Relationships - directed</h2>
+<figure class="graph-diagram">
+<ul class="graph-diagram-markup" data-internal-scale="1" data-external-scale="1">
+  <li class="node" data-node-id="0" data-x="1" data-y="0">
+    <span class="caption">Node</span>
+  </li>
+  <li class="node" data-node-id="1" data-x="624.5" data-y="0">
+    <span class="caption">Node</span>
+  </li>
+  <li class="relationship" data-from="0" data-to="1">
+    <span class="type">RELATIONSHIP</span>
+  </li>
+</ul>
+</figure>
+</section>
+<section class="slide" id="_relationships_bi_directional">
+<h2>Relationships - bi-directional</h2>
+<figure class="graph-diagram">
+<ul class="graph-diagram-markup" data-internal-scale="1" data-external-scale="1">
+  <li class="node" data-node-id="0" data-x="1" data-y="0">
+    <span class="caption">Node</span>
+  </li>
+  <li class="node" data-node-id="1" data-x="624.5" data-y="0">
+    <span class="caption">Node</span>
+  </li>
+  <li class="relationship" data-from="0" data-to="1"></li>
+  <li class="relationship" data-from="1" data-to="0">
+    <span class="type">RELATIONSHIP</span>
+  </li>
+</ul>
+</figure>
+</section>
+<section class="slide" id="_general_representation_of_data">
+<h2>General representation of data</h2>
+<figure class="graph-diagram">
+<ul class="graph-diagram-markup" data-internal-scale="1.58" data-external-scale="0.7">
+  <li class="node" data-node-id="0" data-x="-115.53164556962025" data-y="-540.7594936708862">
+    <span class="caption">Bob</span>
+  </li>
+  <li class="node" data-node-id="1" data-x="-358.9403254972869" data-y="-330.334538878843">
+    <span class="caption">Book</span><dl class="properties"><dt>title</dt><dd>"Graph Databases"</dd></dl></li>
+  <li class="node" data-node-id="2" data-x="-565.6753022399126" data-y="-595.5646381619613">
+    <span class="caption">Alice</span>
+  </li>
+  <li class="relationship" data-from="0" data-to="1">
+    <span class="type">Has Read</span>
+  </li>
+  <li class="relationship" data-from="0" data-to="2">
+    <span class="type">Friend Of</span>
+  </li>
+  <li class="relationship" data-from="2" data-to="1">
+    <span class="type">Has Read</span>
+  </li>
+  <li class="relationship" data-from="2" data-to="0">
+    <span class="type">Friend Of</span>
+  </li>
+</ul>
+</figure>
+</section>
+<section class="slide" id="_types_of_graph_stores">
+<h2>Types of graph stores</h2>
+<div class="ulist">
+<ul>
+<li>Network (simple graph)</li>
+<li>Triple store (Semantic Web, RDF)</li>
+<li>Hyper graphs</li>
+<li>Property graph</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_property_graphs">
+<h2>Property Graphs</h2>
+<div class="ulist">
+<ul>
+<li>Nodes and relationships can be labeled (a kind of typing)</li>
+<li>Nodes and relationships have attributes</li>
+<li>Attributes have a name and a value of a given type - e.g. String, Integer, Decimal, Boolean</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_property_graph_sample">
+<h2>Property Graph Sample</h2>
+<figure class="graph-diagram">
+<ul class="graph-diagram-markup" data-internal-scale="1.58" data-external-scale="0.7">
+  <li class="node" data-node-id="0" data-x="-115.53164556962025" data-y="-540.7594936708862">
+    <span class="caption">Entity</span><dl class="properties"><dt>name</dt><dd>Bob</dd><dt>age</dt><dd>38</dd></dl></li>
+  <li class="node" data-node-id="1" data-x="-358.9403254972869" data-y="-330.334538878843">
+    <span class="caption">Book</span><dl class="properties"><dt>title</dt><dd>"Graph Databases"</dd><dt>authors</dt><dd>"Ian Robinson, ..."</dd></dl></li>
+  <li class="node" data-node-id="2" data-x="-565.6753022399126" data-y="-595.5646381619613">
+    <span class="caption">Entity</span><dl class="properties"><dt>name</dt><dd>Alice</dd><dt>age</dt><dd>34</dd></dl></li>
+  <li class="relationship" data-from="0" data-to="1">
+    <span class="type">Has Read</span><dl class="properties"><dt>date</dt><dd>Jun-03</dd><dt>rating</dt><dd>4</dd></dl></li>
+  <li class="relationship" data-from="0" data-to="2">
+    <span class="type">Friend Of</span>
+  </li>
+  <li class="relationship" data-from="2" data-to="1">
+    <span class="type">Has Read</span><dl class="properties"><dt>date</dt><dd>Dec-05</dd><dt>rating</dt><dd>5</dd></dl></li>
+  <li class="relationship" data-from="2" data-to="0">
+    <span class="type">Friend Of</span>
+  </li>
+</ul>
+</figure>
+</section>
+<section class="slide" id="_segue_graphs_in_a_relational_world">
+<h2>Segue: Graphs in a Relational World</h2>
+
+</section>
+<section class="slide" id="_tables">
+<h2>Tables</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="transform 1" src="../../training/intro/classroom-enterprise/img/transform/transform-1.png">
+</div>
+</div>
+</section>
+<section class="slide" id="_one_table_for_persons">
+<h2>One table for Persons</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="transform 2" src="../../training/intro/classroom-enterprise/img/transform/transform-2.png">
+</div>
+</div>
+</section>
+<section class="slide" id="_another_one_for_departments">
+<h2>Another one for Departments</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="transform 3" src="../../training/intro/classroom-enterprise/img/transform/transform-3.png">
+</div>
+</div>
+</section>
+<section class="slide" id="_a_link_table_in_between">
+<h2>A link table in between</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="transform 4" src="../../training/intro/classroom-enterprise/img/transform/transform-4.png">
+</div>
+</div>
+<div class="paragraph"><p>for many-to-many relationships</p></div>
+</section>
+<section class="slide" id="_joining_them">
+<h2>JOINing them</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="transform 5" src="../../training/intro/classroom-enterprise/img/transform/transform-5.png">
+</div>
+</div>
+</section>
+<section class="slide" id="_this_is_the_data">
+<h2>This is the data</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="transform 6" src="../../training/intro/classroom-enterprise/img/transform/transform-6.png">
+</div>
+</div>
+</section>
+<section class="slide" id="_explicit_as_a_graph">
+<h2>Explicit as a graph</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="transform 7" src="../../training/intro/classroom-enterprise/img/transform/transform-7.png">
+</div>
+</div>
+</section>
+<section class="slide" id="_nodes_2">
+<h2>Nodes, &#8230;&#8203;</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="transform 8" src="../../training/intro/classroom-enterprise/img/transform/transform-8.png">
+</div>
+</div>
+</section>
+<section class="slide" id="_nodes_relationships_and">
+<h2>Nodes, Relationships and &#8230;&#8203;</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="transform 9" src="../../training/intro/classroom-enterprise/img/transform/transform-9.png">
+</div>
+</div>
+</section>
+<section class="slide" id="_nodes_relationships_and_labels">
+<h2>Nodes, Relationships and Labels.</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="transform 10" src="../../training/intro/classroom-enterprise/img/transform/transform-10.png">
+</div>
+</div>
+</section>
+<section class="slide" id="_network_and_it_operations_management">
+<h2>Network and IT Operations Management</h2>
+<div class="imageblock" style="text-align: top; float: right">
+<div class="content">
+<img alt="700" src="../../img/use-cases/usecase-network-it-mgmt.png" width="700">
+</div>
+</div>
+<div class="paragraph"><p>The interconnected physical, virtual, and application layers of a network are perfectly modeled in a comprehensive Neo4j graph.</p></div>
+<div class="paragraph"><p><em>Queries: Impact Analysis, Root Cause Analysis, Quality-of-Service Mapping, Asset Management</em></p></div>
+</section>
+<section class="slide" id="_social">
+<h2>Social</h2>
+<div class="imageblock" style="text-align: top; float: right">
+<div class="content">
+<img alt="700" src="../../img/use-cases/usecase-social.png" width="700">
+</div>
+</div>
+<div class="paragraph"><p>Family, friends and followers extend into a social graph which reveals patterns of similar behavior, influence, and implicit groups.</p></div>
+<div class="paragraph"><p><em>Queries : Friend Recommendations, Sharing &amp; Collaboration, Influencer Analysis</em></p></div>
+</section>
+<section class="slide" id="_recommendations">
+<h2>Recommendations</h2>
+<div class="imageblock" style="text-align: top; float: right">
+<div class="content">
+<img alt="700" src="../../img/use-cases/usecase-recommendation.png" width="700">
+</div>
+</div>
+<div class="paragraph"><p>Connect the dots of seemingly unrelated interests and relationships to make recommendations that balance fresh with familiar.</p></div>
+<div class="paragraph"><p><em>Queries : Product, Social, Service, and Professional Recommendations</em></p></div>
+</section>
+<section class="slide" id="_identity_and_access_management">
+<h2>Identity and Access Management</h2>
+<div class="imageblock" style="text-align: top; float: right">
+<div class="content">
+<img alt="700" src="../../img/use-cases/usecase-identity-access-mgmt.png" width="700">
+</div>
+</div>
+<div class="paragraph"><p>Who you are, how you belong, and what you’re permitted depends upon the relationships between you, an organization, and a system.</p></div>
+<div class="paragraph"><p><em>Queries : Access Management, Interconnected Group Organization, Provenance</em></p></div>
+</section>
+<section class="slide" id="_master_data_management">
+<h2>Master Data Management</h2>
+<div class="imageblock" style="text-align: top; float: right">
+<div class="content">
+<img alt="700" src="../../img/use-cases/usecase-mdm.png" width="700">
+</div>
+</div>
+<div class="paragraph"><p>Organization and product lines are inherently shaped like graphs: deep hierarchies with top-down, lateral, and diagonal connections.</p></div>
+<div class="paragraph"><p><em>Queries : Cross Reference Business Objects, Organizational Hierarchies, Data Ownership</em></p></div>
+</section>
+<section class="slide" id="_digital_asset_management">
+<h2>Digital Asset Management</h2>
+<div class="imageblock" style="text-align: top; float: right">
+<div class="content">
+<img alt="700" src="../../img/use-cases/usecase-digita-asset-mgmt.png" width="700">
+</div>
+</div>
+<div class="paragraph"><p>Media library built around the relationships between digital assets and their attributes.</p></div>
+<div class="paragraph"><p><em>Queries : Access Management, Cataloging, Work Flow Processes</em></p></div>
+</section>
+<section class="slide" id="_how_do_databases_join_data">
+<h2>How do databases JOIN data?</h2>
+<div class="ulist">
+<ul>
+<li class="slide">primary-key &lt;&#8201;&#8212;&#8201;&gt; foreign key relationships</li>
+<li class="slide">have to find / lookup matching keys</li>
+<li class="slide">across indexes and tables / collections</li>
+<li class="slide">for each join during each query</li>
+<li class="slide">computationally expensive</li>
+<li class="slide">depend on data volume and number of joins</li>
+<li class="slide">Is there another way ?</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_cheap_trick_prematerialize_relationships">
+<h2>Cheap trick: prematerialize relationships</h2>
+<div class="ulist">
+<ul>
+<li class="slide">store relationship-struct-list with node</li>
+<li class="slide">called ajacency-list</li>
+<li class="slide">direct pointer to relationship and other node</li>
+<li class="slide">no JOIN required, just following pointers</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="__join_complexity">
+<h2>"Join"-Complexity</h2>
+<div class="ulist">
+<ul>
+<li>One Relationship: O(1)</li>
+<li>N Relationships O(n)</li>
+<li>All N Relationships across M steps O(N^M)</li>
+<li>Relationship-Counts O(1) also by type and direction</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_local_neighborhood_queries">
+<h2>Local Neighborhood Queries</h2>
+<div class="ulist">
+<ul>
+<li class="slide">traverse 1..n steps out,</li>
+<li class="slide">collect, filter and project information</li>
+<li class="slide">not affected by total data volume, just neighbourhood size</li>
+<li class="slide">full neighbourhood size n-levels out grows exponetially though!</li>
+<li class="slide">there are special approaches</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_special_query_use_cases_graph_algorithms">
+<h2>Special Query Use Cases - Graph Algorithms</h2>
+<div class="ulist">
+<ul>
+<li class="slide">Shortest-Path algorithm</li>
+<li class="slide">Find connection between two known nodes</li>
+<li class="slide">Bidirectional implementation</li>
+<li class="slide">Routing: Dijkstra, A*</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_data_modeling_dimensions">
+<h2>Data Modeling: Dimensions</h2>
+<div class="ulist">
+<ul>
+<li class="slide">arbitrary values &#8594; properies</li>
+<li class="slide">boolean, small sets &#8594; labels</li>
+<li class="slide">lists &#8594; properties or linked lists</li>
+<li class="slide">order &#8594; linked list</li>
+<li class="slide">hierarchies &#8594; trees</li>
+<li class="slide">geo &#8594; 2-dim r-tree</li>
+<li class="slide">facets &#8594; n-dimensional tree</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_utilizing_structure">
+<h2>Utilizing Structure</h2>
+<div class="ulist">
+<ul>
+<li class="slide">Graphs are also access structures</li>
+<li class="slide">Use graph structures to provide alternative access paths</li>
+<li class="slide">Fast traversals / access to subgraphs</li>
+<li class="slide">Nodes and subgraphs are datapoints embedded in link structures</li>
+<li class="slide">Called: <em>in graph indexes</em></li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_in_graph_indexes">
+<h2>In Graph Indexes</h2>
+<div class="ulist">
+<ul>
+<li class="slide">(Linked) lists</li>
+<li class="slide">Trees</li>
+<li class="slide">Multidimensional-trees</li>
+<li class="slide">Skip-list</li>
+<li class="slide">Streams (Activity-Streams)</li>
+<li class="slide">Hypergraph</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_linked_list_event_list">
+<h2>Linked List: Event-List</h2>
+<div class="ulist">
+<ul>
+<li>one-dimensional</li>
+<li>Linked List of Data Points</li>
+<li>Optionally Double Linked</li>
+<li>Optionally Skip-List</li>
+<li>Represent Order, Sequence</li>
+<li>Multiple Linked Lists with individual relationship-types</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_tree_time_tree">
+<h2>Tree: Time Tree</h2>
+<div class="imageblock" style="text-align: middle; float: right">
+<div class="content">
+<img alt="700" src="img/timetree.png" width="700">
+</div>
+</div>
+<div class="imageblock" style="text-align: middle; float: left">
+<div class="content">
+<img alt="700" src="img/ga_time_tree.jpg" width="700">
+</div>
+</div>
+</section>
+<section class="slide" id="_tree_time_tree_2">
+<h2>Tree: Time Tree</h2>
+<div class="ulist">
+<ul>
+<li>two-dimensional: width and height</li>
+<li>split time by unit: root&#8592;year&#8592;month &#8592;day&#8592;hour&#8592;minute, &#8230;&#8203;</li>
+<li>granularity as needed</li>
+<li>create tree to root</li>
+<li>optional <em>NEXT</em> links per level</li>
+<li>attach datapoints to appropriate level</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_tree_bill_of_material">
+<h2>Tree: Bill of Material</h2>
+<div class="imageblock" style="text-align: top; float: right">
+<div class="content">
+<img alt="300" src="img/bom_furniture.png" width="500">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>everything can be deconstructed from a root</li>
+<li>broken into components, modules, parts</li>
+<li>machine, vehicle, factory, furniture</li>
+<li>combine structural tree with construction process tree</li>
+<li>store quanities, prices, volumes at lowest levels</li>
+<li>compute or aggregate on higher levels</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_2_dimensional_tree_r_tree">
+<h2>2-dimensional Tree: R-Tree</h2>
+<div class="imageblock" style="text-align: top; float: right">
+<div class="content">
+<img alt="300" src="img/spatial_rtree.svg" width="500">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>three dimensions: height, width, depth</li>
+<li>project surfaces points and polygons into a hierarchy</li>
+<li>fast search for containment</li>
+<li>retrace and filter for concrete outline</li>
+<li>e.g. Neo4j-Spatial</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_multi_dimensional_tree_facets">
+<h2>Multi-Dimensional-Tree: Facets</h2>
+<div class="imageblock" style="text-align: top; float: right">
+<div class="content">
+<img alt="300" src="img/facetted_search_tree.png" width="500">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>many (variably structures) dimensions of datapoints</li>
+<li><p>
+allow users to explore a dataset by also returning selected dimensinons<div class="ulist">
+<ul>
+<li>good use of cypher collect() function</li>
+</ul>
+</div></p></li>
+<li>combine several aspects in one big tree</li>
+<li>allows to aggregate over each or any dimension-group</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_neo4j_apis">
+<h2>Neo4j APIs</h2>
+<div class="ulist">
+<ul>
+<li class="slide">Cypher query language</li>
+<li class="slide"><p>
+Neo4j-Server HTTP-APIs<div class="ulist">
+<ul>
+<li>Cypher Endpoint</li>
+<li>Graph Algorithms</li>
+</ul>
+</div></p></li>
+<li class="slide"><p>
+Server Extensions<div class="ulist">
+<ul>
+<li>exposing HTTP Endpoints</li>
+<li>using Java Core API, or Kernel SPI</li>
+</ul>
+</div></p></li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_cypher_neo4j_s_graph_query_language">
+<h2>Cypher: Neo4j&#8217;s Graph Query Language</h2>
+<div class="ulist">
+<ul>
+<li class="slide">Made for Graphs &amp; Humans</li>
+<li class="slide">All about patterns</li>
+<li class="slide">First class graph concepts</li>
+<li class="slide">Derived from SparQL and SQL</li>
+<li class="slide">Declarative &amp; Expressive</li>
+<li class="slide">Optimized for reading &amp; understanding</li>
+<li class="slide">First class collection support</li>
+<li class="slide">Query, update, metadata</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_sql_vs_cypher">
+<h2>SQL vs. Cypher</h2>
+<div class="listingblock slide">
+<div class="title">SQL Older Women in IT-Department</div>
+<div class="content">
+<textarea class="code" mode="plsql">SELECT Person.name FROM Person
+LEFT JOIN Person_Dept
+  ON Person.Id = Person_Dept.PersonId
+LEFT JOIN Dept
+  ON Department.Id = Person_Dept.DeptId
+WHERE Dept.name = "IT-Department"
+  AND Person.age &gt; 43 AND Person.gender = "female"</textarea>
+</div>
+</div>
+<div class="listingblock slide">
+<div class="title">Cypher</div>
+<div class="content">
+<textarea class="code" mode="cypher">MATCH (p:Person:Female)-[:WORKS_AT]-&gt;(d:Dept {name:"IT-Department"})
+WHERE p.age &gt; 43
+RETURN p.name</textarea>
+</div>
+</div>
+</section>
+<section class="slide" id="_cypher_pattern_match">
+<h2>Cypher: Pattern Match</h2>
+<div class="listingblock">
+<div class="title">Analytics Query across Orders, Geo and Product Categories</div>
+<div class="content">
+<textarea class="code" mode="cypher">MATCH (me:Person)-[:ORDERED]-&gt;(o:Order)-[:OF]-&gt;(p:Product),
+      (p)-[:CATEGORY]-&gt;(cat0:Category)-[:PARENT*]-&gt;(catn:Category),
+      (o)-[:ON]-&gt;(d:Day)-[:MONTH]-&gt;(month)-[:YEAR]-&gt;(y),
+      (o)-[:IN]-(city:City)-[:IN_STATE]-&gt;(state:State)--&gt;(co:Country)</textarea>
+</div>
+</div>
+</section>
+<section class="slide" id="_cypher_filter_predicates">
+<h2>Cypher: Filter Predicates</h2>
+<div class="listingblock">
+<div class="title">Analytics Query across Orders, Geo and Product Categories</div>
+<div class="content">
+<textarea class="code" mode="cypher">MATCH (me:Person)-[:ORDERED]-&gt;(o:Order)-[:OF]-&gt;(p:Product),
+      (p)-[:CATEGORY]-&gt;(cat0:Category)-[:PARENT*]-&gt;(catn:Category),
+      (o)-[:ON]-&gt;(d:Day)-[:MONTH]-&gt;(month)-[:YEAR]-&gt;(y),
+      (o)-[:IN]-(city:City)-[:IN_STATE]-&gt;(state:State)--&gt;(co:Country)
+WHERE me.name = {name} and co.name = 'US' and y.year = '2014'</textarea>
+</div>
+</div>
+</section>
+<section class="slide" id="_cypher_project_and_aggregate_results">
+<h2>Cypher: Project and Aggregate Results</h2>
+<div class="listingblock">
+<div class="title">Analytics Query across Orders, Geo and Product Categories</div>
+<div class="content">
+<textarea class="code" mode="cypher">MATCH (me:Person)-[:ORDERED]-&gt;(o:Order)-[:OF]-&gt;(p:Product),
+      (p)-[:CATEGORY]-&gt;(cat0:Category)-[:PARENT*]-&gt;(catn:Category),
+      (o)-[:ON]-&gt;(d:Day)-[:MONTH]-&gt;(month)-[:YEAR]-&gt;(y),
+      (o)-[:IN]-(city:City)-[:IN_STATE]-&gt;(state:State)--&gt;(co:Country)
+WHERE me.name = {name} and co.name = 'US' and y.year = '2014'
+RETURN catn, state, month, sum(o.amount), collect(city)</textarea>
+</div>
+</div>
+</section>
+<section class="slide" id="_cypher_status">
+<h2>Cypher: Status</h2>
+<div class="ulist">
+<ul>
+<li>Language well developed</li>
+<li><p>
+Query Planner:<div class="ulist">
+<ul>
+<li>current - rule based</li>
+<li>next - cost based</li>
+</ul>
+</div></p></li>
+<li><p>
+Runtime:<div class="ulist">
+<ul>
+<li>current - Scala</li>
+<li>next - Java/dynamically compiled</li>
+</ul>
+</div></p></li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_example_multifacetted_domains_e_commerce">
+<h2>Example Multifacetted Domains: E-Commerce</h2>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img alt="northwind" src="img/northwind.png">
+</div>
+</div>
+</section>
+<section class="slide" id="_example_multifacetted_domains_e_commerce_2">
+<h2>Example Multifacetted Domains: E-Commerce</h2>
+<div class="ulist">
+<ul>
+<li><p>
+Business-Transactions (e.g. Northwind)<div class="ulist">
+<ul>
+<li>order &#8594; buyer &#8594; demography,</li>
+<li>order &#8594; seller &#8594; category, &#8594; history</li>
+<li>order &#8594; product &#8594; product categories,</li>
+<li>payment &#8594; cc / debit, &#8594; payment history</li>
+<li>logistics &#8594; address &#8594; city &#8594; state &#8594; country,</li>
+<li>warehouse &#8594; position &#8594; shelf &#8594; aisle &#8594; section,</li>
+<li>employee &#8594; manager sales hierarchy,</li>
+<li>time</li>
+</ul>
+</div></p></li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_example_multifacetted_domains_software_repositories">
+<h2>Example Multifacetted Domains: Software Repositories</h2>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img alt="ikwattro github2" src="img/ikwattro_github2.png">
+</div>
+</div>
+</section>
+<section class="slide" id="_example_multifacetted_domains_software_repositories_2">
+<h2>Example Multifacetted Domains: Software Repositories</h2>
+<div class="ulist">
+<ul>
+<li><p>
+Git:<div class="ulist">
+<ul>
+<li>Tree of Commits &#8594; Branch &#8594; Repository</li>
+<li>Commit &#8594; Time,</li>
+<li>Commit &#8594; Parent Commits</li>
+<li>Diff &#8594; File &#8594; Commit</li>
+</ul>
+</div></p></li>
+<li><p>
+GitHub - Events<div class="ulist">
+<ul>
+<li>Fork, Issue, Clone, Pull-Request, Review, Release, Team</li>
+</ul>
+</div></p></li>
+</ul>
+</div>
+<div class="paragraph small"><p>source: <a class="bare" href="http://de.slideshare.net/christophewillemsen/github-eventsneo4j">http://de.slideshare.net/christophewillemsen/github-eventsneo4j</a></p></div>
+</section>
+<section class="slide" id="_example_multifacetted_domains_source_code">
+<h2>Example Multifacetted Domains: Source Code</h2>
+<div class="imageblock" style="text-align: top">
+<div class="content">
+<img alt="jqassistant model" height="400" src="img/jqassistant_model.png">
+</div>
+</div>
+<div class="imageblock" style="text-align: bottom">
+<div class="content">
+<img alt="jqassistant db" height="300" src="img/jqassistant_db.png">
+</div>
+</div>
+</section>
+<section class="slide" id="_example_multifacetted_domains_source_code_2">
+<h2>Example Multifacetted Domains: Source Code</h2>
+<div class="ulist">
+<ul>
+<li><p>
+Source Code / Software Projects<div class="ulist">
+<ul>
+<li>&#8594; packages,</li>
+<li>&#8594; module dependencies,</li>
+<li>&#8594; call dependencies,</li>
+<li>&#8594; type dependencies,</li>
+<li>inheritance, composition, nesting,</li>
+<li>orthogonal &#8594; annotations</li>
+</ul>
+</div></p></li>
+</ul>
+</div>
+<div class="paragraph small"><p>source: <a class="bare" href="http://jqassistant.org">http://jqassistant.org</a></p></div>
+</section>
+<section class="slide" id="_how_to_create_multiple_dimensions_time_tree">
+<h2>How to create multiple dimensions: Time Tree</h2>
+<div class="listingblock normal">
+<div class="title">Create A Time Tree</div>
+<div class="content">
+<textarea class="code" mode="cypher">//for every Year, let's connect 12 children at a 3rd level, the Months
+MATCH (year:Year {id:2014})
+WITH range(1,12) as MONTHS, year
+FOREACH (month in MONTHS | CREATE (:Month {id:month})-[:PART_OF]-&gt;(year) );</textarea>
+</div>
+</div>
+<div class="listingblock normal">
+<div class="content">
+<textarea class="code" mode="cypher">//for every Month, connect 30 Days, and add one day for the longer months
+MATCH (month:Month)
+WITH range(1,30) as DAYS, month
+FOREACH (day in DAYS | CREATE (:Day {id:day})-[:PART_OF]-&gt;(month))
+WITH month
+WHERE month.id in [1,3,5,7,8,10,12]
+CREATE (:Day {id:31})-[:PART_OF]-&gt;(month);</textarea>
+</div>
+</div>
+<div class="paragraph small"><p>source: <a class="bare" href="http://jexp.de/blog/2014/04/importing-forests-into-neo4j/">http://jexp.de/blog/2014/04/importing-forests-into-neo4j/</a></p></div>
+</section>
+<section class="slide" id="_how_to_create_multiple_dimensions_github">
+<h2>How to create multiple dimensions: GitHub</h2>
+<div class="imageblock" style="text-align: top; float: right">
+<div class="content">
+<img alt="400" src="img/ikwattro_github.png" width="400">
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Comment on Issue</div>
+<div class="content">
+<textarea class="code" mode="cypher">MERGE (u:User {name:'johanneswilm'})
+CREATE (ev:IssueCommentEvent {time:toInt(1401606384) })
+MERGE (u)-[:DO]-&gt;(ev)
+MERGE (comment:IssueComment {id:toInt(44769338)})
+MERGE (ev)-[:ISSUE_COMMENT]-&gt;(comment)
+MERGE (issue:Issue {id:toInt(34722578)})
+MERGE (repo:Repository {id:toInt(14487686)})
+MERGE (comment)-[:COMMENT_ON]-&gt;(issue)-[:ISSUE_ON]-&gt;(repo)
+SET repo.name = 'diffDOM'
+MERGE (owner:User {name:'fiduswriter'})
+MERGE (comment)-[:COMMENT_ON]-&gt;(issue)-[:ISSUE_ON]-&gt;(repo)-[:OWNED_BY]-&gt;(owner)</textarea>
+</div>
+</div>
+<div class="paragraph small"><p>source:https://github.com/ikwattro/gh4j</p></div>
+</section>
+<section class="slide" id="_how_to_create_multiple_dimensions_java_api">
+<h2>How to create multiple dimensions: Java-API</h2>
+<div class="ulist">
+<ul>
+<li>Create Tree&#8217;s top-down link to datapoints</li>
+<li>Create Lists by forward or backward linkin</li>
+<li>recursive method calls for hierachies</li>
+<li>keep nodes in maps for quick lookup during structure creation</li>
+<li>map object structures to the graph &#8594; static hierarchies</li>
+<li>Use a library, e.g. <a href="http://graphaware.com/neo4j/2014/08/20/graphaware-neo4j-timetree.html">GraphAware Time Tree</a></li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_how_to_create_multiple_dimensions_java_api_2">
+<h2>How to create multiple dimensions: Java-API</h2>
+<div class="listingblock">
+<div class="content">
+<textarea class="code" mode="java">product.createRelationshipTo(category, IN_CATEGORY);
+
+node.getRelationships(OUTGOING, BOUGHT);
+
+Iterator&lt;Node&gt; events =
+db.traversalDescription().depthFirst().uniqueness(NODE_PATH)
+  .relationships(IN_MONTH,IN_YEAR,ON_DAY)
+  .traverse(year).nodes();</textarea>
+</div>
+</div>
+</section>
+<section class="slide" id="_summary">
+<h2>Summary</h2>
+<div class="ulist">
+<ul>
+<li class="slide">Graphs are well suited for complex connected structures</li>
+<li class="slide">Dimensions form structures on top of data points</li>
+<li class="slide">Easy to model and evolve</li>
+<li class="slide">Fast Querying across the structures</li>
+<li class="slide">Aggregation, collection, projection of results and facets</li>
+</ul>
+</div>
+</section>
+<a class="deck-prev-link" href="#" title="Previous">&#8592;</a>
+<a class="deck-next-link" href="#" title="Next">&#8594;</a>
+<form action="." class="goto-form" method="get">
+<label for="goto-slide">Go to Slide:</label>
+<input id="goto-slide" list="goto-datalist" name="slidenum" type="text">
+<datalist id="goto-data-list"></datalist>
+<input type="submit" value="Go">
+</form>
+<a class="deck-permalink" href="." title="Permalink to this slide">#</a>
+<script src="../../../asciidoc/deck.js/extensions/hash/deck.hash.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/scale/deck.scale.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/blank/deck.blank.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/goto/deck.goto.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/menu/deck.menu.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/navigation/deck.navigation.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/split/deck.split.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/status/deck.status.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/toc/deck.toc.js"></script>
+<div class="deck-toc"></div>
+<script src="../../../asciidoc/deck.js/extensions/arrows/home.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/arrows/d3.v3.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/arrows/arrows-graph-diagram.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/arrows/arrows-init.js"></script>
+<footer>Copyright (c) 2014 Neo Technology, Inc. All rights reserved. The reproduction or distribution of this copyrighted work is strictly prohibited.</footer>
+<img id="logo" src="../../img/neo4j-logo.png">
+<img id="logo2" src="../../img/Neo_Technology.jpg">
+<p class="deck-status">
+<span class="deck-status-current"></span>
+/
+<span class="deck-status-total"></span>
+</p>
+<div class="slide cypher-status">
+<h2>Status of the presentation</h2>
+<p>Cypher queries execution</p>
+<div>
+<div id="status"></div>
+<pre id="errors" style="overflow-y:scroll;font-size:small"></pre>
+</div>
+</div>
+<script src="../../../asciidoc/js/checkcypher.js"></script>
+<script>
+  (function($, deck, undefined) {
+    $.deck.defaults.keys['previous'] = [8, 33, 37, 39];
+    $.deck.defaults.keys['next'] = [13, 32, 34, 39];
+  
+    $.extend(true, $[deck].defaults, {
+        countNested: false
+    });
+  
+    $.deck('.slide');
+  })(jQuery, 'deck');
+</script>
+<style>
+  .slide.canvas-image {
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  display: -moz-box;
+  display: -webkit-box;
+  display: -ms-box;
+  display: box;
+  -moz-box-orient: vertical;
+  -webkit-box-orient: vertical;
+  -ms-box-orient: vertical;
+  box-orient: vertical;
+  -moz-box-align: start;
+  -webkit-box-align: start;
+  -ms-box-align: start;
+  box-align: start;
+  -moz-box-pack: start;
+  -webkit-box-pack: start;
+  -ms-box-pack: start;
+  box-pack: start;}
+  
+  .bottom-left {
+    left: 1%;
+    bottom: 20%; }
+  
+  .top-left {
+    left: 1%;
+    top: 20%; }
+  
+  .bottom-right {
+    right: 1%;
+    bottom: 20%; }
+  
+  .top-right {
+    right: 1%;
+    top: 20%; }
+  
+  .center-up {
+    right: 50%;
+    top: 1%;
+  }
+  
+  .center-down {
+    right: 50%;
+    bottom: 1%;
+  }
+  .canvas-image .canvas-caption p {
+    -webkit-transform: translate(0, -50%);
+    -moz-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    -o-transform: translate(0, -50%);
+    transform: translate(0, -100%);
+  }
+  .canvas-image .canvas-title p {
+    -webkit-transform: translate(0, -100%);
+    -moz-transform: translate(0, -100%);
+    -ms-transform: translate(0, -100%);
+    -o-transform: translate(0, -100%);
+    transform: translate(0, -100%);
+  }
+  .canvas-image .canvas-caption p, .canvas-image .canvas-title p {
+    left: 0;
+    right: 0;
+    top: 50%;
+    text-align: center;
+    display: inline;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    font-weight: normal;
+    font-size: 3em;
+    padding: 1em;
+    color: white; }
+  kbd.keyseq { color: #555555; }
+  kbd:not(.keyseq) {
+    display: inline-block;
+    color: #222222;
+    font-size: 0.7em;
+    line-height: 1.4;
+    background-color: #F7F7F7;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset;
+    margin: -0.15em 0.15em 0 0.15em;
+    padding: 0.2em 0.6em;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  kbd kbd:first-child { margin-left: 0; }
+  kbd kbd:last-child { margin-right: 0; }
+</style>
+</body>
+</html>

@@ -1,0 +1,48 @@
+== Network and IT Operations Management
+
+image::{img}/use-cases/usecase-network-it-mgmt.png[700,700,float="right",align="top"]
+
+The interconnected physical, virtual, and application layers of a network are perfectly modeled in a comprehensive Neo4j graph.
+
+_Queries: Impact Analysis, Root Cause Analysis, Quality-of-Service Mapping, Asset Management_
+
+== Social
+
+image::{img}/use-cases/usecase-social.png[700,700,float="right",align="top"]
+
+Family, friends and followers extend into a social graph which reveals patterns of similar behavior, influence, and implicit groups.
+
+_Queries : Friend Recommendations, Sharing & Collaboration, Influencer Analysis_
+
+== Recommendations
+
+image::{img}/use-cases/usecase-recommendation.png[700,700,float="right",align="top"]
+
+Connect the dots of seemingly unrelated interests and relationships to make recommendations that balance fresh with familiar.
+
+_Queries : Product, Social, Service, and Professional Recommendations_
+
+
+== Identity and Access Management
+
+image::{img}/use-cases/usecase-identity-access-mgmt.png[700,700,float="right",align="top"]
+
+Who you are, how you belong, and what you’re permitted depends upon the relationships between you, an organization, and a system.
+
+_Queries : Access Management, Interconnected Group Organization, Provenance_
+
+== Master Data Management
+
+image::{img}/use-cases/usecase-mdm.png[700,700,float="right",align="top"]
+
+Organization and product lines are inherently shaped like graphs: deep hierarchies with top-down, lateral, and diagonal connections.
+
+_Queries : Cross Reference Business Objects, Organizational Hierarchies, Data Ownership_
+
+== Digital Asset Management
+
+image::{img}/use-cases/usecase-digita-asset-mgmt.png[700,700,float="right",align="top"]
+
+Media library built around the relationships between digital assets and their attributes.
+
+_Queries : Access Management, Cataloging, Work Flow Processes_

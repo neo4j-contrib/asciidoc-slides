@@ -1,0 +1,495 @@
+= Multi Dimensional Graph Queries with Neo4j
+:presenter: Neo Technology
+:twitter: neo4j
+:email: info@neotechnology.com
+:backend: deckjs
+:deckjs_theme: neotech-iq
+:deckjs_transition: none
+:deckjsdir: ../../../asciidoc/deck.js
+// horizontal-slide
+:icons: font
+:source-highlighter: codemirror
+:navigation:
+:status:
+:customjs: ../../../asciidoc/js/checkcypher.js
+:arrows:
+:split:
+:gist-source: https://raw.github.com/neo4j-contrib/gists/master/
+:footer: Copyright (c) 2014 Neo Technology, Inc. All rights reserved. The reproduction or distribution of this copyrighted work is strictly prohibited.
+:img: ../../img
+:logo: {img}/neo4j-logo.png
+:logo2: {img}/Neo_Technology.jpg
+:blank:
+:goto:
+:menu:
+:toc:
+:split:
+:hidetitle: true
+
+++++
+<style type="text/css">
+.normal {
+  font-size:.8em;
+}
+.small {
+  font-size:.4em;
+}
+p:empty {
+    display:none;
+}
+p {
+  margin-bottom:0.3em;
+}
+</style>
+++++
+
+[canvas-image="{img}/graph.jpg"]
+== Multi Dimensional Graph Queries with Neo4j
+
+
+[role="canvas-title", position="center"]
+Multi Dimensional Graph Queries with Neo4j
+
+[role="subtitle"]
+Data2Day Karlsruhe 2014
+
+[role="subtitle2"]
+Peter Neubauer, Michael Hunger
+
+++++
+<div class="img-ref dark">
+derivative of <a href="https://www.flickr.com/photos/generated/416810">"Node.Garden, Gallery of Computation"</a> by <a href="https://www.flickr.com/photos/generated/">Jared Tarbell</a> / <a href="http://creativecommons.org/licenses/by/2.0/">CC BY</a>
+<div>
+++++
+
+== Agenda
+
+* Introduction:
+** Graph Database, 
+** Property Graph Model
+** Use-Cases
+** JOIN-Optimization
+* Dimensions
+** Modeling, Examples
+** Creating / Querying
+
+
+include::../../training/intro/classroom-enterprise/02_Intro_to_Graphs/0202_graph_overview.adoc[]
+
+:img: ../../training/intro/classroom-enterprise/img/transform
+
+include::../../training/intro/classroom-enterprise/02_Intro_to_Graphs/0204_relational.adoc[]
+
+:img: ../../img
+ 
+include::use-cases.adoc[]
+
+== How do databases JOIN data?
+
+[options=step]
+* primary-key < -- > foreign key relationships
+* have to find / lookup matching keys
+* across indexes and tables / collections
+* for each join during each query
+* computationally expensive
+* depend on data volume and number of joins
+* Is there another way ?
+
+== Cheap trick: prematerialize relationships
+
+[options=step]
+* store relationship-struct-list with node
+* called ajacency-list
+* direct pointer to relationship and other node
+* no JOIN required, just following pointers
+
+== "Join"-Complexity
+
+* One Relationship: O(1)
+* N Relationships O(n)
+* All N Relationships across M steps O(N^M)
+* Relationship-Counts O(1) also by type and direction
+
+== Local Neighborhood Queries
+
+[options=step]
+* traverse 1..n steps out, 
+* collect, filter and project information
+* not affected by total data volume, just neighbourhood size
+* full neighbourhood size n-levels out grows exponetially though!
+* there are special approaches
+
+== Special Query Use Cases - Graph Algorithms
+
+[options=step]
+* Shortest-Path algorithm
+* Find connection between two known nodes
+* Bidirectional implementation
+* Routing: Dijkstra, A*
+
+== Data Modeling: Dimensions
+
+[options=step]
+* arbitrary values -> properies
+* boolean, small sets -> labels
+* lists -> properties or linked lists
+* order -> linked list
+* hierarchies -> trees
+* geo -> 2-dim r-tree
+* facets -> n-dimensional tree
+
+== Utilizing Structure
+
+[options=step]
+* Graphs are also access structures
+* Use graph structures to provide alternative access paths
+* Fast traversals / access to subgraphs
+* Nodes and subgraphs are datapoints embedded in link structures
+* Called: _in graph indexes_
+
+== In Graph Indexes
+
+[options=step]
+* (Linked) lists
+* Trees
+* Multidimensional-trees
+* Skip-list
+* Streams (Activity-Streams)
+* Hypergraph
+
+== Linked List: Event-List
+
+* one-dimensional
+* Linked List of Data Points
+* Optionally Double Linked
+* Optionally Skip-List
+* Represent Order, Sequence
+* Multiple Linked Lists with individual relationship-types
+
+== Tree: Time Tree
+
+image::img/timetree.png[700,700,float="right",align="middle"]
+image::img/ga_time_tree.jpg[700,700,float="left",align="middle"]
+
+== Tree: Time Tree
+
+* two-dimensional: width and height
+* split time by unit: root<-year<-month <-day<-hour<-minute, ...
+* granularity as needed
+* create tree to root
+* optional _NEXT_ links per level
+* attach datapoints to appropriate level
+
+== Tree: Bill of Material
+
+image::img/bom_furniture.png[300,500,float="right",align="top"]
+
+* everything can be deconstructed from a root
+* broken into components, modules, parts
+* machine, vehicle, factory, furniture
+* combine structural tree with construction process tree
+* store quanities, prices, volumes at lowest levels
+* compute or aggregate on higher levels
+
+== 2-dimensional Tree: R-Tree
+
+image::img/spatial_rtree.svg[300,500,float="right",align="top"]
+
+* three dimensions: height, width, depth
+* project surfaces points and polygons into a hierarchy
+* fast search for containment
+* retrace and filter for concrete outline
+* e.g. Neo4j-Spatial
+
+== Multi-Dimensional-Tree: Facets
+
+image::img/facetted_search_tree.png[300,500,float="right",align="top"]
+
+* many (variably structures) dimensions of datapoints
+* allow users to explore a dataset by also returning selected dimensinons
+** good use of cypher collect() function
+* combine several aspects in one big tree
+* allows to aggregate over each or any dimension-group
+
+
+== Neo4j APIs
+
+[options=step]
+* Cypher query language
+* Neo4j-Server HTTP-APIs
+** Cypher Endpoint 
+** Graph Algorithms
+* Server Extensions
+** exposing HTTP Endpoints
+** using Java Core API, or Kernel SPI
+
+== Cypher: Neo4j's Graph Query Language
+
+[options=step]
+* Made for Graphs & Humans
+* All about patterns
+* First class graph concepts
+* Derived from SparQL and SQL
+* Declarative & Expressive
+* Optimized for reading & understanding
+* First class collection support
+* Query, update, metadata
+
+== SQL vs. Cypher
+
+[options="step"]
+.SQL Older Women in IT-Department
+[source,plsql]
+----
+SELECT Person.name FROM Person
+LEFT JOIN Person_Dept 
+  ON Person.Id = Person_Dept.PersonId
+LEFT JOIN Dept
+  ON Department.Id = Person_Dept.DeptId
+WHERE Dept.name = "IT-Department" 
+  AND Person.age > 43 AND Person.gender = "female"
+----
+
+[options="step"]
+.Cypher
+[source,cypher]
+----
+MATCH (p:Person:Female)-[:WORKS_AT]->(d:Dept {name:"IT-Department"})
+WHERE p.age > 43
+RETURN p.name
+----
+
+== Cypher: Pattern Match
+
+.Analytics Query across Orders, Geo and Product Categories
+[source,cypher]
+----
+MATCH (me:Person)-[:ORDERED]->(o:Order)-[:OF]->(p:Product),
+      (p)-[:CATEGORY]->(cat0:Category)-[:PARENT*]->(catn:Category),
+      (o)-[:ON]->(d:Day)-[:MONTH]->(month)-[:YEAR]->(y),
+      (o)-[:IN]-(city:City)-[:IN_STATE]->(state:State)-->(co:Country)
+----
+
+== Cypher: Filter Predicates
+
+.Analytics Query across Orders, Geo and Product Categories
+[source,cypher]
+----
+MATCH (me:Person)-[:ORDERED]->(o:Order)-[:OF]->(p:Product),
+      (p)-[:CATEGORY]->(cat0:Category)-[:PARENT*]->(catn:Category),
+      (o)-[:ON]->(d:Day)-[:MONTH]->(month)-[:YEAR]->(y),
+      (o)-[:IN]-(city:City)-[:IN_STATE]->(state:State)-->(co:Country)
+WHERE me.name = {name} and co.name = 'US' and y.year = '2014'
+----
+
+== Cypher: Project and Aggregate Results
+
+.Analytics Query across Orders, Geo and Product Categories
+[source,cypher]
+----
+MATCH (me:Person)-[:ORDERED]->(o:Order)-[:OF]->(p:Product),
+      (p)-[:CATEGORY]->(cat0:Category)-[:PARENT*]->(catn:Category),
+      (o)-[:ON]->(d:Day)-[:MONTH]->(month)-[:YEAR]->(y),
+      (o)-[:IN]-(city:City)-[:IN_STATE]->(state:State)-->(co:Country)
+WHERE me.name = {name} and co.name = 'US' and y.year = '2014'
+RETURN catn, state, month, sum(o.amount), collect(city)
+----
+
+== Cypher: Status
+
+* Language well developed
+* Query Planner: 
+** current - rule based
+** next - cost based
+* Runtime: 
+** current - Scala
+** next - Java/dynamically compiled
+
+== Example Multifacetted Domains: E-Commerce
+
+image::img/northwind.png[align=center]
+
+== Example Multifacetted Domains: E-Commerce
+
+* Business-Transactions (e.g. Northwind)
+** order -> buyer -> demography,
+** order -> seller -> category, -> history
+** order -> product -> product categories, 
+** payment -> cc / debit, -> payment history 
+** logistics -> address -> city -> state -> country, 
+** warehouse -> position -> shelf -> aisle -> section, 
+** employee -> manager sales hierarchy, 
+** time
+
+== Example Multifacetted Domains: Software Repositories
+
+image::img/ikwattro_github2.png[align=center]
+
+== Example Multifacetted Domains: Software Repositories
+
+* Git:  
+** Tree of Commits -> Branch -> Repository
+** Commit -> Time,
+** Commit -> Parent Commits
+** Diff -> File -> Commit
+
+* GitHub - Events
+** Fork, Issue, Clone, Pull-Request, Review, Release, Team
+
+[role=small]
+source: http://de.slideshare.net/christophewillemsen/github-eventsneo4j
+
+== Example Multifacetted Domains: Source Code
+
+image::img/jqassistant_model.png[height=400,align=top]
+image::img/jqassistant_db.png[height=300,align=bottom]
+
+== Example Multifacetted Domains: Source Code
+
+* Source Code / Software Projects 
+** -> packages,
+** -> module dependencies, 
+** -> call dependencies, 
+** -> type dependencies, 
+** inheritance, composition, nesting, 
+** orthogonal -> annotations
+
+[role=small]
+source: http://jqassistant.org
+
+== How to create multiple dimensions: Time Tree
+
+.Create A Time Tree
+[source,cypher,role=normal]
+----
+//for every Year, let's connect 12 children at a 3rd level, the Months
+MATCH (year:Year {id:2014})
+WITH range(1,12) as MONTHS, year
+FOREACH (month in MONTHS | CREATE (:Month {id:month})-[:PART_OF]->(year) );
+----
+
+[source,cypher,role=normal]
+----
+//for every Month, connect 30 Days, and add one day for the longer months
+MATCH (month:Month)
+WITH range(1,30) as DAYS, month
+FOREACH (day in DAYS | CREATE (:Day {id:day})-[:PART_OF]->(month))
+WITH month
+WHERE month.id in [1,3,5,7,8,10,12]
+CREATE (:Day {id:31})-[:PART_OF]->(month);
+----
+
+[role=small]
+source: http://jexp.de/blog/2014/04/importing-forests-into-neo4j/
+
+////
+== How to create multiple dimensions: Cypher
+
+[source,cypher,role=normal]
+----
+LOAD CSV WITH headers FROM "https://dl.dropboxusercontent.com/u/14493611/git.csv" as line
+CREATE (c:Commit {sha1: line.sha1, hash:line.hash, subject:line.subject)
+
+MERGE (u:User {email:line.author_email}) ON CREATE SET u.name = line.author_name
+CREATE (u)-[:AUTHORED]->(c)
+MERGE (o:Organization {name:line.org_name})
+CREATE (u)-[:IN_ORG]->(o)
+
+MERGE (y:Year {year:substring(line.date_time,0,4)})
+MERGE (m:Month {month:substring(line.date_time,5,2)})-[:IN_YEAR]->(y)
+MERGE (d:Day {date:substring(line.date_time,0,10)})-[:IN_MONTH]->(m)
+CREATE (c)-[:ON_DAY]->(d)
+
+FOREACH (parent_sha1 in split(line.parents," ") |
+   MERGE (parent:Commit {sha1 : parent_sha1})
+   CREATE (c)-[:PARENT]->(parent));
+----
+
+source:
+
+////
+
+
+== How to create multiple dimensions: GitHub
+
+image::img/ikwattro_github.png[400,400,float="right",align="top"]
+
+.Comment on Issue
+[source,cypher]
+----
+MERGE (u:User {name:'johanneswilm'}) 
+CREATE (ev:IssueCommentEvent {time:toInt(1401606384) }) 
+MERGE (u)-[:DO]->(ev) 
+MERGE (comment:IssueComment {id:toInt(44769338)}) 
+MERGE (ev)-[:ISSUE_COMMENT]->(comment)
+MERGE (issue:Issue {id:toInt(34722578)}) 
+MERGE (repo:Repository {id:toInt(14487686)}) 
+MERGE (comment)-[:COMMENT_ON]->(issue)-[:ISSUE_ON]->(repo) 
+SET repo.name = 'diffDOM' 
+MERGE (owner:User {name:'fiduswriter'}) 
+MERGE (comment)-[:COMMENT_ON]->(issue)-[:ISSUE_ON]->(repo)-[:OWNED_BY]->(owner)
+----
+
+[role=small]
+source:https://github.com/ikwattro/gh4j
+
+
+== How to create multiple dimensions: Java-API
+
+* Create Tree's top-down link to datapoints
+* Create Lists by forward or backward linkin
+* recursive method calls for hierachies
+* keep nodes in maps for quick lookup during structure creation
+* map object structures to the graph -> static hierarchies
+* Use a library, e.g. http://graphaware.com/neo4j/2014/08/20/graphaware-neo4j-timetree.html[GraphAware Time Tree]
+
+
+== How to create multiple dimensions: Java-API
+
+[source,java]
+----
+product.createRelationshipTo(category, IN_CATEGORY);
+
+node.getRelationships(OUTGOING, BOUGHT);
+
+Iterator<Node> events = 
+db.traversalDescription().depthFirst().uniqueness(NODE_PATH)
+  .relationships(IN_MONTH,IN_YEAR,ON_DAY)
+  .traverse(year).nodes();
+----
+
+////
+
+== Multi Facetted Search
+
+* 
+- -> Example Tom Zeppenfeld
+
+== Example Price Calculation & Update
+
+- Rik van Bruggen
+- DFS vs. BFS
+
+== Traversal API 
+
+-> how to compute values per level and return them 
+-> each branch is just a path
+
+== How to Query multidimensional structures?
+
+-> cypher
+-> java API
+-> traversal API
+
+
+
+////
+
+== Summary
+
+[options=step]
+* Graphs are well suited for complex connected structures
+* Dimensions form structures on top of data points
+* Easy to model and evolve
+* Fast Querying across the structures
+* Aggregation, collection, projection of results and facets 

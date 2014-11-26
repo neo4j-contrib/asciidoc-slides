@@ -360,7 +360,8 @@ CREATE CONSTRAINT ON (y:Year) ASSERT y.year IS UNIQUE;
 ----
 
 == Import with LOAD CSV - Load the Data
-[source,cypher,role=big]
+
+[source,cypher,role=small,options=step]
 ----
 USING PERIODIC COMMIT 1000
 
