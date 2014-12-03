@@ -31,6 +31,12 @@ open content/demo/index.html
 
 see: http://neo4j-contrib.github.io/asciidoc-slides/content/demo/index.html[Slide Demo]
 
+- generate PDF from HTML.
+[source,bash]
+----
+./pdf.sh content/demo/index.html content/demo/intro.pdf
+----
+
 === Neo4j Training Classes
 
 Available in a separate, private GitHub repository https://github.com/neo-technology/training-slides
