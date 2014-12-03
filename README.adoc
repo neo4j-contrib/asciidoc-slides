@@ -2,23 +2,19 @@
 
 This is what you install (in your terminal):
 
-- Install asciidoctor
+- Install asciidoctor and dependencies
 [source,bash]
 ----
+sudo gem install bundler
 sudo bundle install
 ----
 
-on Linux
-[source,bash]
-----
-sudo gem install asciidoctor
-----
-Make sure you're using at least asciidoctor 0.1.4.
+Make sure you're using at least asciidoctor 1.5.0
 
 - execute asciidoctor to produce Deck.js HTML5 output from the asciidoc source files
 [source,bash]
 ----
-asciidoctor -T ./asciidoctor-backends/haml/deckjs -a allow-uri-read -a presenter="Your Name"  index.adoc
+asciidoctor -T ./asciidoctor-backends/haml/deckjs -a allow-uri-read -a presenter="Your Name"  content/demo/index.adoc
 ----
 
 or
@@ -35,13 +31,19 @@ open content/demo/index.html
 
 see: http://neo4j-contrib.github.io/asciidoc-slides/content/demo/index.html[Slide Demo]
 
-=== Neo4j Trainings
+=== Neo4j Training Classes
 
-to be found under
+Available in a separate, private GitHub repository https://github.com/neo-technology/training-slides
+
+which is integrated in this project as git submodule.
+
+Use `git submodule init` and `git submodule update` to pull the latest versoin.
+
+Then the training content is found under:
 
 `content/training/[intro,cypher,production,modeling,import]/[classroom,online]/index.adoc`
 
-build intro training with
+build **intro** training with
 
 ----
 ./training.sh
