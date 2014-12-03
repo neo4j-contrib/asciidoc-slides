@@ -5,8 +5,8 @@ This is what you install (in your terminal):
 - Install asciidoctor and dependencies
 [source,bash]
 ----
-sudo gem install bundler
-sudo bundle install
+gem install bundler
+bundle install
 ----
 
 Make sure you're using at least asciidoctor 1.5.0
