@@ -1,0 +1,35 @@
+body.deck-container.has-clones {
+  /*background: black;*/
+}
+
+.has-clones section.slide.deck-current, .has-clones section.slide.deck-child-current {
+  border: 3px solid gray;
+  transform: scale(0.5) translate(-47%,-50%) translate(30px,30px);
+}
+
+.has-clones section.slide.deck-current + section.slide, .has-clones .slide.deck-child-current + section.slide {
+  top: 0;
+  left: 0;
+  border: 3px solid gray;
+  transform: scale(0.3) translate(55%,-50%) translate(100px,30px);
+  visibility: visible;
+}
+
+.has-clones ul.deck-child-current li.slide.deck-next, .has-clones ul.deck-child-current li.slide.deck-after {
+  color: lightgray;
+  visibility: visible;
+}
+
+.has-clones .notes.note.speaker {
+  display: block !important;
+  bottom: -350px;
+  left: 0;
+  position: absolute;
+  background: transparent;
+  color: black;
+  border: 3px solid gray;
+  width: 100%;
+  font-size: 44px;
+  padding: 12px;
+  overflow: scroll;
+}
