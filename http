@@ -1,0 +1,9 @@
+if [ "$1" == "" ]; then
+  echo "Usage ./http content/training/intro/classroom/index.html"
+  exit 1
+fi
+python -m SimpleHTTPServer 2>&1 > /dev/null &
+URL="http://localhost:8000/$1"
+echo $URL
+open $URL
+
