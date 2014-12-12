@@ -39,6 +39,8 @@
     - when 'codemirror'
       %link(rel='stylesheet' href="#{deckjs_dir}/extensions/codemirror/deck.codemirror.css")
       %link(rel='stylesheet' href="#{deckjs_dir}/extensions/codemirror/themes/iq.css")
+      %link(rel='stylesheet' href="#{deckjs_dir}/extensions/clone/deck.clone.css")
+      %link(rel='stylesheet' href="#{deckjs_dir}/extensions/notes/deck.notes.css")
       %script(src="#{deckjs_dir}/extensions/codemirror/codemirror.js")
       %script(src="#{deckjs_dir}/extensions/codemirror/deck.codemirror.js")
       %script(src="#{deckjs_dir}/extensions/codemirror/mode/javascript/javascript.js")
@@ -46,6 +48,8 @@
       %script(src="#{deckjs_dir}/extensions/codemirror/mode/htmlmixed/htmlmixed.js")
       %script(src="#{deckjs_dir}/extensions/codemirror/mode/plsql/plsql.js")
       %script(src="#{deckjs_dir}/extensions/cypher/deck.cypher.js")
+      %script(src="#{deckjs_dir}/extensions/clone/deck.clone.js")
+      %script(src="#{deckjs_dir}/extensions/notes/deck.notes.js")
       %link(rel='stylesheet' href="#{deckjs_dir}/extensions/cypher/deck.cypher.css")
     - when 'prettify'
       %link(rel='stylesheet' href="#{attr :prettifydir, 'http://cdnjs.cloudflare.com/ajax/libs/prettify/r298'}/#{attr 'prettify-theme', 'prettify'}.min.css")

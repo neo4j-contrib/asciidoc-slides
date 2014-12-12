@@ -1,0 +1,11 @@
+.notes {
+  position:absolute;
+  z-index:1000;
+  background: black;
+  color: white;
+  opacity :0.8;
+  width : 80%;
+  height: 300px;
+  float: right;
+  overflow: scroll;
+}
