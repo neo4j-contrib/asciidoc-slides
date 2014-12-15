@@ -3,24 +3,31 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
-<meta content="Asciidoctor 0.1.4" name="generator">
+<meta content="Asciidoctor 1.5.2" name="generator">
 <title>Short tests with asciidoc</title>
 <script src="../../asciidoc/deck.js/jquery.min.js"></script>
 <script src="../../asciidoc/deck.js/core/deck.core.js"></script>
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:800,400,600,300" rel="stylesheet">
 <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
 <link href="../../asciidoc/deck.js/extensions/codemirror/deck.codemirror.css" rel="stylesheet">
-<link href="../../asciidoc/deck.js/extensions/codemirror/themes/default.css" rel="stylesheet">
+<link href="../../asciidoc/deck.js/extensions/codemirror/themes/iq.css" rel="stylesheet">
+<link href="../../asciidoc/deck.js/extensions/clone/deck.clone.css" rel="stylesheet">
+<link href="../../asciidoc/deck.js/extensions/notes/deck.notes.css" rel="stylesheet">
 <script src="../../asciidoc/deck.js/extensions/codemirror/codemirror.js"></script>
 <script src="../../asciidoc/deck.js/extensions/codemirror/deck.codemirror.js"></script>
 <script src="../../asciidoc/deck.js/extensions/codemirror/mode/javascript/javascript.js"></script>
 <script src="../../asciidoc/deck.js/extensions/codemirror/mode/css/css.js"></script>
 <script src="../../asciidoc/deck.js/extensions/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+<script src="../../asciidoc/deck.js/extensions/codemirror/mode/plsql/plsql.js"></script>
 <script src="../../asciidoc/deck.js/extensions/cypher/deck.cypher.js"></script>
+<script src="../../asciidoc/deck.js/extensions/clone/deck.clone.js"></script>
+<script src="../../asciidoc/deck.js/extensions/notes/deck.notes.js"></script>
 <link href="../../asciidoc/deck.js/extensions/cypher/deck.cypher.css" rel="stylesheet">
 <link href="../../asciidoc/deck.js/core/deck.core.css" rel="stylesheet">
 <link href="../../asciidoc/deck.js/extensions/hash/deck.hash.css" media="screen" rel="stylesheet">
 <link href="../../asciidoc/deck.js/extensions/scale/deck.scale.css" media="screen" rel="stylesheet">
 <link href="../../asciidoc/deck.js/extensions/goto/deck.goto.css" media="screen" rel="stylesheet">
+<link href="../../asciidoc/deck.js/extensions/menu/deck.menu.css" media="screen" rel="stylesheet">
 <link href="../../asciidoc/deck.js/extensions/navigation/deck.navigation.css" media="screen" rel="stylesheet">
 <link href="../../asciidoc/deck.js/extensions/status/deck.status.css" media="screen" rel="stylesheet">
 <link href="../../asciidoc/deck.js/themes/style/neotech.css" media="screen" rel="stylesheet">
@@ -34,28 +41,24 @@
 <section class="slide">
 <h2>Who is training you?</h2>
 <section class="slide">
-<h3>Presenter: Peter Neubauer</h3>
+<h3>Presenter: Ron van Weverwijk</h3>
 
 </section>
-
 <section class="slide">
 <h3>Twitter:   <a href="http://twitter.com/neo4j">@neo4j</a></h3>
 
 </section>
-
 <section class="slide">
 <h3>Email:     info@neotechnology.com</h3>
 
 </section>
 </section>
-
 <section class="slide">
 <h2>Code</h2>
 <section class="slide">
 <h3>Custom color code</h3>
-<div class="paragraph"><p><code><span class="highlight">MATCH (n)</span>&#8594;() RETURN n</code> should be highlighted and monospace <span class="icon"><i class="icon-heart icon-2x"></i></span></p></div>
+<div class="paragraph"><p>[highlight]#MATCH (n)#-&gt;() RETURN n should be highlighted and monospace <span class="icon"><i class="icon-heart icon-2x"></i></span></p></div>
 </section>
-
 <section class="slide">
 <h3>code block</h3>
 <div class="listingblock">
@@ -66,7 +69,6 @@ MATCH (a)--&gt;(b)</textarea>
 </div>
 </section>
 </section>
-
 <section class="slide">
 <h2>Includes of graph viz</h2>
 <section class="slide">
@@ -84,14 +86,12 @@ MATCH (a)--&gt;(b)</textarea>
 </figure>
 </section>
 </section>
-
 <section class="labslide slide">
 <h2>Lab 1</h2>
 <section class="slide">
 <h3>Which directors also acted in their movie?</h3>
 
 </section>
-
 <section class="slide">
 <h3>Query</h3>
 <div class="listingblock">
@@ -102,23 +102,19 @@ RETURN d.name, m.title;</textarea>
 </div>
 </div>
 </section>
-
 <section class="slide">
 <h3>Result</h3>
 
 </section>
 </section>
-
 <section class="slide canvas-image" style="background-image: url(img/euler.png)">
 <div class="imageblock canvas-caption">
 <div class="content">
 <img alt="euler" src="img/euler.png">
 </div>
 </div>
-
 <div class="paragraph canvas-caption"><p class="center-up">Leonhard Euler, Swiss Mathematician, 1707-1783</p></div>
 </section>
-
 <section class="slide">
 <h2>Königsberg (Prussia) - 1736</h2>
 <div class="imageblock">
@@ -127,7 +123,6 @@ RETURN d.name, m.title;</textarea>
 </div>
 </div>
 </section>
-
 <section class="slide">
 <h2>Königsberg (Prussia) - 1736</h2>
 <div class="imageblock">
@@ -136,7 +131,6 @@ RETURN d.name, m.title;</textarea>
 </div>
 </div>
 </section>
-
 <section class="slide">
 <h2>Königsberg (Prussia) - 1736</h2>
 <div class="imageblock">
@@ -145,21 +139,16 @@ RETURN d.name, m.title;</textarea>
 </div>
 </div>
 </section>
-
 <section class="slide">
 <h2>Include graphgist</h2>
 <div class="paragraph"><p>You create a GraphGist by creating a <a href="https://gist.github.com/">GitHub Gist</a> in <a href="http://asciidoctor.org/docs/asciidoc-quick-reference/">AsciiDoc</a> and enter the URL to it in the form on this page.</p></div>
-
 <div class="paragraph"><p>Click on the Page Source button in the menu to see the source for this GraphGist!</p></div>
 </section>
-
 <section class="slide">
 <h2>Include a query console</h2>
-<div class="paragraph"><p><code>//console</code></p></div>
-
+<div class="paragraph"><p>//console</p></div>
 <div class="paragraph"><p>becomes:</p></div>
 </section>
-
 <section class="slide">
 <h2>Define a <a href="http://docs.neo4j.org/chunked/snapshot/cypher-query-lang.html">Cypher</a> query</h2>
 <div class="literalblock">
@@ -170,27 +159,22 @@ CREATE (n{name:'cypher'})-[r:LIKES]-&gt;({name:'icecream'}) return n.name, r
 ----</pre>
 </div>
 </div>
-
 <div class="paragraph"><p>becomes:</p></div>
-
 <div class="listingblock">
 <div class="content">
 <textarea class="code" mode="cypher">CREATE (n{name:'cypher'})-[r:LIKES]-&gt;({name:'icecream'}) return n.name, r</textarea>
 </div>
 </div>
-
 <div class="paragraph"><p><em>Queries are executed in the order they appear on the page during rendering, so make sure they can be performed in that order.</em>
 Each query has a green or red button to indicate if the query was successful or not.
 The console is set up after the executions, with an empty database, for the reader to play around with the queries.</p></div>
 </section>
-
 <section class="slide">
 <h2>A training video</h2>
 <div class="videoblock">
 <iframe allowFullScreen height="550" mozallowfullscreen src="//player.vimeo.com/video/81146271?title=0&amp;byline=0" webkitAllowFullScreen width="800"></iframe>
 </div>
 </section>
-
 <section class="slide">
 <h2>Run a query with a setup</h2>
 <div class="listingblock">
@@ -199,14 +183,19 @@ The console is set up after the executions, with an empty database, for the read
 </div>
 </div>
 </section>
-
+<section class="slide">
+<h2>Speaker notes.</h2>
+<div class="paragraph"><p>This slide contains speaker notes. Press the n key on your keyboard to show them.
+Or press the c key on your keyboard to clone the presentation and start a presentor display.</p></div>
+<div class="notes note speaker">
+<div class="paragraph"><p>This note will be shown on the speakerdeck.<br>
+Notes are only shown by pressing n or c.<br>
+Notes won&#8217;t be displayed on PDF.<br>
+To force a &lt;br/&gt; use a space and plus char at the end of the line.</p></div>
+</div>
+</section>
 <a class="deck-prev-link" href="#" title="Previous">&#8592;</a>
 <a class="deck-next-link" href="#" title="Next">&#8594;</a>
-<p class="deck-status">
-<span class="deck-status-current"></span>
-/
-<span class="deck-status-total"></span>
-</p>
 <form action="." class="goto-form" method="get">
 <label for="goto-slide">Go to Slide:</label>
 <input id="goto-slide" list="goto-datalist" name="slidenum" type="text">
@@ -217,19 +206,26 @@ The console is set up after the executions, with an empty database, for the read
 <script src="../../asciidoc/deck.js/extensions/hash/deck.hash.js"></script>
 <script src="../../asciidoc/deck.js/extensions/scale/deck.scale.js"></script>
 <script src="../../asciidoc/deck.js/extensions/goto/deck.goto.js"></script>
+<script src="../../asciidoc/deck.js/extensions/menu/deck.menu.js"></script>
 <script src="../../asciidoc/deck.js/extensions/navigation/deck.navigation.js"></script>
 <script src="../../asciidoc/deck.js/extensions/status/deck.status.js"></script>
 <script src="../../asciidoc/deck.js/extensions/arrows/home.js"></script>
 <script src="../../asciidoc/deck.js/extensions/arrows/d3.v3.js"></script>
 <script src="../../asciidoc/deck.js/extensions/arrows/arrows-graph-diagram.js"></script>
+<script src="../../asciidoc/deck.js/extensions/arrows/arrows-init.js"></script>
 <footer>© All Rights Reserved 2013 | Neo Technology, Inc.</footer>
 <img id="logo" src="img/Neo_Technology.jpg">
-<div class="slide">
-<h2>Status of the presenation</h2>
-<h3>Cypher queries execution</h3>
+<p class="deck-status">
+<span class="deck-status-current"></span>
+/
+<span class="deck-status-total"></span>
+</p>
+<div class="slide cypher-status">
+<h2>Status of the presentation</h2>
+<p>Cypher queries execution</p>
 <div>
 <div id="status"></div>
-<pre id="errors"></pre>
+<pre id="errors" style="overflow-y:scroll;font-size:small"></pre>
 </div>
 </div>
 <script src="../../asciidoc/js/checkcypher.js"></script>
@@ -294,23 +290,30 @@ The console is set up after the executions, with an empty database, for the read
     bottom: 1%;
   }
   .canvas-image .canvas-caption p {
+    -webkit-transform: translate(0, -50%);
+    -moz-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    -o-transform: translate(0, -50%);
+    transform: translate(0, -100%);
+  }
+  .canvas-image .canvas-title p {
+    -webkit-transform: translate(0, -100%);
+    -moz-transform: translate(0, -100%);
+    -ms-transform: translate(0, -100%);
+    -o-transform: translate(0, -100%);
+    transform: translate(0, -100%);
+  }
+  .canvas-image .canvas-caption p, .canvas-image .canvas-title p {
+    left: 0;
+    right: 0;
+    top: 50%;
     text-align: center;
-    padding-top: 0;
-    padding: 0;
-    -moz-transform: none;
-    -webkit-transform: none;
-    -o-transform: none;
-    -ms-transform: none;
-    transform: none;
     display: inline;
     position: absolute;
     background-color: rgba(0, 0, 0, 0.7);
-    font-weight: bold;
-    font-size: 58px;
-    -webkit-box-shadow: 2px 2px 2px #000;
-    -moz-box-shadow: 2px 2px 2px #000;
-    box-shadow: 2px 2px 2px #000;
-    padding: 1rem;
+    font-weight: normal;
+    font-size: 3em;
+    padding: 1em;
     color: white; }
   kbd.keyseq { color: #555555; }
   kbd:not(.keyseq) {

@@ -49,3 +49,5 @@ include::sections/intro/8_graphgist.adoc[]
 include::sections/intro/9_video.adoc[]
   
 include::sections/intro/cypher_with_setup.adoc[]
+
+include::sections/intro/speakerNotes.adoc[]
