@@ -1,0 +1,237 @@
+= Neo4j and Ruby
+:presenter: Brian Underwood
+:twitter: cheerfulstoic
+:email: brian@brian-underwood.codes
+:backend: deckjs
+:deckjsdir: ../../../asciidoc/deck.js
+:deckjs_theme: neotech
+:icons: font
+:source-highlighter: codemirror
+:navigation:
+:goto:
+:menu:
+:status:
+:arrows:
+//:presenterview:
+:customjs: ../../../asciidoc/js/checkcypher.js
+:gist-source: https://raw.github.com/neo4j-contrib/gists/master/
+:footer: © All Rights Reserved 2014 | Neo Technology, Inc.
+:img: img
+:logo: {img}/Neo_Technology.jpg
+:allow-uri-read:
+:video:
+:docs-link: https://github.com/neo4j-contrib/asciidoc-slides[documentation]
+:download-link: https://github.com/neo4j-contrib/asciidoc-slides/archive/master.zip[download]
+:sectids!:
+:deckjs_transition: none
+
++++
+<style type="text/css">
+p {
+  margin-bottom: 0.3em;
+}
+.center {
+  width: 100%;
+  text-align: center;
+}
+</style>
++++
+
+== Hello my name is
+
+* Brian Underwood
+* Developer Evangelist at Neo Technology
+* Ruby lover, graph enthusiast
+* @ https://twitter.com/cheerfulstoic[cheerfulstoic] | mailto:brian@brian-underwood.codes[brian@brian-underwood.codes]
+
+
+== Neo4j is a Graph Database
+
+image::{img}/web_console.png[height="450"]
+
++++ <!-- This is the neo4j web console.  We will see a demo later --> +++
+
+== Why Neo4j?
+
+* Expressive and natural data modeling
+* Easy and powerful query language (http://neo4j.com/developer/cypher-query-language/[cypher])
+* Fast and easy querying on complex data relationships
+* Refreshingly ACID
+
+== Neo4j Crash Course
+
+* Nodes and Relationships
+* Both are key->value stores
+* Nodes can have zero or more labels (User, Post, etc...)
+* Relationships have a type (i.e. wrote_post)
+
+== Neo4j Crash Course
+
+* Relationships go from one node to another (directional)
+* Querying can be directional or direction agnostic
+
+== Neo4j Crash Course
+
+image::{img}/property_graph_model.png[height="450"]
+
+== Cypher
+
+[source,cypher]
+----
+MATCH (user:User)-[rel:wrote_post]->(post:Post)
+  WHERE user.id = 123
+  RETURN rel.location, post
+----
+
+* Return post and location it was made
+* Location stored on the relationship
+
++++ <!-- ASCII art --> +++
+
+== Cypher
+
+[source,cypher]
+----
+MATCH (u:User)<-[:written_by]-(:Post)<-[:comments_on]-(c:Comment)-[:written_by]->(u2:User)
+  WHERE u.id = 123
+  RETURN u2.name, count(c)
+----
+
+* Returns users who commented on posts by user #123
+* Gives count of the number of comments for each users
+
++++ <!-- Automatic aggregation on columns when using an aggregate function.  Could also do RETURN p, u2, count(c) to get posts and a count of users for those posts --> +++
+
+== Why should Rubyists use Neo4j?
+
+* Natural and agile data modeling
+* Web console like ruby console
+* Great support
+
++++ <!-- Englishy like Ruby --> +++
+
+== What is the Neo4j gem?
+
+* An ActiveModel compliant Ruby wrapper for the Neo4j graph database.
+
+== Neo4j gem features
+
+* OGM (Object Graph Model)
+** Properties
+** Indexes / Constraints
+** Callbacks
+** Validations
+** Assocations 
+
+== Neo4j gem features
+
+* Query building / chaining interface similar to https://github.com/rails/arel[arel]
+* Transactions
+* Migrations
+
+== Points of Pride
+
+[role=center]
++++ <h4>Well tested</h4> +++
+
+image::{img}/badges_of_pride.png[]
+
+== Points of Pride
+
+[role=center]
++++ <h4>Well documented</h4> +++
+
+image::{img}/wiki_index.png[]
+
+== Points of Pride
+
+[role=center]
++++ <h4>Actively supported</h4> +++
+
+image::{img}/github_pulse.png[]
+
+== Points of Pride
+
+[role=center]
++++ <h4>Won an award!</h4> +++
+
+image::{img}/graphy.jpg[]
+
+== Models
+
+[source,ruby]
+----
+class Post
+  include Neo4j::ActiveNode
+
+  property :subject
+  property :text
+
+  has_one :out, :author, type: :written_by, model_class: 'User', rel_class: 'WrittenBy'
+  has_many :out, :tags, type: :tagged_as # model_class 'Tag' is assumed
+end
+
+class WrittenBy
+  include Neo4j::ActiveRel
+
+  from_class Post
+  to_class   User
+  type :written_by
+
+  property :location
+end
+----
+
++++ <!-- Include ActiveNode to make a model.  Define properties and assocations like ActiveRecord / Mongoid.  ActiveRel is optional, but great for complex relationships.  Supports validations, callbacks, etc... --> +++
+
+== Usage
+
+
+[source,ruby]
+----
+
+class Post
+  has_one :out, :author, type: :written_by, model_class: 'User'
+  has_many :in, :comments, type: :comments_on
+end
+
+class Comment
+  has_one :out, :author, type: :written_by, model_class: 'User'
+end
+
+class User
+  has_many :in, :posts, origin: :author
+end
+
+user.posts.comments(:c).author(:u2).pluck('u2.name, count(c)')
+
+# Compare to:
+# MATCH (u:User)<-[:written_by]-(:Post)<-[:comments_on]-(c:Comment)-[:written_by]->(u2:User)
+#   WHERE u.id = 123
+#   RETURN u2.name, count(c)
+----
+
+== Some supported gems
+
+* devise
+* will_paginate
+* paperclip
+* searchkick
+
+== Projects built with neo4j gem
+
+* https://github.com/neo4jrb/neo4apis[neo4apis]
+* https://github.com/neo4jrb/neo4apis-twitter[neo4apis-twitter]
+* https://github.com/neo4jrb/twitter_analytics[twitter_analytics]
+* http://railsrumble.com/entries/378-graphnote[graphnote]
+* https://github.com/neo4jrb/meta_model[meta_model]
+
+== Thank you!  My info again:
+
+* Brian Underwood
+* Developer Evangelist at Neo Technology
+* @ https://twitter.com/cheerfulstoic[cheerfulstoic] | mailto:brian@brian-underwood.codes[brian@brian-underwood.codes]
+
+== Demo time!
+
+image::{img}/lapd_model.png[height="450"]

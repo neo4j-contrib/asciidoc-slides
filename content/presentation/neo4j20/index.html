@@ -3,18 +3,23 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
-<meta content="Asciidoctor 0.1.4" name="generator">
+<meta content="Asciidoctor 1.5.2" name="generator">
 <title>Neo4j 2.0 (Graphs)-[:FOR]&#8594;(everyone)</title>
 <script src="../../../asciidoc/deck.js/jquery.min.js"></script>
 <script src="../../../asciidoc/deck.js/core/deck.core.js"></script>
+<script>
+var deckjs_dir = '../../../asciidoc/deck.js';
+</script>
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:800,400,600,300" rel="stylesheet">
 <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
 <link href="../../../asciidoc/deck.js/extensions/codemirror/deck.codemirror.css" rel="stylesheet">
-<link href="../../../asciidoc/deck.js/extensions/codemirror/themes/default.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/codemirror/themes/iq.css" rel="stylesheet">
 <script src="../../../asciidoc/deck.js/extensions/codemirror/codemirror.js"></script>
 <script src="../../../asciidoc/deck.js/extensions/codemirror/deck.codemirror.js"></script>
 <script src="../../../asciidoc/deck.js/extensions/codemirror/mode/javascript/javascript.js"></script>
 <script src="../../../asciidoc/deck.js/extensions/codemirror/mode/css/css.js"></script>
 <script src="../../../asciidoc/deck.js/extensions/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/mode/plsql/plsql.js"></script>
 <script src="../../../asciidoc/deck.js/extensions/cypher/deck.cypher.js"></script>
 <link href="../../../asciidoc/deck.js/extensions/cypher/deck.cypher.css" rel="stylesheet">
 <link href="../../../asciidoc/deck.js/core/deck.core.css" rel="stylesheet">
@@ -44,7 +49,6 @@
 </style>
 </div>
 </div>
-
 <section class="slide">
 <h2>Who the hell is this guy?</h2>
 <div class="ulist">
@@ -56,19 +60,17 @@
 </ul>
 </div>
 </section>
-
 <section class="slide">
 <h2>What will he talk about?</h2>
 <div class="ulist">
 <ul>
 <li class="slide">Quick history of Neo4j</li>
 <li class="slide">Big changes in 2.0</li>
-<li class="slide">&#8230; and what they mean for you</li>
+<li class="slide">&#8230;&#8203; and what they mean for you</li>
 <li class="slide">The road ahead</li>
 </ul>
 </div>
 </section>
-
 <section class="slide">
 <h2>Question for you!</h2>
 <div class="ulist">
@@ -80,20 +82,18 @@
 </ul>
 </div>
 </section>
-
 <section class="slide">
 <h2>A quick history of Neo4j</h2>
 <div class="ulist">
 <ul>
 <li class="slide">A small company in Sweden</li>
 <li class="slide">Bang</li>
-<li class="slide">0.x &#8230; small embeddable persistent graph library</li>
-<li class="slide">1.x &#8230; adding indexes, server, first stab of Cypher</li>
-<li class="slide">2.x &#8230; ease of use, data-model, optional schema, Browser</li>
+<li class="slide">0.x &#8230;&#8203; small embeddable persistent graph library</li>
+<li class="slide">1.x &#8230;&#8203; adding indexes, server, first stab of Cypher</li>
+<li class="slide">2.x &#8230;&#8203; ease of use, data-model, optional schema, Browser</li>
 </ul>
 </div>
 </section>
-
 <section class="slide">
 <h2>The old days</h2>
 <div class="ulist">
@@ -106,7 +106,6 @@
 </ul>
 </div>
 </section>
-
 <section class="slide">
 <h2>Java API</h2>
 <div class="listingblock big">
@@ -123,13 +122,11 @@ rel.setProperty("state","mental");
 db.shutdown();</textarea>
 </div>
 </div>
-
 <section class="slide">
 <h3>That&#8217;s not enough</h3>
 
 </section>
 </section>
-
 <section class="slide">
 <h2>Java API (Transactional)</h2>
 <div class="listingblock big">
@@ -153,7 +150,6 @@ db.shutdown();</textarea>
 </div>
 </div>
 </section>
-
 <section class="slide">
 <h2>Upping the Game - Neo4j 1.x</h2>
 <div class="ulist">
@@ -164,7 +160,6 @@ db.shutdown();</textarea>
 </ul>
 </div>
 </section>
-
 <section class="slide">
 <h2>Indexing (now Legacy)</h2>
 <div class="listingblock big">
@@ -178,7 +173,6 @@ db.shutdown();</textarea>
 </div>
 </div>
 </section>
-
 <section class="slide">
 <h2>Neo4j Server</h2>
 <div class="ulist">
@@ -190,7 +184,6 @@ db.shutdown();</textarea>
 </ul>
 </div>
 </section>
-
 <section class="slide">
 <h2>Add a Web-UI</h2>
 <div class="ulist">
@@ -201,11 +194,9 @@ db.shutdown();</textarea>
 </ul>
 </div>
 </section>
-
 <section class="slide canvas-image" style="background-image: url(img/server_visualization.jpg)">
 
 </section>
-
 <section class="slide">
 <h2>Neo4j Server Strengths</h2>
 <div class="ulist">
@@ -217,7 +208,6 @@ db.shutdown();</textarea>
 </ul>
 </div>
 </section>
-
 <section class="slide">
 <h2>Great for people</h2>
 <div class="ulist">
@@ -229,7 +219,6 @@ db.shutdown();</textarea>
 </ul>
 </div>
 </section>
-
 <section class="slide">
 <h2>Some Neo4j Rest Drivers</h2>
 <div class="imageblock">
@@ -238,7 +227,6 @@ db.shutdown();</textarea>
 </div>
 </div>
 </section>
-
 <section class="slide">
 <h2>Neo4j Server Weaknesses</h2>
 <div class="ulist">
@@ -252,7 +240,6 @@ db.shutdown();</textarea>
 </ul>
 </div>
 </section>
-
 <section class="slide">
 <h2>Cypher for the Rescue</h2>
 <div class="ulist">
@@ -263,7 +250,6 @@ db.shutdown();</textarea>
 </ul>
 </div>
 </section>
-
 <section class="slide">
 <h2>Good ideas</h2>
 <div class="ulist">
@@ -277,7 +263,6 @@ db.shutdown();</textarea>
 </ul>
 </div>
 </section>
-
 <section class="slide">
 <h2>Cypher: Refresher</h2>
 <section class="slide">
@@ -291,7 +276,6 @@ FOREACH (m in range(1,12) |
 </div>
 </div>
 </section>
-
 <section class="slide">
 <h3>MATCH</h3>
 <div class="listingblock">
@@ -306,12 +290,10 @@ LIMIT 2</textarea>
 </div>
 </section>
 </section>
-
 <section class="slide">
 <h2>Demo</h2>
 <iframe src="http://console.neo4j.org/r/cctayc" width="1500" height="600"></iframe>
 </section>
-
 <section class="slide">
 <h2>Cypher APIs</h2>
 <section class="slide">
@@ -330,7 +312,6 @@ for (Map&lt;String,Object&gt; row : result) {
 </div>
 </div>
 </section>
-
 <section class="slide">
 <h3>Server API (2.0)</h3>
 <div class="listingblock">
@@ -344,7 +325,6 @@ for (Map&lt;String,Object&gt; row : result) {
 </div>
 </section>
 </section>
-
 <section class="slide">
 <h2>Cypher Drivers (JVM)</h2>
 <div class="ulist">
@@ -355,17 +335,15 @@ for (Map&lt;String,Object&gt; row : result) {
 <li class="slide">(J)Ruby - neo4j.rb</li>
 </ul>
 </div>
-
 <section class="slide">
 <h3>Bigger List</h3>
 <div class="ulist">
 <ul>
-<li><a href="http://neo4j.org/drivers">http://neo4j.org/drivers</a></li>
+<li><a class="bare" href="http://neo4j.org/drivers">http://neo4j.org/drivers</a></li>
 </ul>
 </div>
 </section>
 </section>
-
 <section class="slide">
 <h2>Cypher Drivers (Non-JVM)</h2>
 <div class="ulist">
@@ -376,11 +354,10 @@ for (Map&lt;String,Object&gt; row : result) {
 <li class="slide">.Net - Neo4jClient</li>
 <li class="slide">PHP - Neo4jPHP</li>
 <li class="slide">Perl - REST::Neo4p</li>
-<li class="slide">&#8230; many more &#8230;</li>
+<li class="slide">&#8230;&#8203; many more &#8230;&#8203;</li>
 </ul>
 </div>
 </section>
-
 <section class="slide">
 <h2>Big Leap Neo4j 2.0</h2>
 <div class="ulist">
@@ -392,14 +369,12 @@ for (Map&lt;String,Object&gt; row : result) {
 </ul>
 </div>
 </section>
-
 <section class="slide">
 <h2>Node-Labels</h2>
 <section class="slide">
 <h3>How do you add types to a graph?</h3>
 
 </section>
-
 <section class="slide">
 <h3>Answer 1: Cumbersomely</h3>
 <div class="ulist">
@@ -409,7 +384,6 @@ for (Map&lt;String,Object&gt; row : result) {
 <li class="slide">type indexes</li>
 </ul>
 </div>
-
 <div class="ulist">
 <ul>
 <li class="slide">confuse and pollute the models</li>
@@ -419,14 +393,12 @@ for (Map&lt;String,Object&gt; row : result) {
 </div>
 </section>
 </section>
-
 <section class="slide">
 <h2>Node-Labels</h2>
 <section class="slide">
 <h3>How do you add types to a graph?</h3>
 
 </section>
-
 <section class="slide">
 <h3>Answer 2: Labels</h3>
 <div class="ulist">
@@ -440,12 +412,10 @@ for (Map&lt;String,Object&gt; row : result) {
 </div>
 </section>
 </section>
-
 <section class="slide">
 <h2>Labels in a Graph</h2>
 <div class="paragraph"><p><span class="image"><img alt="property_graph_model" height="700" src="img/property_graph_model.png"></span></p></div>
 </section>
-
 <section class="slide">
 <h2>Labels in Cypher</h2>
 <section class="slide">
@@ -456,7 +426,6 @@ for (Map&lt;String,Object&gt; row : result) {
 </div>
 </div>
 </section>
-
 <section class="slide">
 <h3>Get-or-create with labels (&amp; unique constraint)</h3>
 <div class="listingblock big">
@@ -466,7 +435,6 @@ ON CREATE SET me:Father</textarea>
 </div>
 </div>
 </section>
-
 <section class="slide">
 <h3>Match, filter, update and return labels</h3>
 <div class="listingblock big">
@@ -479,7 +447,6 @@ RETURN labels(me)</textarea>
 </div>
 </section>
 </section>
-
 <section class="slide">
 <h2>Optional Schema - Indexes</h2>
 <div class="ulist">
@@ -489,7 +456,6 @@ RETURN labels(me)</textarea>
 <li>Now: real automatic indexes, based on labels</li>
 </ul>
 </div>
-
 <section class="slide">
 <h3>Create Index</h3>
 <div class="listingblock">
@@ -498,7 +464,6 @@ RETURN labels(me)</textarea>
 </div>
 </div>
 </section>
-
 <section class="slide">
 <h3>Use Index</h3>
 <div class="listingblock">
@@ -512,7 +477,6 @@ LIMIT 10</textarea>
 </div>
 </section>
 </section>
-
 <section class="slide">
 <h2>Optional Schema - Constraints</h2>
 <div class="ulist">
@@ -522,7 +486,6 @@ LIMIT 10</textarea>
 <li>Uses index behind the scenes</li>
 </ul>
 </div>
-
 <section class="slide">
 <h3>Create Constraint</h3>
 <div class="listingblock">
@@ -531,7 +494,6 @@ LIMIT 10</textarea>
 </div>
 </div>
 </section>
-
 <section class="slide">
 <h3>Use Constraint</h3>
 <div class="listingblock">
@@ -543,7 +505,6 @@ ON CREATE SET b.title = "Neo4j 2.0 – Eine Graphdatenbank für alle",
 </div>
 </section>
 </section>
-
 <section class="slide">
 <h2>New Neo4j 2.0 Hand!-Book (German)</h2>
 <div class="imageblock">
@@ -551,12 +512,9 @@ ON CREATE SET b.title = "Neo4j 2.0 – Eine Graphdatenbank für alle",
 <img alt="neo4j buch" src="img/neo4j_buch.png" width="400">
 </div>
 </div>
-
-<div class="paragraph"><p><a href="http://bit.ly/das-buch">http://bit.ly/das-buch</a></p></div>
-
+<div class="paragraph"><p><a class="bare" href="http://bit.ly/das-buch">http://bit.ly/das-buch</a></p></div>
 <div class="paragraph"><p>Or visit our booth for a free printed copy.</p></div>
 </section>
-
 <section class="slide">
 <h2>Neo4j Browser</h2>
 <div class="ulist">
@@ -574,15 +532,12 @@ Developer Workbench<div class="ulist">
 </ul>
 </div>
 </section>
-
 <section class="slide canvas-image" style="background-image: url(img/neo4j_browser.png)">
 
 </section>
-
 <section class="slide canvas-image" style="background-image: url(img/browser_get_some_data.png)">
 
 </section>
-
 <section class="slide">
 <h2>Transactional HTTP Endpoint</h2>
 <section class="slide">
@@ -598,7 +553,6 @@ Developer Workbench<div class="ulist">
 </div>
 </section>
 </section>
-
 <section class="slide">
 <h2>Transactional HTTP Endpoint</h2>
 <section class="slide">
@@ -615,11 +569,9 @@ Developer Workbench<div class="ulist">
 </div>
 </section>
 </section>
-
 <section class="slide canvas-image" style="background-image: url(img/blank.png)">
 <h1>Demo Time</h1>
 </section>
-
 <section class="slide">
 <h2>Next Step Neo4j: 2.1</h2>
 <div class="ulist">
@@ -636,7 +588,6 @@ Import all the things<div class="ulist">
 </ul>
 </div>
 </section>
-
 <section class="slide">
 <h2>The Road Ahead - Neo4j 2.x</h2>
 <div class="ulist">
@@ -649,7 +600,6 @@ Import all the things<div class="ulist">
 </ul>
 </div>
 </section>
-
 <section class="slide">
 <h2>The Road Ahead - Neo4j 2.x</h2>
 <section class="slide">
@@ -664,7 +614,6 @@ Import all the things<div class="ulist">
 </div>
 </section>
 </section>
-
 <section class="slide">
 <h2>The Road Ahead - Neo4j 2.x</h2>
 <section class="slide">
@@ -679,7 +628,6 @@ Import all the things<div class="ulist">
 </div>
 </section>
 </section>
-
 <section class="slide">
 <h2>The Road Ahead - Neo4j 2.x</h2>
 <section class="slide">
@@ -692,7 +640,6 @@ Import all the things<div class="ulist">
 </ul>
 </div>
 </section>
-
 <section class="slide">
 <h3>Indexing</h3>
 <div class="ulist">
@@ -703,7 +650,6 @@ Import all the things<div class="ulist">
 </div>
 </section>
 </section>
-
 <section class="slide">
 <h2>The Road Ahead - Neo4j 2.x</h2>
 <section class="slide">
@@ -723,18 +669,11 @@ New Query Planner<div class="ulist">
 </div>
 </section>
 </section>
-
 <section class="slide canvas-image" style="background-image: url(img/blank.png)">
 <h1>Questions ? Thank You!</h1>
 </section>
-
 <a class="deck-prev-link" href="#" title="Previous">&#8592;</a>
 <a class="deck-next-link" href="#" title="Next">&#8594;</a>
-<p class="deck-status">
-<span class="deck-status-current"></span>
-/
-<span class="deck-status-total"></span>
-</p>
 <form action="." class="goto-form" method="get">
 <label for="goto-slide">Go to Slide:</label>
 <input id="goto-slide" list="goto-datalist" name="slidenum" type="text">
@@ -751,14 +690,20 @@ New Query Planner<div class="ulist">
 <script src="../../../asciidoc/deck.js/extensions/arrows/home.js"></script>
 <script src="../../../asciidoc/deck.js/extensions/arrows/d3.v3.js"></script>
 <script src="../../../asciidoc/deck.js/extensions/arrows/arrows-graph-diagram.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/arrows/arrows-init.js"></script>
 <footer>© All Rights Reserved 2013 | Neo Technology, Inc.</footer>
 <img id="logo" src="img/Neo_Technology.jpg">
-<div class="slide">
-<h2>Status of the presenation</h2>
-<h3>Cypher queries execution</h3>
+<p class="deck-status">
+<span class="deck-status-current"></span>
+/
+<span class="deck-status-total"></span>
+</p>
+<div class="slide cypher-status">
+<h2>Status of the presentation</h2>
+<p>Cypher queries execution</p>
 <div>
 <div id="status"></div>
-<pre id="errors"></pre>
+<pre id="errors" style="overflow-y:scroll;font-size:small"></pre>
 </div>
 </div>
 <script src="../../../asciidoc/js/checkcypher.js"></script>
@@ -823,23 +768,30 @@ New Query Planner<div class="ulist">
     bottom: 1%;
   }
   .canvas-image .canvas-caption p {
+    -webkit-transform: translate(0, -50%);
+    -moz-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    -o-transform: translate(0, -50%);
+    transform: translate(0, -100%);
+  }
+  .canvas-image .canvas-title p {
+    -webkit-transform: translate(0, -100%);
+    -moz-transform: translate(0, -100%);
+    -ms-transform: translate(0, -100%);
+    -o-transform: translate(0, -100%);
+    transform: translate(0, -100%);
+  }
+  .canvas-image .canvas-caption p, .canvas-image .canvas-title p {
+    left: 0;
+    right: 0;
+    top: 50%;
     text-align: center;
-    padding-top: 0;
-    padding: 0;
-    -moz-transform: none;
-    -webkit-transform: none;
-    -o-transform: none;
-    -ms-transform: none;
-    transform: none;
     display: inline;
     position: absolute;
     background-color: rgba(0, 0, 0, 0.7);
-    font-weight: bold;
-    font-size: 58px;
-    -webkit-box-shadow: 2px 2px 2px #000;
-    -moz-box-shadow: 2px 2px 2px #000;
-    box-shadow: 2px 2px 2px #000;
-    padding: 1rem;
+    font-weight: normal;
+    font-size: 3em;
+    padding: 1em;
     color: white; }
   kbd.keyseq { color: #555555; }
   kbd:not(.keyseq) {

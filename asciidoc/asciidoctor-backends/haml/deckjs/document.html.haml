@@ -13,6 +13,9 @@
       - deckjs_dir = "#{attr :deckjsdir}"
       %script(src='#{deckjs_dir}/jquery.min.js')
       %script(src='#{deckjs_dir}/core/deck.core.js')
+
+    %script
+      var deckjs_dir = '#{deckjs_dir}';
     %link(rel='stylesheet'){:href=>'http://fonts.googleapis.com/css?family=Open+Sans:800,400,600,300'}
     
     - unless (attr :stylesheet, '').empty?
@@ -125,11 +128,14 @@
     - if attr? :toc
       %script(src='#{deckjs_dir}/extensions/toc/deck.toc.js')
       %div(class='deck-toc')
+    - if attr? :presenterview
+      %script(src="#{deckjs_dir}/extensions/presenterview/deck.presenterview.js")
     - if attr? :arrows
       %script(src='#{deckjs_dir}/extensions/arrows/home.js')
       %script(src='#{deckjs_dir}/extensions/arrows/d3.v3.js')
       %script(src='#{deckjs_dir}/extensions/arrows/arrows-graph-diagram.js')
       %script(src='#{deckjs_dir}/extensions/arrows/arrows-init.js')
+
     - if attr? :footer
       %footer=attr :footer
     - if attr? :logo
