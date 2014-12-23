@@ -53,7 +53,29 @@ build **intro** training with
 
 ----
 ./training.sh
-open content/training/intro/classroom/index.html
 ----
 
 see: http://neo4j-contrib.github.io/asciidoc-slides/content/training/intro/classroom/index.html[Training Demo]
+
+== Run training
+
+The easiest way to start the training is to start a webserver and open the training on a http url.
+
+For example run a SimpleHTTPServer with python.
+This is wrapped in a shell scripts for unix users.
+
+on Linux:
+
+[source,bash]
+----
+./http content/training/intro/classroom/index.html
+----
+
+== keymappings during the training
+
+There are a couple of shortcuts you can use as a trainer to help during the training this is a summery of the most common:
+
+* g: show a window to quickly go to a slide.
+* m: show an overview of your presentation, be able to click a slide to goto the selected slide.
+* n: show presenter notes
+* c: clone the presentation to a presenter-deck (with next slide and presenter notes) and a master.

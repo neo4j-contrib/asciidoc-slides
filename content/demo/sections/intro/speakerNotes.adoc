@@ -1,0 +1,12 @@
+== Speaker notes.
+
+This slide contains speaker notes. Press the n key on your keyboard to show them.
+Or press the c key on your keyboard to clone the presentation and start a presentor display.
+
+[NOTE.speaker]
+--
+This note will be shown on the speakerdeck. +
+Notes are only shown by pressing n or c. +
+Notes won't be displayed on PDF. +
+To force a <br/> use a space and plus char at the end of the line.
+--
