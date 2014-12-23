@@ -58,18 +58,29 @@ p {
 <ul>
 <li>Brian Underwood</li>
 <li>Developer Evangelist at Neo Technology</li>
-<li>Ruby lover, graph enthusiast</li>
+<li>Ruby lover, database enthusiast</li>
 <li>@ <a href="https://twitter.com/cheerfulstoic">cheerfulstoic</a> | <a href="mailto:brian@brian-underwood.codes">brian@brian-underwood.codes</a></li>
 </ul>
 </div>
 </section>
 <section class="slide">
 <h2>Neo4j is a Graph Database</h2>
-<div class="imageblock">
-<div class="content">
-<img alt="web console" height="450" src="img/web_console.png">
-</div>
-</div>
+<div class="paragraph"><p>
+<table style="margin: 0 auto; margin-top: -50px;">
+  <tr>
+    <th>Graph</th>
+    <th>Chart</th>
+  </tr>
+  <tr>
+    <td>
+      <img src="img/web_console.png" style="height: 410px">
+    </td>
+    <td>
+      <img src="img/pie_chart_vs_bar_chart.jpg" style="height: 410px">
+    </td>
+  </tr>
+</table>
+</p></div>
 <div class="paragraph"><p> <!-- This is the neo4j web console.  We will see a demo later --> </p></div>
 </section>
 <section class="slide">
@@ -79,7 +90,7 @@ p {
 <li>Expressive and natural data modeling</li>
 <li>Easy and powerful query language (<a href="http://neo4j.com/developer/cypher-query-language/">cypher</a>)</li>
 <li>Fast and easy querying on complex data relationships</li>
-<li>Refreshingly ACID</li>
+<li>ACID / Replication</li>
 </ul>
 </div>
 </section>
@@ -115,7 +126,7 @@ p {
 <h2>Cypher</h2>
 <div class="listingblock">
 <div class="content">
-<textarea class="code" mode="cypher">MATCH (user:User)-[rel:wrote_post]-&gt;(post:Post)
+<textarea class="code" mode="cypher">MATCH (user:User)&lt;-[rel:written_by]-(post:Post)
   WHERE user.id = 123
   RETURN rel.location, post</textarea>
 </div>
@@ -143,13 +154,14 @@ p {
 <li>Gives count of the number of comments for each users</li>
 </ul>
 </div>
-<div class="paragraph"><p> <!-- Automatic aggregation on columns when using an aggregate function.  Could also do RETURN p, u2, count(c) to get posts and a count of users for those posts --> </p></div>
+<div class="paragraph"><p> <!-- Automatic aggregation on columns when using an aggregate function.  Could also do RETURN p, u2, count(c) to get posts and a count of users for those posts.  Pause for questions --> </p></div>
 </section>
 <section class="slide">
 <h2>Why should Rubyists use Neo4j?</h2>
 <div class="ulist">
 <ul>
 <li>Natural and agile data modeling</li>
+<li>Higher level abstraction</li>
 <li>Web console like ruby console</li>
 <li>Great support</li>
 </ul>
@@ -185,6 +197,7 @@ OGM (Object Graph Model)<div class="ulist">
 <h2>Neo4j gem features</h2>
 <div class="ulist">
 <ul>
+<li>Modeling nodes and relationships</li>
 <li>Query building / chaining interface similar to <a href="https://github.com/rails/arel">arel</a></li>
 <li>Transactions</li>
 <li>Migrations</li>
@@ -238,7 +251,7 @@ OGM (Object Graph Model)<div class="ulist">
   property :text
 
   has_one :out, :author, type: :written_by, model_class: 'User', rel_class: 'WrittenBy'
-  has_many :out, :tags, type: :tagged_as # model_class 'Tag' is assumed
+  has_many :out, :tags, type: :tagged_as  # model_class 'Tag' is assumed
 end
 
 class WrittenBy
@@ -304,6 +317,24 @@ user.posts.comments(:c).author(:u2).pluck('u2.name, count(c)')
 </div>
 </section>
 <section class="slide">
+<h2>Demo time!</h2>
+<div class="paragraph"><p>Code available on: <a class="bare" href="https://github.com/neo4jrb/lapd_incidents">https://github.com/neo4jrb/lapd_incidents</a></p></div>
+<div class="imageblock">
+<div class="content">
+<img alt="lapd csv" src="img/lapd_csv.png">
+</div>
+</div>
+</section>
+<section class="slide">
+<h2>Demo time!</h2>
+<div class="paragraph"><p>Code available on: <a class="bare" href="https://github.com/neo4jrb/lapd_incidents">https://github.com/neo4jrb/lapd_incidents</a></p></div>
+<div class="imageblock">
+<div class="content">
+<img alt="lapd model" height="400" src="img/lapd_model.png">
+</div>
+</div>
+</section>
+<section class="slide">
 <h2>Thank you!  My info again:</h2>
 <div class="ulist">
 <ul>
@@ -311,14 +342,6 @@ user.posts.comments(:c).author(:u2).pluck('u2.name, count(c)')
 <li>Developer Evangelist at Neo Technology</li>
 <li>@ <a href="https://twitter.com/cheerfulstoic">cheerfulstoic</a> | <a href="mailto:brian@brian-underwood.codes">brian@brian-underwood.codes</a></li>
 </ul>
-</div>
-</section>
-<section class="slide">
-<h2>Demo time!</h2>
-<div class="imageblock">
-<div class="content">
-<img alt="lapd model" height="450" src="img/lapd_model.png">
-</div>
 </div>
 </section>
 <a class="deck-prev-link" href="#" title="Previous">&#8592;</a>
