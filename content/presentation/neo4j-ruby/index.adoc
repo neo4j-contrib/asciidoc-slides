@@ -12,7 +12,7 @@
 :menu:
 :status:
 :arrows:
-//:presenterview:
+:presenterview:
 :customjs: ../../../asciidoc/js/checkcypher.js
 :gist-source: https://raw.github.com/neo4j-contrib/gists/master/
 :footer: © All Rights Reserved 2014 | Neo Technology, Inc.
@@ -166,6 +166,13 @@ image::{img}/wiki_index.png[]
 +++ <h4>Actively supported</h4> +++
 
 image::{img}/github_pulse.png[]
+
+== Points of Pride
+
+[role=center]
++++ <h4>Well loved</h4> +++
+
+image::{img}/stars_and_forks.png[]
 
 == Points of Pride
 
