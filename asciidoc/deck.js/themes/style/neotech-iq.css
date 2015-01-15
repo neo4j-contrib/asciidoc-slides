@@ -639,6 +639,10 @@ section.notitle h2 {
     display: none;
 }
 
+section.notitle h3 {
+    display: none;
+}
+
 table,td {
     border: solid thin;
 }
@@ -654,6 +658,7 @@ td, th {
 
 td p {
     margin-bottom: 0;
+    font-size: 1em;
 }
 
 figure,table {
@@ -669,6 +674,9 @@ figure,table {
 }
 .blue {
     color: #0000ff;
+}
+.right {
+	text-align:right;
 }
 
 .img-ref {
@@ -747,4 +755,13 @@ h1 {
 .canvas-image {
     background-size: cover;
     background-position: center;
+}
+
+figure.big-graph svg {
+	width:62%;
+	height:62%;
+}
+
+.large-image img {
+	width: 85%;
 }
