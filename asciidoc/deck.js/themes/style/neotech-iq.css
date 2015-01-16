@@ -765,3 +765,11 @@ figure.big-graph svg {
 .large-image img {
 	width: 85%;
 }
+
+.small-image img {
+	width: 50%;
+}
+
+.exercise {
+	background-color: lightgray;
+}
