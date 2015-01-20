@@ -118,6 +118,10 @@ ul li {
     list-style-type: circle;
 }
 
+.small {
+    font-size: 85%;
+}
+
 small {
     font-size: 85%;
 }
@@ -297,7 +301,9 @@ pre {
 .deck-container .slide .CodeMirror pre span, .deck-container .slide .CodeMirror .CodeMirror-gutter-text pre {
     font-size: 1.5em;
 }
-
+.CodeMirror-gutter {
+	display: none;
+}
 .deck-container .slide .CodeMirror .CodeMirror-gutter-text {
     margin-right: 0.3em;
 }
@@ -320,7 +326,7 @@ em {
 }
 
 li {
-    padding: .25em 0;
+    padding: .15em 0 .15em 0;
     font-size: 2em;
     vertical-align: middle;
 }
@@ -759,4 +765,12 @@ figure.big-graph svg {
 
 .large-image img {
 	width: 85%;
+}
+
+.small-image img {
+	width: 50%;
+}
+
+.exercise {
+	background-color: lightgray;
 }

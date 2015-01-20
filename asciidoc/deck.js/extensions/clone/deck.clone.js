@@ -16,7 +16,7 @@ This module provides a support for cloning the deck.
         
     $.extend(true, $[deck].defaults, {	
         keys: {
-            clone: 67 // c
+            clone: 80 // p
         }
     });
 
