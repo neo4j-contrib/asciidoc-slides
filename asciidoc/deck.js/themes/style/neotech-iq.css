@@ -118,6 +118,10 @@ ul li {
     list-style-type: circle;
 }
 
+.small {
+    font-size: 85%;
+}
+
 small {
     font-size: 85%;
 }
