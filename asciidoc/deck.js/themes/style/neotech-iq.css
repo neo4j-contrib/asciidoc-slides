@@ -572,15 +572,6 @@ a:hover, a:focus {
     bottom: 50px;
 }
 
-.deck-menu .slide {
-    background: transparent;
-    border-radius: 5px;
-}
-
-.rgba .deck-menu .slide {
-    background: rgba(0, 0, 0, 0.1);
-}
-
 .deck-menu .slide.deck-current, .rgba .deck-menu .slide.deck-current, .no-touch .deck-menu .slide:hover {
     background: #fff;
 }
@@ -635,6 +626,10 @@ footer {
 
 .highlight {
     color: #B0362B;
+}
+
+.slide {
+    background-color: rgb(254,254,254);
 }
 
 .labslide {

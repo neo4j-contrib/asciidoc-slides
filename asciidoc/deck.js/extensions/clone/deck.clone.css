@@ -1,5 +1,5 @@
 body.deck-container.has-clones {
-  /*background: black;*/
+  background: #444;
 }
 
 .has-clones section.slide.deck-current, .has-clones section.slide.deck-child-current {
@@ -20,16 +20,25 @@ body.deck-container.has-clones {
   visibility: visible;
 }
 
-.has-clones .notes.note.speaker {
+.has-clones .deck-child-current .notes.note.speaker, .has-clones .deck-current .notes.note.speaker {
   display: block !important;
   bottom: -350px;
   left: 0;
   position: absolute;
-  background: transparent;
+  background: #FFF;
+  opacity: 1;
   color: black;
   border: 3px solid gray;
-  width: 100%;
-  font-size: 44px;
+  width: 190%;
+  font-size: 24px;
   padding: 12px;
   overflow: scroll;
+}
+
+.has-clones img#logo {
+  display: none;
+}
+
+.has-clones footer {
+  display: none;
 }
