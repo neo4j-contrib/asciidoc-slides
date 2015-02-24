@@ -119,7 +119,7 @@ ul li {
 }
 
 .small {
-    font-size: 85%;
+    font-size: 85% !important;
 }
 
 small {
@@ -773,4 +773,15 @@ figure.big-graph svg {
 
 .exercise {
 	background-color: lightgray;
+}
+.middle {
+	position:absolute;
+	bottom:61%;
+	top:39%;
+}
+.center {
+	text-align: center;
+}
+.bigger {
+	font-size: 2em;
 }
