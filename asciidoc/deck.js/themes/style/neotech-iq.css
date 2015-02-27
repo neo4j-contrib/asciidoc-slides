@@ -88,11 +88,11 @@ a {
 }
 
 a:hover, a:active {
-    outline: none;
+/*    outline: none;*/
 }
 
 .slide a {
-    text-decoration: none;
+/*    text-decoration: none; */
     color: inherit;
 }
 
@@ -119,7 +119,10 @@ ul li {
 }
 
 .small {
-    font-size: 85% !important;
+    font-size: 0.7em !important;
+}
+.smallest {
+    font-size: 0.5em !important;
 }
 
 small {
@@ -629,11 +632,11 @@ footer {
 }
 
 .slide {
-    background-color: rgb(254,254,254);
+/*    background-color: rgb(254,254,254); */
 }
 
-.labslide {
-    background-color: rgb(221, 252, 154);
+.labslide, .exercise {
+    background-color: lightgray !important; /* rgb(221, 252, 154) */
 }
 
 section.notitle h2 {
@@ -784,4 +787,7 @@ figure.big-graph svg {
 }
 .bigger {
 	font-size: 2em;
+}
+.deck-container.has-clones {
+	background-color: white;
 }
