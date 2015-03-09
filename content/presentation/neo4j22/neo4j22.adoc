@@ -1,0 +1,277 @@
+= What’s coming up in Neo4j 2.2?
+:presenter: Neo Technology
+:twitter: neo4j
+:email: info@neotechnology.com
+:backend: deckjs
+:deckjs_theme: neotech-iq
+:deckjs_transition: none
+:deckjsdir: ../../../asciidoc/deck.js
+// horizontal-slide
+:icons: font
+:source-highlighter: codemirror
+:navigation:
+:status:
+:customjs: ../../../asciidoc/js/checkcypher.js
+:arrows:
+:split:
+:gist-source: https://raw.github.com/neo4j-contrib/gists/master/
+:footer: Copyright (c) 2015, Neo Technology, Inc. All rights reserved. The reproduction or distribution of this copyrighted work is strictly prohibited.
+:img: ../../img
+:logo2: {img}/neo4j_logo_new.png
+:blank:
+:goto:
+:menu:
+:toc:
+:split:
+:hidetitle: false
+
+//Jim Webber @jimwebberAlistair Jones @apcjMark Needham @markhneedham
+
+[canvas-image="{img}/graph.jpg"]
+== Neo4j 2.2
+
+[role="canvas-caption", position="center"]
+What's New in Neo4j 2.2
+
+== Topics
+
+* Authentication
+* Neo4j Browser Update
+* Kernel: Read and Write Performance
+* Cypher Performance
+* Import Tool
+
+== Authentication / Security
+
+* In 2.2 Neo4j server requires authentication
+* Both for UI and Http-Clients
+* Username + Password
+* Single User so far
+* API for updating credentials
+
+[.middle]
+== Neo4j Browser Update
+
+== Neo4j Browser Update: Code
+
+* Northwind import with `LOAD CSV`
+* Query Template forms for Create and Query
+* The Movie Graph
+
+== Neo4j Browser Update: Styling
+
+* New Visualization / Styling
+** Auto-Caption
+** Choose caption for rels
+** Curved Relationship
+** Panning
+** Counts on Labels and Rel-Types
+
+== Neo4j Browser UI
+
+image::browser1.png[]
+
+== Neo4j Browser Updates (2)
+
+* Killing Queries
+* :help keys, :help commands
+* Input History `:history`
+* Style `:style`
+* Configuration `:config`
+** maxNeighbours, maxRows, maxNodes
+
+== Noe4j Browser UI (2)
+
+image::browser2.png[]
+
+== Neo4j Browser Update
+
+DEMO with Neo4j - 2.2.0-RC01
+
+[.middle]
+== Neo4j Kernel & Performance Improvements
+
+== Technical Debt, Internal Improvements
+
+* Many internal changes
+* Rewrite of larger parts of the kernel
+* Not completely finished
+* Deleted 30k LOC
+* Easier to understand and maintain
+
+== Concurrent Read Performance: Page Cache
+
+* Don't trust the OS kernel ->
+* No more memory mapping, 
+* New page cache - optimal strategy
+* Auto-configured, Off-heap
+
+== Concurrent Read Performance: Page Cache
+
+* Less contention, more time doing useful things
+* Scales more linearly with cores
+* Not dependent on kernel to write out dirty pages
+
+== Transaction Performance
+
+* Removed JTA and internal 2PC
+* Internal clean-up and restructuring
+* Unified log for graph and indexes (less to do)
+
+== Batched Writes
+
+* Costs for flush to disk for many concurrent transactions amortised +
+-> especially useful for small transactions
+* Pending Transactions are flushed with current sync operation
+* Expecially helpful with remote Cypher execution
+
+== Demo: Batched Writes: Java
+
+=== Execute Java-API multithreaded to create 100M nodes and rels
+
+----
+mvn compile exec:java -Dexec.mainClass=perftest.CreateNodes
+24 Threads on a SSD 
+100 000 000 Nodes and Rels 160 599 ms = 1,25M entities / second
+----
+
+== Demo: Batched Writes: Cypher-Remote
+
+=== Apache Bench w/ concurrent statements
+----
+ab -k -c 4 -n 100000 -p create.json -T application/json -H accept:application/json \
+   http://localhost:7474/db/data/transaction/commit
+
+3 nodes, 2 relationships per request
+
+Concurrency Level:      4
+Time taken for tests:   53.565 seconds (2.1.7)
+Time taken for tests:   9.521 seconds  (2.2.0-RC01)
+----
+
+== Batched Writes (HDD)
+
+image::batched_writes_hdd_large.jpg[]
+
+== Batched Writes (HDD Small)
+
+image::batched_writes_hdd_small.jpg[]
+
+== Batched Writes (SDD)
+
+image::batched_writes_ssd_small.jpg[]
+
+== Cypher Performance
+
+* Cost-based optimiser available
+* Compliments existing rule-based optimiser
+* Database Statistics are gathered and queries planned using those
+* Allows for more informed planning
+
+== Cypher Profiling
+* Examine your execution plans by prefixing your query with `EXPLAIN` or `PROFILE`
+* `EXPLAIN`: see the execution plan, but do not run it
+* `PROFILE`: run the statement and track flow through, and IO for, each operator 
+
+== Numbers
+
+image::cypher_cost.jpg[]
+
+== Demo
+
+* 3 example datasets (some from GDB book)
+* Results from Performance tests
+** recommendations, social-network, access control
+* 2 planners: PLANNER [COST|RULE] [PROFILE|EXPLAIN] statement
+* use neo4j-shell to execute
+
+== Demo in Browser
+
+* Visual Query Plan representation
+* EXPLAIN shows estimated rows
+* PROFILE shows rows and dbhits
+* Details per Operator, Expand All
+* http://neo4j.com/docs/milestone/execution-plans.html[Query Plans in Manual]
+
+== Query Plan Viz
+
+image::browser_query_plan.png[]
+
+== Import
+
+* Superfast batch loader now integrated as neo4j-import
+* Initial Loading
+* 1M records/sec - sustained!
+
+== Numbers
+
+image::import_tool.jpg[]
+
+== Import Tool
+
+* Importing initial data sets
+* Parallel & Staged Architecture
+* New CSV Parser with pre-reading Thread
+* Concurrent creation of nodes, rels, properties
+* Special Trick for updating relationship-list
+* Low memory requirements
+
+== Import Tool: Capabilities
+
+* Link nodes via ID's
+** actual, string, long
+* Separate ID-Spaces
+* property type conversion
+* labels, rel-types in CSV and command line
+* split CSV files (sep. headers)
+
+== Demo: Importing Crime Data
+
+Crime Stats in London 4M nodes 2x4M rels
+
+[.normal]
+----
+./neo/bin/neo4j-import --into crimes.db --nodes primaryTypes.csv --nodes beats.csv \
+--nodes crimes.csv --relationships crimesPrimaryTypes.csv ....
+
+Nodes                           Done in 8s 866ms
+Calculate dense nodes           Done in 3s 747ms
+Relationships                   Done in 4s 627ms
+Node --> Relationship           Done in 303ms
+Relationship --> Relationship   Done in 1s 621ms
+Node counts                     Done in 232ms
+Relationship counts             Done in 1s 653ms
+IMPORT DONE in 21s 799ms
+----
+
+== Conclusion: Neo4j 2.2 is
+
+* faster
+** Initial import at 1M records / sec
+** Up to 10x faster Cypher queries 
+** Up to 100x faster concurrent writes 
+* safer
+* easier to use
+
+
+== Feedback
+
+Please test out the release candidate:
+
+* feedback@neotechnology.com
+* GitHub issues
+* Built in message box
+
+== Upcoming Events
+
+* Meetup München (morgen, Die)
+* Meetup Dresden (diesen Do)
+* Training Bern (17.Mär) Zürich (31.Mär)
+* Training & Meetup Berlin (29.Apr)
+* GraphConnect Europe London (7.Mai) +
+Discount Code: WEBINAR30
+
+image::http://cdn.evbuc.com/images/12195106/129961668827/1/logo.png[float="left"]
+
+[.middle]
+== Questions?

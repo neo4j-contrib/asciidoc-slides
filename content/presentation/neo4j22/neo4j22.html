@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+<meta content="Asciidoctor 1.5.1" name="generator">
+<title>What’s coming up in Neo4j 2.2?</title>
+<script src="../../../asciidoc/deck.js/jquery.min.js"></script>
+<script src="../../../asciidoc/deck.js/core/deck.core.js"></script>
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:800,400,600,300" rel="stylesheet">
+<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/codemirror/deck.codemirror.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/codemirror/themes/iq.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/clone/deck.clone.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/notes/deck.notes.css" rel="stylesheet">
+<script src="../../../asciidoc/deck.js/extensions/codemirror/codemirror.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/deck.codemirror.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/mode/javascript/javascript.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/mode/css/css.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/mode/plsql/plsql.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/cypher/deck.cypher.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/clone/deck.clone.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/notes/deck.notes.js"></script>
+<link href="../../../asciidoc/deck.js/extensions/cypher/deck.cypher.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/core/deck.core.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/hash/deck.hash.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/scale/deck.scale.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/goto/deck.goto.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/menu/deck.menu.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/navigation/deck.navigation.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/status/deck.status.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/toc/deck.toc.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/themes/style/neotech-iq.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/core/print.css" media="print" rel="stylesheet">
+<script src="../../../asciidoc/deck.js/modernizr.custom.js"></script>
+</head>
+<body class="deck-container article">
+<section class="slide canvas-image" id="_neo4j_2_2" style="background-image: url(../../img/graph.jpg)">
+<div class="paragraph canvas-caption"><p class="center">What&#8217;s New in Neo4j 2.2</p></div>
+</section>
+<section class="slide" id="_topics">
+<h2>Topics</h2>
+<div class="ulist">
+<ul>
+<li>Authentication</li>
+<li>Neo4j Browser Update</li>
+<li>Kernel: Read and Write Performance</li>
+<li>Cypher Performance</li>
+<li>Import Tool</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_authentication_security">
+<h2>Authentication / Security</h2>
+<div class="ulist">
+<ul>
+<li>In 2.2 Neo4j server requires authentication</li>
+<li>Both for UI and Http-Clients</li>
+<li>Username + Password</li>
+<li>Single User so far</li>
+<li>API for updating credentials</li>
+</ul>
+</div>
+</section>
+<section class="middle slide" id="_neo4j_browser_update">
+<h2>Neo4j Browser Update</h2>
+
+</section>
+<section class="slide" id="_neo4j_browser_update_code">
+<h2>Neo4j Browser Update: Code</h2>
+<div class="ulist">
+<ul>
+<li>Northwind import with <code>LOAD CSV</code></li>
+<li>Query Template forms for Create and Query</li>
+<li>The Movie Graph</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_neo4j_browser_update_styling">
+<h2>Neo4j Browser Update: Styling</h2>
+<div class="ulist">
+<ul>
+<li><p>
+New Visualization / Styling<div class="ulist">
+<ul>
+<li>Auto-Caption</li>
+<li>Choose caption for rels</li>
+<li>Curved Relationship</li>
+<li>Panning</li>
+<li>Counts on Labels and Rel-Types</li>
+</ul>
+</div></p></li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_neo4j_browser_ui">
+<h2>Neo4j Browser UI</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="browser1" src="browser1.png">
+</div>
+</div>
+</section>
+<section class="slide" id="_neo4j_browser_updates_2">
+<h2>Neo4j Browser Updates (2)</h2>
+<div class="ulist">
+<ul>
+<li>Killing Queries</li>
+<li>:help keys, :help commands</li>
+<li>Input History <code>:history</code></li>
+<li>Style <code>:style</code></li>
+<li><p>
+Configuration <code>:config</code><div class="ulist">
+<ul>
+<li>maxNeighbours, maxRows, maxNodes</li>
+</ul>
+</div></p></li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_noe4j_browser_ui_2">
+<h2>Noe4j Browser UI (2)</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="browser2" src="browser2.png">
+</div>
+</div>
+</section>
+<section class="slide" id="_neo4j_browser_update_2">
+<h2>Neo4j Browser Update</h2>
+<div class="paragraph"><p>DEMO with Neo4j - 2.2.0-RC01</p></div>
+</section>
+<section class="middle slide" id="_neo4j_kernel_performance_improvements">
+<h2>Neo4j Kernel &amp; Performance Improvements</h2>
+
+</section>
+<section class="slide" id="_technical_debt_internal_improvements">
+<h2>Technical Debt, Internal Improvements</h2>
+<div class="ulist">
+<ul>
+<li>Many internal changes</li>
+<li>Rewrite of larger parts of the kernel</li>
+<li>Not completely finished</li>
+<li>Deleted 30k LOC</li>
+<li>Easier to understand and maintain</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_concurrent_read_performance_page_cache">
+<h2>Concurrent Read Performance: Page Cache</h2>
+<div class="ulist">
+<ul>
+<li>Don&#8217;t trust the OS kernel &#8594;</li>
+<li>No more memory mapping,</li>
+<li>New page cache - optimal strategy</li>
+<li>Auto-configured, Off-heap</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_concurrent_read_performance_page_cache_2">
+<h2>Concurrent Read Performance: Page Cache</h2>
+<div class="ulist">
+<ul>
+<li>Less contention, more time doing useful things</li>
+<li>Scales more linearly with cores</li>
+<li>Not dependent on kernel to write out dirty pages</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_transaction_performance">
+<h2>Transaction Performance</h2>
+<div class="ulist">
+<ul>
+<li>Removed JTA and internal 2PC</li>
+<li>Internal clean-up and restructuring</li>
+<li>Unified log for graph and indexes (less to do)</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_batched_writes">
+<h2>Batched Writes</h2>
+<div class="ulist">
+<ul>
+<li>Costs for flush to disk for many concurrent transactions amortised<br>
+&#8594; especially useful for small transactions</li>
+<li>Pending Transactions are flushed with current sync operation</li>
+<li>Expecially helpful with remote Cypher execution</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_demo_batched_writes_java">
+<h2>Demo: Batched Writes: Java</h2>
+<section class="slide" id="_execute_java_api_multithreaded_to_create_100m_nodes_and_rels">
+<h3>Execute Java-API multithreaded to create 100M nodes and rels</h3>
+<div class="listingblock">
+<div class="content">
+<pre><code>mvn compile exec:java -Dexec.mainClass=perftest.CreateNodes
+24 Threads on a SSD
+100 000 000 Nodes and Rels 160 599 ms = 1,25M entities / second</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section class="slide" id="_demo_batched_writes_cypher_remote">
+<h2>Demo: Batched Writes: Cypher-Remote</h2>
+<section class="slide" id="_apache_bench_w_concurrent_statements">
+<h3>Apache Bench w/ concurrent statements</h3>
+<div class="listingblock">
+<div class="content">
+<pre><code>ab -k -c 4 -n 100000 -p create.json -T application/json -H accept:application/json \
+   http://localhost:7474/db/data/transaction/commit
+
+3 nodes, 2 relationships per request
+
+Concurrency Level:      4
+Time taken for tests:   53.565 seconds (2.1.7)
+Time taken for tests:   9.521 seconds  (2.2.0-RC01)</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section class="slide" id="_batched_writes_hdd">
+<h2>Batched Writes (HDD)</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="batched writes hdd large" src="batched_writes_hdd_large.jpg">
+</div>
+</div>
+</section>
+<section class="slide" id="_batched_writes_hdd_small">
+<h2>Batched Writes (HDD Small)</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="batched writes hdd small" src="batched_writes_hdd_small.jpg">
+</div>
+</div>
+</section>
+<section class="slide" id="_batched_writes_sdd">
+<h2>Batched Writes (SDD)</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="batched writes ssd small" src="batched_writes_ssd_small.jpg">
+</div>
+</div>
+</section>
+<section class="slide" id="_cypher_performance">
+<h2>Cypher Performance</h2>
+<div class="ulist">
+<ul>
+<li>Cost-based optimiser available</li>
+<li>Compliments existing rule-based optimiser</li>
+<li>Database Statistics are gathered and queries planned using those</li>
+<li>Allows for more informed planning</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_cypher_profiling">
+<h2>Cypher Profiling</h2>
+<div class="ulist">
+<ul>
+<li>Examine your execution plans by prefixing your query with <code>EXPLAIN</code> or <code>PROFILE</code></li>
+<li><code>EXPLAIN</code>: see the execution plan, but do not run it</li>
+<li><code>PROFILE</code>: run the statement and track flow through, and IO for, each operator</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_numbers">
+<h2>Numbers</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="cypher cost" src="cypher_cost.jpg">
+</div>
+</div>
+</section>
+<section class="slide" id="_demo">
+<h2>Demo</h2>
+<div class="ulist">
+<ul>
+<li>3 example datasets (some from GDB book)</li>
+<li><p>
+Results from Performance tests<div class="ulist">
+<ul>
+<li>recommendations, social-network, access control</li>
+</ul>
+</div></p></li>
+<li>2 planners: PLANNER [COST|RULE] [PROFILE|EXPLAIN] statement</li>
+<li>use neo4j-shell to execute</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_demo_in_browser">
+<h2>Demo in Browser</h2>
+<div class="ulist">
+<ul>
+<li>Visual Query Plan representation</li>
+<li>EXPLAIN shows estimated rows</li>
+<li>PROFILE shows rows and dbhits</li>
+<li>Details per Operator, Expand All</li>
+<li><a href="http://neo4j.com/docs/milestone/execution-plans.html">Query Plans in Manual</a></li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_query_plan_viz">
+<h2>Query Plan Viz</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="browser query plan" src="browser_query_plan.png">
+</div>
+</div>
+</section>
+<section class="slide" id="_import">
+<h2>Import</h2>
+<div class="ulist">
+<ul>
+<li>Superfast batch loader now integrated as neo4j-import</li>
+<li>Initial Loading</li>
+<li>1M records/sec - sustained!</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_numbers_2">
+<h2>Numbers</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="import tool" src="import_tool.jpg">
+</div>
+</div>
+</section>
+<section class="slide" id="_import_tool">
+<h2>Import Tool</h2>
+<div class="ulist">
+<ul>
+<li>Importing initial data sets</li>
+<li>Parallel &amp; Staged Architecture</li>
+<li>New CSV Parser with pre-reading Thread</li>
+<li>Concurrent creation of nodes, rels, properties</li>
+<li>Special Trick for updating relationship-list</li>
+<li>Low memory requirements</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_import_tool_capabilities">
+<h2>Import Tool: Capabilities</h2>
+<div class="ulist">
+<ul>
+<li><p>
+Link nodes via ID&#8217;s<div class="ulist">
+<ul>
+<li>actual, string, long</li>
+</ul>
+</div></p></li>
+<li>Separate ID-Spaces</li>
+<li>property type conversion</li>
+<li>labels, rel-types in CSV and command line</li>
+<li>split CSV files (sep. headers)</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_demo_importing_crime_data">
+<h2>Demo: Importing Crime Data</h2>
+<div class="paragraph"><p>Crime Stats in London 4M nodes 2x4M rels</p></div>
+<div class="listingblock normal">
+<div class="content">
+<pre><code>./neo/bin/neo4j-import --into crimes.db --nodes primaryTypes.csv --nodes beats.csv \
+--nodes crimes.csv --relationships crimesPrimaryTypes.csv ....
+
+Nodes                           Done in 8s 866ms
+Calculate dense nodes           Done in 3s 747ms
+Relationships                   Done in 4s 627ms
+Node --&gt; Relationship           Done in 303ms
+Relationship --&gt; Relationship   Done in 1s 621ms
+Node counts                     Done in 232ms
+Relationship counts             Done in 1s 653ms
+IMPORT DONE in 21s 799ms</code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_conclusion_neo4j_2_2_is">
+<h2>Conclusion: Neo4j 2.2 is</h2>
+<div class="ulist">
+<ul>
+<li><p>
+faster<div class="ulist">
+<ul>
+<li>Initial import at 1M records / sec</li>
+<li>Up to 10x faster Cypher queries </li>
+<li>Up to 100x faster concurrent writes </li>
+</ul>
+</div></p></li>
+<li>safer</li>
+<li>easier to use</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_feedback">
+<h2>Feedback</h2>
+<div class="paragraph"><p>Please test out the release candidate:</p></div>
+<div class="ulist">
+<ul>
+<li><a href="mailto:feedback@neotechnology.com">feedback@neotechnology.com</a></li>
+<li>GitHub issues</li>
+<li>Built in message box</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_upcoming_events">
+<h2>Upcoming Events</h2>
+<div class="ulist">
+<ul>
+<li>Meetup München (morgen, Die)</li>
+<li>Meetup Dresden (diesen Do)</li>
+<li>Training Bern (17.Mär) Zürich (31.Mär)</li>
+<li>Training &amp; Meetup Berlin (29.Apr)</li>
+<li>GraphConnect Europe London (7.Mai)<br>
+Discount Code: WEBINAR30</li>
+</ul>
+</div>
+<div class="imageblock" style="float: left">
+<div class="content">
+<img alt="logo" src="http://cdn.evbuc.com/images/12195106/129961668827/1/logo.png">
+</div>
+</div>
+</section>
+<section class="middle slide" id="_questions">
+<h2>Questions?</h2>
+
+</section>
+<a class="deck-prev-link" href="#" title="Previous">&#8592;</a>
+<a class="deck-next-link" href="#" title="Next">&#8594;</a>
+<form action="." class="goto-form" method="get">
+<label for="goto-slide">Go to Slide:</label>
+<input id="goto-slide" list="goto-datalist" name="slidenum" type="text">
+<datalist id="goto-data-list"></datalist>
+<input type="submit" value="Go">
+</form>
+<a class="deck-permalink" href="." title="Permalink to this slide">#</a>
+<script src="../../../asciidoc/deck.js/extensions/hash/deck.hash.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/scale/deck.scale.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/blank/deck.blank.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/goto/deck.goto.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/menu/deck.menu.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/navigation/deck.navigation.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/split/deck.split.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/status/deck.status.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/toc/deck.toc.js"></script>
+<div class="deck-toc"></div>
+<script src="../../../asciidoc/deck.js/extensions/arrows/home.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/arrows/d3.v3.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/arrows/arrows-graph-diagram.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/arrows/arrows-init.js"></script>
+<footer>Copyright (c) 2015, Neo Technology, Inc. All rights reserved. The reproduction or distribution of this copyrighted work is strictly prohibited.</footer>
+<img id="logo2" src="../../img/neo4j_logo_new.png">
+<p class="deck-status">
+<span class="deck-status-current"></span>
+/
+<span class="deck-status-total"></span>
+</p>
+<div class="slide cypher-status">
+<h2>Status of the presentation</h2>
+<p>Cypher queries execution</p>
+<div>
+<div id="status"></div>
+<pre id="errors" style="overflow-y:scroll;font-size:small"></pre>
+</div>
+</div>
+<script src="../../../asciidoc/js/checkcypher.js"></script>
+<script>
+  (function($, deck, undefined) {
+    $.deck.defaults.keys['previous'] = [8, 33, 37, 39];
+    $.deck.defaults.keys['next'] = [13, 32, 34, 39];
+  
+    $.extend(true, $[deck].defaults, {
+        countNested: false
+    });
+  
+    $.deck('.slide');
+  })(jQuery, 'deck');
+</script>
+<style>
+  .slide.canvas-image {
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  display: -moz-box;
+  display: -webkit-box;
+  display: -ms-box;
+  display: box;
+  -moz-box-orient: vertical;
+  -webkit-box-orient: vertical;
+  -ms-box-orient: vertical;
+  box-orient: vertical;
+  -moz-box-align: start;
+  -webkit-box-align: start;
+  -ms-box-align: start;
+  box-align: start;
+  -moz-box-pack: start;
+  -webkit-box-pack: start;
+  -ms-box-pack: start;
+  box-pack: start;}
+  
+  .bottom-left {
+    left: 1%;
+    bottom: 20%; }
+  
+  .top-left {
+    left: 1%;
+    top: 20%; }
+  
+  .bottom-right {
+    right: 1%;
+    bottom: 20%; }
+  
+  .top-right {
+    right: 1%;
+    top: 20%; }
+  
+  .center-up {
+    right: 50%;
+    top: 1%;
+  }
+  
+  .center-down {
+    right: 50%;
+    bottom: 1%;
+  }
+  .canvas-image .canvas-caption p {
+    -webkit-transform: translate(0, -50%);
+    -moz-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    -o-transform: translate(0, -50%);
+    transform: translate(0, -100%);
+  }
+  .canvas-image .canvas-title p {
+    -webkit-transform: translate(0, -100%);
+    -moz-transform: translate(0, -100%);
+    -ms-transform: translate(0, -100%);
+    -o-transform: translate(0, -100%);
+    transform: translate(0, -100%);
+  }
+  .canvas-image .canvas-caption p, .canvas-image .canvas-title p {
+    left: 0;
+    right: 0;
+    top: 50%;
+    text-align: center;
+    display: inline;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    font-weight: normal;
+    font-size: 3em;
+    padding: 1em;
+    color: white; }
+  kbd.keyseq { color: #555555; }
+  kbd:not(.keyseq) {
+    display: inline-block;
+    color: #222222;
+    font-size: 0.7em;
+    line-height: 1.4;
+    background-color: #F7F7F7;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset;
+    margin: -0.15em 0.15em 0 0.15em;
+    padding: 0.2em 0.6em;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  kbd kbd:first-child { margin-left: 0; }
+  kbd kbd:last-child { margin-right: 0; }
+</style>
+</body>
+</html>
