@@ -791,3 +791,6 @@ figure.big-graph svg {
 .deck-container.has-clones {
 	background-color: white;
 }
+.clear {
+	clear: both;
+}
