@@ -185,6 +185,17 @@ image::cypher_cost.jpg[]
 * 2 planners: PLANNER [COST|RULE] [PROFILE|EXPLAIN] statement
 * use neo4j-shell to execute
 
+== Interesting
+
+* Cypher uses `getDegree()`
+** In Pattern-Expressions like +`size((n)-[:FOO]->())`+ and +`MATCH (n)-[:FOO]->() RETURN count(*)`+
+** In Patterns like +`WHERE [not] (n1)-[:FOO]->(n2)`+ (with n1, n2 known) (ExpandInto)
+
+* COST planner disabled by default for Var-Length-Paths
+** It's often better but sometimes worse
+
+* Having more labels helps the COST planner to make better decisions
+
 == Demo in Browser
 
 * Visual Query Plan representation
@@ -264,10 +275,6 @@ Please test out the release candidate:
 
 == Upcoming Events
 
-* Meetup München (morgen, Die)
-* Meetup Dresden (diesen Do)
-* Training Bern (17.Mär) Zürich (31.Mär)
-* Training & Meetup Berlin (29.Apr)
 * GraphConnect Europe London (7.Mai) +
 Discount Code: WEBINAR30
 

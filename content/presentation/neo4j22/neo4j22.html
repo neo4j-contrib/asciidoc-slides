@@ -289,6 +289,27 @@ Results from Performance tests<div class="ulist">
 </ul>
 </div>
 </section>
+<section class="slide" id="_interesting">
+<h2>Interesting</h2>
+<div class="ulist">
+<ul>
+<li><p>
+Cypher uses <code>getDegree()</code><div class="ulist">
+<ul>
+<li>In Pattern-Expressions like `size((n)-[:FOO]-&gt;())` and `MATCH (n)-[:FOO]-&gt;() RETURN count(*)`</li>
+<li>In Patterns like `WHERE [not] (n1)-[:FOO]-&gt;(n2)` (with n1, n2 known) (ExpandInto)</li>
+</ul>
+</div></p></li>
+<li><p>
+COST planner disabled by default for Var-Length-Paths<div class="ulist">
+<ul>
+<li>It&#8217;s often better but sometimes worse</li>
+</ul>
+</div></p></li>
+<li>Having more labels helps the COST planner to make better decisions</li>
+</ul>
+</div>
+</section>
 <section class="slide" id="_demo_in_browser">
 <h2>Demo in Browser</h2>
 <div class="ulist">
@@ -408,10 +429,6 @@ faster<div class="ulist">
 <h2>Upcoming Events</h2>
 <div class="ulist">
 <ul>
-<li>Meetup München (morgen, Die)</li>
-<li>Meetup Dresden (diesen Do)</li>
-<li>Training Bern (17.Mär) Zürich (31.Mär)</li>
-<li>Training &amp; Meetup Berlin (29.Apr)</li>
 <li>GraphConnect Europe London (7.Mai)<br>
 Discount Code: WEBINAR30</li>
 </ul>
