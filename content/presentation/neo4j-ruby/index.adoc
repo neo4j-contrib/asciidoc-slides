@@ -39,7 +39,7 @@ p {
 == Hello my name is
 
 * Brian Underwood
-* Developer Evangelist at Neo Technology
+* Developer Advocate at Neo Technology
 * Ruby lover, database enthusiast
 * @ https://twitter.com/cheerfulstoic[cheerfulstoic] | mailto:brian@brian-underwood.codes[brian@brian-underwood.codes]
 
