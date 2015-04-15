@@ -31,10 +31,13 @@ open content/demo/index.html
 
 see: http://neo4j-contrib.github.io/asciidoc-slides/content/demo/index.html[Slide Demo]
 
-- generate PDF from HTML.
+- generate PDF from AsciiDoc.
+Renders the document to a temporary file, without creating intermediate steps for bullets.
+Then generates PDF from that using an "screencapture" app. This will get better soon.
+
 [source,bash]
 ----
-./pdf.sh content/demo/index.html content/demo/intro.pdf
+./pdf.sh content/demo/index.adoc
 ----
 
 === Neo4j Training Classes
