@@ -2,6 +2,7 @@
 :presenter: Neo Technology
 :twitter: neo4j
 :email: info@neotechnology.com
+:currentyear: 2015
 :backend: deckjs
 :deckjs_theme: neotech-iq
 :deckjs_transition: none
@@ -15,7 +16,7 @@
 :arrows:
 :split:
 :gist-source: https://raw.github.com/neo4j-contrib/gists/master/
-:footer: Copyright (c) 2015, Neo Technology, Inc. All rights reserved. The reproduction or distribution of this copyrighted work is strictly prohibited.
+:footer: Copyright (c) {currentyear}, Neo Technology, Inc. All rights reserved. The reproduction or distribution of this copyrighted work is strictly prohibited.
 :img: ../../img
 :logo2: {img}/neo4j_logo_new.png
 :blank:

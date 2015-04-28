@@ -2,6 +2,7 @@
 :presenter: Michael Hunger
 :twitter: mesirii
 :email: michael@neo4j.org
+:currentyear: 2015
 :backend: deckjs
 :deckjsdir: ../../../asciidoc/deck.js
 :deckjs_theme: neotech
@@ -14,7 +15,7 @@
 :arrows:
 :customjs: ../../../asciidoc/js/checkcypher.js
 :gist-source: https://raw.github.com/neo4j-contrib/gists/master/
-:footer: © All Rights Reserved 2014 | Neo Technology, Inc.
+:footer: © All Rights Reserved {currentyear} | Neo Technology, Inc.
 :img: img
 :logo: {img}/neo4j-logo.png
 :allow-uri-read:

@@ -2,6 +2,7 @@
 :presenter: Neo Technology
 :twitter: neo4j
 :email: info@neotechnology.com
+:currentyear: 2015
 :backend: deckjs
 :deckjsdir: ../../asciidoc/deck.js
 :deckjs_transition: horizontal-slide
@@ -15,7 +16,7 @@
 :arrows:
 :customjs: ../../asciidoc/js/checkcypher.js
 :gist-source: https://raw.github.com/neo4j-contrib/gists/master/
-:footer: © All Rights Reserved 2013 | Neo Technology, Inc.
+:footer: © All Rights Reserved {currentyear} | Neo Technology, Inc.
 :logo: img/Neo_Technology.jpg
 :allow-uri-read:
 :img: img
