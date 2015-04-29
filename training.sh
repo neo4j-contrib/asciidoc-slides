@@ -1,1 +1,7 @@
-./run.sh content/training/intro/classroom/index.adoc -a presenter=${1-"Michael Hunger"}
+file=${1-intro/intro-cypher-movies/training-intro-cypher-movies.adoc}
+
+presenter=${2-"Neo4j"}
+email=${4-"info@neotechnology.com"}
+twitter=${4-"neo4j"}
+
+./run.sh content/training/$file -a presenter=$presenter -a email=$email -a twitter=$twitter
