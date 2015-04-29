@@ -1,4 +1,12 @@
-== Producing html
+== Creating Slides
+
+Build *training slides* with one script invocation (which contains all the link:#neo4j-training-classes[steps listed below]): 
+
+Run `./create_training_slides.sh`
+
+== Detailed Steps
+
+=== AsciiDoc -> HTML
 
 This is what you install (in your terminal):
 
@@ -9,29 +17,31 @@ gem install bundler
 bundle install
 ----
 
-Make sure you're using at least asciidoctor 1.5.0
+Make sure you're using asciidoctor 1.5.1
 
-- execute asciidoctor to produce Deck.js HTML5 output from the asciidoc source files
+- execute asciidoctor to produce Deck.js HTML5 output from the AsciiDoc source files
+
+Test it with:
+
 [source,bash]
 ----
+./run.sh content/demo/index.adoc
+#equivalent to
 asciidoctor -T ./asciidoctor-backends/haml/deckjs -a allow-uri-read -a presenter="Your Name"  content/demo/index.adoc
 ----
 
-or
-
-----
-./run.sh content/demo/index.adoc
-----
+=== Open HTML File
 
 - open the resulting HTML file
 [source,bash]
 ----
-open content/demo/index.html
+./http content/demo/index.html
 ----
 
-see: http://neo4j-contrib.github.io/asciidoc-slides/content/demo/index.html[Slide Demo]
+http://neo4j-contrib.github.io/asciidoc-slides/content/demo/index.html[Slide Demo on GH-Pages]
 
-- generate PDF from AsciiDoc.
+=== AsciiDoc -> PDF
+
 Renders the document to a temporary file, without creating intermediate steps for bullets.
 Then generates PDF from that using an "screencapture" app. This will get better soon.
 
@@ -40,11 +50,13 @@ Then generates PDF from that using an "screencapture" app. This will get better 
 ./pdf.sh content/demo/index.adoc
 ----
 
-=== Neo4j Training Classes
+== Neo4j Training Classes
 
-Available in a separate, private GitHub repository https://github.com/neo-technology/training-slides
+=== Content Git Submodule
 
-which is integrated in this project as git submodule.
+Content available in a *separate, private* GitHub repository https://github.com/neo-technology/training-slides
+
+which is integrated in this project as *git submodule*.
 
 Use `git submodule init` and `git submodule update` to pull the latest versoin.
 
@@ -52,15 +64,19 @@ Then the training content is found under:
 
 `content/training/[intro,cypher,production,modeling,import]/[classroom,online]/index.adoc`
 
-build **intro** training with
+=== Build Training HTML
+
+Easiest to just run `./create_training_slides.sh`
+
+build **Movies Intro** training with:
 
 ----
-./training.sh
+./training.sh 
+# or
+./training.sh [path/to/training.adoc] ["Trainer Name"] [trainer@email.com] [@trainer]
 ----
 
-see: http://neo4j-contrib.github.io/asciidoc-slides/content/training/intro/classroom/index.html[Training Demo]
-
-== Run training
+=== Open Training in Browser
 
 The easiest way to start the training is to start a webserver and open the training on a http url.
 
@@ -71,10 +87,12 @@ on Linux:
 
 [source,bash]
 ----
-./http content/training/intro/classroom/index.html
+./http .
+# or a concrete training
+./http content/training/intro/intro-cypher-movies/training-intro-cypher-movies.html
 ----
 
-== keymappings during the training
+== In Browser Key-Bindings during the Training
 
 There are a couple of shortcuts you can use as a trainer to help during the training this is a summery of the most common:
 
