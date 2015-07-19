@@ -4,7 +4,7 @@
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
 <meta content="Asciidoctor 1.5.2" name="generator">
-<title>Neo4j and Ruby</title>
+<title>Introduction to Neo4j and Cypher</title>
 <script src="../../../asciidoc/deck.js/jquery.min.js"></script>
 <script src="../../../asciidoc/deck.js/core/deck.core.js"></script>
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:800,400,600,300" rel="stylesheet">
@@ -36,7 +36,7 @@
 </head>
 <body class="deck-container article">
 <section class="slide" id="title-slide">
-<h1>Neo4j and Ruby</h1>
+<h1>Introduction to Neo4j and Cypher</h1>
 </section>
 <div id="preamble">
 <div class="sectionbody">
@@ -58,8 +58,8 @@ p {
 <div class="ulist">
 <ul>
 <li>Brian Underwood</li>
-<li>Developer Advocate at Neo Technology</li>
-<li>Ruby lover, database enthusiast</li>
+<li>Developer Evangelist at Neo Technology</li>
+<li>Data Enthusiast</li>
 <li>@ <a href="https://twitter.com/cheerfulstoic">cheerfulstoic</a> | <a href="mailto:brian@brian-underwood.codes">brian@brian-underwood.codes</a></li>
 </ul>
 </div>
@@ -158,171 +158,42 @@ p {
 <div class="paragraph"><p> <!-- Automatic aggregation on columns when using an aggregate function.  Could also do RETURN p, u2, count(c) to get posts and a count of users for those posts.  Pause for questions --> </p></div>
 </section>
 <section class="slide">
-<h2>Why should Rubyists use Neo4j?</h2>
-<div class="ulist">
-<ul>
-<li>Natural and agile data modeling</li>
-<li>Higher level abstraction</li>
-<li>Web console like ruby console</li>
-<li>Great support</li>
-</ul>
-</div>
-<div class="paragraph"><p> <!-- Englishy like Ruby --> </p></div>
-</section>
-<section class="slide">
-<h2>What is the Neo4j gem?</h2>
-<div class="ulist">
-<ul>
-<li>An ActiveModel compliant Ruby wrapper for the Neo4j graph database.</li>
-</ul>
-</div>
-</section>
-<section class="slide">
-<h2>Neo4j gem features</h2>
-<div class="ulist">
-<ul>
-<li><p>
-OGM (Object Graph Model)<div class="ulist">
-<ul>
-<li>Properties</li>
-<li>Indexes / Constraints</li>
-<li>Callbacks</li>
-<li>Validations</li>
-<li>Assocations</li>
-</ul>
-</div></p></li>
-</ul>
-</div>
-</section>
-<section class="slide">
-<h2>Neo4j gem features</h2>
-<div class="ulist">
-<ul>
-<li>Modeling nodes and relationships</li>
-<li>Query building / chaining interface similar to <a href="https://github.com/rails/arel">arel</a></li>
-<li>Transactions</li>
-<li>Migrations</li>
-</ul>
-</div>
-</section>
-<section class="slide">
-<h2>Points of Pride</h2>
-<div class="paragraph center"><p> <h4>Well tested</h4> </p></div>
+<h2>Use cases - social graph</h2>
 <div class="imageblock">
 <div class="content">
-<img alt="badges of pride" src="img/badges_of_pride.png">
+<img alt="social network" height="450" src="img/social_network.png">
 </div>
 </div>
 </section>
 <section class="slide">
-<h2>Points of Pride</h2>
-<div class="paragraph center"><p> <h4>Well documented</h4> </p></div>
+<h2>Use cases - fraud detection</h2>
 <div class="imageblock">
 <div class="content">
-<img alt="wiki index" src="img/wiki_index.png">
+<img alt="fraud ring" src="img/fraud_ring.jpg">
 </div>
 </div>
 </section>
 <section class="slide">
-<h2>Points of Pride</h2>
-<div class="paragraph center"><p> <h4>Actively supported</h4> </p></div>
+<h2>Use cases - code / bug analysis</h2>
 <div class="imageblock">
 <div class="content">
-<img alt="github pulse" src="img/github_pulse.png">
+<img alt="joern" height="450" src="img/joern.png">
 </div>
 </div>
 </section>
 <section class="slide">
-<h2>Points of Pride</h2>
-<div class="paragraph center"><p> <h4>Well loved</h4> </p></div>
-<div class="imageblock">
-<div class="content">
-<img alt="stars and forks" src="img/stars_and_forks.png">
-</div>
-</div>
+<h2>Use cases - code / bug analysis</h2>
+<div class="paragraph"><p>Joern</p></div>
+<div class="paragraph"><p><a class="bare" href="http://mlsec.org/joern/">http://mlsec.org/joern/</a></p></div>
+<div class="paragraph"><p><a class="bare" href="https://www.youtube.com/watch?v=291hpUE5-3g">https://www.youtube.com/watch?v=291hpUE5-3g</a></p></div>
 </section>
 <section class="slide">
-<h2>Points of Pride</h2>
-<div class="paragraph center"><p> <h4>Won an award!</h4> </p></div>
-<div class="imageblock">
-<div class="content">
-<img alt="graphy" src="img/graphy.jpg">
-</div>
-</div>
-</section>
-<section class="slide">
-<h2>Models</h2>
-<div class="listingblock">
-<div class="content">
-<textarea class="code" mode="ruby">class Post
-  include Neo4j::ActiveNode
-
-  property :subject
-  property :text
-
-  has_one :out, :author, type: :written_by, model_class: 'User', rel_class: 'WrittenBy'
-  has_many :out, :tags, type: :tagged_as  # model_class 'Tag' is assumed
-end
-
-class WrittenBy
-  include Neo4j::ActiveRel
-
-  from_class Post
-  to_class   User
-  type :written_by
-
-  property :location
-end</textarea>
-</div>
-</div>
-<div class="paragraph"><p> <!-- Include ActiveNode to make a model.  Define properties and assocations like ActiveRecord / Mongoid.  ActiveRel is optional, but great for complex relationships.  Supports validations, callbacks, etc... --> </p></div>
-</section>
-<section class="slide">
-<h2>Usage</h2>
-<div class="listingblock">
-<div class="content">
-<textarea class="code" mode="ruby">class Post
-  has_one :out, :author, type: :written_by, model_class: 'User'
-  has_many :in, :comments, type: :comments_on
-end
-
-class Comment
-  has_one :out, :author, type: :written_by, model_class: 'User'
-end
-
-class User
-  has_many :in, :posts, origin: :author
-end
-
-user.posts.comments(:c).author(:u2).pluck('u2.name, count(c)')
-
-# Compare to:
-# MATCH (u:User)&lt;-[:written_by]-(:Post)&lt;-[:comments_on]-(c:Comment)-[:written_by]-&gt;(u2:User)
-#   WHERE u.id = 123
-#   RETURN u2.name, count(c)</textarea>
-</div>
-</div>
-</section>
-<section class="slide">
-<h2>Some supported gems</h2>
+<h2>Use cases</h2>
 <div class="ulist">
 <ul>
-<li>devise</li>
-<li>will_paginate</li>
-<li>paperclip</li>
-<li>searchkick</li>
-</ul>
-</div>
-</section>
-<section class="slide">
-<h2>Projects built with neo4j gem</h2>
-<div class="ulist">
-<ul>
-<li><a href="https://github.com/neo4jrb/neo4apis">neo4apis</a></li>
-<li><a href="https://github.com/neo4jrb/neo4apis-twitter">neo4apis-twitter</a></li>
-<li><a href="https://github.com/neo4jrb/twitter_analytics">twitter_analytics</a></li>
-<li><a href="http://railsrumble.com/entries/378-graphnote">graphnote</a></li>
-<li><a href="https://github.com/neo4jrb/meta_model">meta_model</a></li>
+<li>Recommendations</li>
+<li>Hardware infrastructure dependency analysis</li>
+<li>Access control</li>
 </ul>
 </div>
 </section>

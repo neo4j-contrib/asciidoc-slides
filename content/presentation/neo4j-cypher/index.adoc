@@ -1,8 +1,7 @@
-= Neo4j and Ruby
+= Introduction to Neo4j and Cypher
 :presenter: Brian Underwood
 :twitter: cheerfulstoic
 :email: brian@brian-underwood.codes
-:currentyear: 2015
 :backend: deckjs
 :deckjsdir: ../../../asciidoc/deck.js
 :deckjs_theme: neotech
@@ -15,7 +14,7 @@
 :arrows:
 :customjs: ../../../asciidoc/js/checkcypher.js
 :gist-source: https://raw.github.com/neo4j-contrib/gists/master/
-:footer: © All Rights Reserved {currentyear} | Neo Technology, Inc.
+:footer: © All Rights Reserved 2014 | Neo Technology, Inc.
 :img: img
 :logo: {img}/Neo_Technology.jpg
 :allow-uri-read:
@@ -40,8 +39,8 @@ p {
 == Hello my name is
 
 * Brian Underwood
-* Developer Advocate at Neo Technology
-* Ruby lover, database enthusiast
+* Developer Evangelist at Neo Technology
+* Data Enthusiast
 * @ https://twitter.com/cheerfulstoic[cheerfulstoic] | mailto:brian@brian-underwood.codes[brian@brian-underwood.codes]
 
 
@@ -117,138 +116,31 @@ MATCH (u:User)<-[:written_by]-(:Post)<-[:comments_on]-(c:Comment)-[:written_by]-
 
 +++ <!-- Automatic aggregation on columns when using an aggregate function.  Could also do RETURN p, u2, count(c) to get posts and a count of users for those posts.  Pause for questions --> +++
 
-== Why should Rubyists use Neo4j?
+== Use cases - social graph
 
-* Natural and agile data modeling
-* Higher level abstraction
-* Web console like ruby console
-* Great support
+image::{img}/social_network.png[height="450"]
 
-+++ <!-- Englishy like Ruby --> +++
+== Use cases - fraud detection
 
-== What is the Neo4j gem?
+image::{img}/fraud_ring.jpg[]
 
-* An ActiveModel compliant Ruby wrapper for the Neo4j graph database.
+== Use cases - code / bug analysis
 
-== Neo4j gem features
+image::{img}/joern.png[height="450"]
 
-* OGM (Object Graph Model)
-** Properties
-** Indexes / Constraints
-** Callbacks
-** Validations
-** Assocations 
+== Use cases - code / bug analysis
 
-== Neo4j gem features
+Joern
 
-* Modeling nodes and relationships
-* Query building / chaining interface similar to https://github.com/rails/arel[arel]
-* Transactions
-* Migrations
+http://mlsec.org/joern/
 
-== Points of Pride
+https://www.youtube.com/watch?v=291hpUE5-3g
 
-[role=center]
-+++ <h4>Well tested</h4> +++
+== Use cases
 
-image::{img}/badges_of_pride.png[]
-
-== Points of Pride
-
-[role=center]
-+++ <h4>Well documented</h4> +++
-
-image::{img}/wiki_index.png[]
-
-== Points of Pride
-
-[role=center]
-+++ <h4>Actively supported</h4> +++
-
-image::{img}/github_pulse.png[]
-
-== Points of Pride
-
-[role=center]
-+++ <h4>Well loved</h4> +++
-
-image::{img}/stars_and_forks.png[]
-
-== Points of Pride
-
-[role=center]
-+++ <h4>Won an award!</h4> +++
-
-image::{img}/graphy.jpg[]
-
-== Models
-
-[source,ruby]
-----
-class Post
-  include Neo4j::ActiveNode
-
-  property :subject
-  property :text
-
-  has_one :out, :author, type: :written_by, model_class: 'User', rel_class: 'WrittenBy'
-  has_many :out, :tags, type: :tagged_as  # model_class 'Tag' is assumed
-end
-
-class WrittenBy
-  include Neo4j::ActiveRel
-
-  from_class Post
-  to_class   User
-  type :written_by
-
-  property :location
-end
-----
-
-+++ <!-- Include ActiveNode to make a model.  Define properties and assocations like ActiveRecord / Mongoid.  ActiveRel is optional, but great for complex relationships.  Supports validations, callbacks, etc... --> +++
-
-== Usage
-
-
-[source,ruby]
-----
-
-class Post
-  has_one :out, :author, type: :written_by, model_class: 'User'
-  has_many :in, :comments, type: :comments_on
-end
-
-class Comment
-  has_one :out, :author, type: :written_by, model_class: 'User'
-end
-
-class User
-  has_many :in, :posts, origin: :author
-end
-
-user.posts.comments(:c).author(:u2).pluck('u2.name, count(c)')
-
-# Compare to:
-# MATCH (u:User)<-[:written_by]-(:Post)<-[:comments_on]-(c:Comment)-[:written_by]->(u2:User)
-#   WHERE u.id = 123
-#   RETURN u2.name, count(c)
-----
-
-== Some supported gems
-
-* devise
-* will_paginate
-* paperclip
-* searchkick
-
-== Projects built with neo4j gem
-
-* https://github.com/neo4jrb/neo4apis[neo4apis]
-* https://github.com/neo4jrb/neo4apis-twitter[neo4apis-twitter]
-* https://github.com/neo4jrb/twitter_analytics[twitter_analytics]
-* http://railsrumble.com/entries/378-graphnote[graphnote]
-* https://github.com/neo4jrb/meta_model[meta_model]
+ * Recommendations
+ * Hardware infrastructure dependency analysis
+ * Access control
 
 == Demo time!
 
