@@ -1,3 +1,5 @@
+#!/bin/sh
+
 if [ "$1" == "" ]; then
   echo "Usage ./http content/training/intro/intro-cypher-movies/training-intro-cypher-movies.html"
   exit 1
