@@ -12,6 +12,6 @@
 
 DIR=`dirname $1`
 echo "watching $DIR"
-while inotifywait -e modify $DIR; do
+while inotifywait -r -e modify $DIR; do
 	./run.sh "$@"
 done
