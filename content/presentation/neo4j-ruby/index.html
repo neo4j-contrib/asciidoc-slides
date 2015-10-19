@@ -61,8 +61,8 @@ p {
 <div class="ulist">
 <ul>
 <li>Brian Underwood</li>
-<li>Developer Evangelist at Neo Technology</li>
-<li>Ruby lover, database enthusiast</li>
+<li>Developer Advocate at Neo Technology</li>
+<li>Ruby lover, data enthusiast</li>
 <li>@ <a href="https://twitter.com/cheerfulstoic">cheerfulstoic</a> | <a href="mailto:brian@brian-underwood.codes">brian@brian-underwood.codes</a></li>
 </ul>
 </div>
@@ -92,7 +92,7 @@ p {
 <div class="ulist">
 <ul>
 <li>Expressive and natural data modeling</li>
-<li>Easy and powerful query language (<a href="http://neo4j.com/developer/cypher-query-language/">cypher</a>)</li>
+<li>Easy and powerful query language (<a href="http://neo4j.com/developer/cypher-query-language/">Cypher</a>)</li>
 <li>Fast and easy querying on complex data relationships</li>
 <li>ACID / Replication</li>
 </ul>
@@ -170,7 +170,15 @@ p {
 <li>Great support</li>
 </ul>
 </div>
-<div class="paragraph"><p> <!-- Englishy like Ruby --> </p></div>
+<div class="paragraph"><p> <!-- Of course it makes querying on complex data easy.  Englishy like Ruby --> </p></div>
+</section>
+<section class="slide">
+<h2>Neo4j Resources</h2>
+<div class="ulist">
+<ul>
+<li><a class="bare" href="http://graphdatabases.com">http://graphdatabases.com</a> O&#8217;Reilly&#8217;s Graph Databases (free and a great intro to the internals of Neo4j)</li>
+</ul>
+</div>
 </section>
 <section class="slide">
 <h2>What is the Neo4j gem?</h2>
@@ -204,9 +212,10 @@ OGM (Object Graph Model)<div class="ulist">
 <li>Modeling nodes and relationships</li>
 <li>Query building / chaining interface similar to <a href="https://github.com/rails/arel">arel</a></li>
 <li>Transactions</li>
-<li>Migrations</li>
+<li>Migrations (for data)</li>
 </ul>
 </div>
+<div class="paragraph"><p> <!-- Query chaining, but also association chaining! --> </p></div>
 </section>
 <section class="slide">
 <h2>Points of Pride</h2>
@@ -234,6 +243,16 @@ OGM (Object Graph Model)<div class="ulist">
 <img alt="github pulse" src="img/github_pulse.png">
 </div>
 </div>
+</section>
+<section class="slide">
+<h2>Points of Pride</h2>
+<div class="paragraph center"><p> <h4>Actively supported</h4> </p></div>
+<div class="paragraph"><p> <h5>Active on StackOverflow</h5> </p></div>
+<div class="paragraph"><p><a class="bare" href="http://stackoverflow.com/questions/ask?tags=neo4j.rb+neo4j+ruby">http://stackoverflow.com/questions/ask?tags=neo4j.rb+neo4j+ruby</a></p></div>
+<div class="paragraph"><p> <h5>Gitter chat room</h5> </p></div>
+<div class="paragraph"><p><a class="bare" href="https://gitter.im/neo4jrb/neo4j">https://gitter.im/neo4jrb/neo4j</a></p></div>
+<div class="paragraph"><p> <h5>Twitter</h5> </p></div>
+<div class="paragraph"><p><a class="bare" href="https://twitter.com/neo4jrb">https://twitter.com/neo4jrb</a></p></div>
 </section>
 <section class="slide">
 <h2>Points of Pride</h2>
@@ -305,6 +324,7 @@ user.posts.comments(:c).author(:u2).pluck('u2.name, count(c)')
 #   RETURN u2.name, count(c)</textarea>
 </div>
 </div>
+<div class="paragraph"><p> <!-- Here we're going to implement the same Cypher query from before but using the neo4j gem --> </p></div>
 </section>
 <section class="slide">
 <h2>Some supported gems</h2>
@@ -316,18 +336,7 @@ user.posts.comments(:c).author(:u2).pluck('u2.name, count(c)')
 <li>searchkick</li>
 </ul>
 </div>
-</section>
-<section class="slide">
-<h2>Projects built with neo4j gem</h2>
-<div class="ulist">
-<ul>
-<li><a href="https://github.com/neo4jrb/neo4apis">neo4apis</a></li>
-<li><a href="https://github.com/neo4jrb/neo4apis-twitter">neo4apis-twitter</a></li>
-<li><a href="https://github.com/neo4jrb/twitter_analytics">twitter_analytics</a></li>
-<li><a href="http://railsrumble.com/entries/378-graphnote">graphnote</a></li>
-<li><a href="https://github.com/neo4jrb/meta_model">meta_model</a></li>
-</ul>
-</div>
+<div class="paragraph"><p> <!-- Briefly mention neo4apis project here and specifically neo4apis-activerecord --> </p></div>
 </section>
 <section class="slide">
 <h2>Demo time!</h2>
@@ -349,13 +358,14 @@ user.posts.comments(:c).author(:u2).pluck('u2.name, count(c)')
 </section>
 <section class="slide">
 <h2>Thank you!  My info again:</h2>
-<div class="ulist">
-<ul>
-<li>Brian Underwood</li>
-<li>Developer Evangelist at Neo Technology</li>
-<li>@ <a href="https://twitter.com/cheerfulstoic">cheerfulstoic</a> | <a href="mailto:brian@brian-underwood.codes">brian@brian-underwood.codes</a></li>
-</ul>
-</div>
+<div class="paragraph"><p>Brian Underwood</p></div>
+<div class="paragraph"><p>Developer Evangelist at Neo Technology</p></div>
+<div class="paragraph"><p>@ <a href="https://twitter.com/cheerfulstoic">cheerfulstoic</a> | <a href="mailto:brian@brian-underwood.codes">brian@brian-underwood.codes</a></p></div>
+<div class="paragraph"><p>&#160;<br>
+&#160;<br></p></div>
+<div class="paragraph"><p>I&#8217;ll be doing a webinar on September 10th!</p></div>
+<div class="paragraph"><p>"Metadata and Asset Control Using Ruby on Rails and Neo4j"</p></div>
+<div class="paragraph"><p><a class="bare" href="http://info.neo4j.com/0910-register.html">http://info.neo4j.com/0910-register.html</a></p></div>
 </section>
 <a class="deck-prev-link" href="#" title="Previous">&#8592;</a>
 <a class="deck-next-link" href="#" title="Next">&#8594;</a>
@@ -376,7 +386,7 @@ user.posts.comments(:c).author(:u2).pluck('u2.name, count(c)')
 <script src="../../../asciidoc/deck.js/extensions/arrows/d3.v3.js"></script>
 <script src="../../../asciidoc/deck.js/extensions/arrows/arrows-graph-diagram.js"></script>
 <script src="../../../asciidoc/deck.js/extensions/arrows/arrows-init.js"></script>
-<footer>© All Rights Reserved 2014 | Neo Technology, Inc.</footer>
+<footer>© All Rights Reserved 2015 | Neo Technology, Inc.</footer>
 <img id="logo" src="img/Neo_Technology.jpg">
 <p class="deck-status">
 <span class="deck-status-current"></span>

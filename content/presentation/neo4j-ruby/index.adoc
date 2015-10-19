@@ -14,7 +14,7 @@
 :arrows:
 :customjs: ../../../asciidoc/js/checkcypher.js
 :gist-source: https://raw.github.com/neo4j-contrib/gists/master/
-:footer: © All Rights Reserved 2014 | Neo Technology, Inc.
+:footer: © All Rights Reserved 2015 | Neo Technology, Inc.
 :img: img
 :logo: {img}/Neo_Technology.jpg
 :allow-uri-read:
@@ -39,8 +39,8 @@ p {
 == Hello my name is
 
 * Brian Underwood
-* Developer Evangelist at Neo Technology
-* Ruby lover, database enthusiast
+* Developer Advocate at Neo Technology
+* Ruby lover, data enthusiast
 * @ https://twitter.com/cheerfulstoic[cheerfulstoic] | mailto:brian@brian-underwood.codes[brian@brian-underwood.codes]
 
 
@@ -68,7 +68,7 @@ p {
 == Why Neo4j?
 
 * Expressive and natural data modeling
-* Easy and powerful query language (http://neo4j.com/developer/cypher-query-language/[cypher])
+* Easy and powerful query language (http://neo4j.com/developer/cypher-query-language/[Cypher])
 * Fast and easy querying on complex data relationships
 * ACID / Replication
 
@@ -123,7 +123,11 @@ MATCH (u:User)<-[:written_by]-(:Post)<-[:comments_on]-(c:Comment)-[:written_by]-
 * Web console like ruby console
 * Great support
 
-+++ <!-- Englishy like Ruby --> +++
++++ <!-- Of course it makes querying on complex data easy.  Englishy like Ruby --> +++
+
+== Neo4j Resources
+
+ * http://graphdatabases.com O'Reilly's Graph Databases (free and a great intro to the internals of Neo4j)
 
 == What is the Neo4j gem?
 
@@ -143,7 +147,9 @@ MATCH (u:User)<-[:written_by]-(:Post)<-[:comments_on]-(c:Comment)-[:written_by]-
 * Modeling nodes and relationships
 * Query building / chaining interface similar to https://github.com/rails/arel[arel]
 * Transactions
-* Migrations
+* Migrations (for data)
+
++++ <!-- Query chaining, but also association chaining! --> +++
 
 == Points of Pride
 
@@ -165,6 +171,23 @@ image::{img}/wiki_index.png[]
 +++ <h4>Actively supported</h4> +++
 
 image::{img}/github_pulse.png[]
+
+== Points of Pride
+
+[role=center]
++++ <h4>Actively supported</h4> +++
+
++++ <h5>Active on StackOverflow</h5> +++
+
+http://stackoverflow.com/questions/ask?tags=neo4j.rb+neo4j+ruby
+
++++ <h5>Gitter chat room</h5> +++
+
+https://gitter.im/neo4jrb/neo4j
+
++++ <h5>Twitter</h5> +++
+
+https://twitter.com/neo4jrb
 
 == Points of Pride
 
@@ -234,6 +257,8 @@ user.posts.comments(:c).author(:u2).pluck('u2.name, count(c)')
 #   RETURN u2.name, count(c)
 ----
 
++++ <!-- Here we're going to implement the same Cypher query from before but using the neo4j gem --> +++
+
 == Some supported gems
 
 * devise
@@ -241,13 +266,7 @@ user.posts.comments(:c).author(:u2).pluck('u2.name, count(c)')
 * paperclip
 * searchkick
 
-== Projects built with neo4j gem
-
-* https://github.com/neo4jrb/neo4apis[neo4apis]
-* https://github.com/neo4jrb/neo4apis-twitter[neo4apis-twitter]
-* https://github.com/neo4jrb/twitter_analytics[twitter_analytics]
-* http://railsrumble.com/entries/378-graphnote[graphnote]
-* https://github.com/neo4jrb/meta_model[meta_model]
++++ <!-- Briefly mention neo4apis project here and specifically neo4apis-activerecord --> +++
 
 == Demo time!
 
@@ -263,7 +282,17 @@ image::{img}/lapd_model.png[height="400"]
 
 == Thank you!  My info again:
 
-* Brian Underwood
-* Developer Evangelist at Neo Technology
-* @ https://twitter.com/cheerfulstoic[cheerfulstoic] | mailto:brian@brian-underwood.codes[brian@brian-underwood.codes]
+Brian Underwood
 
+Developer Advocate at Neo Technology
+
+@ https://twitter.com/cheerfulstoic[cheerfulstoic] | mailto:brian@brian-underwood.codes[brian@brian-underwood.codes]
+
+{nbsp} +
+{nbsp} +
+
+I'll be doing a webinar on September 10th!
+
+"Metadata and Asset Control Using Ruby on Rails and Neo4j"
+
+http://info.neo4j.com/0910-register.html
