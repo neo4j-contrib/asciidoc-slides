@@ -128,6 +128,8 @@ MATCH (u:User)<-[:written_by]-(:Post)<-[:comments_on]-(c:Comment)-[:written_by]-
 == Neo4j Resources
 
  * http://graphdatabases.com O'Reilly's Graph Databases (free and a great intro to the internals of Neo4j)
+ * http://neo4j.com/developer/ruby/ Neo4j.com Ruby guides
+ * http://neo4j.com/developer/cypher/ Introduction to Cypher
 
 == What is the Neo4j gem?
 
