@@ -268,6 +268,14 @@ user.posts.comments(:c).author(:u2).pluck('u2.name, count(c)')
 
 +++ <!-- Briefly mention neo4apis project here and specifically neo4apis-activerecord --> +++
 
+== Projects built with neo4j gem
+
+* https://github.com/neo4jrb/neo4apis[neo4apis]
+* https://github.com/neo4jrb/neo4apis-twitter[neo4apis-twitter]
+* https://github.com/neo4jrb/twitter_analytics[twitter_analytics]
+* http://railsrumble.com/entries/378-graphnote[graphnote]
+* https://github.com/neo4jrb/meta_model[meta_model]
+
 == Demo time!
 
 Code available on: https://github.com/neo4jrb/lapd_incidents
@@ -291,8 +299,4 @@ Developer Advocate at Neo Technology
 {nbsp} +
 {nbsp} +
 
-I'll be doing a webinar on September 10th!
 
-"Metadata and Asset Control Using Ruby on Rails and Neo4j"
-
-http://info.neo4j.com/0910-register.html

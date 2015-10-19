@@ -78,4 +78,4 @@ There are a couple of shortcuts you can use as a trainer to help during the trai
 * g: show a window to quickly go to a slide.
 * m: show an overview of your presentation, be able to click a slide to goto the selected slide.
 * n: show presenter notes
-* c: clone the presentation to a presenter-deck (with next slide and presenter notes) and a master.
+* p: clone the presentation to a presenter-deck (with next slide and presenter notes) and a master.
