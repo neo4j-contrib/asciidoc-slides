@@ -20,7 +20,8 @@ read email
 function create {
 	./run.sh content/training/$1 -a presenter="$name" -a twitter="$twitter" -a email="$email"
 }
-SLIDES="advanced_cypher/training-advanced-cypher.adoc import/training-data-import.adoc modeling/training-data-modeling.adoc production/training-neo4j-in-production.adoc intro/intro-cypher-movies/training-intro-cypher-movies.adoc intro/intro-cypher-relational/training-intro-cypher-relational.adoc"
+SLIDES="advanced_cypher/training-advanced-cypher.adoc import/training-data-import.adoc modeling/training-data-modeling.adoc production/training-neo4j-in-production.adoc intro/intro-cypher-movies/training-intro-cypher-movies.adoc intro/intro-cypher-relational/training-intro-cypher-relational.adoc intro/intro-cypher-interactive/training-intro-cypher-interactive.adoc "
+
 
 for i in $SLIDES; do
 	echo "Rendering $i"
