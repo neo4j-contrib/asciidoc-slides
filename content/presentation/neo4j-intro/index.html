@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+<meta content="Asciidoctor 1.5.2" name="generator">
+<title>The Neo4j Graph Database</title>
+<script src="../../../asciidoc/deck.js/jquery.min.js"></script>
+<script src="../../../asciidoc/deck.js/core/deck.core.js"></script>
+<script>
+var deckjs_dir = '../../../asciidoc/deck.js';
+</script>
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:800,400,600,300" rel="stylesheet">
+<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/codemirror/deck.codemirror.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/codemirror/themes/iq.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/clone/deck.clone.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/notes/deck.notes.css" rel="stylesheet">
+<script src="../../../asciidoc/deck.js/extensions/codemirror/codemirror.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/deck.codemirror.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/mode/javascript/javascript.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/mode/css/css.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/codemirror/mode/plsql/plsql.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/cypher/deck.cypher.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/clone/deck.clone.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/notes/deck.notes.js"></script>
+<link href="../../../asciidoc/deck.js/extensions/cypher/deck.cypher.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/core/deck.core.css" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/hash/deck.hash.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/scale/deck.scale.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/goto/deck.goto.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/menu/deck.menu.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/navigation/deck.navigation.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/extensions/status/deck.status.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/themes/style/neotech.css" media="screen" rel="stylesheet">
+<link href="../../../asciidoc/deck.js/core/print.css" media="print" rel="stylesheet">
+<script src="../../../asciidoc/deck.js/modernizr.custom.js"></script>
+</head>
+<body class="deck-container article">
+<section class="slide" id="title-slide">
+<h1>The Neo4j Graph Database</h1>
+</section>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph"><p>
+<style type="text/css">
+p {
+  margin-bottom: 0.3em;
+}
+.center {
+  width: 100%;
+  text-align: center;
+}
+</style>
+</p></div>
+</div>
+</div>
+<section class="slide">
+<h2>Hello my name is</h2>
+<div class="ulist">
+<ul>
+<li>Brian Underwood</li>
+<li>Developer Advocate at Neo Technology</li>
+<li>Co-Maintainer of the <a href="http://neo4jrb.io/">Neo4j.rb</a> project</li>
+<li>@ <a href="https://twitter.com/cheerfulstoic">cheerfulstoic</a> | <a href="mailto:brian@brian-underwood.codes">brian@brian-underwood.codes</a></li>
+</ul>
+</div>
+</section>
+<section class="slide">
+<h2>Neo4j is a Graph Database</h2>
+<div class="paragraph"><p>
+<table style="margin: 0 auto; margin-top: -50px;">
+  <tr>
+    <th>Graph</th>
+    <th>Chart</th>
+  </tr>
+  <tr>
+    <td>
+      <img src="img/web_console.png" style="height: 410px">
+    </td>
+    <td>
+      <img src="img/pie_chart_vs_bar_chart.jpg" style="height: 410px">
+    </td>
+  </tr>
+</table>
+</p></div>
+<div class="paragraph"><p> <!-- This is the neo4j web console.  We will see a demo later --> </p></div>
+</section>
+<section class="slide">
+<h2>Why Neo4j?</h2>
+<div class="ulist">
+<ul>
+<li>Expressive and natural data modeling</li>
+<li>Easy and powerful query language (<a href="http://neo4j.com/developer/cypher-query-language/">Cypher</a>)</li>
+<li>Fast and easy querying on complex data relationships</li>
+<li>ACID / Replication</li>
+</ul>
+</div>
+</section>
+<section class="slide">
+<h2>Neo4j Crash Course</h2>
+<div class="ulist">
+<ul>
+<li>Nodes and Relationships</li>
+<li>Both are key&#8594;value stores</li>
+<li>Nodes can have zero or more labels (User, Post, etc&#8230;&#8203;)</li>
+<li>Relationships have a type (i.e. wrote_post)</li>
+</ul>
+</div>
+</section>
+<section class="slide">
+<h2>Neo4j Crash Course</h2>
+<div class="ulist">
+<ul>
+<li>Relationships go from one node to another (directional)</li>
+<li>Querying can be directional or direction agnostic</li>
+</ul>
+</div>
+</section>
+<section class="slide">
+<h2>Neo4j Crash Course</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="property graph model" height="450" src="img/property_graph_model.png">
+</div>
+</div>
+</section>
+<section class="slide">
+<h2>Cypher</h2>
+<div class="listingblock">
+<div class="content">
+<textarea class="code" mode="cypher">MATCH (user:User)&lt;-[rel:written_by]-(post:Post)
+  WHERE user.id = 123
+  RETURN rel.location, post</textarea>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>Return post and location it was made</li>
+<li>Location stored on the relationship</li>
+</ul>
+</div>
+<div class="paragraph"><p> <!-- ASCII art --> </p></div>
+</section>
+<section class="slide">
+<h2>Cypher</h2>
+<div class="listingblock">
+<div class="content">
+<textarea class="code" mode="cypher">MATCH (u:User)&lt;-[:written_by]-(:Post)&lt;-[:comments_on]-(c:Comment)-[:written_by]-&gt;(u2:User)
+  WHERE u.id = 123
+  RETURN u2.name, count(c)</textarea>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>Returns users who commented on posts by user #123</li>
+<li>Gives count of the number of comments for each users</li>
+</ul>
+</div>
+<div class="paragraph"><p> <!-- Automatic aggregation on columns when using an aggregate function.  Could also do RETURN p, u2, count(c) to get posts and a count of users for those posts.  Pause for questions --> </p></div>
+</section>
+<section class="slide">
+<h2>Neo4j Resources</h2>
+<div class="ulist">
+<ul>
+<li><a class="bare" href="http://graphdatabases.com">http://graphdatabases.com</a> O&#8217;Reilly&#8217;s Graph Databases (free and a great intro to the internals of Neo4j)</li>
+<li><a class="bare" href="http://neo4j.com/developer/ruby/">http://neo4j.com/developer/ruby/</a> Neo4j.com Ruby guides</li>
+<li><a class="bare" href="http://neo4j.com/developer/cypher/">http://neo4j.com/developer/cypher/</a> Introduction to Cypher</li>
+</ul>
+</div>
+</section>
+<section class="slide">
+<h2>Neo4j.rb gem</h2>
+<div class="listingblock">
+<div class="content">
+<textarea class="code" mode="ruby">class Post
+  has_one :out, :author, type: :written_by, model_class: 'User'
+  has_many :in, :comments, type: :comments_on
+end
+
+class Comment
+  has_one :out, :author, type: :written_by, model_class: 'User'
+end
+
+class User
+  has_many :in, :posts, origin: :author
+end
+
+user.posts.comments(:c).author(:u2).pluck('u2.name, count(c)')
+
+# Compare to:
+# MATCH (u:User)&lt;-[:written_by]-(:Post)&lt;-[:comments_on]-(c:Comment)-[:written_by]-&gt;(u2:User)
+#   WHERE u.id = 123
+#   RETURN u2.name, count(c)</textarea>
+</div>
+</div>
+</section>
+<section class="slide">
+<h2>Demo time!</h2>
+<div class="paragraph"><p>Code available on:</p></div>
+<div class="imageblock">
+<div class="content">
+<img alt="img" src="img">
+</div>
+</div>
+</section>
+<section class="slide">
+<h2>Demo time!</h2>
+<div class="paragraph"><p>Code available on:</p></div>
+<div class="imageblock">
+<div class="content">
+<img alt="img" src="img">
+</div>
+</div>
+</section>
+<section class="slide">
+<h2>Thank you!  My info again:</h2>
+<div class="paragraph"><p>Brian Underwood</p></div>
+<div class="paragraph"><p>Developer Advocate at Neo Technology</p></div>
+<div class="paragraph"><p>@ <a href="https://twitter.com/cheerfulstoic">cheerfulstoic</a> | <a href="mailto:brian@brian-underwood.codes">brian@brian-underwood.codes</a></p></div>
+<div class="paragraph"><p>&#160;<br>
+&#160;<br></p></div>
+</section>
+<a class="deck-prev-link" href="#" title="Previous">&#8592;</a>
+<a class="deck-next-link" href="#" title="Next">&#8594;</a>
+<form action="." class="goto-form" method="get">
+<label for="goto-slide">Go to Slide:</label>
+<input id="goto-slide" list="goto-datalist" name="slidenum" type="text">
+<datalist id="goto-data-list"></datalist>
+<input type="submit" value="Go">
+</form>
+<a class="deck-permalink" href="." title="Permalink to this slide">#</a>
+<script src="../../../asciidoc/deck.js/extensions/hash/deck.hash.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/scale/deck.scale.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/goto/deck.goto.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/menu/deck.menu.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/navigation/deck.navigation.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/status/deck.status.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/arrows/home.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/arrows/d3.v3.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/arrows/arrows-graph-diagram.js"></script>
+<script src="../../../asciidoc/deck.js/extensions/arrows/arrows-init.js"></script>
+<footer>© All Rights Reserved 2015 | Neo Technology, Inc.</footer>
+<img id="logo" src="img/Neo_Technology.jpg">
+<p class="deck-status">
+<span class="deck-status-current"></span>
+/
+<span class="deck-status-total"></span>
+</p>
+<div class="slide cypher-status">
+<h2>Status of the presentation</h2>
+<p>Cypher queries execution</p>
+<div>
+<div id="status"></div>
+<pre id="errors" style="overflow-y:scroll;font-size:small"></pre>
+</div>
+</div>
+<script src="../../../asciidoc/js/checkcypher.js"></script>
+<script>
+  (function($, deck, undefined) {
+    $.deck.defaults.keys['previous'] = [8, 33, 37, 39];
+    $.deck.defaults.keys['next'] = [13, 32, 34, 39];
+  
+    $.extend(true, $[deck].defaults, {
+        countNested: false
+    });
+  
+    $.deck('.slide');
+  })(jQuery, 'deck');
+</script>
+<style>
+  .slide.canvas-image {
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  display: -moz-box;
+  display: -webkit-box;
+  display: -ms-box;
+  display: box;
+  -moz-box-orient: vertical;
+  -webkit-box-orient: vertical;
+  -ms-box-orient: vertical;
+  box-orient: vertical;
+  -moz-box-align: start;
+  -webkit-box-align: start;
+  -ms-box-align: start;
+  box-align: start;
+  -moz-box-pack: start;
+  -webkit-box-pack: start;
+  -ms-box-pack: start;
+  box-pack: start;}
+  
+  .bottom-left {
+    left: 1%;
+    bottom: 20%; }
+  
+  .top-left {
+    left: 1%;
+    top: 20%; }
+  
+  .bottom-right {
+    right: 1%;
+    bottom: 20%; }
+  
+  .top-right {
+    right: 1%;
+    top: 20%; }
+  
+  .center-up {
+    right: 50%;
+    top: 1%;
+  }
+  
+  .center-down {
+    right: 50%;
+    bottom: 1%;
+  }
+  .canvas-image .canvas-caption p {
+    -webkit-transform: translate(0, -50%);
+    -moz-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    -o-transform: translate(0, -50%);
+    transform: translate(0, -100%);
+  }
+  .canvas-image .canvas-title p {
+    -webkit-transform: translate(0, -100%);
+    -moz-transform: translate(0, -100%);
+    -ms-transform: translate(0, -100%);
+    -o-transform: translate(0, -100%);
+    transform: translate(0, -100%);
+  }
+  .canvas-image .canvas-caption p, .canvas-image .canvas-title p {
+    left: 0;
+    right: 0;
+    top: 50%;
+    text-align: center;
+    display: inline;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    font-weight: normal;
+    font-size: 3em;
+    padding: 1em;
+    color: white; }
+  kbd.keyseq { color: #555555; }
+  kbd:not(.keyseq) {
+    display: inline-block;
+    color: #222222;
+    font-size: 0.7em;
+    line-height: 1.4;
+    background-color: #F7F7F7;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset;
+    margin: -0.15em 0.15em 0 0.15em;
+    padding: 0.2em 0.6em;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  kbd kbd:first-child { margin-left: 0; }
+  kbd kbd:last-child { margin-right: 0; }
+</style>
+</body>
+</html>

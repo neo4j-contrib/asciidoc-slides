@@ -1,0 +1,174 @@
+= The Neo4j Graph Database
+:presenter: Brian Underwood
+:twitter: cheerfulstoic
+:email: brian@brian-underwood.codes
+:backend: deckjs
+:deckjsdir: ../../../asciidoc/deck.js
+:deckjs_theme: neotech
+:icons: font
+:source-highlighter: codemirror
+:navigation:
+:goto:
+:menu:
+:status:
+:arrows:
+:customjs: ../../../asciidoc/js/checkcypher.js
+:gist-source: https://raw.github.com/neo4j-contrib/gists/master/
+:footer: © All Rights Reserved 2015 | Neo Technology, Inc.
+:img: img
+:logo: {img}/Neo_Technology.jpg
+:allow-uri-read:
+:video:
+:docs-link: https://github.com/neo4j-contrib/asciidoc-slides[documentation]
+:download-link: https://github.com/neo4j-contrib/asciidoc-slides/archive/master.zip[download]
+:sectids!:
+:deckjs_transition: none
+
++++
+<style type="text/css">
+p {
+  margin-bottom: 0.3em;
+}
+.center {
+  width: 100%;
+  text-align: center;
+}
+</style>
++++
+
+== Hello my name is
+
+* Brian Underwood
+* Developer Advocate at Neo Technology
+* Co-Maintainer of the http://neo4jrb.io/[Neo4j.rb] project
+* @ https://twitter.com/cheerfulstoic[cheerfulstoic] | mailto:brian@brian-underwood.codes[brian@brian-underwood.codes]
+
+
+== Neo4j is a Graph Database
+
++++
+<table style="margin: 0 auto; margin-top: -50px;">
+  <tr>
+    <th>Graph</th>
+    <th>Chart</th>
+  </tr>
+  <tr>
+    <td>
+      <img src="img/web_console.png" style="height: 410px">
+    </td>
+    <td>
+      <img src="img/pie_chart_vs_bar_chart.jpg" style="height: 410px">
+    </td>
+  </tr>
+</table>
++++
+
++++ <!-- This is the neo4j web console.  We will see a demo later --> +++
+
+== Why Neo4j?
+
+* Expressive and natural data modeling
+* Easy and powerful query language (http://neo4j.com/developer/cypher-query-language/[Cypher])
+* Fast and easy querying on complex data relationships
+* ACID / Replication
+
+== Neo4j Crash Course
+
+* Nodes and Relationships
+* Both are key->value stores
+* Nodes can have zero or more labels (User, Post, etc...)
+* Relationships have a type (i.e. wrote_post)
+
+== Neo4j Crash Course
+
+* Relationships go from one node to another (directional)
+* Querying can be directional or direction agnostic
+
+== Neo4j Crash Course
+
+image::{img}/property_graph_model.png[height="450"]
+
+== Cypher
+
+[source,cypher]
+----
+MATCH (user:User)<-[rel:written_by]-(post:Post)
+  WHERE user.id = 123
+  RETURN rel.location, post
+----
+
+* Return post and location it was made
+* Location stored on the relationship
+
++++ <!-- ASCII art --> +++
+
+== Cypher
+
+[source,cypher]
+----
+MATCH (u:User)<-[:written_by]-(:Post)<-[:comments_on]-(c:Comment)-[:written_by]->(u2:User)
+  WHERE u.id = 123
+  RETURN u2.name, count(c)
+----
+
+* Returns users who commented on posts by user #123
+* Gives count of the number of comments for each users
+
++++ <!-- Automatic aggregation on columns when using an aggregate function.  Could also do RETURN p, u2, count(c) to get posts and a count of users for those posts.  Pause for questions --> +++
+
+== Neo4j Resources
+
+ * http://graphdatabases.com O'Reilly's Graph Databases (free and a great intro to the internals of Neo4j)
+ * http://neo4j.com/developer/ruby/ Neo4j.com Ruby guides
+ * http://neo4j.com/developer/cypher/ Introduction to Cypher
+
+== Neo4j.rb gem
+
+[source,ruby]
+----
+
+class Post
+  has_one :out, :author, type: :written_by, model_class: 'User'
+  has_many :in, :comments, type: :comments_on
+end
+
+class Comment
+  has_one :out, :author, type: :written_by, model_class: 'User'
+end
+
+class User
+  has_many :in, :posts, origin: :author
+end
+
+user.posts.comments(:c).author(:u2).pluck('u2.name, count(c)')
+
+# Compare to:
+# MATCH (u:User)<-[:written_by]-(:Post)<-[:comments_on]-(c:Comment)-[:written_by]->(u2:User)
+#   WHERE u.id = 123
+#   RETURN u2.name, count(c)
+----
+
+== Demo time!
+
+Code available on: 
+
+image::{img}/[]
+
+== Demo time!
+
+Code available on: 
+
+image::{img}/[]
+
+== Thank you!  My info again:
+
+Brian Underwood
+
+Developer Advocate at Neo Technology
+
+@ https://twitter.com/cheerfulstoic[cheerfulstoic] | mailto:brian@brian-underwood.codes[brian@brian-underwood.codes]
+
+{nbsp} +
+{nbsp} +
+
+
