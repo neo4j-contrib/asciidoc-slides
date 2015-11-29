@@ -157,7 +157,7 @@ image::{img}/badges_of_pride.png[]
 [role=center]
 +++ <h4>Well documented</h4> +++
 
-image::{img}/wiki_index.png[]
+image::{img}/readthedocs_index.png[]
 
 == Points of Pride
 
