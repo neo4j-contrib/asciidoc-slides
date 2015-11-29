@@ -1,4 +1,4 @@
-= Neo4j and Ruby
+= The Neo4j Graph Database
 :presenter: Brian Underwood
 :twitter: cheerfulstoic
 :email: brian@brian-underwood.codes
@@ -40,7 +40,7 @@ p {
 
 * Brian Underwood
 * Developer Advocate at Neo Technology
-* Ruby lover, data enthusiast
+* Co-Maintainer of the http://neo4jrb.io/[Neo4j.rb] project
 * @ https://twitter.com/cheerfulstoic[cheerfulstoic] | mailto:brian@brian-underwood.codes[brian@brian-underwood.codes]
 
 
@@ -122,118 +122,7 @@ MATCH (u:User)<-[:written_by]-(:Post)<-[:comments_on]-(c:Comment)-[:written_by]-
  * http://neo4j.com/developer/ruby/ Neo4j.com Ruby guides
  * http://neo4j.com/developer/cypher/ Introduction to Cypher
 
-== Why should Rubyists use Neo4j?
-
-* Natural and agile data modeling
-* Higher level abstraction
-* Web console like ruby console
-* Great support
-
-+++ <!-- Of course it makes querying on complex data easy.  Englishy like Ruby --> +++
-
-== What is the Neo4j gem?
-
-* An ActiveModel compliant Ruby wrapper for the Neo4j graph database.
-
-== Neo4j gem features
-
-* OGM (Object Graph Model)
-** Properties
-** Indexes / Constraints
-** Callbacks
-** Validations
-** Assocations 
-
-== Neo4j gem features
-
-* Modeling nodes and relationships
-* Query building / chaining interface similar to https://github.com/rails/arel[arel]
-* Transactions
-* Migrations (for data)
-
-+++ <!-- Query chaining, but also association chaining! --> +++
-
-== Points of Pride
-
-[role=center]
-+++ <h4>Well tested</h4> +++
-
-image::{img}/badges_of_pride.png[]
-
-== Points of Pride
-
-[role=center]
-+++ <h4>Well documented</h4> +++
-
-image::{img}/readthedocs_index.png[]
-
-== Points of Pride
-
-[role=center]
-+++ <h4>Actively supported</h4> +++
-
-image::{img}/github_pulse.png[]
-
-== Points of Pride
-
-[role=center]
-+++ <h4>Actively supported</h4> +++
-
-+++ <h5>Active on StackOverflow</h5> +++
-
-http://stackoverflow.com/questions/ask?tags=neo4j.rb+neo4j+ruby
-
-+++ <h5>Gitter chat room</h5> +++
-
-https://gitter.im/neo4jrb/neo4j
-
-+++ <h5>Twitter</h5> +++
-
-https://twitter.com/neo4jrb
-
-== Points of Pride
-
-[role=center]
-+++ <h4>Well loved</h4> +++
-
-image::{img}/stars_and_forks.png[]
-
-== Points of Pride
-
-[role=center]
-+++ <h4>Won an award!</h4> +++
-
-image::{img}/graphy.jpg[]
-
-== Models
-
-[source,ruby]
-----
-class Post
-  include Neo4j::ActiveNode
-
-  property :subject
-  property :text
-
-  has_one :out, :author, type: :written_by, model_class: 'User', rel_class: 'WrittenBy'
-  has_many :out, :tags, type: :tagged_as  # model_class 'Tag' is assumed
-end
-
-class WrittenBy
-  include Neo4j::ActiveRel
-
-  from_class Post
-  to_class   User
-  type :written_by
-
-  property :location
-end
-----
-
-+++ <!-- Include ActiveNode to make a model.  Define properties and assocations like ActiveRecord / Mongoid.  ActiveRel is optional, but great for complex relationships.  Supports validations, callbacks, etc... --> +++
-
-== Usage
-
+== Neo4j.rb gem
 
 [source,ruby]
 ----
@@ -259,36 +148,17 @@ user.posts.comments(:c).author(:u2).pluck('u2.name, count(c)')
 #   RETURN u2.name, count(c)
 ----
 
-+++ <!-- Here we're going to implement the same Cypher query from before but using the neo4j gem --> +++
+== Demo time!
 
-== Some supported gems
+Code available on: 
 
-* devise
-* will_paginate
-* paperclip
-* searchkick
-
-+++ <!-- Briefly mention neo4apis project here and specifically neo4apis-activerecord --> +++
-
-== Projects built with neo4j gem
-
-* https://github.com/neo4jrb/neo4apis[neo4apis]
-* https://github.com/neo4jrb/neo4apis-twitter[neo4apis-twitter]
-* https://github.com/neo4jrb/twitter_analytics[twitter_analytics]
-* http://railsrumble.com/entries/378-graphnote[graphnote]
-* https://github.com/neo4jrb/meta_model[meta_model]
+image::{img}/[]
 
 == Demo time!
 
-Code available on: https://github.com/neo4jrb/lapd_incidents
+Code available on: 
 
-image::{img}/lapd_csv.png[]
-
-== Demo time!
-
-Code available on: https://github.com/neo4jrb/lapd_incidents
-
-image::{img}/lapd_model.png[height="400"]
+image::{img}/[]
 
 == Thank you!  My info again:
 
