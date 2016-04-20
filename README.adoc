@@ -24,8 +24,6 @@ On Ubuntu (tested with 16.04) you don't need to use gem/bundle, instead install 
 sudo apt-get install asciidoctor ruby-tilt ruby-thread-safe ruby-haml
 ----
 
-For a unkown reason on Ubuntu you might need to set attribute `encoding=utf-8` either in the adoc files or by amending `-a encoding=utf-8` to the invokation of asciidoctor.
-
 Make sure you're using asciidoctor 1.5.1
 
 - execute asciidoctor to produce Deck.js HTML5 output from the AsciiDoc source files
