@@ -1,11 +1,16 @@
 #!/bin/sh
 
-if [ "$1" == "" ]; then
+# use double aliasing to safely test the passed parameter
+if [ "x$1" = "x" ]; then
   echo "Usage ./http content/training/intro/intro-cypher-movies/training-intro-cypher-movies.html"
   exit 1
 fi
-python -m SimpleHTTPServer 2>&1 > /dev/null &
-URL="http://localhost:8000/$1"
-echo $URL
-open $URL
 
+# don't know if this is intended... change the order to
+# python -m SimpleHTTPServer > /dev/null 2>&1 &
+# in order to suppress output messages on the console
+python -m SimpleHTTPServer 2>&1 > /dev/null &
+
+URL="http://localhost:8000/$1"
+echo "$URL"
+open "$URL"
