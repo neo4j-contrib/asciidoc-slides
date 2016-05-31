@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 gem 'asciidoctor', '1.5.1'
+gem 'asciidoctor-pdf'
 gem 'rubypress'
 gem 'haml'
 gem 'tilt'
