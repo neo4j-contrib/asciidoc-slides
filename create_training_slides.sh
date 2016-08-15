@@ -6,8 +6,8 @@ if [ ! $? ];  then
     echo "Please have rbenv installed https://github.com/rbenv/rbenv#installation"
     rbenv install 2.2.5 && rbenv global 2.2.5
 	echo "Installing AsciiDoctor"
-    gem install bundler
-    bundle install
+    rbenv exec gem install bundler
+    rbenv exec bundle install
 else
 	echo "Installed"
 	echo $ADOC_VERSION
