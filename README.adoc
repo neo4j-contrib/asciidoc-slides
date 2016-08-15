@@ -2,7 +2,7 @@
 
 Build *training slides* with one script invocation (which contains all the link:#neo4j-training-classes[steps listed below]): 
 
-Run `./create_training_slides.sh`
+Run `./create_training_slides.sh` and provide your name, twitter-handle and e-mail address.
 
 == Detailed Steps
 
@@ -66,7 +66,7 @@ Then the training content is found under:
 
 === Build Training HTML
 
-Easiest to just run `./create_training_slides.sh`
+Easiest to just run `./create_training_slides.sh` 
 
 build **Movies Intro** training with:
 
