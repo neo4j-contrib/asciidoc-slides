@@ -3,8 +3,11 @@ git submodule update
 
 ADOC_VERSION=$(asciidoctor -v)
 if [ ! $? ];  then
+    echo "Please have rbenv installed https://github.com/rbenv/rbenv#installation"
+    rbenv install 2.2.5 && rbenv global 2.2.5
 	echo "Installing AsciiDoctor"
-	bundle install
+    gem install bundler
+    bundle install
 else
 	echo "Installed"
 	echo $ADOC_VERSION
