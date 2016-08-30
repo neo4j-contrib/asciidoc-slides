@@ -90,7 +90,7 @@ PLATFORMS
 
 DEPENDENCIES
   asciidoctor (= 1.5.1)
-  asciidoctor-pdf
+  asciidoctor-pdf (>= 1.5.0.alpha)
   guard
   haml
   rubypress
